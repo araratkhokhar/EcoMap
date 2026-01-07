@@ -188,7 +188,54 @@ function initApp() {
     }
 
     initMap();
+    // Initial Load
     loadMarkers();
+
+    // --- HYBRID GEOSERVER INTEGRATION (FAIL-SAFE) ---
+    async function loadGeoServerLayer() {
+        // 1. The Ngrok URL pointing to your Local GeoServer
+        const geoserverUrl = 'https://egoistic-dichotomically-makenzie.ngrok-free.dev/geoserver/ne/wms';
+        const workspaceLayer = 'ne:markers'; // Ensure this matches your Layer Name
+
+        console.log("Checking for Local GeoServer...");
+
+        try {
+            // 2. Check if the server is online (Laptop ON)
+            // We use a small timeout so the app doesn't freeze waiting
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 2000); // 2 second timeout
+
+            const response = await fetch(`${geoserverUrl}?service=WMS&version=1.1.0&request=GetCapabilities`, {
+                signal: controller.signal,
+                mode: 'no-cors' // Opaque request just to check connectivity
+            });
+            clearTimeout(timeoutId);
+
+            console.log("GeoServer is ONLINE! Loading WMS Layer...");
+
+            // 3. Add the WMS Layer (Only if online)
+            const wmsLayer = L.tileLayer.wms(geoserverUrl, {
+                layers: workspaceLayer,
+                format: 'image/png',
+                transparent: true,
+                version: '1.1.0',
+                attribution: "EcoMap Local GeoServer"
+            });
+
+            wmsLayer.addTo(map);
+
+            // Optional: Add a visual indicator
+            L.control.attribution({ prefix: '<span style="color:green">🟢 GeoServer Connected</span>' }).addTo(map);
+
+        } catch (error) {
+            console.log("GeoServer is OFFLINE (User laptop is off). Skipping WMS layer.");
+            // Do nothing! The app works normally with standard markers.
+        }
+    }
+
+    // Call the hybrid loader
+    loadGeoServerLayer();
+
     updateUI();
     // checkFirstVisit();
     // setTimeout(createGuestBanner, 30000); // Show banner after 30s
