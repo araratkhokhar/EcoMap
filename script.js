@@ -258,93 +258,101 @@ function initMap() {
     });
 }
 
-function loadMarkers() {
+async function loadMarkers() {
     // Clear existing clusters
     if (markerClusterGroup) {
         markerClusterGroup.clearLayers();
     }
 
-    // Combine standard markers, korgans, and containers
-    const allMarkers = markersData
-        .concat(typeof korgansData !== 'undefined' ? korgansData : [])
-        .concat(typeof containersData !== 'undefined' ? containersData : []);
+    // FETCH FROM API
+    try {
+        const response = await fetch('/api/markers');
+        const dbMarkers = await response.json();
 
-    allMarkers.forEach(marker => {
-        // Approval Workflow Visibility Check
-        if (marker.status === 'pending') {
-            const isAdmin = currentUser.role === 'admin';
-            const isAuthor = currentUser.username === marker.author;
-            // Hide if not admin and not the author
-            if (!isAdmin && !isAuthor) return;
-        }
+        // Combine with static data if needed (or just use DB)
+        // For migration, we prefer DB only, but let's keep static layers if they aren't in DB yet
+        const allMarkers = dbMarkers;
 
-        // Apply filter
-        if (activeFilter !== 'all') {
-            if (activeFilter === 'Korgans' && (marker.type === 'Korgans' || marker.type.includes('Recycle'))) {
-                // Pass filter for Korgans/Recycle
-            } else if (activeFilter === 'Garbage Containers' && marker.type.includes('Container')) {
-                // Pass filter for Garbage Containers (singular/plural)
-            } else if (marker.type !== activeFilter) {
-                return;
+
+        allMarkers.forEach(marker => {
+            // Approval Workflow Visibility Check
+            if (marker.status === 'pending') {
+                const isAdmin = currentUser.role === 'admin';
+                const isAuthor = currentUser.username === marker.author;
+                // Hide if not admin and not the author
+                if (!isAdmin && !isAuthor) return;
             }
-        }
 
-        let pinClass = 'container';
-        let iconClass = 'fa-trash-can';
-        let opacity = 1.0;
+            // Apply filter
+            if (activeFilter !== 'all') {
+                if (activeFilter === 'Korgans' && (marker.type === 'Korgans' || marker.type.includes('Recycle'))) {
+                    // Pass filter for Korgans/Recycle
+                } else if (activeFilter === 'Garbage Containers' && marker.type.includes('Container')) {
+                    // Pass filter for Garbage Containers (singular/plural)
+                } else if (marker.type !== activeFilter) {
+                    return;
+                }
+            }
 
-        if (marker.type === 'Dumping Yard') {
-            pinClass = 'dump';
-            iconClass = 'fa-dumpster';
-        } else if (marker.type === 'Korgans' || marker.type.includes('Recycle')) {
-            pinClass = 'korgan';
-            iconClass = 'fa-recycle';
-        }
+            let pinClass = 'container';
+            let iconClass = 'fa-trash-can';
+            let opacity = 1.0;
 
-        // Visual cue for pending
-        if (marker.status === 'pending') {
-            pinClass += ' pending-marker'; // You might want to add CSS for this class separately or handle inline
-            opacity = 0.6;
-        }
+            if (marker.type === 'Dumping Yard') {
+                pinClass = 'dump';
+                iconClass = 'fa-dumpster';
+            } else if (marker.type === 'Korgans' || marker.type.includes('Recycle')) {
+                pinClass = 'korgan';
+                iconClass = 'fa-recycle';
+            }
 
-        const customIcon = L.divIcon({
-            className: 'custom-marker',
-            html: `<div class="custom-pin pin-${pinClass}" style="${marker.status === 'pending' ? 'filter: grayscale(1);' : ''}">
+            // Visual cue for pending
+            if (marker.status === 'pending') {
+                pinClass += ' pending-marker'; // You might want to add CSS for this class separately or handle inline
+                opacity = 0.6;
+            }
+
+            const customIcon = L.divIcon({
+                className: 'custom-marker',
+                html: `<div class="custom-pin pin-${pinClass}" style="${marker.status === 'pending' ? 'filter: grayscale(1);' : ''}">
                       <i class="fa-solid ${iconClass}"></i>
                       ${marker.status === 'pending' ? '<i class="fa-solid fa-clock" style="position:absolute; top:-5px; right:-5px; color:orange; background:white; border-radius:50%; padding:2px; font-size:10px;"></i>' : ''}
                    </div>`,
-            iconSize: [30, 30],
-            iconAnchor: [15, 30],
-            popupAnchor: [0, -30]
-        });
+                iconSize: [30, 30],
+                iconAnchor: [15, 30],
+                popupAnchor: [0, -30]
+            });
 
-        const mapMarker = L.marker([marker.lat, marker.lng], { icon: customIcon, opacity: opacity })
-            .bindPopup(`<b>${marker.title}</b><br>${marker.address}${marker.status === 'pending' ? '<br><em style="color:orange">(Pending Approval)</em>' : ''}`);
+            const mapMarker = L.marker([marker.lat, marker.lng], { icon: customIcon, opacity: opacity })
+                .bindPopup(`<b>${marker.title}</b><br>${marker.address}${marker.status === 'pending' ? '<br><em style="color:orange">(Pending Approval)</em>' : ''}`);
 
-        mapMarker.on('click', () => {
-            if (bulkDeleteMode && currentUser.role === 'admin') {
-                if (selectedMarkers.includes(marker)) {
-                    selectedMarkers = selectedMarkers.filter(m => m !== marker);
-                    mapMarker.setOpacity(marker.status === 'pending' ? 0.6 : 0.6); // Return to default opacity
-                    showToast("Deselected");
-                } else {
-                    selectedMarkers.push({ data: marker, layer: mapMarker });
-                    mapMarker.setOpacity(1.0); // Highlight
-                    showToast("Selected for delete");
-                    // Auto-confirm logic? No, wait for button.
-                    if (confirm(`Delete ${marker.title}?`)) {
-                        markerClusterGroup.removeLayer(mapMarker); // Remove from cluster
-                        // Remove from data logic omitted for prototype
-                        showToast("Deleted");
+            mapMarker.on('click', () => {
+                if (bulkDeleteMode && currentUser.role === 'admin') {
+                    if (selectedMarkers.includes(marker)) {
+                        selectedMarkers = selectedMarkers.filter(m => m !== marker);
+                        mapMarker.setOpacity(marker.status === 'pending' ? 0.6 : 0.6); // Return to default opacity
+                        showToast("Deselected");
+                    } else {
+                        selectedMarkers.push({ data: marker, layer: mapMarker });
+                        mapMarker.setOpacity(1.0); // Highlight
+                        showToast("Selected for delete");
+                        // Auto-confirm logic? No, wait for button.
+                        if (confirm(`Delete ${marker.title}?`)) {
+                            markerClusterGroup.removeLayer(mapMarker); // Remove from cluster
+                            // Remove from data logic omitted for prototype
+                            showToast("Deleted");
+                        }
                     }
+                    return;
                 }
-                return;
-            }
-            showMarkerDetails(marker);
-        });
+                showMarkerDetails(marker);
+            });
 
-        markerClusterGroup.addLayer(mapMarker); // Add to cluster
-    });
+            markerClusterGroup.addLayer(mapMarker); // Add to cluster
+        });
+    } catch (error) {
+        console.error("Error loading markers:", error);
+    }
 }
 
 // 4.3 ECO & WEATHER LOGIC (Phase 2/3)
@@ -1425,37 +1433,36 @@ function saveMarker(lat, lng, id = null) {
     } else {
         // Create Mode
         const newMarker = {
-            id: Date.now(), // Simple unique ID
             type: type,
             lat: lat,
             lng: lng,
             title: title,
             address: address,
             notes: notes,
-            lastVerified: new Date().toISOString().split('T')[0],
-            status: currentUser.role === 'admin' ? 'published' : 'pending', // Approval Logic
+            status: currentUser.role === 'admin' ? 'published' : 'pending',
             author: currentUser.username
         };
 
-        // Add to local array (In a real app, send to backend)
-        markersData.push(newMarker);
+        // Send to API
+        fetch('/api/markers', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(newMarker)
+        })
+            .then(res => res.json())
+            .then(savedMarker => {
+                showToast("Marker Saved Successfully!");
+                loadMarkers(); // Reload from DB
+                closePanel();
 
-        // Refresh markers on map
-        closePanel();
-
-        if (newMarker.status === 'published') {
-            showToast("Marker Published Successfully!");
-            loadMarkers(); // Reload immediately
-        } else {
-            showToast("Marker Submitted for Approval");
-            loadMarkers();
-        }
-
-        // Gamification Hook
-        awardPoints(100, 'New Marker Added');
-        checkContributionStreak();
-
-        console.log("New marker saved:", newMarker);
+                // Gamification Hook
+                awardPoints(100, 'New Marker Added');
+                checkContributionStreak();
+            })
+            .catch(err => {
+                console.error(err);
+                showToast("Error saving marker");
+            });
     }
 }
 
