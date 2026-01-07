@@ -1,0 +1,2333 @@
+// --- DUMPING YARDS ---
+    { lat: 31.608569, lng: 74.383984, category: "Dumping Yard", address: "Mehmood Booti Disposal Station", image: "Mehmood_Booti_Disposal.jpg" },
+    { lat: 31.626783, lng: 74.419454, category: "Dumping Yard", address: "Lakhodair Landfill", image: "Lakhodair_Landfill.jpg" },
+    { lat: 31.610000, lng: 74.380000, category: "Dumping Yard", address: "LWMC Compost Plant (Mehmood Booti)", image: null },
+    { lat: 31.5635, lng: 74.3340, category: "Dumping Yard", address: "LWMC Head Office", image: null },
+    { lat: 31.5065, lng: 74.3510, category: "Dumping Yard", address: "MIT Waste Management", image: null },
+    { lat: 31.5300, lng: 74.3700, category: "Dumping Yard", address: "Waste Busters Lahore", image: null },
+    { lat: 31.5000, lng: 74.3200, category: "Dumping Yard", address: "Hygienic Waste Management", image: null },
+    { lat: 31.5100, lng: 74.3400, category: "Dumping Yard", address: "Zero Waste Solutions", image: null },
+    { lat: 31.4850, lng: 74.3750, category: "Dumping Yard", address: "Green Earth Recycling", image: null },
+    { lat: 31.5100, lng: 74.3200, category: "Dumping Yard", address: "ISP Environmental Solutions", image: null },
+    { lat: 31.4700, lng: 74.2400, category: "Dumping Yard", address: "MYZ Waste Management", image: null },
+    { lat: 31.4900, lng: 74.3700, category: "Dumping Yard", address: "Kabaaria (Online Scrap)", image: null },
+    { lat: 31.5850, lng: 74.3300, category: "Dumping Yard", address: "Scrap Market (Misri Shah)", image: null },
+    { lat: 31.5800, lng: 74.4000, category: "Dumping Yard", address: "Container Market / Dry Port", image: null },
+
+
+// --- GARBAGE CONTAINERS ---
+Longitude	Latitude	Locations					Town																		
+74.307699	31.593391	Old ID Card Office Molana Ahmed Ali road					Ravi Town																		
+74.29941	31.60052	Moter cycle point ravi road					Ravi Town																		
+74.30984	31.59385	Inside Minar-E-Pakistan					Ravi Town																		
+74.29976	31.59775	Main ravi road fire brigade office					Ravi Town																		
+74.30048	31.59695	Lakar mandi main ravi road					Ravi Town																		
+74.32159	31.59083	Opposite Shaker garh stand					Ravi Town																		
+74.31945	31.59197	Waste unclear lorry adda					Ravi Town																		
+74.319	31.59069	Police station lorry adda near parking					Ravi Town																		
+74.31211	31.59379	Kanji house parking					Ravi Town																		
+74.32165	31.58777	Picko road					Ravi Town																		
+74.32238	31.59079	Picko pul					Ravi Town																		
+74.31733	31.5957	Badami bagh railway station					Ravi Town																		
+74.31088	31.59704	Mandir bhugat ram					Ravi Town																		
+74.31458	31.59726	Link ravi road near phaatak					Ravi Town																		
+74.31523	31.59563	Link ravi road					Ravi Town																		
+74.31156	31.60078	Fazal wala container link ravi road					Ravi Town																		
+74.31222	31.60064	Railway line data nagr pul					Ravi Town																		
+74.31113	31.60176	Railway line ganna mandi					Ravi Town																		
+74.30808	31.60476	Truck adda					Ravi Town																		
+74.30595	31.60719	P.C.O near mandi					Ravi Town																		
+74.30511	31.60755	Interchange ghatti					Ravi Town																		
+74.30462	31.60929	Shamas pura phaatak					Ravi Town																		
+74.30345	31.60955	Purana pul ravi road					Ravi Town																		
+74.30033	31.60331	Near junglat colony					Ravi Town																		
+74.30088	31.6047	Junglat colony ring road					Ravi Town																		
+74.303	31.60168	Ayesha  degree college lakar mandi					Ravi Town																		
+74.30293	31.60139	Inside Ayesha degree college					Ravi Town																		
+74.31685	31.60001	Usman chowk					Ravi Town																		
+74.31799	31.60068	Qabristan Abu Baker road					Ravi Town																		
+74.31434	31.59902	Railway line pul data nagar					Ravi Town																		
+74.32042	31.6004	Thana badami bagh					Ravi Town																		
+74.31487	31.60573	Ahmed park gali number 3					Ravi Town																		
+74.31532	31.6046	Ahmed park gali number 5					Ravi Town																		
+74.31067	31.60629	Muslim park store					Ravi Town																		
+74.31068	31.60477	Mian park					Ravi Town																		
+74.31805	31.60344	Gourmet bakery					Ravi Town																		
+74.3098	31.60442	Sadaat colony near park					Ravi Town																		
+74.31583	31.59878	Pul data nagar					Ravi Town																		
+74.31725	31.5984	Papu pan shop data nagar					Ravi Town																		
+74.32252	31.6031	Hajveri shadi hall data nagar					Ravi Town																		
+74.3197	31.60909	Nawaz shareef mil data nagar					Ravi Town																		
+74.3166	31.60531	Ahmed park lamba plot					Ravi Town																		
+74.3177	31.60654	Mehar ishaq ka khooh					Ravi Town																		
+74.3213	31.60193	Hussain park					Ravi Town																		
+74.32188	31.60791	Jalal park bingali bagh					Ravi Town																		
+74.32043	31.60736	Chaudhry colony gali number 3					Ravi Town																		
+74.32396	31.59868	Chah motian bazaar					Ravi Town																		
+74.32462	31.60339	Sher shah road near church					Ravi Town																		
+74.32314	31.60096	Near nazim uc 12 office					Ravi Town																		
+74.31962	31.60338	Hussain memorial hospital drain road					Ravi Town																		
+74.32096	31.60314	Drain road					Ravi Town																		
+74.32176	31.60302	Drain road					Ravi Town																		
+74.32406	31.60163	Ayan shadi hall					Ravi Town																		
+74.32539	31.60073	Masoom shah chowk drain road					Ravi Town																		
+74.32754	31.6007	City kanta drain road					Ravi Town																		
+74.32574	31.6007	City kanta drain road					Ravi Town																		
+74.32929	31.6077	Khan park					Ravi Town																		
+74.32687	31.59576	Madina chowk					Ravi Town																		
+74.32732	31.59634	Choona bhatian					Ravi Town																		
+74.33035	31.60099	Shaikhan abad					Ravi Town																		
+74.33286	31.60206	Raza chowk					Ravi Town																		
+74.33403	31.60434	Main drain road shah din colony					Ravi Town																		
+74.32644	31.6052	Karam nagar					Ravi Town																		
+74.33514	31.60627	Wasa colony near baraf khana					Ravi Town																		
+74.32764	31.59431	Qayum road					Ravi Town																		
+74.33034	31.59879	Joseph colony					Ravi Town																		
+74.3287	31.60065	TNT Flat					Ravi Town																		
+74.33183	31.60146	Gillani chowk					Ravi Town																		
+74.32945	31.61127	Arif bhandra wali side					Ravi Town																		
+74.33259	31.58842	Karam nagar					Ravi Town																		
+74.33237	31.58816	Aziz road misri shah					Ravi Town																		
+74.33398	31.59073	Ganda nala misri shah					Ravi Town																		
+74.32661	31.58754	Kolho ghar					Ravi Town																		
+74.32867	31.58964	Rabia clinick misri shah					Ravi Town																		
+74.32521	31.59168	Chor gali					Ravi Town																		
+74.32483	31.59278	Taj road					Ravi Town																		
+74.32944	31.59385	Mian abdulsattar					Ravi Town																		
+74.32138	31.596	Mandir gali					Ravi Town																		
+74.31766	31.59621	Railway station badami bagh mian aslam road					Ravi Town																		
+74.33025	31.58493	Anside aik moria pul					Ravi Town																		
+74.32442	31.58645	Sheranwala Gate					Ravi Town																		
+74.32918	31.58332	Aik moria Yakki gate					Ravi Town																		
+74.32529	31.58013	Shah Mohammad Ghous (chamba)					Ravi Town																		
+74.32537	31.57966	Shah Mohammad Ghous (chamba)					Ravi Town																		
+74.32282	31.57651	Mochi Gate circular road					Ravi Town																		
+74.3287	31.5835	Aik moria Fasil line					Ravi Town																		
+74.32101	31.58703	Kashmiri gate					Ravi Town																		
+74.31129	31.57695	Mori Gate					Ravi Town																		
+74.31763	31.57684	Shah Alam Baba qulfi wala					Ravi Town																		
+74.31819	31.57867	Shah Alam letrin stop					Ravi Town																		
+74.31833	31.57936	Shah Alam Fawara stop					Ravi Town																		
+74.31825	31.57971	Shah Alam Shoe market					Ravi Town																		
+74.31886	31.58188	Rang mehal chowk					Ravi Town																		
+74.30699	31.58318	Behind Nijli ghar front of Pir Makki					Ravi Town																		
+74.31718	31.58382	Chowk sunjan singh					Ravi Town																		
+74.31563	31.58391	Pani wala talab					Ravi Town																		
+74.31598	31.5843	Kaly toot					Ravi Town																		
+74.31767	31.58874	Rim market					Ravi Town																		
+74.3151	31.59099	Behind Darbar Haider Sain					Ravi Town																		
+74.31171	31.59087	Minar-E-Pakistan (outside)					Ravi Town																		
+74.31255	31.59004	Shahi Qila near gate					Ravi Town																		
+74.31679	31.58862	Shahi Qila near servant quarters					Ravi Town																		
+74.31247	31.58789	Hazoori bagh					Ravi Town																		
+74.31579	31.58617	Fort road near bijjli ghar					Ravi Town																		
+74.31277	31.58648	Ali park Lassi wala					Ravi Town																		
+74.31277	31.58585	Ali park near telephone exchange					Ravi Town																		
+74.31029	31.58482	Near Tibbi thana					Ravi Town																		
+74.31129	31.58411	Tehsil bazaar near medan mian asif					Ravi Town																		
+74.30781	31.5867	Tixali bagion wala					Ravi Town																		
+74.3083	31.58702	Fort roae new dental hospital					Ravi Town																		
+74.30886	31.58799	Shimla road near khuddi					Ravi Town																		
+74.30854	31.58898	Shimla road near parking					Ravi Town																		
+74.31049	31.58977	Near gurdwara					Ravi Town																		
+74.3438	31.6042	Amir Rd Tokay Wala Chowk					Shalimar Town																		
+74.3436	31.6022	Gali # 10 Amir Rd					Shalimar Town																		
+74.3436	31.6022	Gali # 10 Amir Rd					Shalimar Town																		
+74.3435	31.6022	Gali # 10 Amir Rd					Shalimar Town																		
+74.3435	31.6022	Gali # 10 Amir Rd					Shalimar Town																		
+74.3432	31.6019	Amir Rd Workshop					Shalimar Town																		
+74.3438	31.6042	Ganda Nala Amir Rd					Shalimar Town																		
+74.3438	31.6042	Ganda Nala Amir Rd					Shalimar Town																		
+74.3438	31.6042	Ganda Nala Amir Rd					Shalimar Town																		
+74.3437	31.6048	Ganda Nala Amir Rd					Shalimar Town																		
+74.3437	31.6042	Ganda Nala Amir Rd					Shalimar Town																		
+74.3437	31.6042	Ganda Nala Amir Rd					Shalimar Town																		
+74.3437	31.6042	Club Chowk					Shalimar Town																		
+74.3436	31.6041	Club Chowk					Shalimar Town																		
+74.3436	31.6041	Club Chowk					Shalimar Town																		
+74.3435	31.604	Club Chowk					Shalimar Town																		
+74.3435	31.604	Club Chowk					Shalimar Town																		
+74.3434	31.6039	Sajjad Colony					Shalimar Town																		
+74.3434	31.6039	Sajjad Colony					Shalimar Town																		
+74.3434	31.6038	Sajjad Colony					Shalimar Town																		
+74.3434	31.6038	Sajjad Colony					Shalimar Town																		
+74.3434	31.6038	Rana Stop					Shalimar Town																		
+74.3433	31.6038	Rana Stop					Shalimar Town																		
+74.3433	31.6037	Rana Stop					Shalimar Town																		
+74.3433	31.6037	Kashmir Chowk					Shalimar Town																		
+74.3432	31.6036	Munir Gujjar Wali Gali					Shalimar Town																		
+74.3432	31.6036	Munir Gujjar Wali Gali					Shalimar Town																		
+74.3432	31.6036	Munir Gujjar Wali Gali					Shalimar Town																		
+74.3432	31.6035	Rana Saleem Wali Gali Ganda nala					Shalimar Town																		
+74.3432	31.6035	Rana Saleem Wali Gali Ganda nala					Shalimar Town																		
+74.3431	31.6034	Workshop Stop Ganda Nala					Shalimar Town																		
+74.3431	31.6034	Back Stop					Shalimar Town																		
+74.3431	31.6033	Back Stop					Shalimar Town																		
+74.3431	31.6032	Munir Shadi hall					Shalimar Town																		
+74.343	31.6032	Munir Shadi hall					Shalimar Town																		
+74.343	31.6031	Yasrab Colony School Wala Point					Shalimar Town																		
+74.343	31.6031	Yasrab Colony School Wala Point					Shalimar Town																		
+74.343	31.6031	Yasrab Colony School Wala Point					Shalimar Town																		
+74.343	31.6031	Yasrab Colony School Wala Point					Shalimar Town																		
+74.343	31.6031	Yasrab Colony School Wala Point					Shalimar Town																		
+74.343	31.6031	Yasrab Colony School Wala Point					Shalimar Town																		
+74.343	31.6031	Yasrab Colony School Wala Point					Shalimar Town																		
+74.3429	31.603	Yasrab Colony School Wala Point					Shalimar Town																		
+74.3429	31.603	Yasrab Colony School Wala Point					Shalimar Town																		
+74.3429	31.6029	Yasrab Colony Wala Point					Shalimar Town																		
+74.3426	31.6025	Yasrab Colony Wala Point					Shalimar Town																		
+74.3425	31.6023	Yasrab Colony Waa Plot					Shalimar Town																		
+74.3425	31.6022	Yasrab Colony Waa Plot					Shalimar Town																		
+74.3565	31.5949	Bara Dari Rd Faiz Alm Store					Shalimar Town																		
+74.3532	31.5962	Ganda Nala Rafi Park					Shalimar Town																		
+74.3532	31.5961	Ganda Nala Rafi Park					Shalimar Town																		
+74.3527	31.5964	Ganda Nala Rafi Park					Shalimar Town																		
+74.352	31.5968	Ganda Nala Rd Masjid Faiz allam					Shalimar Town																		
+74.3507	31.597	Altaf Park					Shalimar Town																		
+74.35	31.5983	Ganda Nala Rd Abne Maryam School					Shalimar Town																		
+74.35002	31.5983	Ganda Nala Rd Abne Maryam School					Shalimar Town																		
+74.3463	31.6026	Ganda Nala Rd Club Chowk					Shalimar Town																		
+74.3464	31.6025	Ganda Nala Rd Club Chowk					Shalimar Town																		
+74.3464	31.6025	Ganda Nala Rd Club Chowk					Shalimar Town																		
+74.3464	31.6025	Ganda Nala Rd Club Chowk					Shalimar Town																		
+74.3469	31.6034	Afzal Khan Rd Plot Rashid Khan Manggora Wala					Shalimar Town																		
+74.3491	31.6036	Majid Shadi Hall					Shalimar Town																		
+74.3491	31.6036	Majid Shadi Hall					Shalimar Town																		
+74.3491	31.6036	Majid Shadi Hall					Shalimar Town																		
+74.3451	31.6031	Ganda Nala Rd Club Chowk					Shalimar Town																		
+74.3442	31.6031	Ganda Nala Rd Amir Rd					Shalimar Town																		
+74.3441	31.6037	Ganda Nala Rd Amir Rd					Shalimar Town																		
+74.3441	31.6037	Ganda Nala Rd Amir Rd					Shalimar Town																		
+74.3441	31.6037	Ganda Nala Rd Amir Rd					Shalimar Town																		
+74.3441	31.6037	Ganda Nala Rd Amir Rd					Shalimar Town																		
+74.344	31.6037	Ganda Nala Rd Amir Rd					Shalimar Town																		
+74.344	31.6038	Ganda Nala Rd Amir Rd					Shalimar Town																		
+74.3441	31.6038	Ganda Nala Rd Amir Rd					Shalimar Town																		
+74.3441	31.6038	Ganda Nala Rd Amir Rd					Shalimar Town																		
+74.3442	31.6038	Ganda Nala Rd Amir Rd					Shalimar Town																		
+74.3428	31.6044	Ganda Nala Rd Shad Bagh Thana					Shalimar Town																		
+74.3428	31.6044	Ganda Nala Rd Shad Bagh Thana					Shalimar Town																		
+74.3421	31.6035	Main Amir Rd Govt School					Shalimar Town																		
+74.3422	31.6035	Main Amir Rd Govt School					Shalimar Town																		
+74.3547	31.5957	Gulistan Town Ganda Nala					Shalimar Town																		
+74.3527	31.5966	Alhi Town Ganda Nala					Shalimar Town																		
+74.3568	31.5959	China Rd China Pull					Shalimar Town																		
+74.3583	31.6016	China Rd Allah Ho Da Hotel					Shalimar Town																		
+74.3583	31.6043	China Rd Saiko Factory					Shalimar Town																		
+74.3583	31.6043	China Rd Saiko Factory					Shalimar Town																		
+74.358	31.6063	China Rd Near Wapda Office					Shalimar Town																		
+74.3649	31.6055	A 2 Block School Wali Ground					Shalimar Town																		
+74.3666	31.6066	A 2 Block Badshah Rd					Shalimar Town																		
+74.3676	31.6065	A 2 Block Badshah Rd Karol Ghati					Shalimar Town																		
+74.3675	31.6054	A 2 Block House # 109 Usman Mobile					Shalimar Town																		
+74.3664	31.6061	A 2 Block Madrasa Noor					Shalimar Town																		
+74.3659	31.6061	A 2 Block Madrasa Noor					Shalimar Town																		
+74.3677	31.6044	A 2 Block Masjid Ahly Hadess					Shalimar Town																		
+74.3677	31.6043	A 2 Block Masjid Ahly Hadess					Shalimar Town																		
+74.3677	31.6043	A 2 Block Masjid Ahly Hadess					Shalimar Town																		
+74.3686	31.602	B 1 Block Green Balt					Shalimar Town																		
+74.3686	31.602	B 1 Block Green Balt					Shalimar Town																		
+74.366	31.6022	B 1 Block Green Balt College Rd					Shalimar Town																		
+74.3641	31.6039	B 1 Block Green High Tention Rd					Shalimar Town																		
+74.3645	31.6037	B 2 Block Masjid Aqsa					Shalimar Town																		
+74.3618	31.6022	Muhammadia Park B 2					Shalimar Town																		
+74.3645	31.6022	B 1 Block Gdree Coolege					Shalimar Town																		
+74.3634	31.5992	B 3 Block Bari Park					Shalimar Town																		
+74.3618	31.5992	B 3 Block Bari Park					Shalimar Town																		
+74.3627	31.5975	B 3 Block Bari Park Ganda Nala					Shalimar Town																		
+74.3614	31.5968	B 3 Block Mangal Bazar					Shalimar Town																		
+74.36211	31.5962	C 2 Block Gdree College Ganda Nala					Shalimar Town																		
+74.3614	31.5958	C 2 Block Gdree College Ganda Nala					Shalimar Town																		
+74.36008	31.5955	C 2 Block Gdree College Ganda Nala					Shalimar Town																		
+74.358	31.5954	Jamill Park Ganda Nala					Shalimar Town																		
+74.36008	31.5936	Green Belt madni Qabrustan Jamill Park					Shalimar Town																		
+74.3607	31.5923	Qamroodin Park D 2 Block Madni Qabrustan					Shalimar Town																		
+74.3607	31.59222	Qamroodin Park D 2 Block Madni Qabrustan					Shalimar Town																		
+74.3616	31.5949	C 2 Block Near Park Wali Ground					Shalimar Town																		
+74.3633	31.5941	C 2 Block Near Muhammad Ali Shadi Hall					Shalimar Town																		
+74.3633	31.5944	C 2 Block Green Belt Rd					Shalimar Town																		
+74.3638	31.5906	D 2 Block Warisi Park Jani Pura					Shalimar Town																		
+74.3637	31.5906	D 2 Block Warisi Park					Shalimar Town																		
+74.3637	31.5904	D 2 Block Warisi Park					Shalimar Town																		
+74.3662	31.5916	D 1 Block Jani Pura Rashid School					Shalimar Town																		
+74.36708	31.5901	D 1 Block Baggain Wala Rd					Shalimar Town																		
+74.36708	31.5901	D 1 Block Baggain Wala Rd					Shalimar Town																		
+74.3681	31.5885	D 1 Block Malik Shakeel Wala Container					Shalimar Town																		
+74.3686	31.5912	D 1 Block Alm Din Park					Shalimar Town																		
+74.3687	31.5925	D 1 Block Mr Food  Green Belt					Shalimar Town																		
+74.3673	31.5926	D 1 Block Green Belt					Shalimar Town																		
+74.3641	31.5931	C 1 Block Green Belt					Shalimar Town																		
+74.3645	31.5939	C 1 Block Muhammad Ali Hall					Shalimar Town																		
+74.3662	31.59301	C 1 Block Office Main Shahzad					Shalimar Town																		
+74.3665	31.5956	C 1 Block Lady Park					Shalimar Town																		
+74.36806	31.5966	C 1 Block Saffa School					Shalimar Town																		
+74.3653	31.5981	C 1 Block Ganda Nala					Shalimar Town																		
+74.33847	31.59945	goll bag shad bag  park					Shalimar Town																		
+74.33848	31.59944	goll bag shad bag  park					Shalimar Town																		
+74.3383	31.59982	goll bag HBL ky sath					Shalimar Town																		
+74.33775	31.59981	goll bag HBL ky sath					Shalimar Town																		
+74.33778	31.60024	goll bag HBL ky sath					Shalimar Town																		
+74.33775	31.60025	goll bag HBL ky sath					Shalimar Town																		
+74.33773	31.60026	goll bag HBL ky sath					Shalimar Town																		
+74.3377	31.60027	goll bag HBL ky sath					Shalimar Town																		
+74.33768	31.60028	goll bag HBL ky sath					Shalimar Town																		
+74.33768	31.60029	goll bag HBL ky sath					Shalimar Town																		
+74.33765	31.6003	goll bag HBL ky sath					Shalimar Town																		
+74.33763	31.60031	goll bag HBL ky sath					Shalimar Town																		
+74.33769	31.60012	goll bag HBL ky sath					Shalimar Town																		
+74.33753	31.60011	goll bag HBL ky sath					Shalimar Town																		
+74.3374	31.6001	goll bag HBL ky sath					Shalimar Town																		
+74.33738	31.60016	goll bag HBL ky sath					Shalimar Town																		
+74.33738	31.60015	goll bag HBL ky sath					Shalimar Town																		
+74.3372	31.60014	goll bag HBL ky sath					Shalimar Town																		
+74.33805	31.60013	kely wali rerri					Shalimar Town																		
+74.33932	31.60534	kely wali rerri					Shalimar Town																		
+74.33868	31.6064	ganda nala peer rowangi kabirsatan					Shalimar Town																		
+74.33865	31.60645	ganda nala peer rowangi kabirsatan					Shalimar Town																		
+74.33786	31.60691	ganda nala gree					Shalimar Town																		
+74.33784	31.60693	ganda nala gree					Shalimar Town																		
+74.3366	31.60865	wasa dispozal					Shalimar Town																		
+74.33658	31.60857	wasa dispozal					Shalimar Town																		
+74.33589	31.60724	barkat stop					Shalimar Town																		
+74.33559	31.60663	cakkar stop					Shalimar Town																		
+74.33443	31.6048	kohe noor shadi hall					Shalimar Town																		
+74.33407	31.6078	khawaja farooq 3 road					Shalimar Town																		
+74.33453	31.59748	qosar masjid					Shalimar Town																		
+74.33458	31.59754	qosar masjid					Shalimar Town																		
+74.335	31.59514	nazamabad bazar					Shalimar Town																		
+74.33709	31.59321	tajj bag					Shalimar Town																		
+74.33983	31.59524	punjab bank					Shalimar Town																		
+74.34113	31.59667	acha milk shop					Shalimar Town																		
+74.34236	31.59805	sheraz bekars ky samny					Shalimar Town																		
+74.3471	31.59953	5020 telar ky samany					Shalimar Town																		
+74.34561	31.59111	sathi wala contanar					Shalimar Town																		
+74.34175	31.6013	akram park					Shalimar Town																		
+74.34191	31.60492	mian shadi hall					Shalimar Town																		
+7434014	3160547	ganda nala amjad butt ky ghar ky samny					Shalimar Town																		
+74.34103	31.60545	wajad accadmy  ganda nala					Shalimar Town																		
+74.34142	31.6076	peer ronki shah nawaz kebal ka office					Shalimar Town																		
+74.34946	31.60614	peer ronki shah ganda nala					Shalimar Town																		
+74.3495	31.60616	peer ronki shah ganda nala					Shalimar Town																		
+74.34723	31.60652	shad bag center					Shalimar Town																		
+74.33723	31.60651	shad bag center					Shalimar Town																		
+74.33722	31.6065	shad bag center					Shalimar Town																		
+74.33721	31.60659	shad bag center					Shalimar Town																		
+74.3372	31.60658	shad bag center					Shalimar Town																		
+74.33917	31.60649	shad bag center					Shalimar Town																		
+74.33718	31.60648	shad bag center					Shalimar Town																		
+74.33717	31.60647	shad bag center					Shalimar Town																		
+74.33715	31.60646	shad bag center					Shalimar Town																		
+74.33725	31.59646	shad bag center					Shalimar Town																		
+74.34025	31.59801	2020 telar pani wali tenki ky samny					Shalimar Town																		
+74.3326	31.59802	2020 telar pani wali tenki ky samny					Shalimar Town																		
+74.3327	31.59803	2020 telar pani wali tenki ky samny					Shalimar Town																		
+74.3328	31.59804	2020 telar pani wali tenki ky samny					Shalimar Town																		
+74.3329	31.59806	2020 telar pani wali tenki ky samny					Shalimar Town																		
+74.3331	31.59808	2020 telar pani wali tenki ky samny					Shalimar Town																		
+74.3332	31.59809	2020 telar pani wali tenki ky samny					Shalimar Town																		
+74.3332	31.59809	2020 telar pani wali tenki ky samny					Shalimar Town																		
+74.3333	31.59811	2020 telar pani wali tenki ky samny					Shalimar Town																		
+74.3334	31.59812	2020 telar pani wali tenki ky samny					Shalimar Town																		
+7433852	3159130	abbas chownk muhammadi street					Shalimar Town																		
+74.3374	31.5925	street no 223					Shalimar Town																		
+74.3367	31.59101	2020 telar pani wali tenki ky samny					Shalimar Town																		
+74.33672	31.591	2020 telar pani wali tenki ky samny					Shalimar Town																		
+74.33674	31.59104	2020 telar pani wali tenki ky samny					Shalimar Town																		
+74.33655	31.59277	tajj pura nakooni					Shalimar Town																		
+74.33739	31.59335	tajj pura garaound					Shalimar Town																		
+74.33774	31.59342	tajj pura pamp ky sath					Shalimar Town																		
+74.3382	31.59177	inkalabi park					Shalimar Town																		
+74.3398	31.59205	inkalabi park					Shalimar Town																		
+74.33128	31.59226	a/4 sammas raod					Shalimar Town																		
+7434013	31.59333	amjad road dispensiry					Shalimar Town																		
+7433852	31.59337	muhammadi street babar jim					Shalimar Town																		
+74.33936	31.59385	nonahal park					Shalimar Town																		
+7433910	31.5886	aisha park					Shalimar Town																		
+74.33898	31.58704	aziz road barf khana					Shalimar Town																		
+74.33896	31.58706	aziz road barf khana					Shalimar Town																		
+74.33972	31.58707	aziz road habib bank					Shalimar Town																		
+74.3418	31.58635	neelam sanima habib bank					Shalimar Town																		
+74.342	31.58625	neelam sanima dakkhana road					Shalimar Town																		
+74.34187	31.58583	panj peer road school wala point					Shalimar Town																		
+74.34155	31.58521	panj peer road school wala point					Shalimar Town																		
+74.3387	31.58603	zaffar ullah khan road					Shalimar Town																		
+74.33733	31.58549	zaffar ullah khan road					Shalimar Town																		
+74.33731	31.5855	zaffar ullah khan road					Shalimar Town																		
+74.33732	31.58552	umar deen jawa barost					Shalimar Town																		
+74.33714	31.58827	umar deen jawa barost					Shalimar Town																		
+74.33715	31.58837	umar deen jawa barost					Shalimar Town																		
+74.33675	31.58859	umar deen rod pentars					Shalimar Town																		
+74.33672	31.58853	umar deen rod pentars					Shalimar Town																		
+74.33673	31.5885	umar deen rod pentars					Shalimar Town																		
+74.33612	31.58811	aqab ilahi park school					Shalimar Town																		
+74.33601	31.58734	ahmad masjid ilahe park					Shalimar Town																		
+74.33595	31.58691	ahmad masjid ilahe park					Shalimar Town																		
+74.33569	31.58678	ilahe  park filtar point					Shalimar Town																		
+74.33566	31.58677	ilahe  park filtar point					Shalimar Town																		
+74.33512	31.58747	ilahe park dispesiry					Shalimar Town																		
+74.33497	31.58764	ilahe park dispesiry					Shalimar Town																		
+74.33537	31.58786	ilahe park ground					Shalimar Town																		
+74.33534	31.58787	ilahe park ground					Shalimar Town																		
+74.33533	31.58788	ilahe park ground					Shalimar Town																		
+74.33535	31.5879	ilahe park ground					Shalimar Town																		
+74.3353	31.58791	ilahe park ground					Shalimar Town																		
+74.33529	31.58795	ilahe park ground					Shalimar Town																		
+74.33528	31.588	ilahe park ground					Shalimar Town																		
+74.33526	31.5881	ilahe park ground					Shalimar Town																		
+74.33538	31.58822	ilahe park ground					Shalimar Town																		
+74.3354	31.5883	ilahe park ground					Shalimar Town																		
+74.33546	31.58832	ilahe park ground					Shalimar Town																		
+74.3356	31.58833	ilahe park ground					Shalimar Town																		
+74.33509	31.5884	ilahe park ground					Shalimar Town																		
+74.33515	31.58855	ilahe park ground					Shalimar Town																		
+74.33516	31.58865	ilahe park ground					Shalimar Town																		
+74.33607	31.5888	ilahi park girls school					Shalimar Town																		
+74.33608	31.58921	ilahi park girls school					Shalimar Town																		
+74.34937	31.59636	infriends govt school					Shalimar Town																		
+74.34935	31.59633	infriends govt school					Shalimar Town																		
+74.34977	31.59511	back saied govt school greet plet					Shalimar Town																		
+74.34977	31.59491	greeb belt no 2					Shalimar Town																		
+74.435081	31.59465	kotli mehar asraf scheem no 2					Shalimar Town																		
+74.3521	31.59462	kotli mehar asraf scheem no 2					Shalimar Town																		
+74.35222	31.59462	kotli mehar asraf scheem no 2					Shalimar Town																		
+74.35057	31.59468	wapda office					Shalimar Town																		
+74.35059	31.59469	wapda office					Shalimar Town																		
+74.35057	31.59439	wapda offce back sied					Shalimar Town																		
+74.34901	31.59205	ladi sofi park					Shalimar Town																		
+74.34903	31.59202	ladi sofi park					Shalimar Town																		
+74.39903	31.59201	ladi sofi park					Shalimar Town																		
+74.34906	31.592	ladi sofi park					Shalimar Town																		
+74.34922	31.59211	ladi sofi park					Shalimar Town																		
+74.34923	31.59212	ladi sofi park					Shalimar Town																		
+74.34924	31.59213	ladi sofi park					Shalimar Town																		
+74.36956	31.59331	central childran park scheem 2					Shalimar Town																		
+74.34956	31.59337	central childran park scheem 2					Shalimar Town																		
+74.34646	31.59571	taya chownk					Shalimar Town																		
+74.3465	31.59571	taya chownk					Shalimar Town																		
+74.34912	31.59524	taya chownk					Shalimar Town																		
+74.34911	31.59525	wastein kaluq scheem no 2					Shalimar Town																		
+74.34912	31.59526	wastein kaluq scheem no 2					Shalimar Town																		
+74.34909	31.59527	wastein kaluq scheem no 2					Shalimar Town																		
+74.34908	31.59528	wastein kaluq scheem no 2					Shalimar Town																		
+74.34907	31.59529	wastein kaluq scheem no 2					Shalimar Town																		
+74.34906	31.5953	wastein kaluq scheem no 2					Shalimar Town																		
+7434908	3159197	ladi sofi park					Shalimar Town																		
+7434909	3159198	ladi sofi park					Shalimar Town																		
+74.3491	31.59199	ladi sofi park					Shalimar Town																		
+74.34911	31.592	ladi sofi park					Shalimar Town																		
+74.34912	31.59221	ladi sofi park					Shalimar Town																		
+74.34913	31.59262	ladi sofi park					Shalimar Town																		
+74.34914	31.59203	ladi sofi park					Shalimar Town																		
+74.34915	31.59204	ladi sofi park					Shalimar Town																		
+74.34916	31.59205	ladi sofi park					Shalimar Town																		
+74.34917	31.59206	ladi sofi park					Shalimar Town																		
+74.34918	31.59207	ladi sofi park					Shalimar Town																		
+74.34919	31.59208	ladi sofi park					Shalimar Town																		
+74.3492	31.59209	ladi sofi park					Shalimar Town																		
+74.34921	31.5921	ladi sofi park					Shalimar Town																		
+74.34905	31.59531	waste in killo fee					Shalimar Town																		
+74.34904	31.59532	waste in killo fee					Shalimar Town																		
+74.34903	31.59533	waste in killo fee					Shalimar Town																		
+74.34902	31.59534	waste in killo fee					Shalimar Town																		
+74.34901	31.59535	waste in killo fee					Shalimar Town																		
+74.349	31.59536	waste in killo fee					Shalimar Town																		
+74.34989	31.59537	waste in killo fee					Shalimar Town																		
+74.34988	31.59538	waste in killo fee					Shalimar Town																		
+74.34987	31.59539	waste in killo fee					Shalimar Town																		
+74.34986	31.5954	waste in killo fee					Shalimar Town																		
+74.34985	31.59541	waste in killo fee					Shalimar Town																		
+74.36859	31.5842	Chowk Shuwala					Shalimar Town																		
+74.35982	31.5839	Suki Tali					Shalimar Town																		
+74.36888	31.5853	Ali Park					Shalimar Town																		
+74.35857	31.58775	60 no wagon wala adda					Shalimar Town																		
+74.33899	31.58392	Plot Suki Tali					Shalimar Town																		
+74.35861	31.58402	Shanze shadi hall ghoray shah road					Shalimar Town																		
+74.35545	31.58393	Chowk gujar pura					Shalimar Town																		
+74.35567	31.58481	Saadi road chowk gujar pura					Shalimar Town																		
+74.35144	31.58353	Allama ahsan hospital ghoray shah road					Shalimar Town																		
+74.3498	31.58359	Ghoray shah darbar					Shalimar Town																		
+74.34811	31.58193	Swami nagar road					Shalimar Town																		
+74.34662	31.5812	Tezab ahaata					Shalimar Town																		
+74.34553	31.58438	Siraj road					Shalimar Town																		
+74.36691	31.58398	Shuwala chowk near primary school					Shalimar Town																		
+74.36816	31.53235	Children park					Shalimar Town																		
+74.36533	31.58244	Ilyas qabariya bhogiwal road					Shalimar Town																		
+74.36626	31.57838	Begum pura GT road					Shalimar Town																		
+74.36266	31.57782	6 no gate UET					Shalimar Town																		
+74.36332	31.5794	Judgan wali dhari begum pura					Shalimar Town																		
+74.36266	31.58212	Tehsil dar office begum pura					Shalimar Town																		
+74.36353	31.58189	Usman park					Shalimar Town																		
+74.36094	31.58185	Mirza idrees plot					Shalimar Town																		
+74.35949	31.58319	Kucha naqsh bandi qabrastan					Shalimar Town																		
+74.34368	31.5862	Siraj road					Shalimar Town																		
+74.34408	31.58579	Siraj caltex petrol pump					Shalimar Town																		
+74.34463	31.58488	Bibi ahaata					Shalimar Town																		
+74.34497	31.58353	Iqbal road					Shalimar Town																		
+74.34826	31.5861	Dilawar road					Shalimar Town																		
+74.34509	31.57927	Peli kothi tezab ahaata					Shalimar Town																		
+74.34391	31.57974	Street no 16 jinnah park					Shalimar Town																		
+74.347	31.58287	Siraj road					Shalimar Town																		
+74.34683	31.58112	Tezab ahaata road					Shalimar Town																		
+74.3464	31.58066	tezab ahaata road					Shalimar Town																		
+74.34618	31.5804	Gas factory tezab ahaata					Shalimar Town																		
+74.34666	31.57825	Eye hospital					Shalimar Town																		
+74.34765	31.57744	Swami nagar near schazo laboratory					Shalimar Town																		
+74.34818	31.57798	Street no 22 swami nagar					Shalimar Town																		
+74.3485	31.5784	Street no 21 swami nagar					Shalimar Town																		
+74.34778	31.57864	Swami nagar near halwa pure wala					Shalimar Town																		
+74.35065	31.58185	Shuja colony					Shalimar Town																		
+74.34938	31.57841	Wireless colony					Shalimar Town																		
+74.34961	31.57705	Wireless colony					Shalimar Town																		
+74.34262	31.58101	Doodi Peer					Shalimar Town																		
+74.3421	31.58113	Jinnah park					Shalimar Town																		
+74.34309	31.57977	Doodi peer near petrol pump					Shalimar Town																		
+74.3438	31.58066	Street no 15 jinnah park					Shalimar Town																		
+74.34297	31.58209	Street no 10 jinnah park					Shalimar Town																		
+74.34269	31.58338	Jamia masjid sultani					Shalimar Town																		
+74.34196	31.58309	Tube well sultani park					Shalimar Town																		
+74.34215	31.58222	Talib husian bawaqchi sultani park					Shalimar Town																		
+74.33974	31.581	Ahaata malik basu					Shalimar Town																		
+74.33698	31.57958	DT road railway line godam					Shalimar Town																		
+74.33993	31.57945	GT Road Ali tailor					Shalimar Town																		
+74.3417	31.57937	GT road total petrol pump					Shalimar Town																		
+74.34266	31.58188	Allah malik building					Shalimar Town																		
+74.34607	31.58239	Shafi masjid					Shalimar Town																		
+74.35187	31.57603	UET GT Road					Shalimar Town																		
+74.35311	31.57623	Science Museum					Shalimar Town																		
+74.34732	31.57638	GT Road cooper store karam shah darbar					Shalimar Town																		
+74.34629	31.57711	Heer ranja shaid hall GT road					Shalimar Town																		
+74.34599	31.57735	Railway school GT Road					Shalimar Town																		
+74.34495	31.57815	GT road near painter					Shalimar Town																		
+74.34425	31.5787	Bara dari GT road tezab ahaata					Shalimar Town																		
+74.35508	31.59084	Fazal pura waste inclosue					Shalimar Town																		
+74.35495	31.59508	Waste inclosure sher shah road					Shalimar Town																		
+74.35651	31.59444	Bara dari chowk					Shalimar Town																		
+74.35722	31.59394	Dhoop sari sher shah road					Shalimar Town																		
+74.35734	31.59145	Shah noor qabrastan					Shalimar Town																		
+74.35442	31.58378	Gujar pura near school					Shalimar Town																		
+74.35629	31.58871	Malik asgar road					Shalimar Town																		
+74.34842	31.58848	Takia ujagar shah chah miran					Shalimar Town																		
+74.34639	31.58829	Chowk hazuri shah chah miran					Shalimar Town																		
+74.34669	31.58929	Newa muhala christian abadi					Shalimar Town																		
+74.34307	31.59546	Mukhan pura road near nadeemi chowk					Shalimar Town																		
+74.34156	31.59516	Ayub road near dr basit					Shalimar Town																		
+74.34215	31.59308	Shamshad park new shad bagh					Shalimar Town																		
+74.34036	31.58333	Thana misri shah					Shalimar Town																		
+74.34173	31.58292	Sultani park					Shalimar Town																		
+74.34162	31.58266	Taal wali gali sultan pura					Shalimar Town																		
+74.34134	31.58179	Ahaata bakshi sultan pura road					Shalimar Town																		
+74.33488	31.58131	Railway quarter					Shalimar Town																		
+74.33397	31.58254	Faiz Bagh					Shalimar Town																		
+74.3334	31.58394	Faiz Bagh bazar					Shalimar Town																		
+74.33256	31.58166	Do moria pull GT Road					Shalimar Town																		
+74.3309	31.58334	Ak moria pull Gt road					Shalimar Town																		
+74.33371	31.5811	GT road near fatima school					Shalimar Town																		
+74.33443	31.58053	GT road railway quarter					Shalimar Town																		
+74.33562	31.58663	Chowk na khuda office					Shalimar Town																		
+74.33524	31.58574	New elahi park					Shalimar Town																		
+74.33569	31.5853	Tariq hospital					Shalimar Town																		
+74.33643	31.58522	Generator wali dhari chah miran road					Shalimar Town																		
+74.33565	31.58445	Dera waseem qadar					Shalimar Town																		
+74.33504	31.58404	Suraee wali dhari					Shalimar Town																		
+74.33419	31.58372	Forman mill					Shalimar Town																		
+74.3329	31.58375	Bakre wala godam					Shalimar Town																		
+74.33172	31.58405	Jhake wali dhari					Shalimar Town																		
+74.33207	31.58588	Islamia high school misri shah					Shalimar Town																		
+74.33388	31.58602	Street no 18 nawab colony					Shalimar Town																		
+74.33752	31.58498	Kachu pura near anwar butt house					Shalimar Town																		
+74.33733	31.58405	Kachu pura near anwar butt house					Shalimar Town																		
+74.33748	31.58328	Street no 15 jinnah park					Shalimar Town																		
+74.33778	31.58246	Yaseen hotel akbar road					Shalimar Town																		
+74.33815	31.58104	Chamra mandi akbar road					Shalimar Town																		
+74.33849	31.58054	Chamra mandi school					Shalimar Town																		
+74.33755	31.58024	Sultan pura road					Shalimar Town																		
+74.33631	31.57966	Chamra mandi road					Shalimar Town																		
+74.33793	31.58121	Station stairs					Shalimar Town																		
+74.33755	31.58172	Chamra mandi disposal					Shalimar Town																		
+74.33543	31.58093	Ahsan road					Shalimar Town																		
+74.33605	31.58178	Ahsan road plot					Shalimar Town																		
+74.33606	31.58179	Ahsan road ganda nala					Shalimar Town																		
+74.33615	31.58204	Ganda nala faiz bagh					Shalimar Town																		
+74.33652	31.58348	Disposal Faiz bagh					Shalimar Town																		
+74.33417	31.58593	Ganda nala misri shah					Shalimar Town																		
+74.33437	31.58504	Ganda nala misri shah					Shalimar Town																		
+74.33559	31.58479	Butt kursian wala					Shalimar Town																		
+74.33564	31.5834	Street no 20 faiz bagh					Shalimar Town																		
+74.37428	31.58051	Baghichi Seetha Wali					Shalimar Town																		
+74.37589	31.5811	Azad Wali Gali					Shalimar Town																		
+74.37726	31.58237	Dars aur Dumurghi wala points					Shalimar Town																		
+74.3757	31.58161	G.T. Road					Shalimar Town																		
+74.37315	31.58029	G.T. Road					Shalimar Town																		
+74.37238	31.5799	G.T. Road					Shalimar Town																		
+74.37112	31.57943	G.T. Road					Shalimar Town																		
+74.37031	31.57546	Usman Abad					Shalimar Town																		
+74.37202	31.57488	Usman Abad					Shalimar Town																		
+74.37869	31.57649	Shalimar Hospital Back Side					Shalimar Town																		
+74.37977	31.5765	Shalimar Hospital wali Gali					Shalimar Town																		
+74.3811	31.57756	Link Road					Shalimar Town																		
+74.38112	31.57845	Link Road					Shalimar Town																		
+74.38116	31.57947	Link Road					Shalimar Town																		
+74.37813	31.57984	Dars Road					Shalimar Town																		
+74.3726	31.57917	Hafiz Pura Qabristan					Shalimar Town																		
+74.3705	31.57814	Telephone Exchange					Shalimar Town																		
+74.37692	31.58418	Shabdar Ghani Shah					Shalimar Town																		
+74.37519	31.58511	Hazrat Madhu Lal Hussain					Shalimar Town																		
+74.37365	31.58605	Madhu Lal Hussain Tube Well					Shalimar Town																		
+74.37272	31.58675	Peer Shakhshiyan Darbar					Shalimar Town																		
+74.36913	31.58584	Bhogiwal					Shalimar Town																		
+74.3705	31.58262	Rafiq Bakeri					Shalimar Town																		
+74.37265	31.58237	Pakistani Bazar					Shalimar Town																		
+74.36982	31.58077	Surriya Park					Shalimar Town																		
+74.37055	31.58077	Surriya Park Office					Shalimar Town																		
+74.36865	31.57885	Singh Pura					Shalimar Town																		
+74.36964	31.57911	Gourmet Bakeri					Shalimar Town																		
+74.37373	31.58085	Latif Academy					Shalimar Town																		
+74.37629	31.58215	Habib Bank G.T Road					Shalimar Town																		
+74.37135	31.57981	Crown Marriage Hall					Shalimar Town																		
+74.37527	31.59644	Mai Ghumi Masjid					Shalimar Town																		
+74.37461	31.59752	GulBahar Colony Gali no 5					Shalimar Town																		
+74.37653	3159794	GulBahar Colony Gali no 2					Shalimar Town																		
+74.37621	31.59838	GulBahar Colony Gali no 2					Shalimar Town																		
+7437720	31.59739	Shelor Chowk					Shalimar Town																		
+74.37771	31.59917	Shero Multani wali Gali Gul Bahar Colony					Shalimar Town																		
+74.38033	31.59878	Slier House					Shalimar Town																		
+74.37941	31.59873	Multani Bazar Masjid ul Jannat					Shalimar Town																		
+74.37831	31.60059	Multani Bazar Gali no 10					Shalimar Town																		
+74.37814	31.60078	Multani Bazar Gali no 11					Shalimar Town																		
+74.37788	31.60091	Multani Bazar Gali no 13					Shalimar Town																		
+74.3777	31.60126	Multani Bazar Gali no 14					Shalimar Town																		
+74.37723	31.60088	Multani Bazar Gali no 15					Shalimar Town																		
+74.37703	31.60137	Multani Bazar Gali no 16					Shalimar Town																		
+74.37634	31.60172	Multani Bazar taaj Dein Masjid					Shalimar Town																		
+74.37545	31.60258	Multani Bazar Church Wali Gali					Shalimar Town																		
+74.37616	31.60295	Multani Bazar Chand Park Gali no 09					Shalimar Town																		
+74.37537	31.60255	Multani Bazar Chand Park Gali no 07					Shalimar Town																		
+74.3746	31.60333	Multani Bazar Chand Park Gali no 05					Shalimar Town																		
+74.37419	31.60361	Multani Bazar Transformer Wala Point					Shalimar Town																		
+74.3733	31.60338	Multani Colony Rehman Park Masjid					Shalimar Town																		
+74.3735	31.60427	Multani Bazar Shehbaaz Butt Office					Shalimar Town																		
+74.37301	31.60495	Multani Bazar Meer Ramzan Office					Shalimar Town																		
+74.37295	31.60494	Laal Shah Road					Shalimar Town																		
+74.3727	31.60042	Meer Bashir Colony					Shalimar Town																		
+74.27058	31.59987	Petrol Pump wala Road					Shalimar Town																		
+74.369	31.59731	Aatif Park					Shalimar Town																		
+74.36983	31.59749	Aatif Park Tariq Gujjar Wala Plot					Shalimar Town																		
+74.36852	31.59392	Bhogiwal Chowk					Shalimar Town																		
+74.36856	31.59362	Bhogiwal Chowk Mai Ghumi Road					Shalimar Town																		
+74.37222	31.59459	Mai Ghumi Road Murghi Wala Point					Shalimar Town																		
+74.37276	31.59727	Jail wali Kothi Wala Road					Shalimar Town																		
+74.37488	31.59609	Mai Ghumi Road					Shalimar Town																		
+74.38027	31.6	Farooq Park Gali no 03					Shalimar Town																		
+74.38323	31.60081	Farooq Park					Shalimar Town																		
+74.38004	31.60021	Multani Colony Gali no 10					Shalimar Town																		
+7437965	31.60069	Multani Colony Gali no 10					Shalimar Town																		
+74.38166	31.60126	Farooq Park Akhter Foji					Shalimar Town																		
+Farooq Park Kachi Gali	1	0.8CM																							
+74.38226	31.60105	Basharat Road					Shalimar Town																		
+74.37978	31.60122	Aliya Town Chhati Gali					Shalimar Town																		
+74.38008	31.60156	Aaliya Town Takoni park					Shalimar Town																		
+74.38129	31.6025	Aaliya Town 100 Foot Road					Shalimar Town																		
+74.37916	31.6023	Aaliya Town Hajira Masjid					Shalimar Town																		
+74.37962	31.60288	Aaliya Town Purani Choki					Shalimar Town																		
+74.38039	31.6039	Aaliya Town Lari Park					Shalimar Town																		
+74.38106	31.60395	Aaliya Town Tube Well					Shalimar Town																		
+74.3733	31.59065	Union Council Office M.Deen Colony					Shalimar Town																		
+74.36999	31.58877	Ibrahim Colony Bakeri Wale					Shalimar Town																		
+74.37086	31.58855	Ibrahim Colony Gali no 09					Shalimar Town																		
+74.36945	31.58706	Kaka Gujjar wala Point					Shalimar Town																		
+74.36911	31.58725	Bhogiwal Road					Shalimar Town																		
+74.37419	31.59125	Union Council Government School					Shalimar Town																		
+74.37455	31.59127	Barkat Park					Shalimar Town																		
+74.37515	31.59274	Ghausia Chowk					Shalimar Town																		
+74.37581	31.5949	Khajor Wali Gali College Road					Shalimar Town																		
+74.37675	31.59523	College Road					Shalimar Town																		
+74.3775	31.59606	College Road Shelor					Shalimar Town																		
+74.37715	31.59564	College Road Masjid Wali Gali					Shalimar Town																		
+74.37206	31.59327	Hajveri Park					Shalimar Town																		
+74.37827	31.59563	Makkah chowk jameel shaheed road					Shalimar Town																		
+74.38009	31.59681	Black brown school gulshan shalimar					Shalimar Town																		
+74.3813	31.59884	Gulshan shalimar peera wala points					Shalimar Town																		
+74.38082	31.59855	Gulshan shalimar saleem bakery					Shalimar Town																		
+74.38162	31.59853	Gulshan shalimar tahir model school					Shalimar Town																		
+74.38266	31.59898	Gulshan shalimar basharat road tangy wala adda					Shalimar Town																		
+74.38313	31.59646	Basharat road nazir chowk					Shalimar Town																		
+74.38111	31.59313	Basharat road					Shalimar Town																		
+74.3802	31.58966	Aqib shalimar bagh					Shalimar Town																		
+74.38135	31.58966	Aqib shalimar bagh					Shalimar Town																		
+74.38187	31.58982	Aqib shalimar bagh					Shalimar Town																		
+74.38303	31.59	Aqib shalimar bagh					Shalimar Town																		
+74.38318	31.58968	Saif park					Shalimar Town																		
+74.38348	31.58944	Saif park					Shalimar Town																		
+74.38318	31.58862	Taroon wala point					Shalimar Town																		
+74.38372	31.58681	Nagar khana					Shalimar Town																		
+74.38467	31.58642	S-D-O point					Shalimar Town																		
+74.385	31.58506	Shalimar back side					Shalimar Town																		
+74.3847	31.58472	GT road shalimar bagh					Shalimar Town																		
+74.38336	31.5845	GT road shalimar bagh					Shalimar Town																		
+74.37718	31.58265	GT road baghbanpura					Shalimar Town																		
+74.37848	31.58321	GT road baghbanpura					Shalimar Town																		
+74.37978	31.58371	Baghbanpura haq nawaz road					Shalimar Town																		
+74.38131	31.58392	Shalimar chowk					Shalimar Town																		
+74.38062	31.5848	Jameel shaheed road					Shalimar Town																		
+74.38053	31.58573	Jameel shaheed road					Shalimar Town																		
+74.38047	31.58766	Jameel shaheed road					Shalimar Town																		
+74.37894	31.58817	Truck wala point					Shalimar Town																		
+74.37791	31.58887	college road					Shalimar Town																		
+74.37774	31.59122	Bricks wala point college road					Shalimar Town																		
+74.38019	31.58902	Jameel shaeed road					Shalimar Town																		
+74.37778	31.58274	GT road					Shalimar Town																		
+74.38405	31.5842	Carporation office					Shalimar Town																		
+74.38148	31.58297	Link road					Shalimar Town																		
+74.38141	31.58191	Link road					Shalimar Town																		
+74.3813	31.57697	Link road					Shalimar Town																		
+74.3818	31.57644	Ganda nala road					Shalimar Town																		
+74.38351	31.57662	Ganda nala road					Shalimar Town																		
+74.38532	31.57679	Ganda nala road					Shalimar Town																		
+74.38615	31.57685	Ganda nala road					Shalimar Town																		
+74.38292	31.57715	Atta mil anguri scheme no:2					Shalimar Town																		
+74.38145	31.57854	Mustafa darbar					Shalimar Town																		
+74.38386	31.57933	Mustafa darbar road					Shalimar Town																		
+74.38282	31.58046	Muchi wala point					Shalimar Town																		
+74.38631	31.58116	Child protection					Shalimar Town																		
+74.38834	31.58127	Akhri mint back side					Shalimar Town																		
+74.38938	31.5807	Wapda point					Shalimar Town																		
+74.38028	31.57897	katli peer abdul rahman					Shalimar Town																		
+74.39373	31.58454	Shahid park ifra school					Shalimar Town																		
+74.39425	31.58229	Janmuna shadi hall					Shalimar Town																		
+74.39307	31.58211	Rana ijaz wali gali					Shalimar Town																		
+74.38943	31.58146	Allied school					Shalimar Town																		
+74.38692	31.58138	Akhri mint wall					Shalimar Town																		
+74.38679	31.58219	Akhri mint wall					Shalimar Town																		
+74.38666	31.58301	Akhri mint wall					Shalimar Town																		
+74.38662	31.58309	Akhri mint wall					Shalimar Town																		
+74.38644	31.58414	Akhri mint wall					Shalimar Town																		
+74.38635	31.58442	Akhri mint wall					Shalimar Town																		
+74.38519	31.58463	GT road					Shalimar Town																		
+74.38143	31.57606	Ganda nala					Shalimar Town																		
+74.38303	31.5763	Ganda nala					Shalimar Town																		
+74.38417	31.57641	Ganda nala					Shalimar Town																		
+74.38675	31.57416	Sawari street no:19					Shalimar Town																		
+74.38667	31.57244	Sawari street no:14					Shalimar Town																		
+74.3856	31.57286	Qauid-e-azam park					Shalimar Town																		
+74.38391	31.57402	Sawari madrasa wala point					Shalimar Town																		
+74.38348	31.57408	Sawari bazar wala t stall					Shalimar Town																		
+74.38123	31.57522	Shabnam center link road					Shalimar Town																		
+74.3812	31.57378	Link road sawari stop					Shalimar Town																		
+74.38109	31.57215	Link road kumi bachat					Shalimar Town																		
+74.38106	31.5714	Link road awan auto					Shalimar Town																		
+74.38108	31.57095	Link road service shoes					Shalimar Town																		
+74.38104	3156985	Link road raam ghar bazar					Shalimar Town																		
+74.38104	31.5689	Link road china sale mela					Shalimar Town																		
+74.38102	31.56844	Link road balal furits chat					Shalimar Town																		
+74.38101	31.5682	Link road batt sweet					Shalimar Town																		
+74.381	31.56771	Link road					Shalimar Town																		
+74.38268	31.5673	Shah kamal majal wala adda					Shalimar Town																		
+74.38992	31.59754	Sultan Mehmood Road					Wahga Town																		
+74.39056	31.59888	Sultan Mehmood Road					Wahga Town																		
+74.39144	31.60028	Sultan Mehmood Road					Wahga Town																		
+74.39203	31.60073	Sultan Mehmood Road					Wahga Town																		
+74.39355	31.60168	Sultan Mehmood Road					Wahga Town																		
+74.39468	31.60166	Shagoor Peer Darbar Chowk					Wahga Town																		
+74.3941	31.60064	Shagoor Peer Road					Wahga Town																		
+74.39536	31.60267	Sultan Mehmood Road Muhallah Aziz Park					Wahga Town																		
+74.39562	31.60447	Mehmood Boti City Dist. Boys School					Wahga Town																		
+74.39423	31.60506	Salah-ud-Din Road Mehmood Boti					Wahga Town																		
+74.39344	31.60507	Salah-ud-Din Road Mehmood Boti					Wahga Town																		
+74.39205	31.60396	Salah-ud-Din Road Mehmood Boti					Wahga Town																		
+74.39141	31.60365	Chiristan Park Mehmood Boti					Wahga Town																		
+74.39013	31.60317	Chiristan Park Salah-ud-Din Road					Wahga Town																		
+74.38849	31.60251	Dera Allah Rakha Salah-ud-Din Road					Wahga Town																		
+74.38467	31.60112	Shalimar Housing Scheme Salah-ud-Din Road					Wahga Town																		
+74.38705	31.60015	Taj Park					Wahga Town																		
+74.38885	31.59939	Taj Park Road Asif Colony					Wahga Town																		
+74.39226	31.59795	Govt. High School New Karol					Wahga Town																		
+74.39427	31.59568	Lakhoder Road					Wahga Town																		
+74.39462	31.59547	Lakhoder Road					Wahga Town																		
+74.39439	31.59519	Lakhoder Road					Wahga Town																		
+74.39397	31.59467	Lakhoder Road					Wahga Town																		
+74.39663	31.59668	Hakeem Wali Gali Karol bazar					Wahga Town																		
+74.39328	31.59389	Lakhoder Road					Wahga Town																		
+74.39267	31.59303	Lakhoder Road					Wahga Town																		
+74.39221	31.59257	Lakhoder Road					Wahga Town																		
+74.39376	31.59217	Muhallah M.Pura Near Pak Gillani School					Wahga Town																		
+74.39656	31.59431	National Road					Wahga Town																		
+74.39596	31.59439	Alvi Colony					Wahga Town																		
+74.39322	31.59215	Muhallah M. Pura					Wahga Town																		
+74.39182	31.59803	Tibba New Karol					Wahga Town																		
+74.39081	31.59567	Chikhaan Wala Stop					Wahga Town																		
+74.39014	31.5907	Nawaan Wala Chowk					Wahga Town																		
+74.3915	31.59161	Lakhoder Road					Wahga Town																		
+74.39308	31.59213	Sabri Road					Wahga Town																		
+74.39453	31.59125	Seharwari Road					Wahga Town																		
+74.39218	31.5906	Seharwari Road					Wahga Town																		
+74.39436	31.5893	Salman Street					Wahga Town																		
+74.39568	31.58867	College Road					Wahga Town																		
+74.39704	31.58641	G.T Road Sirtaj Floor Mill					Wahga Town																		
+74.39769	31.58968	Sher Shah Road					Wahga Town																		
+74.39498	31.58623	G.T Road Kashmir High School					Wahga Town																		
+74.39203	31.58583	G.T Road Ghatta Road					Wahga Town																		
+74.39937	31.58552	G.T Road PSO Pump					Wahga Town																		
+74.38828	31.58531	G.T Road Agaz Shaadi Hall					Wahga Town																		
+74.38729	31.58516	G.T Road Manna Hospital					Wahga Town																		
+74.38612	31.58573	Sukh Canal Ghass Mandi					Wahga Town																		
+74.38602	31.58628	Sukh Nehar Sultan Mehmood					Wahga Town																		
+74.38644	31.58684	Sukh Nehar Sultan Mehmood Road					Wahga Town																		
+74.3856	31.58885	Wapda Road Near Darbar Hussain					Wahga Town																		
+74.38604	31.59013	Wapda Road Grid Station					Wahga Town																		
+74.38844	31.59182	Wapda Chowk					Wahga Town																		
+74.38791	31.59359	Hizra Abad Nala					Wahga Town																		
+74.38642	31.5965	Asif Colony Plot					Wahga Town																		
+74.38802	31.58981	Sultan M. Sutar Mill					Wahga Town																		
+74.38808	31.58956	Seharwari Road Post Office					Wahga Town																		
+74.40493	31.58701	G.T Road Darogha Wala Chowk					Wahga Town																		
+74.40442	31.58623	Naqshbandi Bazar					Wahga Town																		
+74.40529	31.58685	Gourmat Backers Darogha Wala Chowk					Wahga Town																		
+74.40794	31.58571	G.T Road Over Bridge					Wahga Town																		
+74.40856	31.5876	G.T Road Libia Colony					Wahga Town																		
+74.41004	31.58774	G.T Road Libia Colony					Wahga Town																		
+74.41133	31.5879	G.T Road Libia Colony Near Loral School					Wahga Town																		
+74.40883	31.5873	G.T Road Salamat Pura Mord					Wahga Town																		
+74.40788	31.5872	G.T Road Over Bridge					Wahga Town																		
+74.40272	31.59399	Band Road Opp. Farooq Abad					Wahga Town																		
+74.40338	31.59139	Band Road Paradise School					Wahga Town																		
+74.40348	31.59086	Band Road Tall Wala Point					Wahga Town																		
+74.4052	31.58859	Momin Pura Road Anwar Chane Wala					Wahga Town																		
+74.40739	31.58928	Momin Pura Road Truk Stand					Wahga Town																		
+74.40882	31.58951	Momin Pura Road Grid Station					Wahga Town																		
+74.40929	31.59276	Afshaan Park					Wahga Town																		
+74.40884	31.59507	Afshaan Park St. No 4					Wahga Town																		
+74.40994	31.59476	Afshaan Park St. No 1					Wahga Town																		
+74.4101	31.59349	Afshaan Park St. No 4					Wahga Town																		
+74.41048	31.59344	Akbar Colony Near Jama Masjid					Wahga Town																		
+74.4108	31.59406	Khaal Wali Street Afshaan Park					Wahga Town																		
+74.40814	31.59559	Nain Road Afshaan Park					Wahga Town																		
+74.40739	31.59588	Main Bazar Noor Colony					Wahga Town																		
+74.40731	31.5951	Abdul Latif Tahir Giyani Hospital M S Road					Wahga Town																		
+74.40636	31.59653	Noor Colony Shaadi Pura					Wahga Town																		
+74.40459	31.59757	Muhallah Juttan Shaadi Pura					Wahga Town																		
+74.4016	31.59848	Band Road Church Wali Gali					Wahga Town																		
+74.40178	31.59976	Rana Shahid Wali Gali					Wahga Town																		
+74.40485	31.60058	Jaddha Colony Shaadi Pura					Wahga Town																		
+74.40662	31.6038	Muhallah Aziz Baig Bheni Road					Wahga Town																		
+74.40914	31.6045	Iqbal Colony Bheni Road					Wahga Town																		
+74.41062	31.488	St. 5 Iqbal Colony					Wahga Town																		
+74.4102	31.60475	St. 4 Iqbal Colony					Wahga Town																		
+74.4007	31.60315	Lakhoder Road					Wahga Town																		
+74.40076	31.60312	Lakhoder Road					Wahga Town																		
+74.40018	31.60664	Road Peer Qabristan					Wahga Town																		
+74.40019	31.60661	Road Peer Qabristan					Wahga Town																		
+74.40716	31.58751	G.T Road Gas Factory					Wahga Town																		
+74.41312	31.58461	Raj hall Din Dar Bhooli					Wahga Town																		
+74.40939	31.58568	Salamat Pura Road					Wahga Town																		
+74.40987	31.58744	G.T Road Latif Wala Bazar					Wahga Town																		
+74.41203	31.58766	G.T Road Salamat Pura Stop					Wahga Town																		
+74.41198	31.58768	Iftikhar Park					Wahga Town																		
+74.41383	31.58785	G.T Road Salamat Pura Stop					Wahga Town																		
+74.41563	31.58806	Popi Chargha House G.T Road					Wahga Town																		
+74.41777	31.58828	Attock Pump G.T Road					Wahga Town																		
+74.4199	31.58848	G.T Road Global Generator Factory					Wahga Town																		
+74.42271	31.58877	G.T Road Ek Minar Wali Masjid					Wahga Town																		
+74.42426	31.58891	G.T Road New Abadi					Wahga Town																		
+74.42956	31.58948	G.T Road Chungi					Wahga Town																		
+74.42768	31.59035	Dubai Park					Wahga Town																		
+74.42652	31.59202	Dubai Park					Wahga Town																		
+74.42227	31.59354	Momin Pura Govt. School					Wahga Town																		
+74.42112	31.59358	Momin Pura					Wahga Town																		
+74.4211	31.59496	Momin Pura					Wahga Town																		
+74.42172	31.5916	Gulbhar Town					Wahga Town																		
+74.42203	31.59034	Gulbhar Town					Wahga Town																		
+74.4259	31.5879	Dhone Shah Darbar					Wahga Town																		
+74.43037	31.58787	Warra Stop					Wahga Town																		
+74.43051	31.58781	Warra Stop					Wahga Town																		
+74.43512	31.58129	Band Road Kotli					Wahga Town																		
+74.43795	31.58167	Kotli Pind School Wali Gali					Wahga Town																		
+74.44017	31.58185	Kotli Pind					Wahga Town																		
+74.4383	31.58012	Kotli Pind					Wahga Town																		
+74.4265	31.58706	Raj Hall Union Council					Wahga Town																		
+74.42228	31.58631	Kareem Nagar Raj Hall					Wahga Town																		
+74.42068	31.58604	Raj Hall Near Machinery Store					Wahga Town																		
+74.41854	31.58568	Raj Hall Road Near Filter Point					Wahga Town																		
+74.41656	31.58546	Raj Hall Road Data Park					Wahga Town																		
+74.4144	31.58512	Muhallah Eid Gah					Wahga Town																		
+74.41359	31.58495	Din Dar Poli Raj Hall Road					Wahga Town																		
+74.41051	31.58435	Momin Pura Christian Abadi					Wahga Town																		
+74.41059	31.58448	Takkia Salamat Pura					Wahga Town																		
+74.39895	31.58655	Main G.T Road Dhoobi Ghat					Wahga Town																		
+74.4009	31.58681	Main G.T Road Dhoobi Ghat					Wahga Town																		
+74.40133	31.58688	Main G.T Road Chaman Ice Cream					Wahga Town																		
+74.40176	31.58692	Main G.T Road Alhamd Shaadi Hall					Wahga Town																		
+74.40263	31.587	Main G.T Road Alflah Bank					Wahga Town																		
+74.40285	31.58704	Main G.T Road Bank Islami					Wahga Town																		
+74.40329	31.58711	Main G.T Road MCB Bank					Wahga Town																		
+74.40417	31.58724	Drogha Wala Chowk					Wahga Town																		
+74.40392	31.58838	Main Band Road Anwar Chane Wala					Wahga Town																		
+74.40359	31.59008	Main Band Road Gali No 13					Wahga Town																		
+74.40349	31.59037	Main Band Road Gali No. 14					Wahga Town																		
+74.40347	31.59063	Main Band Road Bilal Colony					Wahga Town																		
+74.40342	31.59088	Gali No. 20 Band Road					Wahga Town																		
+74.40324	31.5915	Gali No. 18 Band Road					Wahga Town																		
+74.40305	31.59188	Gali No 17 Band Road					Wahga Town																		
+74.40298	31.59245	Jhande Wala Chowk					Wahga Town																		
+74.40276	31.59347	Band Road Model Kanta					Wahga Town																		
+74.40252	31.59412	Band Road National Oil					Wahga Town																		
+74.40224	31.59522	Taraan Wala Bazar Band Road					Wahga Town																		
+74.40192	31.59696	Band Road Patha Mandi					Wahga Town																		
+74.40144	31.59906	Band Road haji Karyana Store					Wahga Town																		
+74.40118	31.60052	Band Road PSo Pump					Wahga Town																		
+74.40118	31.60111	Band Road Bheni Mor					Wahga Town																		
+74.40089	31.6021	Band Road Goll Chakar					Wahga Town																		
+74.40052	31.60186	Budh Pura S.A Rehman Tailor					Wahga Town																		
+74.3999	31.60224	Shakora Abad Main Bazar					Wahga Town																		
+74.39771	31.59982	Allah Tuwakal Road Chiti Kohye Chowk					Wahga Town																		
+74.40033	31.6006	Baba Jaan Colony					Wahga Town																		
+74.40019	31.59908	Kothi Wala Bazar Near Grammer School					Wahga Town																		
+74.40101	31.59793	Kiran Park Shaadi Pura					Wahga Town																		
+74.40096	31.59784	Sufi Nazir Near Total Pump					Wahga Town																		
+74.39964	31.59674	Siraj Pura Qabristan					Wahga Town																		
+74.40242	31.58795	Sunny Road Gandhi Shah Darbar					Wahga Town																		
+74.40169	31.58766	Sunny Road Biscuit Factory					Wahga Town																		
+74.39954	31.587	Sunny Road Wing Cola					Wahga Town																		
+74.40427	31.56423	Astation muslim abbad					Aziz Bhatti Town																		
+74.40617	31.56622	garamar school gulam nabi park					Aziz Bhatti Town																		
+74.40593	31.56726	pull fateh garh cannal road					Aziz Bhatti Town																		
+74.4072	31.56721	janaz gah fateh gar					Aziz Bhatti Town																		
+74.4082	31.56745	cannnal road mian atto					Aziz Bhatti Town																		
+74.40936	31.56789	askari school cannal road					Aziz Bhatti Town																		
+74.40833	31.56674	abbasi masjid nori darbar road					Aziz Bhatti Town																		
+74.40836	31.56492	itfaq park railway lain muslim abbad					Aziz Bhatti Town																		
+74.4097	31.56509	muneer bazar railway lain muslim abbad					Aziz Bhatti Town																		
+74.1189	31.56568	gujjar wala railway lain nori darbar road					Aziz Bhatti Town																		
+74.1189	31.5665	samma town street no 3					Aziz Bhatti Town																		
+74.41198	31.56825	cannal road aziz pulli					Aziz Bhatti Town																		
+74.41348	31.56847	saood shadi hall cannal road					Aziz Bhatti Town																		
+74.41382	31.5679	subhani accadimy shamma town					Aziz Bhatti Town																		
+74.41512	31.56823	pak gramar school cannal park					Aziz Bhatti Town																		
+74.41702	31.56798	main bazar new cannal park					Aziz Bhatti Town																		
+74.41757	31.56946	tajj bag cannal road					Aziz Bhatti Town																		
+74.42034	31.57051	cannal toli clinic cannal road					Aziz Bhatti Town																		
+74.42345	31.57051	qasir shadi hall cannal road					Aziz Bhatti Town																		
+74.42264	31.5703	main bazar madina chownk					Aziz Bhatti Town																		
+74.42263	31.57033	madina town cannal road					Aziz Bhatti Town																		
+74.42399	31.57064	phatteyan walli pulli cannal road					Aziz Bhatti Town																		
+74.42474	31.5694	hazrat ali chownk madina town					Aziz Bhatti Town																		
+74.42517	31.57084	shows factory cannal road					Aziz Bhatti Town																		
+74.42764	31.57134	allied school haneef bazar cannal road					Aziz Bhatti Town																		
+74.42872	31.57162	sehzad posis cannal road					Aziz Bhatti Town																		
+74.43023	31.57186	mugal tempar stor cannal road					Aziz Bhatti Town																		
+74.43396	31.5726	pull harbanspura					Aziz Bhatti Town																		
+74.43372	31.57093	defince road harbanspura					Aziz Bhatti Town																		
+74.43314	31.5705	islam park defince road harbanspura					Aziz Bhatti Town																		
+74.43224	31.56968	buri abbadi defince road harbanspura					Aziz Bhatti Town																		
+74.43443	31.57569	ring road qalandar pura					Aziz Bhatti Town																		
+74.43455	31.57616	ring riad harbanspura					Aziz Bhatti Town																		
+74.43475	3157699	mian mobile shop ring road					Aziz Bhatti Town																		
+74.43481	31.57757	badsha pan shop ring road					Aziz Bhatti Town																		
+74.43102	31.57796	oxford school qalandar pura					Aziz Bhatti Town																		
+74.43024	31.57489	awan building matirial qalandar pura					Aziz Bhatti Town																		
+74.43024	31.57487	afzal park harbanspura					Aziz Bhatti Town																		
+74.43019	31.57389	masjid gulzar madina afzal park					Aziz Bhatti Town																		
+74.425514	31.57676	gujjar chownk nawaz park					Aziz Bhatti Town																		
+74.42295	31.57767	iftikhar park harbanspura					Aziz Bhatti Town																		
+74.42295	31.57767	street janaz gah harbanspura					Aziz Bhatti Town																		
+74.41968	31.57507	the street school amir town					Aziz Bhatti Town																		
+74.41882	31.57031	stop amir town cannal road					Aziz Bhatti Town																		
+74.4208	31.57089	phattiyan wali pulli cannal road					Aziz Bhatti Town																		
+74.42152	31.57097	mian asosiates cannal road					Aziz Bhatti Town																		
+74.42297	31.57124	khalid bazar cannal road					Aziz Bhatti Town																		
+74.42431	31.57156	kohistan narsari cannal road					Aziz Bhatti Town																		
+74.42645	31.57198	rahit bakiry harbanspura					Aziz Bhatti Town																		
+74.4304	31.5728	afzal park harbanspura					Aziz Bhatti Town																		
+74.4315	31.57302	afzal pulli air cannal road					Aziz Bhatti Town																		
+74.43422	31.57366	pull harbanspura					Aziz Bhatti Town																		
+74.44438	31.57537	nawab pura sahafi colony					Aziz Bhatti Town																		
+74.44851	31.57791	sahafi colony a block					Aziz Bhatti Town																		
+74.44456	31.57924	sahafi colony					Aziz Bhatti Town																		
+74.44934	31.58296	main road sahafi colony					Aziz Bhatti Town																		
+74.45309	31.58148	sahafi colony					Aziz Bhatti Town																		
+74.45117	31.58006	sahafi colony					Aziz Bhatti Town																		
+74.46587	31.57933	nazeer gardan air cannal road					Aziz Bhatti Town																		
+74.45832	31.57783	rani stand air cannal road					Aziz Bhatti Town																		
+74.44808	31.57576	hajwariy housing scheem air cannal road					Aziz Bhatti Town																		
+74.44131	31.57476	allah malik air cannal harbanspura					Aziz Bhatti Town																		
+74.43739	31.57344	nawab stand harnbanspura					Aziz Bhatti Town																		
+7443555	31.57186	nawab stand ringroad					Aziz Bhatti Town																		
+74.40067	31.56663	new pull camman park					Aziz Bhatti Town																		
+74.40139	31.56688	new pull sarvice rod camman park					Aziz Bhatti Town																		
+74.40338	31.56766	sarvice road fate garh					Aziz Bhatti Town																		
+74.40318	31.56875	oven in school camman park					Aziz Bhatti Town																		
+74.40196	31.57084	sani park street no 2					Aziz Bhatti Town																		
+74.40144	31.57122	gulshan park road					Aziz Bhatti Town																		
+7439858	31.57148	mian shadi hall road					Aziz Bhatti Town																		
+74.39776	31.57179	mian shadi hall gulshan park					Aziz Bhatti Town																		
+74.39789	31.5736	gulshan farooq scheem					Aziz Bhatti Town																		
+74.39673	31.57404	gulshan farooq scheem street no 23					Aziz Bhatti Town																		
+74.39673	31.57404	bud bazar walli park					Aziz Bhatti Town																		
+74.39818	31.57423	gulshan farooq scheem road					Aziz Bhatti Town																		
+74.39857	31.573757	ali unice school gulshan farooq scheem					Aziz Bhatti Town																		
+74.3988	31.57436	gulshan farooq scheem street no 5					Aziz Bhatti Town																		
+74.3981	31.57645	walli park kcca road					Aziz Bhatti Town																		
+74.39796	31.5794	farnas wala point  rasheed pura					Aziz Bhatti Town																		
+74.39783	31.5794	ahmad garamar school rasheed pura					Aziz Bhatti Town																		
+74.39566	31.58486	rail pluss rajba road					Aziz Bhatti Town																		
+74.39603	31.58266	sheees mehal rajba road					Aziz Bhatti Town																		
+74.39215	31.58284	nayab idiol school rajba road					Aziz Bhatti Town																		
+74.39902	31.58309	filter wala point rajba road					Aziz Bhatti Town																		
+74.39982	31.58331	akbar park					Aziz Bhatti Town																		
+74.40163	31.58086	akbar road					Aziz Bhatti Town																		
+74.40229	31.58086	street no 10 akbar park main bazar					Aziz Bhatti Town																		
+74.40242	31.58093	toheed park					Aziz Bhatti Town																		
+74.4024	31.57982	wasa tuib well rajba road					Aziz Bhatti Town																		
+74.39982	31.58331	gazali cakki rajba road					Aziz Bhatti Town																		
+74.40363	31.58345	daroga wala chownk					Aziz Bhatti Town																		
+74.39857	31.57375	dak khana wali street					Aziz Bhatti Town																		
+74.10166	31.5867	s.a rehman bazar					Aziz Bhatti Town																		
+74.39886	31.5864	dhobi ghat stop					Aziz Bhatti Town																		
+74.39773	31.58626	bata shoes g t road					Aziz Bhatti Town																		
+74.39584	31.58602	collage stop g t road					Aziz Bhatti Town																		
+74.39509	31.58445	rasheed pura road					Aziz Bhatti Town																		
+74.40025	31.57548	dogar road hameed pura					Aziz Bhatti Town																		
+74.40242	31.58093	toheed park					Aziz Bhatti Town																		
+74.40438	31.56742	main bazar air cannal road muslim abbad					Aziz Bhatti Town																		
+74.4026	31.56651	near wapda office sarvice road muslim abbad					Aziz Bhatti Town																		
+74.40217	31.56621	sarvice road muslim abbad					Aziz Bhatti Town																		
+74.40058	31.56457	urooj road new pull railway line					Aziz Bhatti Town																		
+74.40118	31.56374	railway phatak new pull					Aziz Bhatti Town																		
+7440312	31.56415	railway lain muslim abbad					Aziz Bhatti Town																		
+74.40022	31.5637	new pull railway phatak					Aziz Bhatti Town																		
+74.39926	3156611	new pull cannal roa					Aziz Bhatti Town																		
+74.39835	31.56445	malik park street no 2					Aziz Bhatti Town																		
+74.39801	31.56389	street no 8 malik park					Aziz Bhatti Town																		
+74.39779	31.56389	railway lain malik park					Aziz Bhatti Town																		
+7439701	31.56539	paj peer cannal road					Aziz Bhatti Town																		
+74.3947	31.56477	main bazar panj peer canal road					Aziz Bhatti Town																		
+74.39468	31.56476	karraku muhallah cannal road					Aziz Bhatti Town																		
+74.39457	31.56282	railway lain panj peer main bazar					Aziz Bhatti Town																		
+74.39559	31.56306	railway lain panj peer main bazar					Aziz Bhatti Town																		
+74.3923	31.56267	lal pull railway phatak					Aziz Bhatti Town																		
+74.39205	31.56283	muhammah pura bazar					Aziz Bhatti Town																		
+74.38081	31.56465	muhammah pura bazar lal pull					Aziz Bhatti Town																		
+74.39085	31.56363	chownk lal pull					Aziz Bhatti Town																		
+74.39262	31.56427	cannal road shall patrol mump					Aziz Bhatti Town																		
+74.3931	31.56442	cannal road near tahir public school					Aziz Bhatti Town																		
+74.39334	31.5654	near punjab bank maskeen pura					Aziz Bhatti Town																		
+74.39219	31.56484	sasta bazar maskeen pura					Aziz Bhatti Town																		
+74.3907	31.56473	gormet bakry lal pull					Aziz Bhatti Town																		
+7439020	31.56469	chownk lal pull near pak mitahi					Aziz Bhatti Town																		
+74.38902	31.56776	steel shop rod lal pull					Aziz Bhatti Town																		
+74.38902	31.56776	nabi pura bazar lal pul					Aziz Bhatti Town																		
+74.39072	31.56805	allah hooo masjid sadeeq akbar road					Aziz Bhatti Town																		
+74.39087	31.56842	sadeeq akbar road lal oul mian colony					Aziz Bhatti Town																		
+74.39087	31.56907	sadeeq akbar road lal pul					Aziz Bhatti Town																		
+74.39081	31.57087	inton wally dheer					Aziz Bhatti Town																		
+74.39111	31.57267	khuddi wala plot					Aziz Bhatti Town																		
+74.38933	31.57474	govt girls high school saraye jora peer					Aziz Bhatti Town																		
+74.39336	31.57568	farooq park					Aziz Bhatti Town																		
+74.39017	31.57656	bali memorial hospital cotli peer abdul rehman					Aziz Bhatti Town																		
+74.39336	31.51164	kaiscan muhalah kotli peer abdul rehman					Aziz Bhatti Town																		
+7439542	31.57764	malik hospital rasheed pura					Aziz Bhatti Town																		
+74.3941	31.57449	bilal masjid bilal road					Aziz Bhatti Town																		
+74.39366	31.5653	sarvice road maskeen pura pull					Aziz Bhatti Town																		
+74.39578	31.56577	sarvice road lal pull book dippu maskeen pura					Aziz Bhatti Town																		
+74.39672	31.566	sarvice road near liaqat hospital maskeen pura					Aziz Bhatti Town																		
+74.39783	31.56622	sarvice road wapda grid astation new pull					Aziz Bhatti Town																		
+74.39883	31.5664	sarvice rod rehman park new pul					Aziz Bhatti Town																		
+74.3994	31.56662	sarvice rod new pul rehman park rana accadimy					Aziz Bhatti Town																		
+74.40604	31.56786	sarvice road pull fath gar					Aziz Bhatti Town																		
+74.4074	31.56817	sarvice road pso  fathe garh					Aziz Bhatti Town																		
+74.40932	31.56853	sarvice road near saleem pulli cannal road					Aziz Bhatti Town																		
+74.41064	31.56882	sarivice road near wapda office aziz pulli cannal road					Aziz Bhatti Town																		
+74.41325	31.56956	savice road air foundation school					Aziz Bhatti Town																		
+74.41527	31.56977	60 fit raod  cannal bank scheem					Aziz Bhatti Town																		
+74.41351	31.57106	60 fit raod  cannal bank scheem					Aziz Bhatti Town																		
+74.41338	31.57242	near asraf hotel cannal scheem					Aziz Bhatti Town																		
+74.41505	31.57315	lahore cant pablic school cannal bank scheem					Aziz Bhatti Town																		
+74.41376	31.5736	tofail block madina masjid cannal bank scheem					Aziz Bhatti Town																		
+74.41384	31.5736	rowal marige hall cannal bank scheem					Aziz Bhatti Town																		
+74.41397	31.57659	60 fit raod  cannal bank scheem					Aziz Bhatti Town																		
+74.41411	31.57461	60 fit raod  cannal bank scheem					Aziz Bhatti Town																		
+74.41364	31.57866	60 ft road narsari					Aziz Bhatti Town																		
+74.41311	31.57983	faibar glass abdullah chownk salamat pura road					Aziz Bhatti Town																		
+74.41361	31.58183	sultan bahoo salamt pura					Aziz Bhatti Town																		
+74.40882	31.58429	rana azeem academy rajba road					Aziz Bhatti Town																		
+74.41405	31.57776	60 fit raod madina road farnicar canal bank scheem					Aziz Bhatti Town																		
+74.407	31.58412	barkat colony rajba road					Aziz Bhatti Town																		
+74.40619	31.584	bilal park rajba roadd					Aziz Bhatti Town																		
+74.40421	31.58197	main bazar sha deen park					Aziz Bhatti Town																		
+74.40658	31.58098	bilal park near darbar					Aziz Bhatti Town																		
+74.40668	31.58042	bilal park near mian jarnal stor					Aziz Bhatti Town																		
+74.40804	31.58162	b block a q ljam accadimy new shalimar scheem					Aziz Bhatti Town																		
+74.40938	31.58044	b block main road new shalimar schem					Aziz Bhatti Town																		
+74.40836	31.58268	b block house no 199 new shalimar scheem					Aziz Bhatti Town																		
+74.40891	31.58218	allaid school b block					Aziz Bhatti Town																		
+74.4091	31.58168	ali adnan ka dera new shalimar scheem					Aziz Bhatti Town																		
+74.4097	31.57859	abdullah book dipo main bazar fateh garh					Aziz Bhatti Town																		
+74.40966	31.58012	main bazar road fateh gar					Aziz Bhatti Town																		
+74.40968	31.58036	main bazar road fateh gar					Aziz Bhatti Town																		
+74.4097	31.58216	khan jarnal stor new shalimar scheem					Aziz Bhatti Town																		
+74.40559	31.5827	naveed atto new shalimar scheem main road					Aziz Bhatti Town																		
+74.40614	31.56988	street no 7 main road new shalimar scheem					Aziz Bhatti Town																		
+74.4091	31.58218	b block new shalimar scheem					Aziz Bhatti Town																		
+74.40838	31.58044	bblock usman ghani street no 4					Aziz Bhatti Town																		
+74.40405	31.5784	bismillah park main road sha deen park					Aziz Bhatti Town																		
+74.40446	31.57834	bismillah park main road sha deen park					Aziz Bhatti Town																		
+74.4051	31.57818	bismillah park main road sha deen park					Aziz Bhatti Town																		
+74.40647	31.57812	mugal chownk mehar fiaz colony					Aziz Bhatti Town																		
+74.40874	31.57846	city hospital mehar fiaz colony					Aziz Bhatti Town																		
+74.41166	31.58005	a block house no 11 new shalimar scheem					Aziz Bhatti Town																		
+74.41126	31.58278	a block street no 136 new shalimar scheem					Aziz Bhatti Town																		
+74.41182	31.58311	a block makah street  new shalimar scheem					Aziz Bhatti Town																		
+74.41223	31.5827	a block street no a 1 new shalimar scheem					Aziz Bhatti Town																		
+74.4009	31.57783	mehar ijaz ki cothy					Aziz Bhatti Town																		
+74.4129	31.57895	phatta gadian wala					Aziz Bhatti Town																		
+74.41492	31.57979	tajj mehal park snokar club					Aziz Bhatti Town																		
+74.4158	31.57979	toheed chownk tajj mehal park main road					Aziz Bhatti Town																		
+74.41859	31.5799	tajj mehal madrassa anware madina					Aziz Bhatti Town																		
+74.41878	31.57885	haji yaseen street tajj mehal					Aziz Bhatti Town																		
+74.41459	31.57977	albadar school tajj mehal park					Aziz Bhatti Town																		
+74.41219	31.57745	118 tofail block cannal bank scheem					Aziz Bhatti Town																		
+74.41284	31.57662	govt digree girls collage salamat pura					Aziz Bhatti Town																		
+74.41265	31.57523	melad street cannal bank scheem					Aziz Bhatti Town																		
+74.41265	31.57523	darbar baba mastan ali shah cannal bank street					Aziz Bhatti Town																		
+74.41254	31.57438	street no 2 cannal bank scheem					Aziz Bhatti Town																		
+74.41567	31.57091	tang street no 3 new cannal point scheem					Aziz Bhatti Town																		
+74.41674	31.5715	new lahore cant public school new cannal scheem					Aziz Bhatti Town																		
+74.41595	31.57206	street no 7 new cannal point scheem					Aziz Bhatti Town																		
+74.4094	31.56969	kacca salamat pura road					Aziz Bhatti Town																		
+74.41035	31.57168	fateh dispensiry kacca salamat pura road					Aziz Bhatti Town																		
+74.40806	31.57195	kamma chownk mehar fiaz colony a block					Aziz Bhatti Town																		
+74.41595	31.57206	mehar basheer wali street mehar fiaz colony a block					Aziz Bhatti Town																		
+74.41016	31.5738	street no 1 mehar fiaz colony a block					Aziz Bhatti Town																		
+74.41028	31.57451	kacca salalmat pura raod mehar fiaz colony					Aziz Bhatti Town																		
+74.40951	31.57557	imran jarnal store a block mehar fiaz colony					Aziz Bhatti Town																		
+74.40813	31.57548	iman welfair socity mehar fiaz colony					Aziz Bhatti Town																		
+74.40731	31.57555	street ni 4 mehar fiaz colony					Aziz Bhatti Town																		
+74.40709	31.57559	bhk school mehar fiaz clony					Aziz Bhatti Town																		
+74.40645	31.5745	aa block mehar fiaz colony					Aziz Bhatti Town																		
+74.40365	31.57441	mustreet no a 5 block mehar fiaz colony					Aziz Bhatti Town																		
+74.40279	31.57456	dispensiry fateh garh					Aziz Bhatti Town																		
+74.40443	31.57157	mustaq dry clinar dispensory road					Aziz Bhatti Town																		
+74.40464	31.57079	naeem pan shop gulshan park road					Aziz Bhatti Town																		
+74.40136	31.57128	gatta facotary gulshan park					Aziz Bhatti Town																		
+74.40443	31.57187	kabirstan road faeh garh					Aziz Bhatti Town																		
+74.40645	31.5745	60 fit road					Aziz Bhatti Town																		
+74.403	31.57448	zohra park					Aziz Bhatti Town																		
+74.4034	31.57686	khjoor scheem hameed pura					Aziz Bhatti Town																		
+74041352	31.5552	IMAM DEEN ROAD ILAID SCHOOL					Aziz Bhatti Town																		
+74.41155	31.55663	NAGENA HOUSE					Aziz Bhatti Town																		
+74.41063	31.55684	IMAM DEEN HOUSE					Aziz Bhatti Town																		
+74.41062	31.55777	TAJ PURA PIND TOWER WALA PLOT					Aziz Bhatti Town																		
+74.40923	31.55732	HAZURI SHA DARBAR					Aziz Bhatti Town																		
+74.401919	31.55793	TAJJ PURA BAZAR MAIN CHOWNK					Aziz Bhatti Town																		
+74.40815	31.55824	MADINA DARNAL STORE					Aziz Bhatti Town																		
+74.40714	31.55789	TAJJ PURA AZHAR ABBAS PARK					Aziz Bhatti Town																		
+74.40659	31.55792	TAJJ PUURA BASS STOP					Aziz Bhatti Town																		
+74.40574	31.55753	SUNDAY BAZAR LANDA BAZAR					Aziz Bhatti Town																		
+74.40759	31.55702	TAJJ PURA AZHAZR PLOT					Aziz Bhatti Town																		
+74.40759	31.55702	TAJJ PURA SCHEEM AZHAR ABBAS PARK					Aziz Bhatti Town																		
+74.4077	31.55655	WAPDA OFFICE					Aziz Bhatti Town																		
+74.4058	31.55636	325 E BLOCK					Aziz Bhatti Town																		
+74.40566	31.55611	TAJJ PURA SCHEEM 365 E BLOCK					Aziz Bhatti Town																		
+74.40822	31.55422	AMEER UD DEEN PARK PHASE 2 TAJJ PURA					Aziz Bhatti Town																		
+74.40678	31.55424	ALMERAJ MASJID					Aziz Bhatti Town																		
+74.40587	31.55319	AMERR UD DEEN PARK PHASE 2 PUNJAB PROPERTY					Aziz Bhatti Town																		
+74.40468	31.55439	AMEER UD DEEN PARK PHASE 2 TAJJ PURA 60 FIT					Aziz Bhatti Town																		
+74.40465	31.55542	TAJJ PURA SCHEEM E BLOCK QADRI BOOK DIPU					Aziz Bhatti Town																		
+74.40312	31.55592	STUDY POINT ACADAMY					Aziz Bhatti Town																		
+74.40395	31.55561	AMEER UD DEEN PARK ALI FOUNDATION SCHOOL					Aziz Bhatti Town																		
+74.40346	31.55501	AMEER UD DEEN PARK STREET NO 4					Aziz Bhatti Town																		
+74.40158	31.55543	AMEER UD DEEN LADIES PARK					Aziz Bhatti Town																		
+74.40158	31.55543	AMEER UD DEEN LADIES PARK					Aziz Bhatti Town																		
+74.40107	31.55583	DISPENSIRY ROAD					Aziz Bhatti Town																		
+74.39883	31.55579	DISPENSIRY ROAD					Aziz Bhatti Town																		
+74.39864	31.5561	DISPENSIRY ROAD					Aziz Bhatti Town																		
+74.40195	31.55971	TAJJ PURA  SCHEEM A BLOCK					Aziz Bhatti Town																		
+74.40239	31.5599	TAJJ PURA SCHEEM A BLOCK 316					Aziz Bhatti Town																		
+74.40439	31.55955	TAJJ PURA SCHEEM A 345					Aziz Bhatti Town																		
+74.39333	31.55318	SOLANG ROAD PAKORA STOP					Aziz Bhatti Town																		
+74.39391	31.55315	KARMANWALA BAZAR					Aziz Bhatti Town																		
+74.39524	31.5531	SADIQI CALINIC					Aziz Bhatti Town																		
+74.3957	31.55306	KHOKA STOP					Aziz Bhatti Town																		
+74.39674	31.55303	KHOKA STOP					Aziz Bhatti Town																		
+74.39827	31.553	JAMIA MASJID NAQSBANDI					Aziz Bhatti Town																		
+74.39827	31.55296	NAZAMA ABAD					Aziz Bhatti Town																		
+74.39966	31.55294	NAZAMA ABAD CHOWNK					Aziz Bhatti Town																		
+74.39979	31.55295	NAZAMA ABAD CHOWNK					Aziz Bhatti Town																		
+74.40192	31.55292	KHWAJA AHMAD EHSAN ROAD					Aziz Bhatti Town																		
+74.40301	31.55285	KHWAJA AHMAD EHSAN ROAD					Aziz Bhatti Town																		
+74.40431	31.55279	KHWAJA AHMAD EHSAN ROAD NERI SAIN KABRISTAN					Aziz Bhatti Town																		
+74.40693	31.55575	KHWAJA AHMAD AHSAN ROAD					Aziz Bhatti Town																		
+74.40897	31.55266	KHWAJA AHMAD AHSAN ROAD					Aziz Bhatti Town																		
+74.41042	31.5525	KHWAJA AHMAD AHSAN ROAD					Aziz Bhatti Town																		
+KHWAJA AHMAD AHSAN ROAD	1	0.8CM																							
+74.41449	31.55845	SHER SHA COLONY HAJI CAMP					Aziz Bhatti Town																		
+74.4094	31.5502	HARBANS PURA ROAD					Aziz Bhatti Town																		
+74.40903	31.54995	HARBANS PURA ROAD					Aziz Bhatti Town																		
+74.40766	31.54876	JORY PULL					Aziz Bhatti Town																		
+74.40917	31.54678	ALMDAR ROAD					Aziz Bhatti Town																		
+74.40915	31.54558	ALMDAR ROAD					Aziz Bhatti Town																		
+74.40897	31.54238	AIR PORT BACK SAID					Aziz Bhatti Town																		
+74.40734	31.5424	AIR PORT BACK SAID					Aziz Bhatti Town																		
+74.40373	31.54253	AIR PORT BACK SAID					Aziz Bhatti Town																		
+74.40202	31.54259	AIR PORT BACK SAID					Aziz Bhatti Town																		
+74.40134	31.54317	BAHAR SHAH ROAD					Aziz Bhatti Town																		
+74.40188	31.54357	BAHAR SHAH ROAD					Aziz Bhatti Town																		
+74.4024	31.54408	BAHAR SHAH ROAD					Aziz Bhatti Town																		
+74.40289	31.54454	BAHAR SHAH ROAD					Aziz Bhatti Town																		
+74.40334	31.54499	BAHAR SHAH ROAD					Aziz Bhatti Town																		
+74.40389	31.54542	BAHAR SHAH ROAD SOTAR MILL					Aziz Bhatti Town																		
+74.40508	31.54644	BAHAR SHAH ROAD SOTAR MILL					Aziz Bhatti Town																		
+74.40524	31.54757	BAHAR SHAH ROAD ALFAISAL TOWN					Aziz Bhatti Town																		
+74.4038	31.54718	RAJBA NALA C BLOCK ALFAISAL TOWN					Aziz Bhatti Town																		
+74.40178	31.54617	RAJBA NALA C BLOCK ALFAISAL TOWN					Aziz Bhatti Town																		
+74.40061	31.54745	RAJBA NALA C BLOCK ALFAISAL TOWN					Aziz Bhatti Town																		
+74.40209	31.54897	MURGI KHAN A STOP					Aziz Bhatti Town																		
+74.4042	31.54874	MURGI KHAN A STOP					Aziz Bhatti Town																		
+74.40596	31.54857	KHWAJA AHMAD EHSAN ROD					Aziz Bhatti Town																		
+74.40039	31.54916	KHWAJA AHMAD EHSAN ROD					Aziz Bhatti Town																		
+74.40075	31.54212	ZARRAR SAHEED ROAD ALFAISAL TOWN					Aziz Bhatti Town																		
+74.40495	31.5528	ZARRAR SAHEED ROAD ALFAISAL TOWN					Aziz Bhatti Town																		
+74.40778	31.55265	ZARRAR SAHEED ROAD ALFAISAL TOWN					Aziz Bhatti Town																		
+74.42152	31.56088	HARBANS PURA ROAD  TAJJ BAG					Aziz Bhatti Town																		
+74.42011	31.56222	TAJ BAG PHASE 3					Aziz Bhatti Town																		
+74.4134	31.56118	KOTLI STREET TOWER					Aziz Bhatti Town																		
+74.41221	31.56093	TAJJ BAG SAMAN STREET					Aziz Bhatti Town																		
+74.41582	31.56451	MAIN MARKIT					Aziz Bhatti Town																		
+74.42049	31.56415	MANZOOR COLONY MAIN BAZAR					Aziz Bhatti Town																		
+74.42191	31.56367	MANZOOR COLONY MAIN BAZAR STREET NO 9					Aziz Bhatti Town																		
+74.41441	31.55838	IMAM TOWN ROAD MARKAZ TOHEED					Aziz Bhatti Town																		
+74.41103	31.558905	IMAM TOWN ROAD MARKAZ TOHEED  BARF KHANA					Aziz Bhatti Town																		
+74.40934	31.56187	GUJJA PEER DARBAR					Aziz Bhatti Town																		
+74.40732	31.55937	SHAH ALAM CLONY ROSHANI SCHOOL					Aziz Bhatti Town																		
+74.40514	31.55796	TAJJ PURA ROAD GOVT SCHOOL BOYS					Aziz Bhatti Town																		
+74.40331	31.55833	TAJJ PURA ROAD GOVT SCHOOL BOYS					Aziz Bhatti Town																		
+74.41103	31.558905	THANA GAZIA ABBAD TAJJ PURA SCHEEM					Aziz Bhatti Town																		
+74.40552	31.56108	ALI MUHAMMAD BAZAR					Aziz Bhatti Town																		
+74.40671	31.56167	ALI MUHAMMAD PARK PATHAN WALA PLOT					Aziz Bhatti Town																		
+74.40872	31.56462	MANZOOR COLONY RAILWAY					Aziz Bhatti Town																		
+74.41118	31.56506	MANZOOR COLONY RAILWAY					Aziz Bhatti Town																		
+74.40722	31.56441	MADINA COLONY RAILWAY LAIN					Aziz Bhatti Town																		
+74.40633	31.56436	RASOOL PURA RAILWAY LAIN					Aziz Bhatti Town																		
+74.40378	31.56406	PATWARI MUHALLAH RAILWAY LAIN					Aziz Bhatti Town																		
+74.4019	31.56373	TANWEER ABAD RAILWAY LAIN					Aziz Bhatti Town																		
+74.39942	31.56334	BARKAT PARK RAILWAY LAIN					Aziz Bhatti Town																		
+74.39885	31.56326	BARKAT PARK RAILWAY LAIN					Aziz Bhatti Town																		
+74.39565	31.56297	UMAIR ALI ROAD RAILWAY LAIN					Aziz Bhatti Town																		
+74.39622	31.56286	UMAIR ALI ROAD RAILWAY LAIN					Aziz Bhatti Town																		
+74.39565	31.56275	UMAIR ALI ROAD RAILWAY LAIN					Aziz Bhatti Town																		
+74.39487	31.56265	ITHAD COLONY RAILWAY LAIN					Aziz Bhatti Town																		
+74.40092	31.56171	APROC ROAD					Aziz Bhatti Town																		
+74.40273	31.56031	AYZ TOWN JOHAR STREET					Aziz Bhatti Town																		
+74.4008	31.55931	APROC ROAD BUTT CHOWN TAJJ PURA SCHEEEM					Aziz Bhatti Town																		
+74.40149	31.55923	TAJJ PURA ROAD GOVT SCHOOL BOYS					Aziz Bhatti Town																		
+74.40319	31.55733	TAJJ PURA SCHEM SUNDY BAZAR					Aziz Bhatti Town																		
+74.40301	31.55651	AL MUKADAS MERRIGE HALL					Aziz Bhatti Town																		
+74.4044	31.5571	TAJJ PURA SCHEEM LANDA BAZAR					Aziz Bhatti Town																		
+74.4236	31.55802	MAHERI PARK					Aziz Bhatti Town																		
+74.39891	31.55923	TAJ PURA SCHEEM AMINA MASJID					Aziz Bhatti Town																		
+74.39891	31.55923	TAJ PURA SCHEEM AMINA MASJID					Aziz Bhatti Town																		
+74.39893	31.55949	TAJ PURA SCHEEM AMINA MASJID					Aziz Bhatti Town																		
+74.39893	31.55949	TAJ PURA SCHEEM AMINA MASJID					Aziz Bhatti Town																		
+74.39893	31.55949	TAJ PURA SCHEEM AMINA MASJID					Aziz Bhatti Town																		
+74.39893	31.55949	TAJ PURA SCHEEM AMINA MASJID					Aziz Bhatti Town																		
+74.40929	31.54815	MAIN ZARRAR SAGEEED RID GOVT GIRLS HAIG SCHOOL					Aziz Bhatti Town																		
+74.41665	31.54615	MAIN ZARRAZ SAHEED ROAD PTCL OFFICE					Aziz Bhatti Town																		
+74.41949	31.54615	MAIN ZARRAR SAHEED RAOD HAZARA HOTAL					Aziz Bhatti Town																		
+74.41949	31.54511	MAIN ZARRAR SAHEED RAOD GOVT BEKRY					Aziz Bhatti Town																		
+74.4203	31.5448	MAIN ZARRAR SAHEED RAOD SUNERI BEKERY					Aziz Bhatti Town																		
+74.4212	31.54442	MAIN ZARRAR SAHEED RAOD RIYAST UC OFFUCE					Aziz Bhatti Town																		
+74.42191	31.54416	MAIN ZARRAR SAHEED RAOD DOGEFCH PIND					Aziz Bhatti Town																		
+74.42278	31.54384	MAIN ZARRAR SAHEED RAOD CHUNGI STOP					Aziz Bhatti Town																		
+74.42419	31.54313	OUT FALL  ROA					Aziz Bhatti Town																		
+74.42499	31.54256	GOVT MADAL HIGH SCHOOL CHUNGI					Aziz Bhatti Town																		
+74.42635	31.54421	IBRAHIM COLONY COHADI ASFAQ					Aziz Bhatti Town																		
+74.43297	31.55563	MAIN ZARRAR SAHEED RAOD					Aziz Bhatti Town																		
+74.43285	61.55603	MAIN ZARRAR SAHEED RAOD					Aziz Bhatti Town																		
+74.43473	31.55993	PEER NASEER MELAD CHOWN					Aziz Bhatti Town																		
+74.43456	31.56108	PEER NASEER MELAD CHOWN					Aziz Bhatti Town																		
+74.43324	31.56246	PEER NASEER DARBAR					Aziz Bhatti Town																		
+74.43148	31.56156	PEER NASEER DARBAR					Aziz Bhatti Town																		
+74.4287	31.56128	PEER NASEER CANDIAN PIND					Aziz Bhatti Town																		
+74.43166	31.56661	JALLAL COLONY HOUSE NO 17					Aziz Bhatti Town																		
+74.43346	31.56591	JALLAL COLONY HOUSE NO 17					Aziz Bhatti Town																		
+74.43439	31.56726	JALLAL COLONY HOUSE NO 17					Aziz Bhatti Town																		
+74.43372	31.56814	JALLAL COLONY HOUSE NO 17					Aziz Bhatti Town																		
+74.43291	31.568	JALLAL COLONY HOUSE NO 17					Aziz Bhatti Town																		
+74.42636	31.56483	HARBANS PURA RAOD					Aziz Bhatti Town																		
+74.42517	31.56371	HARBANS PURA RAOD					Aziz Bhatti Town																		
+74.41878	31.55855	HARBANS PURA RAOD					Aziz Bhatti Town																		
+74.42085	31.5558	HARBANS PURA RAOD					Aziz Bhatti Town																		
+74.41644	31.55636	HARBANSPURA ROAD JALAL COLONY					Aziz Bhatti Town																		
+74.41569	31.5582	HARBANS PURA ROAD TOTAL PUMP					Aziz Bhatti Town																		
+74.41595	31.55482	JALAL PRAK					Aziz Bhatti Town																		
+74.41369	31.545397	HARBANSPURA ROAD JALAL COLONY					Aziz Bhatti Town																		
+74.41483	31.55199	NARSARY ROAD BADAR COLONY					Aziz Bhatti Town																		
+74.41528	31.55118	NARSARY ROAD BADAR COLONY RAINGER HEAD COWATAR					Aziz Bhatti Town																		
+74.41621	31.55008	NARSARI RAOD BISMILLAH CHOWNK RAINGER HEAD COWATER					Aziz Bhatti Town																		
+74.41624	31.54755	NARSARI RAOD BISMILLAH CHOWNK RAINGER HEAD COWATER					Aziz Bhatti Town																		
+7438881	31.56425	LAL PULL MUGAL PURA					Aziz Bhatti Town																		
+744373	31.56396	AKBAR MASJID					Aziz Bhatti Town																		
+74.438332	31.56326	ASFAQ GUJJAR WALI STREET MUGALPURA					Aziz Bhatti Town																		
+7438201	3156297	SOCITY SCHOOL MUGAL PURA					Aziz Bhatti Town																		
+7438068	3156375	BATA SHOSE					Aziz Bhatti Town																		
+7438087	31.56485	GUNJJ BAZAR LINK ROAD					Aziz Bhatti Town																		
+74.3822	31.56442	JUNJJ BAZAAR UC OFFICE					Aziz Bhatti Town																		
+743822	31.56442	JGANJJ BAZAR CHAKKI WALA POINT					Aziz Bhatti Town																		
+74.38102	31.5657	LINK ROAD RANA CARPORASION					Aziz Bhatti Town																		
+74.38104	31.56603	SHAHI DAWAKHANA SHALIMAR LINK ROAD					Aziz Bhatti Town																		
+7438094	31.56712	LINK RAOD MAJJAN WALA ADDA					Aziz Bhatti Town																		
+74.38379	31.56721	SHAH KAMAROAD PANI WALI TENKI					Aziz Bhatti Town																		
+74.384334	31.15667	SHAH KAMAROAD QULFI WALI FACTORY					Aziz Bhatti Town																		
+74.38669	31.56634	DISPENSIRY SHAH KAMAL ROAD					Aziz Bhatti Town																		
+74.38693	31.56693	TOHEED PARK WAHEED SCHOOL					Aziz Bhatti Town																		
+74.38773	31.56778	TOHEED PARK DISPOSAL PAMP					Aziz Bhatti Town																		
+74.38977	31.5638	YASMEEN SCHOOL MUGAL PURA					Aziz Bhatti Town																		
+7438808	31.56348	STREET NO 1 FIAZ PARK					Aziz Bhatti Town																		
+74.438555	31.56285	DISPOSAL PAMP FIAZ PARK					Aziz Bhatti Town																		
+74.38316	31.56256	MURIAN AMSTARI MUHALAH					Aziz Bhatti Town																		
+74.38194	31.56218	AMRITSARI MUHALLAH MUGAL PURA PULL					Aziz Bhatti Town																		
+74388445	31.56163	LARIX COLONY PHATK NO 4					Aziz Bhatti Town																		
+74.38017	31.5612	RAILWAY COLONY MUGAL PURA					Aziz Bhatti Town																		
+74.37962	31.56112	RAILWAY COLONY MUGAL PURA					Aziz Bhatti Town																		
+7437858	31.56094	RAILWAY COLONY MUGAL PURA					Aziz Bhatti Town																		
+7437701	31.56057	RAILWAY COLONY MUGAL PURA					Aziz Bhatti Town																		
+74.437678	31.56053	RAILWAY COLONY MUGAL PURA					Aziz Bhatti Town																		
+74.36279	31.54957	INFENTARY RAOD ARTHO CLINIC					Aziz Bhatti Town																		
+74.36356	31.54903	INFENTARY RAOD DARGA STREET					Aziz Bhatti Town																		
+74.36216	31.54653	JAN MUHAMMAD ROAD NEAR TANVEER HIGH SCHOOL					Aziz Bhatti Town																		
+74.36336	31.56832	DARGAH STREET					Aziz Bhatti Town																		
+74.3653	31.54841	GANDA NALA NEAR ARIF HIGH SCHOOL					Aziz Bhatti Town																		
+74.36138	31.54662	DENGE SHAH DARBAR WALA ROAD					Aziz Bhatti Town																		
+74.35894	31.3154758	NUSRAT COLONY NEAR RAILWAY LINE					Aziz Bhatti Town																		
+74.636563	31.54427	GANDA NALA NEAR AKBAR NAI					Aziz Bhatti Town																		
+74.36706	31.55014	STREET NO 62 GANDA NALA					Aziz Bhatti Town																		
+74.36683	31.54406	GORA KABRISTAN DARHAMPURA					Aziz Bhatti Town																		
+74.36644	31.54939	GORA KABRISTAN DARHAMPURA					Aziz Bhatti Town																		
+74.36985	31.55067	ILAMA IQBAL ROAD NEAR HAQ ATTO					Aziz Bhatti Town																		
+74.36477	31.55143	ILAMA IQBAL RAOD NEAR COCO PAN SHOP					Aziz Bhatti Town																		
+74.36142	31.55189	ILAMA IQBAL ROAD CNG ASTAION					Aziz Bhatti Town																		
+74.36102	31.55216	ILAMA IQBAL ROAD NEAR TOTAL PETROL POMP					Aziz Bhatti Town																		
+74.3624	31.55195	ILAMA IQBAL ROAD STREET NO 6					Aziz Bhatti Town																		
+74.36044	31.55147	INFENTARY RAOD NEAR RIAZE BIJLI WALA					Aziz Bhatti Town																		
+74.360905	31.55118	INFENTARY RAOD NEAR REHMAT OFFICE					Aziz Bhatti Town																		
+74.35905	30.55261	ILAMA IQBAL ROAD NEAR LALA BOOK DIPPO					Aziz Bhatti Town																		
+74.35834	31.55249	NUSRAT COLONY NEAR RAILWAY LINE					Aziz Bhatti Town																		
+74.36062	31.55249	CANAL ROAD DISPOSAL WASA					Aziz Bhatti Town																		
+74.36168	31.5539	AHATA MAKHAN SING WALI MASJID					Aziz Bhatti Town																		
+74.36368	31.55543	STREET NO 3 SCHEEM NO 1					Aziz Bhatti Town																		
+74.36254	31.55366	AHATA MAKHAN SING WALI MASJID					Aziz Bhatti Town																		
+74.36127	31.54971	DARBAR MIAN MEER					Aziz Bhatti Town																		
+74.36058	31.54877	DARBAR MIAN MEER					Aziz Bhatti Town																		
+74.35998	31.5519	MOR MIAN MEER					Aziz Bhatti Town																		
+74.38866	31.55805	GAZIA ABBAD BAS STOP					Aziz Bhatti Town																		
+74.38887	31.55711	HARI BHARI STREET NEAR KABRISTAN					Aziz Bhatti Town																		
+74.3893	315552	SOLANG ROAD NEAR KABRISTAN					Aziz Bhatti Town																		
+74.39011	31.55483	KHALEERA KA HOTAL SOLING					Aziz Bhatti Town																		
+74.39807	31.55423	SOLONG ROA NAZAR					Aziz Bhatti Town																		
+74.3924	31.55334	SOLING RAOD PAKORA STOP					Aziz Bhatti Town																		
+74.38924	31.55833	GOVT HIGH SCHOOL GAZIA ABAD					Aziz Bhatti Town																		
+74.38867	31.55934	TAJJ PURA RAOD NEAR GOVT SCHOOL					Aziz Bhatti Town																		
+74.2888	31.55959	TAJJ PURA RAOD NEAR PHOOL MEER DARBAR					Aziz Bhatti Town																		
+74.3893	31.56029	TAJJ PURA NEAR JANAZ GAH					Aziz Bhatti Town																		
+74.38954	31.56059	TAJJ PURA RAOD NEAR HASAN MADICAL					Aziz Bhatti Town																		
+74.38988	31.56096	TAJJ PURA RAOD STREET NO 32					Aziz Bhatti Town																		
+74.39017	31.56137	TAJJ PURA ROAD NEAR WASA OFFICE					Aziz Bhatti Town																		
+74.39079	31.56178	TAJJ PURA ROAD NEAR BHTTO KABBAB					Aziz Bhatti Town																		
+74.39267	31.56213	TAJJ PURA PHATAK					Aziz Bhatti Town																		
+74.38662	31.56003	LARIX COLONY PHATK NO 4					Aziz Bhatti Town																		
+74.3857	31.56034	MILLAT COLONY NEAR GOVT HIGH SCHOL					Aziz Bhatti Town																		
+74.38548	31.56053	LARIIX COLONY RAILWAY LAIN					Aziz Bhatti Town																		
+74.38468	31.5583	GODAM SAIANCE ACD					Aziz Bhatti Town																		
+74.38107	31.55853	GODAM RAOD CHUNGI NO 03					Aziz Bhatti Town																		
+74.38027	31.56103	DARAI  PORT PHATAK					Aziz Bhatti Town																		
+74.3804	31.55861	CHONDI NO 3					Aziz Bhatti Town																		
+74.38004	31.55899	CHUNGI NO 3 RAILWAY COLONY					Aziz Bhatti Town																		
+74.37901	31.55994	AISWAR NAGAR					Aziz Bhatti Town																		
+74.37813	31.55938	HUSSAIN PURA DARAI PORT					Aziz Bhatti Town																		
+74.37717	31.55882	DARAI PORT MAIN GATE					Aziz Bhatti Town																		
+74.37556	31.5582	DARAI PORT PARK					Aziz Bhatti Town																		
+74.37401	31.55774	TNT CLONY					Aziz Bhatti Town																		
+74.37331	31.55802	TNT CADA					Aziz Bhatti Town																		
+74.37707	31.5598	THANA DARIPORT					Aziz Bhatti Town																		
+74.55992	31.55992	THANA DARAI PORT BACK SAID					Aziz Bhatti Town																		
+74.37248	31.5593	ZARAR SAHEED RAOD					Aziz Bhatti Town																		
+74.37086	31.55776	EID GAH TARIQ CLONY					Aziz Bhatti Town																		
+74.37032	31.55898	MAQBOOL PARK					Aziz Bhatti Town																		
+74.36965	31.65896	MAQBOOL PARK					Aziz Bhatti Town																		
+74.36828	31.5589	COBACCA PHATAK CANAL ROAD					Aziz Bhatti Town																		
+74.36983	31.55569	STREET NO 9 GULISTAN ROAD					Aziz Bhatti Town																		
+74.36858	31.55477	GULISTAN COLONY GOLL CAKKAR					Aziz Bhatti Town																		
+74.36697	31.55408	STREET NO 6 DARHAMPURA					Aziz Bhatti Town																		
+74.36716	31.55303	SCHOOL ROAD					Aziz Bhatti Town																		
+74.3679	31.55278	INTERY COLLAGE					Aziz Bhatti Town																		
+74.36892	31.55247	STREET NO 17					Aziz Bhatti Town																		
+74.36847	31.5523	STREET NO 2 MUSTAFA ABAD					Aziz Bhatti Town																		
+74.36763	31.55218	DISPENSIRY ROAD					Aziz Bhatti Town																		
+74.36743	31.55148	DISPENSIRY RAOD WATER FILTR PLOT					Aziz Bhatti Town																		
+74.36736	31.55146	STREET NO 57 DISPENSIRY ROAD					Aziz Bhatti Town																		
+74.37091	31.55068	MAIN ILAMAIQBAT RAOD DARHAM PURA PHATAK					Aziz Bhatti Town																		
+74.35712	31.55485	Under railway line Allama iqbal road					Gulberg Town																		
+74.35754	31.55429	Bird market Allama iqbal road					Gulberg Town																		
+74.35275	31.55401	Canal road near chowk dharampura bridge					Gulberg Town																		
+74.36859	31.55992	Canal road near India phattak					Gulberg Town																		
+74.37184	31.56072	Canal road near chobacha phatak					Gulberg Town																		
+74.35942	31.56107	Tajdeen mosque Laurex colony					Gulberg Town																		
+74.35473	31.56376	Royal palm country club wall laurex colony					Gulberg Town																		
+74.35422	31.56447	Laurex colony					Gulberg Town																		
+74.35442	31.56506	India phattak near baja line					Gulberg Town																		
+74.35485	31.5651	Baja line opposite masjid tayiba					Gulberg Town																		
+74.35564	31.56472	Baja line near laurex colony gate					Gulberg Town																		
+74.35568	31.56618	Baja line near industrial					Gulberg Town																		
+74.3559	31.56617	Baja line opposite to Filteration Plant					Gulberg Town																		
+74.35661	31.56759	Baja line Kachi abadi					Gulberg Town																		
+74.35508	31.5678	Baja line near Children Park					Gulberg Town																		
+74.35716	31.56761	Baja line near Tubewell railway					Gulberg Town																		
+74.35357	31.57215	Fauji camp kachi abadi railway					Gulberg Town																		
+74.3895	31.57305	Underpass garhi shahu near Rikshaw market					Gulberg Town																		
+74.3967	31.57385	Modern floor mill gate					Gulberg Town																		
+74.3875	31.57397	Garhi shahu bridge near railway quarter					Gulberg Town																		
+74.3848	31.57495	Garhi shahu bridge near railway quarter					Gulberg Town																		
+74.3766	31.57551	Zubaidah Industrial School Hoop road					Gulberg Town																		
+74.379	31.57335	Opposite to PR Boys school Hoop road					Gulberg Town																		
+74.3797	31.57251	Dongi ground Hoop road					Gulberg Town																		
+74.362	31.57224	Kachi abadi signal near Ilyas butt shop					Gulberg Town																		
+74.3639	31.57319	Near Railway signal					Gulberg Town																		
+74.3415	31.57505	Gandi gali Railway signal					Gulberg Town																		
+74.323	31.57526	Gudam signal shop					Gulberg Town																		
+74.3168	31.57568	Gudam signal shop					Gulberg Town																		
+74.3251	31.57569	Gudam signal shop					Gulberg Town																		
+74.3147	31.57718	Kachi abadi					Gulberg Town																		
+74.3309	31.57677	parachute factory kachi abadi					Gulberg Town																		
+74.3316	31.57768	Dhobi ghat list road					Gulberg Town																		
+74.3435	31.57656	Darbar wali gali list road					Gulberg Town																		
+74.3624	31.57678	Darbar wali gali list road					Gulberg Town																		
+74.35471	31.57622	GT road near PSO petrol pump					Gulberg Town																		
+74.35776	31.57671	GT road opposite to Gate # 3					Gulberg Town																		
+74.36295	31.57578	Opposite to Ghauri street jameel abad					Gulberg Town																		
+74.36592	31.57813	Near Mandi singh pura GT road					Gulberg Town																		
+74.36804	31.57854	Chowk Mandi singh pura GT road					Gulberg Town																		
+74.36843	31.57756	Wheatman road mandi singh pura					Gulberg Town																		
+74.35136	31.57396	Achant garh tubewell					Gulberg Town																		
+74.35195	31.57418	Achant garh near graveyard wall					Gulberg Town																		
+74.35302	31.57444	Achant garh kachi abadi					Gulberg Town																		
+74.3533	31.57384	Achant garh kachi abadi					Gulberg Town																		
+74.3664	31.55903	Outside Royal palm country club canal road					Gulberg Town																		
+74.35108	31.57574	Near Alfarish furniture GT road					Gulberg Town																		
+74.35601	31.57641	Maqbara Budhuhawa Gt road					Gulberg Town																		
+74.36409	31.57779	Maqbara Daee Anga GT road					Gulberg Town																		
+74.36671	31.57827	Near Mandi Singh pura					Gulberg Town																		
+74.37531	31.56173	Gas point Canal road					Gulberg Town																		
+74.38004	31.56269	Shell petrol pump mughal pura chowk					Gulberg Town																		
+74.38043	31.56347	Lasani burger point shalimar link road					Gulberg Town																		
+74.38052	31.56481	Thana Mughalpura shalimar link road					Gulberg Town																		
+74.38064	31.56663	PSO petrol pump shalimar link road					Gulberg Town																		
+74.37923	31.56609	Essa Abadi behind thana Mughal pura					Gulberg Town																		
+74.38009	31.56828	PR girls highschool abdul waheed colony railway					Gulberg Town																		
+74.37643	31.56898	PR boys highschool mistri colony railway					Gulberg Town																		
+74.38041	31.56968	Raam garh railway flat near Inayat shadi hall					Gulberg Town																		
+74.38093	31.57107	Mashallah Sanitory store shalimar link road					Gulberg Town																		
+74.38103	31.57573	Shalimar hospital shalimar link road					Gulberg Town																		
+74.37897	31.57411	Inside shalimar hospital					Gulberg Town																		
+74.38078	31.57347	Railway flat street # 2 madni colony					Gulberg Town																		
+74.38071	31.57301	Railway flat street # 4 madni colony					Gulberg Town																		
+74.37989	31.5715	Lahore punlic school daras baray mian					Gulberg Town																		
+74.37894	31.5713	Main daras baray mian road near Wapda office					Gulberg Town																		
+74.37861	31.57154	Street rana pco daras baray mian					Gulberg Town																		
+74.37837	31.5711	Chowk daras baray mian near janazgah					Gulberg Town																		
+74.37766	31.57193	Dhoobi ghaat chowk					Gulberg Town																		
+74.37837	31.5728	Usman park daras road					Gulberg Town																		
+74.37874	31.5743	Chotay mian qabrastan daras road					Gulberg Town																		
+74.37508	31.57329	Azeem ground					Gulberg Town																		
+74.37459	31.57409	Chowk khursheed awan					Gulberg Town																		
+74.37321	31.57399	Khursheed awan road railway disposal					Gulberg Town																		
+74.37318	31.56836	Office wapda MEF II					Gulberg Town																		
+74.37318	31.56917	Office Nadeed ShafeeMEF II					Gulberg Town																		
+74.37192	31.56998	Residence Nadeem Shafee MEF II					Gulberg Town																		
+74.37168	31.56917	Baba beri wala					Gulberg Town																		
+74.36907	31.56991	Near Amanat hussain baba beri wala					Gulberg Town																		
+74.36997	31.56835	baba beri wala sector b noor colony					Gulberg Town																		
+74.35015	31.56017	Tariq road near UC office					Gulberg Town																		
+74.35114	31.56247	Tariq road city district boys school					Gulberg Town																		
+74.35021	31.56394	Mehrab masjid					Gulberg Town																		
+74.3512	31.56507	Mughal pura road Garhi Shahu					Gulberg Town																		
+74.34978	31.56443	Mughal pura road Garhi Shahu					Gulberg Town																		
+74.34731	31.56346	Mughal pura road Garhi Shahu					Gulberg Town																		
+74.348	31.56429	Main bazar bohar wala chowk garhi shahu					Gulberg Town																		
+74.34818	31.56449	Street # 27 tube well garhi shahu					Gulberg Town																		
+74.34853	31.56564	Street # 27  dispensary garhi shahu					Gulberg Town																		
+74.34949	31.56645	Railway stadium road garhi shahu					Gulberg Town																		
+74.34768	31.56741	Railway stadium road garhi shahu					Gulberg Town																		
+74.34656	31.56721	Garhi shahu bridge					Gulberg Town																		
+74.34556	31.56606	Shalimar road Railway flat					Gulberg Town																		
+74.34478	31.56454	Gourmet Bakery Allama iqbal road					Gulberg Town																		
+74.34647	31.56296	Juice corner Allama iqbal road road near mughal pura road					Gulberg Town																		
+74.34975	31.56055	Andron thana garhi shahu					Gulberg Town																		
+74.35103	31.55937	Total petrol petrol pump Allama iqbal road					Gulberg Town																		
+74.35189	31.5586	Alfallah bank Allama iqbal road					Gulberg Town																		
+74.35514	31.55605	Sui gas point allama iqbal road					Gulberg Town																		
+74.35576	31.55556	junior model school allama iqbal road					Gulberg Town																		
+74.35609	31.55821	Survey colony railway					Gulberg Town																		
+74.35441	31.56207	Laurex colony opposite to children park					Gulberg Town																		
+74.35311	31.56409	Laurex colony opposite to Grid station					Gulberg Town																		
+74.35325	31.56053	Gondi peer					Gulberg Town																		
+74.35203	31.56087	Badar street graveyard					Gulberg Town																		
+74.35143	31.56043	Badar street assembly quarter					Gulberg Town																		
+74.20251	31.33459	Bibi pakdaman kuzlabash road					Gulberg Town																		
+74.20351	31.33462	queen merry road nazd doltana house					Gulberg Town																		
+74.20377	31.33499	shalimar road near hafiz juice wala					Gulberg Town																		
+74.20382	31.33547	Allama iqbal road near crown cinema					Gulberg Town																		
+74.20359	31.33555	Allama iqbal road near Jamia Nayimia					Gulberg Town																		
+74.20289	31.34021	Allama iqbal road near mohammad nagar disposal					Gulberg Town																		
+74.20248	31.34058	Allama iqbal road near railway head quarter					Gulberg Town																		
+74.20222	31.34103	Allama iqbal road near karren hospital					Gulberg Town																		
+74.20193	31.34153	Allama iqbal road karren hospital gate 2					Gulberg Town																		
+74.20168	31.34244	Allama iqbal road near Bohr wala chowk					Gulberg Town																		
+74.2013	31.34212	Chughtai near bohr wala chowk					Gulberg Town																		
+74.20129	31.34216	Nicolson road near church					Gulberg Town																		
+74.20089	31.34202	nicolson road near cng pump					Gulberg Town																		
+74.20068	31.34261	Empress road near gts ada					Gulberg Town																		
+74.20111	31.34289	Hafiz hotel station					Gulberg Town																		
+74.19485	31.34132	mclore road triangle					Gulberg Town																		
+74.19567	31.34245	Mclore road near railway police line					Gulberg Town																		
+74.20028	31.3431	Australlia chowk 33 number stop					Gulberg Town																		
+74.20077	31.34139	Haaji camp empress road					Gulberg Town																		
+74.20082	31.33564	Empress near punjab police line					Gulberg Town																		
+74.20123	31.3345	Shimla hill					Gulberg Town																		
+74.20201	31.33437	Deorand road					Gulberg Town																		
+74.20174	31.33367	Davis road near Jang paper office					Gulberg Town																		
+74.20321	31.33329	Habib ullah road near haq brother					Gulberg Town																		
+74.20264	31.33287	habib ullah road near office zarayat					Gulberg Town																		
+74.20235	31.33236	Davis road near muslim league house					Gulberg Town																		
+74.33904	31.55872	Almalik plaza davis road					Gulberg Town																		
+74.33546	31.57424	Daewoo stop railway station					Gulberg Town																		
+74.33536	31.57495	Lahore transport station					Gulberg Town																		
+74.33682	31.5667	Ali Complex empress road					Gulberg Town																		
+74.33591	31.56364	Shimla tower empress road					Gulberg Town																		
+74.34124	31.5626	Queen merry college					Gulberg Town																		
+74.34106	31.56246	queen merry school					Gulberg Town																		
+74.34399	31.56521	opposite jamiya nayimiya allama iqbal road					Gulberg Town																		
+74.34012	31.55962	Habib ullah road imtiaz surgical hospital					Gulberg Town																		
+74.33894	31.51142	Qadaffi stadium round about					Gulberg Town																		
+74.33555	31.50821	center point near police workshop					Gulberg Town																		
+74.33717	31.50751	Main boulevard gulberg near Punjab Bank					Gulberg Town																		
+74.33611	31.51286	Imam Hussain neae IPO Office					Gulberg Town																		
+74.33794	31.51661	Imam Hussain road near Fc kachi abadi tank					Gulberg Town																		
+74.33987	31.51619	Near National College E! Block Gulberg					Gulberg Town																		
+74.34085	31.51683	Ghalib road near hafeez center					Gulberg Town																		
+74.34055	31.51836	Ghalib road near zahoor elahi road					Gulberg Town																		
+74.33867	31.52152	C block near Zahoor elahi road					Gulberg Town																		
+74.3345	31.5273	Canal Service road near FC college					Gulberg Town																		
+74.33578	31.52868	Canal service near Green villas					Gulberg Town																		
+74.337624	31.52934	Canal service tibba point					Gulberg Town																		
+74.33794	31.5311	Canal road near Malik iftikhar residence					Gulberg Town																		
+74.33923	31.53244	Canal road near sikandar malhi road					Gulberg Town																		
+74.33994	31.53184	Sikandar Malhi road					Gulberg Town																		
+74.34036	31.52779	Rana Shaukar mehmood road					Gulberg Town																		
+74.34057	31.52585	Sikandar Malhi road near Street 27					Gulberg Town																		
+74.34081	31.52447	Sikandar Malhi road nearstreet 32					Gulberg Town																		
+74.34086	31.52393	Sikandar Malhi road near D Block					Gulberg Town																		
+74.34328	31.52278	Zahoor Elahi road near Suzuki Office					Gulberg Town																		
+74.34447	31.52348	Zanjani road infront of Gravyard					Gulberg Town																		
+74.3456	31.52417	Near Punjab tikka Main market					Gulberg Town																		
+74.34567	31.5246	Main market near Shezan Bakery					Gulberg Town																		
+74.34601	31.52474	Main market near Habib Bank					Gulberg Town																		
+74.3459	31.52473	Main market near national bank					Gulberg Town																		
+74.34676	31.5241	Main market near tariq dry fruit store					Gulberg Town																		
+74.34724	31.52387	main market near MCB					Gulberg Town																		
+74.34804	31.52401	Origa center main boulevard					Gulberg Town																		
+74.34679	31.52387	Main market near Fazal din pharmacy					Gulberg Town																		
+74.34647	31.52395	Main market near CHH pharmacy					Gulberg Town																		
+74.346	31.52391	Main market KM store					Gulberg Town																		
+74.3454	31.5221	Haali road near Zahoor Elahi chowk					Gulberg Town																		
+74.34421	31.52078	Haali road near Gourmet Hall					Gulberg Town																		
+74.34277	31.51799	Haali road near Imam Bargah					Gulberg Town																		
+74.34191	31.51678	Haali road near chenone					Gulberg Town																		
+74.33979	31.51288	Haali road near Mian Amir residence					Gulberg Town																		
+74.3471	31.52232	Raja Center Main boulevard					Gulberg Town																		
+74.3492	31.52604	Main boulevard near Mushtaq Gurmani road					Gulberg Town																		
+74.35018	31.52801	Main boulevard near mcdonald					Gulberg Town																		
+74.3413	31.5301	main boulevard near Habib bank					Gulberg Town																		
+74.35194	31.53162	main boulevard near siddiq trade center					Gulberg Town																		
+74.35769	31.53255	Inside Qurban Line ( Police Line )					Gulberg Town																		
+74.35769	31.53255	Inside Qurban Line ( Police Line )					Gulberg Town																		
+36063	31.53214	Kachi Abadi Qurban Line					Gulberg Town																		
+36052	31.53402	Near mian meer pul qurban line					Gulberg Town																		
+74.3534	31.53955	Zafar Ali road near Lahore Garden					Gulberg Town																		
+74.35288	31.53904	Zafar Ali road near Shell Pump					Gulberg Town																		
+74.35125	31.53774	Zafar Ali road near Surgimed Hospital					Gulberg Town																		
+74.35068	31.53855	Inside Surgimed hospital Zafar Ali road					Gulberg Town																		
+74.34852	31.53556	Zafar Ali road near Wasa Tubewell					Gulberg Town																		
+74.34931	31.53818	Justice Sardar Iqbal Road link Zafar Ali road					Gulberg Town																		
+74.35026	31.54056	Guest House point zafar ali road					Gulberg Town																		
+74.35026	31.54056	Guest House point zafar ali road					Gulberg Town																		
+74.34865	31.5424	Canal Service road near Guest house					Gulberg Town																		
+74.34671	31.53869	Ashiyana Flat zafar Ali road					Gulberg Town																		
+74.34387	31.53492	Jail service road near Ammar hospital					Gulberg Town																		
+74.34207	31.53543	Jail service road near Canal underpass					Gulberg Town																		
+74.34626	31.53496	Jail road near Jamia Masjid					Gulberg Town																		
+74.34487	31.53286	Punjab Tv near Drain					Gulberg Town																		
+74.34387	31.53072	Wasa Pully near drain					Gulberg Town																		
+74.34335	31.53074	Wasa pully waste enclosure					Gulberg Town																		
+74.34218	31.53184	LDA market gulberg					Gulberg Town																		
+74.33608	31.51873	LDA market near Canal road					Gulberg Town																		
+74.34924	31.53621	Zafar Ali road Drain					Gulberg Town																		
+74.33791	31.51938	Inside Fc college					Gulberg Town																		
+74.33202	31.52273	Near Police Choki FC college					Gulberg Town																		
+74.33106	31.51721	FC college near Padesterian bridge					Gulberg Town																		
+74.33902	31.51287	Qadaffi stadium round about					Gulberg Town																		
+74.33068	31.50735	Ferozpur road near Wapda Office					Gulberg Town																		
+74.33398	31.51003	Gate # 18 Qaddafi Stadium					Gulberg Town																		
+74.33498	31.51258	Qadaffi stadium outside LCC ground					Gulberg Town																		
+74.33597	31.51193	Gate# 8 Qaddafi Stadium					Gulberg Town																		
+74.34147	31.51129	Near Bestway Cement coporation					Gulberg Town																		
+74.34066	31.50972	Liberty Park Way Gulrberg III					Gulberg Town																		
+74.34234	31.50798	Behind UCH					Gulberg Town																		
+74.34392	31.5064	Behind Girls College Liberty					Gulberg Town																		
+74.34449	31.50815	Opposite Karachi Paratha Link Noor Jahan Road					Gulberg Town																		
+74.34377	31.51185	Liberty market near Sunford Hotel					Gulberg Town																		
+74.34711	31.51071	Liberty Market near Makkah Tower					Gulberg Town																		
+74.34832	31.51222	Infront of Central Model School					Gulberg Town																		
+74.34999	31.50701	Hussain Chowk Gulberg Footlib Store					Gulberg Town																		
+74.35104	31.50751	Mehmood Qasuri Road near Husaain chowk					Gulberg Town																		
+74.35361	31.51156	Park ghalib market gulberg					Gulberg Town																		
+74.35361	31.51156	Park ghalib market gulberg					Gulberg Town																		
+74.35812	31.51261	HEC Office point					Gulberg Town																		
+74.35806	31.51365	Gurumangat road opposite to HBL					Gulberg Town																		
+74.35804	31.51362	Ghalla Gudam Gurumangat road					Gulberg Town																		
+74.35838	31.51662	A1 Graveyard Gurumangat Road					Gulberg Town																		
+74.35838	31.51662	A1 Graveyard Gurumangat Road					Gulberg Town																		
+74.35866	31.51954	Nasir Colony Gulberg III					Gulberg Town																		
+74.36021	31.52262	Jinnah Park Gulberg Street # 6					Gulberg Town																		
+74.35574	31.52677	Ganga Ice Factory Gulberg					Gulberg Town																		
+74.35574	31.52677	Ganga Ice Factory Gulberg					Gulberg Town																		
+74.35054	31.52785	Main boulveard Gulberg near Standard Chartered Bank					Gulberg Town																		
+74.35148	31.52971	Main Boulevard Gulberg near Doctor Munir Alam					Gulberg Town																		
+74.35175	31.53055	Main boulevard Gulberg near mobilink Franchise					Gulberg Town																		
+74.35426	31.53142	Jail Road Gulberg					Gulberg Town																		
+74.35798	31.52995	Sherpao Bridge near sidiq trade center					Gulberg Town																		
+74.35678	31.52901	College road near Doctor Sarwar					Gulberg Town																		
+74.3522	31.52468	home ecnomice backside drain					Gulberg Town																		
+74.35368	31.52059	Saint merry colony Gulberg					Gulberg Town																		
+74.3498	31.52291	Gourmet Catering near City Tower					Gulberg Town																		
+74.35148	31.52016	Mini market Gulberg II					Gulberg Town																		
+74.35225	31.51869	MM Alam road Near Babay da Khokha					Gulberg Town																		
+74.35157	31.51293	MM alam road Near Pizza Hut					Gulberg Town																		
+74.35711	31.50055	Ramzan Bazar Makkah Colony					Gulberg Town																		
+74.35664	31.49969	Bundu Khan Raheem Park					Gulberg Town																		
+74.35844	31.49834	Baloch Road Near Railway Line Phatak					Gulberg Town																		
+74.35811	31.49713	Baloch Road near baloch system school					Gulberg Town																		
+74.35792	31.49604	Baloch road near sardar marriage hall					Gulberg Town																		
+74.35733	31.49436	Baloch road near phatak railway Nasir cloth merchant					Gulberg Town																		
+74.35678	31.4931	20# point baloch road makkah colony					Gulberg Town																		
+74.35832	31.50286	7 up Point					Gulberg Town																		
+74.35072	31.50242	Firdous market					Gulberg Town																		
+74.35255	31.50118	Z block Gulberg III					Gulberg Town																		
+74.34866	31.50019	Babbi Chowk Gulberg III					Gulberg Town																		
+74.34811	31.503	Firdous Market backside total pump					Gulberg Town																		
+74.33715	31.49192	Bhabhra market infront of Warid Office					Gulberg Town																		
+74.33736	31.49527	Khan Colony					Gulberg Town																		
+74.33369	31.50399	Nursery point Kalma Chowk					Gulberg Town																		
+74.34124	31.492	M block near park					Gulberg Town																		
+74.34212	31.4897	Neeli Park M Block					Gulberg Town																		
+74.34166	31.48747	Kikar point					Gulberg Town																		
+74.34379	31.48856	Benazir Park M block					Gulberg Town																		
+74.34582	31.48618	Kashmir Bakery goli mar point					Gulberg Town																		
+74.34169	31.48549	flying club					Gulberg Town																		
+74.34487	31.47283	Beind Ali institute					Gulberg Town																		
+74.34487	31.47283	Beind Ali institute					Gulberg Town																		
+74.34712	31.47545	Drain point Nawaz Sharif Colony					Gulberg Town																		
+74.34509	31.47536	SOS School					Gulberg Town																		
+74.34347	31.47675	Near SOS Village					Gulberg Town																		
+74.34369	31.4778	Officer Colony					Gulberg Town																		
+74.34402	31.47888	Backside Officer Colony					Gulberg Town																		
+74.34596	31.47779	GOR 6					Gulberg Town																		
+74.34312	31.47734	Total Pump					Gulberg Town																		
+74.34288	31.47796	Children Park					Gulberg Town																		
+74.34212	31.4797	Itefaq Station					Gulberg Town																		
+74.34559	31.48167	Inside Children Hospital					Gulberg Town																		
+74.34123	31.48172	Gulab Devi Gate # 2					Gulberg Town																		
+74.3446	31.48351	Inside Gulab Devi hospital					Gulberg Town																		
+74.34038	31.4838	Gulab devi Signal Ferozpur road					Gulberg Town																		
+74.33889	31.48746	Station Naseer abad					Gulberg Town																		
+74.33779	31.48999	Bhabhra Stop					Gulberg Town																		
+74.31347	31.57489	Qutb-ud-Din Aibak Road					DGBT																		
+74.3129	31.57532	MotiChoor Road, New Anarkali					DGBT																		
+74.31372	31.57137	AddaDhaniRaam Road					DGBT																		
+74.31285	31.57067	MurdaKhana					DGBT																		
+74.31454	31.56899	Nursing Hostel, Panir Road					DGBT																		
+74.31653	31.56762	Egerton Road					DGBT																		
+74.31454	31.56657	Banking Road, Targarh					DGBT																		
+74.31358	31.56817	Bank Square					DGBT																		
+74.31145	31.56769	Tyre Market, NeelaGumbad					DGBT																		
+74.31213	31.56681	UBL, Mall Road					DGBT																		
+74.30949	31.57223	Panj Peer Ghatti					DGBT																		
+74.3163	31.57367	Ibrahim Street, DhaniRaam Road					DGBT																		
+74.3172	31.57678	Bombay Centre, Anarkali					DGBT																		
+74.3191	31.57825	JaanMuhammmad Road, Anarkali					DGBT																		
+74.30753	31.57579	Lower Mall Thana					DGBT																		
+74.30847	31.57592	Urdu Bazaar, Across Khalid Plaza					DGBT																		
+74.30836	31.57778	BhaiChowk					DGBT																		
+74.30935	31.57733	MachliMandi					DGBT																		
+74.3105	31.57687	Circular Road, Across Jalal Din Hospital					DGBT																		
+74.31196	31.57653	Ganpat Road More					DGBT																		
+74.31292	31.57649	Across Lohari Thana					DGBT																		
+74.31472	31.57554	SunelaMandar					DGBT																		
+74.31495	31.57635	Akhbar Market, Circular Road					DGBT																		
+74.31615	31.57598	Shah Almi Near AnarAdda					DGBT																		
+74.31833	31.57558	Shah Almi Across Telephone Exchange					DGBT																		
+74.317	31.57488	Bansanwala Bazaar					DGBT																		
+74.31628	31.57259	Sarai Rain Chand					DGBT																		
+74.31543	31.57319	Hospital Road, Kera Market					DGBT																		
+74.3154	31.56925	Rattan Bagh					DGBT																		
+74.31225	31.5754	Chatterjee Road					DGBT																		
+74.30931	31.57628	Korgan Across District					DGBT																		
+74.3134	31.5687	NeelaGumbad					DGBT																		
+74.3157	31.5738	Waste Depot, Inside Mayo Hospital					DGBT																		
+74.3161	31.57395	Lady Atchison Hospital Road					DGBT																		
+74.31868	31.55963	F.I.A. Temple Road					DGBT																		
+74.31963	31.56124	Regal Chowk					DGBT																		
+74.32134	31.55873	KhabreinAkhbar, Lawrence Road					DGBT																		
+74.32257	31.56041	Korgan at GoGo Restaurant, Mall Road					DGBT																		
+74.32156	31.56059	Korgan at Nakki Market, Mall Road					DGBT																		
+74.31825	31.5622	Korgan at K.F.C. , Mall Road					DGBT																		
+74.31732	31.56281	Fazal Din, Mall Road					DGBT																		
+74.31487	31.56189	High Court Gate, Fane Road					DGBT																		
+74.31425	31.56038	Fatima Girls High School, Fane Road					DGBT																		
+74.31458	31.55901	MazangAdda, Mazang Road					DGBT																		
+74.31641	31.55777	SafanwalaChowk					DGBT																		
+74.31975	31.55568	Ganga Ram Eye Ward, Mazang Road					DGBT																		
+74.31264	31.56128	Family Hospital, Fareed Court Road					DGBT																		
+74.31171	31.56323	Korgan at A.G. Office Chowk					DGBT																		
+74.31011	31.56507	Korgan at Nabha Road					DGBT																		
+74.31128	31.56507	Maclagan Road					DGBT																		
+74.30994	31.56775	Fatima Juice Corner					DGBT																		
+74.31099	31.56332	Mairaj Building, Mauj Darya Road					DGBT																		
+74.31067	31.56287	Kashana Fatima, Mauj Darya Road					DGBT																		
+74.31001	31.56215	GujranwaliGali, Mauj Darya Road					DGBT																		
+74.30925	31.56114	Jain MandarChowk					DGBT																		
+74.30832	31.562	Hailey College, Jain Mandar					DGBT																		
+74.31953	31.57046	Moon Light School, Nisbat Road					DGBT																		
+74.3187	31.57098	Camera Market, Chamberlain Road					DGBT																		
+74.31919	31.56876	Church, Mission Road					DGBT																		
+74.32013	31.56769	Naiz Cinema, Mission Road					DGBT																		
+74.31821	31.56734	TV Market, Link Mcload Road					DGBT																		
+74.31734	31.56701	Patyala Ground, Link Mcload Road					DGBT																		
+74.3179	31.56853	Thornton Road					DGBT																		
+74.31751	31.57046	Pakistan Times, Mayo Hospital Road					DGBT																		
+74.31704	31.57193	Mayo Hospital Chowk					DGBT																		
+74.31892	31.57213	Dr. Nehari, Chamberlain Road					DGBT																		
+74.31933	31.57257	Gawalmandi Food Street, Chamberlain Road					DGBT																		
+74.32087	31.57208	Family Mela, Main Bazaar					DGBT																		
+74.3228	31.57151	Across Government Primary School Ganda Engine (Corner of Main Bazaar and Krishna Bazaar)					DGBT																		
+74.32387	31.57117	Across Lal Din Traders, Main Bazaar					DGBT																		
+74.32432	31.57053	Tara Devi, Main Bazaar					DGBT																		
+74.32819	31.57043	Lahore Hotel Across Jamia Masjid-e-Siraju-ul-Alum (Fleming Road)					DGBT																		
+74.32132	31.32133	Gourmet Bakery, Nisbat Road					DGBT																		
+74.32162	31.56918	Gafur-ur-RaheemShaadi Hall, Nisbat Road					DGBT																		
+74.322	31.56875	Cement WaliGali, Nisbat Road					DGBT																		
+74.32355	31.56799	Korgan at KachaNisbat Road					DGBT																		
+74.32623	31.57211	Mange Wale Dari, Dil Muhammad Road					DGBT																		
+74.32682	31.57257	Dr. Zaad, Dil Muhammad Road					DGBT																		
+74.32117	31.56891	BakhtiarLabour Hall, Nisbat Road					DGBT																		
+74.32515	31.57001	Across College Hostel, Dil Muhammad Road					DGBT																		
+74.32397	31.56717	Lakshmi Chowk					DGBT																		
+74.32571	31.57286	Aziz Street, PremGali No. 11					DGBT																		
+74.3257	31.57334	PremGali No. 11					DGBT																		
+74.32566	31.57266	Masjid ThandiKhui, Fleming Road					DGBT																		
+74.3255	31.5725	Gorey Masjid, Fleming Road					DGBT																		
+74.32725	31.57158	Sufi Soap, Fleming Road					DGBT																		
+74.3251	31.57326	RiazGujjar, Fleming Road					DGBT																		
+74.32726	31.57304	GujjarGali, Dil Muhammad Road					DGBT																		
+74.32758	31.5736	Outside Pathi Ground, Dil Muhammad Road					DGBT																		
+74.33248	31.57527	PSO Petrol Pump, Australia Chowk					DGBT																		
+74.33013	31.57675	IttefaqBarafKhana, 90 Railway Road					DGBT																		
+74.33091	31.57636	Gas Quarter, Railway Road					DGBT																		
+74.33236	31.57689	Polytechnical College, Railway Road					DGBT																		
+74.33472	31.57621	Noori Masjid, Railway Station					DGBT																		
+74.33425	31.57826	Korgan at Across Naulakha Thana, Near Railway Station					DGBT																		
+74.33109	31.5822	Korgan at Outside GhallaMandi, Fort Road					DGBT																		
+74.33002	31.58319	Police Quarters, Fort Road					DGBT																		
+74.3289	31.58306	Malwada Complex, 7 Circular Road					DGBT																		
+74.32803	31.58231	PuraniKotwali, Circular Road					DGBT																		
+74.32726	31.58129	Korgan at Meezan Bank Shah Muhammad Ghaus, Circular Road					DGBT																		
+74.32728	31.5812	Korgan at Meezan Bank Shah Muhammad Ghaus, Circular Road					DGBT																		
+74.32748	31.5811	Korgan at Meezan Bank Shah Muhammad Ghaus, Circular Road					DGBT																		
+74.33274	31.58068	Khwaja C.N.G., Fort Road					DGBT																		
+74.33033	31.58143	PuraniMewahMandi					DGBT																		
+74.32929	31.58241	Police Quarters, GhallaMandi					DGBT																		
+74.32529	31.57906	Akbar Mandi, Circular Road					DGBT																		
+74.32445	31.57794	Akbar Mandi, Circular Road					DGBT																		
+74.32511	31.57824	Kissan Street					DGBT																		
+74.32391	31.57648	Adda Crown					DGBT																		
+74.32201	31.57614	Barkat Ali Centre, Mochi Gate Ghati					DGBT																		
+74.32124	31.57544	Kakku Shah, AndroonMochiGhati					DGBT																		
+74.31986	31.57471	Goshi Butt, Chamberlain Road					DGBT																		
+74.31946	31.574	Masjid Taj-e-Shah, Chamberlain Road					DGBT																		
+74.31812	31.57267	Abdullah Chakki, Railway Road					DGBT																		
+74.31969	31.57316	Government Degree College, Railway Road					DGBT																		
+74.32188	31.5728	AjmalDawa-Khana, Railway Road					DGBT																		
+74.32361	31.57455	Hill Road					DGBT																		
+74.32468	31.57415	Islamia College, Railway Road					DGBT																		
+74.35571	31.57416	PremGali No. 5					DGBT																		
+74.32696	31.57493	PeepalWali Masjid, Railway Road					DGBT																		
+74.32528	31.57547	Inside Islamia College, Railway Road					DGBT																		
+74.31853	31.56257	Korgan Outside Police Station, Regal Chowk					DGBT																		
+74.31713	31.56339	Milli Shoes Mall Service Road					DGBT																		
+74.31626	31.56496	Napier Road Near Church					DGBT																		
+74.31571	31.56596	Mobilink Office McLeod Road					DGBT																		
+74.31969	31.56195	KorganChaman Ice Cream, Mall Road					DGBT																		
+74.32183	31.56124	KorganPanorama Centre, Service Road, Mall Road					DGBT																		
+74.32305	31.56112	Victoria Park					DGBT																		
+74.3222	31.56061	Feroz-sons Building, Mall Road					DGBT																		
+74.32348	31.56068	Inside Alfalah Building					DGBT																		
+74.32476	31.56249	M.P.A hostel					DGBT																		
+74.32506	31.55939	KorganWapda House					DGBT																		
+74.32691	31.55946	KorganZoo Bus Stop Mall Road					DGBT																		
+74.33073	31.55744	KorganAlhamrahChawk Kashmir Road					DGBT																		
+74.33066	31.55735	KorganOpposite AlhamrahChawk					DGBT																		
+74.306	31.5572	KorganKabootarChowk Al-hamadChowk					DGBT																		
+74.33456	31.55492	Korgan Opposite Governer House Mall Road					DGBT																		
+74.33893	31.55542	Old Club Road					DGBT																		
+74.33956	31.55687	Korgan Opposite UBL Bank Davis Road					DGBT																		
+74.3386	31.5552	Davis Road Opposite Muslim League House					DGBT																		
+74.33762	31.56073	Opposite Ambasedar Hotel Davis Road					DGBT																		
+74.33694	31.56158	Public Service Commission Davis Road					DGBT																		
+74.33585	31.5618	Press Club ShimalaPahari					DGBT																		
+74.33524	31.55984	KorganAmericalConcelateAmpress Road					DGBT																		
+74.33429	31.56244	KorganOpposite Punjab Bank Egerton Road					DGBT																		
+74.3326	31.56701	Opposite Alfalah Bank Kashmir Road					DGBT																		
+74.33167	31.55856	Opposite  Allied Bank Parking Kashmir Road					DGBT																		
+74.33114	31.56033	Aiwan e Iqbal Gate, Kashmir Road					DGBT																		
+74.32956	31.55979	KorganAiwan e Iqbal Near Stock Exchange					DGBT																		
+74.32916	31.56096	OppositeFlattiesHotelEgerton Road					DGBT																		
+74.33101	31.56216	National Tower Egerton Road					DGBT																		
+74.33987	31.56205	Opposite LDA Plaza Opposite Egerton Road					DGBT																		
+74.32671	31.56055	KorganOpposite PIA Office Egerton Road					DGBT																		
+74.32451	31.56431	Cooper Road Near Islamia College					DGBT																		
+74.32425	31.56415	Cooper Road Bus Stop					DGBT																		
+74.32415	31.564	17 Cooper Road					DGBT																		
+74.32096	31.56571	Inside P.W.D Office McLeod Road					DGBT																		
+74.32861	31.56641	Outside P.W.D Office McLeod Road					DGBT																		
+74.31861	31.56639	KorganMcLeod Road Near Boys Hostel					DGBT																		
+74.32233	31.5671	Korgan Sir Syed School McLeod Road					DGBT																		
+74.32455	31.56567	Royal Park Tube Well					DGBT																		
+74.32568	31.5668	Shanai Hotel Abbott					DGBT																		
+74.32622	31.56648	National Hotel Abbott Road					DGBT																		
+74.32755	31.56633	Montgomery Road Opposite Shall Petrol Pump					DGBT																		
+74.32867	31.56516	Metropoll Cinema					DGBT																		
+74.33046	31.56336	Janki Devi Abbott Road					DGBT																		
+74.3346	31.56331	PTV Station Abbott Road					DGBT																		
+74.33524	31.56767	Police Line QillaGujar Singh					DGBT																		
+74.33284	31.57098	KorganOpposite Makah Market Nicholson Road					DGBT																		
+74.33121	31.57043	Billal Center Nicholson Road					DGBT																		
+74.32825	31.56824	Montgomery Road Filter House					DGBT																		
+74.32833	31.56717	Montgomery Park					DGBT																		
+74.32666	31.56823	MomanPura GraveyardMcLeod Road					DGBT																		
+74.33266	31.564	Shaheen Complex Abbott Road					DGBT																		
+74.33492	31.56804	Nawab Palace Empress Road					DGBT																		
+74.33257	31.56618	Inside Police Line Empress Road					DGBT																		
+74.33459	31.56472	Radio Pakistan Office Inside Empress Road					DGBT																		
+74.33469	31.55897	Inside Governor House					DGBT																		
+74.33622	31.55814	Inside Governor House					DGBT																		
+74.33894	31.55606	Inside Governor House					DGBT																		
+74.34006	31.55518	Inside Staff College Davis Road					DGBT																		
+74.3297	31.56249	Inside Janki Devi Hospital					DGBT																		
+74.31847	31.56526	Hall Road					DGBT																		
+74.32831	31.5692	Korgan Lahore Hotel Chowk					DGBT																		
+74.32745	31.569	Outside Gulistan Cinema					DGBT																		
+74.30781	31.57137	Government college Katchery Road					DGBT																		
+74.31056	31.5704	Babar market Katchery Road					DGBT																		
+74.31087	31.56968	New Anarkali church					DGBT																		
+74.3103	31.56869	New Anarkali Library					DGBT																		
+74.30861	31.56612	Library Road					DGBT																		
+74.30748	31.56758	Library Road D.I.G office					DGBT																		
+74.30815	31.56553	Church Road old Anarkali					DGBT																		
+74.30853	31.56469	Rubani Road old Anarkali					DGBT																		
+74.30891	31.56368	Kapothalla house old Anarkali					DGBT																		
+74.3079	31.56059	Lake Road mosque qadsiya					DGBT																		
+74.30739	31.55928	Lake Road akbari bakery					DGBT																		
+74.3066	31.55775	Lake Road aeroplane					DGBT																		
+74.30627	31.55721	Lake Road Chowk					DGBT																		
+74.30527	31.55853	Lower mall MAO college to Chubrgi					DGBT																		
+74.30813	31.56242	Dhanichand street old Anarkali					DGBT																		
+74.30721	31.56311	Dhanichand street old Anarkali					DGBT																		
+74.3077	31.56311	Lodge Road old Anarkali					DGBT																		
+74.3055	31.56447	KorganBank Road					DGBT																		
+74.30489	31.5668	Church Road special branch					DGBT																		
+74.30643	31.56765	Bank Road hellay college					DGBT																		
+74.30502	31.56893	Town hall					DGBT																		
+74.30756	31.56693	NCA college library Road					DGBT																		
+74.30695	31.56953	Punjab university mall Road					DGBT																		
+74.31914	31.55246	Ali Jan Motors Queen’s Road					DGBT																		
+74.31768	31.55022	Queen’s hotel near Total Petrol Pump					DGBT																		
+74.31624	31.54827	Akhtar Rasool Colony Jail Road					DGBT																		
+74.31712	31.54693	Jail Road Near Kashmir Chargha House					DGBT																		
+74.31712	31.54373	Ferozpur Road near Zong Franchise					DGBT																		
+74.31921	31.54253	Tolynton Market					DGBT																		
+74.32039	31.54408	Jail Road near Lahore Scholars School Street					DGBT																		
+74.31898	31.54551	Goshi Motors Jail Road					DGBT																		
+74.31745	31.54638	Jail Road Bus Stop near Rajput Motors					DGBT																		
+74.31779	31.54646	Jail Road Moazang Chungi Stop					DGBT																		
+74.32037	31.54497	32-C Jail Road					DGBT																		
+74.32259	31.54404	47-A Jail Road					DGBT																		
+74.32239	31.54309	Jail Road In front of Eden Center					DGBT																		
+74.32833	31.54217	In front of Lahore college shadman Colony					DGBT																		
+74.32475	31.54255	Near Meteorology Department					DGBT																		
+74.31678	31.54475	Tamasail Hall Ferozpur Road					DGBT																		
+74.31837	31.5415	Camp Jail Ferozpur Road					DGBT																		
+74.31896	31.54376	Kacha Jail Road					DGBT																		
+74.32395	31.54228	Crescent Model School Gate # 4 Shadman					DGBT																		
+74.32453	31.54027	Crescent Model School Gate # 3 Shadman					DGBT																		
+74.32656	31.54066	Rehmaniya Park Shadman					DGBT																		
+74.32874	31.53834	Ganda Nala Near Utility Store Shadman					DGBT																		
+74.32904	31.53914	Shadman Market					DGBT																		
+74.32909	31.54065	Bank Al falah Shadman					DGBT																		
+74.33128	31.53867	Back Side Services Hospital Shadman					DGBT																		
+74.32995	31.53809	Shadman Ganda Nala					DGBT																		
+74.33084	31.5392	Shadman market near Gourmet Bakers					DGBT																		
+74.33041	31.54616	China Chowk Race Course Road					DGBT																		
+74.33261	31.54266	Race view Galiyan  Jail Road					DGBT																		
+74.33372	31.54133	Near Fazal Din Pharmacy Jail Road					DGBT																		
+74.34	31.53663	Kinard College Jail Road					DGBT																		
+74.34404	31.54022	Malik Sohna Street G.O.R.I					DGBT																		
+74.33419	31.54	Gate # 3 Services Hospital Jail Road					DGBT																		
+74.33562	31.53886	Cardiology Hospital Jail Road					DGBT																		
+74.33675	31.53894	Near Mc Donald’s Jelani Park					DGBT																		
+74.34838	31.54515	Near Canal Bus Stop Mall Road					DGBT																		
+74.3374	31.55407	Near Deputy Speaker House Mall road					DGBT																		
+74.34678	31.54668	Near 1-B Mall Road					DGBT																		
+74.34557	31.54786	Near Gate College Road Mall Road					DGBT																		
+74.34343	31.5496	Near Habib Bank Mall Road					DGBT																		
+74.33781	31.55386	Beside Staff College Wall Mall Road					DGBT																		
+74.33685	31.55378	5- upper Mall road					DGBT																		
+74.33414	31.55145	Race Course Road Near Children Complex					DGBT																		
+74.33415	31.55036	Off Club Road Near Plot					DGBT																		
+74.33532	31.55026	Near Chamber House Quarter					DGBT																		
+74.33722	31.55043	Off Club Road Near Scrap Shop					DGBT																		
+74.33918	31.5503	Off Club Road Near UC Office					DGBT																		
+74.34053	31.54986	2- Club Road Near Tube Well					DGBT																		
+74.34087	31.54889	3- Club Road G.O.R.I					DGBT																		
+74.33881	31.53717	Kinard Coolege Near Over Head Bridge					DGBT																		
+74.33911	31.53652	Ki9nard College Bus Stop Jail Road Near OMC Hospital					DGBT																		
+74.34164	31.55143	Club Chowk Mall Road					DGBT																		
+74.34071	31.54823	5- Club Road near Kothi # 16 G.O.R.I					DGBT																		
+74.34282	31.54615	4- Tolynton Lane G.O.R.I					DGBT																		
+74.34315	31.54543	In Front of Civil Office Mess					DGBT																		
+74.34435	31.54286	Near G.O.R.I Market					DGBT																		
+74.34125	31.54443	Inside Civil Offices Mess					DGBT																		
+74.3391	31.54681	Near Mosque Colf Road G.O.R.I					DGBT																		
+74.34193	31.54162	Din Pur Road Punjab Club G.O.R.I					DGBT																		
+74.34007	31.53998	Infront of Parking Din Pur Road					DGBT																		
+74.34071	31.54263	16- Golf Lane					DGBT																		
+74.33984	31.54219	Inside Polo Club					DGBT																		
+74.33984	31.54219	Inside Polo Club					DGBT																		
+74.33884	31.54467	Polo Gate Golf Lane					DGBT																		
+74.34165	31.54558	10 Tolynton Road G.O.R.I					DGBT																		
+74.33775	31.54592	4- Golf Lane					DGBT																		
+74.33714	31.54856	Chamber House West Enclosure					DGBT																		
+74.3343	31.54958	Golf Road Near Sultan Rahi House					DGBT																		
+74.33255	31.65915	Race Course Road Near Police Club					DGBT																		
+74.32969	31.54781	Lawrance Road Near Ahl-e-Hadees Mosque					DGBT																		
+74.3276	31.55012	Kacha Lawrance road Near Ganda Nala					DGBT																		
+74.32536	31.54631	Kacha Lawrance Road Near Drug court					DGBT																		
+74.32303	31.54961	Birdwood Road					DGBT																		
+74.32542	31.55024	Al-Riaz colony					DGBT																		
+74.3269	31.5523	Lawrance Road Near Zenat Labortary					DGBT																		
+74.3255	31.55398	Secondary Board Moazang Road					DGBT																		
+74.32493	31.5553	Lawrance Road Near Zoo					DGBT																		
+74.32207	31.55246	Golding Road					DGBT																		
+74.32002	31.55107	Waris Road Quarter					DGBT																		
+74.31955	31.55065	Waris Road Near Saint Peter school					DGBT																		
+74.31984	31.54836	Waris Road Near Laal Qila					DGBT																		
+74.32881	31.5465	Nursery Lane Rokhari house					DGBT																		
+74.33079	31.54774	Race course road inside Ladies Club					DGBT																		
+74.32584	31.55457	Inside Zoo					DGBT																		
+74.31842	31.55486	Ganga Ram Quarter					DGBT																		
+74.32793	31.54304	LCU Bus Stop Jail road					DGBT																		
+74.32642	31.54321	LCU  Along Gate					DGBT																		
+74.3434	31.54799	III- College road G.O.R.I					DGBT																		
+74.34679	31.54379	11-Aikman road G.O.R.I					DGBT																		
+74.34764	31.54326	26- Aikman Road G.O.R.I					DGBT																		
+74.34317	31.54155	23- Aikman Road G.O.R.I					DGBT																		
+74.3308	31.54263	Eva College Jail Road					DGBT																		
+74.3419	31.54899	Club Lane G.O.R.I					DGBT																		
+74.34193	31.54707	Tolyntom Lane G.O.R.I					DGBT																		
+74.34058	31.54671	4- Tolynton Market  G.O.R.I					DGBT																		
+74.31617	31.5465	Moazang Chungi Bus stop Feroz Pur Road					DGBT																		
+74.34427	31.5439	10- Aikman Road Near Quarter					DGBT																		
+74.34724	31.54552	G.O.R.I Near Navy College					DGBT																		
+74.31644	31.54937	Abid Market, Temple Road					DGBT																		
+74.31617	31.55071	Abid Market Near United Bank Limited Inside Street					DGBT																		
+74.31586	31.55137	Shadab Colony Near Taimoor Street Temple Road					DGBT																		
+74.31583	31.5545	Infront of Goga Nakeebia Channe Wala temple Road					DGBT																		
+74.31662	31.55657	Thana Mozang Temple Road					DGBT																		
+74.3185	31.55247	Jalal Din Road					DGBT																		
+74.31289	31.56086	Mozang Road Near CNG Pump					DGBT																		
+74.31234	31.56203	Family Hospital  Mozang Road					DGBT																		
+74.31077	31.56102	Kacha Freed Court House Near Punjab Urban Unit					DGBT																		
+74.31239	31.55893	Begum Road					DGBT																		
+74.30926	31.56047	Inside Punjab Institute College Jain Mandar Chowk					DGBT																		
+74.30892	31.55919	Infront of State Life Insurance Lytton Road Chai Ahaata					DGBT																		
+74.30977	31.55697	CNG Pump Lytton Road					DGBT																		
+74.31133	31.55428	Metro Janaz Gah Station Lytton Road					DGBT																		
+74.31226	31.55424	Chah Pichwara Lytton Road Inside Street					DGBT																		
+74.31229	31.55329	Chowk Saadi Park Lytton Road					DGBT																		
+74.31377	31.55182	Bohar Wala Chowk Main Bazar Mozang					DGBT																		
+74.31426	31.55002	Qartaba Chowk					DGBT																		
+74.31204	31.54979	Fateh Shair Road Bahawal Pur Road					DGBT																		
+74.31358	31.55081	CDGL School Fateh Shair Road					DGBT																		
+74.30836	31.5513	Mizar Ghazi Ilam Din Shaheed BahawalPur Road					DGBT																		
+74.30612	31.55245	Lopis Factory Bahwalpur Road					DGBT																		
+74.30602	31.55357	Suraiya Azeem Hopital Chouburgi					DGBT																		
+74.30528	31.5544	Zaiqa Hospital Chouburgi					DGBT																		
+74.30554	31.55488	Peer Bahawal  Shair Road Near Graveyard Gate					DGBT																		
+74.30666	31.55558	Ganda Nala Peer Bahawal Shair Road Near Graveyard					DGBT																		
+74.30856	31.5561	Peer Bahawal  Shair Road Near Graveyard Gate					DGBT																		
+74.31551	31.55197	Shadab Colony Temple Road					DGBT																		
+74.32821	31.53777	Shadman Round About					DGBT																		
+74.32844	31.53678	Fatima Memorial Hospital					DGBT																		
+74.32864	31.53642	In front of Fatima Memorial Hospital Service Road					DGBT																		
+74.32827	31.53446	In front of Gate No 8 service Road					DGBT																		
+74.32826	31.53317	Gate N0 8 GOR III					DGBT																		
+74.3283	31.5318	Shah Jamal Gol Chakar					DGBT																		
+74.33147	31.52842	Shah Jamal Road Near Mian Usman Tent Service					DGBT																		
+74.32699	31.52977	Pani Wali Tanki Shah Jamal Road					DGBT																		
+74.32539	31.52995	Shah Jamal Road Near Zaidi House					DGBT																		
+74.32412	31.53003	Icchara Police Station Shah Jamal Road					DGBT																		
+74.32741	31.52742	Mian Tent Service Fazlia Colony					DGBT																		
+74.32948	31.52773	Back of Shah Jamal Darbar					DGBT																		
+74.32859	31.52592	17-18 Shah Jamal Road					DGBT																		
+74.32916	31.52292	Jamia Ashrafia Canal					DGBT																		
+74.32503	31.52242	Inside Jami Ashrafia Mosque					DGBT																		
+74.33409	31.52865	Shadman II Canal Road Near Masjid Khizra					DGBT																		
+74.33414	31.53032	184 Shadman II					DGBT																		
+74.332169	31.53023	Kothi No 255 Judge Colony Shadman II					DGBT																		
+74.33586	31.53035	Shadman II Lahore Grammar School Canal Road					DGBT																		
+74.33739	31.53197	Shadman II Canal Road Near Wazarat Kharja Office					DGBT																		
+74.339654	31.5341	Shadman II Near Irani Consulate					DGBT																		
+74.33578	31.53671	Inside Cardiology Hospital					DGBT																		
+74.33462	31.53581	Inside Mental Hospital					DGBT																		
+74.33355	31.53631	848-D Shadman I					DGBT																		
+74.3335	31.53507	D-G Near Shadman I					DGBT																		
+74.33174	31.53754	522-Shadman I					DGBT																		
+74.32935	31.5369	501-Shadman I					DGBT																		
+74.32897	31.53451	714-Shadman I					DGBT																		
+74.32967	31.53497	Mini MARKET Shadman II					DGBT																		
+74.33104	31.53433	600 – A Shadman I Near Dispensary					DGBT																		
+74.33164	31.536	Sundas Foundation Shadman I					DGBT																		
+74.32604	31.53255	C.C.P.O House GOR III					DGBT																		
+74.32658	31.53686	S.W.M Street G.O.R III					DGBT																		
+74.32605	31.53589	G.O.R II Market					DGBT																		
+74.321633	31.53469	35-36 G.O.R III					DGBT																		
+74.32668	31.53447	Maincy Ground G.O.R III					DGBT																		
+74.32475	31.53502	57-B G.O.R III					DGBT																		
+74.32436	31.53823	G.O.R III Near Grid Station					DGBT																		
+74.31931	31.53913	Shama Bus Stop FerozePur Road					DGBT																		
+74.32009	31.53646	Gulla Butt Wali Ferozepur Road					DGBT																		
+74.3209	31.53426	Toke Wali Gali Ferozepur Road					DGBT																		
+74.32162	31.53312	Icchara Shopping Center Ferozepur Road					DGBT																		
+74.32184	31.53183	Quaid e Azam College Ferozepur Road					DGBT																		
+74.32245	31.53038	Goldan Mine Ferozepur Road					DGBT																		
+74.32294	31.52765	Galazy PlazaShoping Center Feroze Pur Road					DGBT																		
+74.3236	31.52625	Al Rahman Trading Company Ferozepur Road					DGBT																		
+74.32469	31.52296	Jamia Ashrafia Main Ferozepur Road					DGBT																		
+74.3252	31.52123	Baba Kulfi Wala Ferozepur Road					DGBT																		
+74.3241	31.53173	Zeldar Park					DGBT																		
+74.32412	31.533	Ashique Market					DGBT																		
+74.32274	31.53589	Akhata Molchand					DGBT																		
+74.3255	31.53198	Chaudhary Kariyana Stoor Zeldar Park					DGBT																		
+74.3306	31.52468	210 Shah Jamal Canal					DGBT																		
+74.3367	31.53372	In front of Wazarat Kharja Office					DGBT																		
+74.32994	31.52918	Yousaf School System Shah Jamal Road					DGBT																		
+74.32915	31.52555	Jinnah Street Lahore Grammar School Shah Jamal Road					DGBT																		
+74.32698	31.52319	Ashrafia Park Colony					DGBT																		
+74.3196	31.53816	Malmo Bakery Ferozepur Road					DGBT																		
+74.3199	31.53727	Madaraj Building Ferozepur Road					DGBT																		
+74.32594	31.52039	Muslim Towm Mor Canal Station Ferozepur Road					DGBT																		
+31.44733	74.43372	Rorah Wala					Nishter Town																		
+31.45891	74.42951	Natha Singh Wala					Nishter Town																		
+31.43532	74.41425	Leel Village Main Ring Road					Nishter Town																		
+31.45258	74.41123	Leel Village Main Ring Road					Nishter Town																		
+31.44849	74.39146	Kamahan Main Ring Road					Nishter Town																		
+31.45519	74.37596	Khalid Park Kamahan					Nishter Town																		
+31.44998	74.35712	Pakka Kamahan Road Point 1					Nishter Town																		
+31.45039	74.35801	Pakka Kamahan Road Point 2					Nishter Town																		
+31.45229	74.36275	Pakka Kamahan Road Point 3					Nishter Town																		
+31.45344	74.36555	Pakka Kamahan Road Near Punjab Society More					Nishter Town																		
+31.46003	74.35017	AlUmer Academy Qainchi Main Stop					Nishter Town																		
+31.45944	74.35046	Gourmet Bakers Main Road Qainchi					Nishter Town																		
+31.45803	74.351	Ghazi Chowk Main Service Road					Nishter Town																		
+31.45733	74.35143	Alfazal Restaurent Near Ghazi Road					Nishter Town																		
+31.45629	74.35168	Ghazi Road Metro Bus Station					Nishter Town																		
+31.45452	74.35233	Mast Iqbal Road					Nishter Town																		
+31.45153	74.35317	Main Bazar Chungi					Nishter Town																		
+31.45092	74.35333	Chungi Metro Bus Station					Nishter Town																		
+31.44059	74.355542	Kamahan Metro Bus Station					Nishter Town																		
+31.44002	74.35783	Bank Stop					Nishter Town																		
+31.44011	74.35783	Bank Stop Ittihad Park St No 2					Nishter Town																		
+31.45229	74.36275	Pakka Kamahan Road Point 4					Nishter Town																		
+31.4491	74.3544	Pakka Kamahan Road Chungi Chowk					Nishter Town																		
+31.44993	74.35703	Pakka Kamahan Road					Nishter Town																		
+31.45026	74.35781	Pakka Kamahan Road					Nishter Town																		
+31.45227	74.36279	Pakka Kamahan Road					Nishter Town																		
+31.44888	74.36386	Pind Bandiyan Wala					Nishter Town																		
+31.44755	74.36382	Niazi Chowk Near Jhuggian					Nishter Town																		
+31.44224	74.36155	Malik Chowk Gulshan Yaseen Colony					Nishter Town																		
+31.44057	74.3615	Ittihad Park Bohar Wala Chowk					Nishter Town																		
+31.43879	74.36018	Bank Stop China Road					Nishter Town																		
+31.44002	74.35562	Bank Stop Ashiyana Road					Nishter Town																		
+31.44011	74.35783	Bank Stop Ittihad Park St No 2					Nishter Town																		
+31.44086	74.36003	Opp Ittihad Park ST No 4					Nishter Town																		
+31.43744	74.35853	Salman Park Near New Crescent School					Nishter Town																		
+31.43639	74.36701	Hakim Chowk					Nishter Town																		
+31.43416	74.36765	Attari PCO					Nishter Town																		
+31.42926	74.37351	Graveyard Mewati Attari Village					Nishter Town																		
+31.43461	74.35941	Inside Awan Market					Nishter Town																		
+31.42735	74.38341	Inside Ashiyana Housing Scheme					Nishter Town																		
+31.42095	74.36146	Jamia Masjid Ghausia					Nishter Town																		
+31.42043	74.36152	Jamia Masjid Ghausia					Nishter Town																		
+31.42022	74.36168	Jamia Masjid Ghausia					Nishter Town																		
+31.42084	74.36185	Jamia Masjid Ghausia					Nishter Town																		
+31.42175	74.35222	Nishter Sunday Market					Nishter Town																		
+31.42206	74.3671	Hassan Block Behind Girls College					Nishter Town																		
+31.42148	74.37061	Yasir Block Nishter Colony					Nishter Town																		
+31.42743	74.35933	Sofi Abad Main Bazar					Nishter Town																		
+31.42359	74.35933	Ammar Block Near Police Station					Nishter Town																		
+31.42359	74.36143	Salman Block					Nishter Town																		
+31.42035	74.36909	Nishter Colony Metro Station					Nishter Town																		
+31.42108	74.35868	Nishter Colony Service Road Parking Stand					Nishter Town																		
+31.42179	74.3586	Nishter Bazar Main Service Road					Nishter Town																		
+31.43958	74.3568	Bank Stop Ashiyana Road					Nishter Town																		
+31.4395	74.35699	Bank Stop Ashiyana Road					Nishter Town																		
+31.43935	74.35753	Bank Stop Ashiyana Road					Nishter Town																		
+31.43906	74.35871	Bank Stop Ashiyana Road					Nishter Town																		
+31.43885	74.35947	Bank Stop Ashiyana Road					Nishter Town																		
+31.43867	74.36276	Bank Stop Ashiyana Road					Nishter Town																		
+31.438	74.36276	Bank Stop Ashiyana Road					Nishter Town																		
+31.43781	74.36357	Bank Stop Ashiyana Road					Nishter Town																		
+31.43694	74.36706	Bank Stop Ashiyana Road					Nishter Town																		
+31.4368	74.36718	Bank Stop Ashiyana Road					Nishter Town																		
+31.4384	74.36082	Bank Stop Ashiyana Road					Nishter Town																		
+31.43893	74.35873	Bank Stop Ashiyana Road					Nishter Town																		
+31.4307	74.35703	Opp Attari Darbar Main Ferozepur Road					Nishter Town																		
+31.42871	74.35731	Mian Colony Near Utility Store Main Road					Nishter Town																		
+31.42262	74.35848	Opp Nishter Bazar Disposal Service Road					Nishter Town																		
+31.43371	74.35661	Younis Abad Opp Mian Center					Nishter Town																		
+31.43593	74.35632	Gourmet Bakers Awan Market					Nishter Town																		
+31.43932	74.38583	Bank Stop Main Road					Nishter Town																		
+31.42206	74.3671	Hassan Block Behind Girls College					Nishter Town																		
+31.4245	74.36381	Jinnah Colony					Nishter Town																		
+31.42099	74.36195	Near Jamia Masjid Ghausia					Nishter Town																		
+31.43464	74.35652	Awan Market Main Service Road					Nishter Town																		
+31.42594	74.36947	Wasim Park					Nishter Town																		
+31.42346	74.3687	Malik Chowk					Nishter Town																		
+31.422	74.362	Sunday Market Nishter Colony					Nishter Town																		
+31.42788	74.35867	Salman Park Near Crescent High School					Nishter Town																		
+31.43707	74.35819	Salman Park Near Wonder Factory					Nishter Town																		
+74.43029	31.58983	chungi islam park main g t road					Wahga Town																		
+74.43047	31.59088	REHMAT PARK CHOWNK					Wahga Town																		
+74.4297	31.59077	MAIN ROAD ISLAM PARK NEAR ASRAF PCO					Wahga Town																		
+74.4295	31.59154	FATIMA DISPENSIRY ISLAM PARK					Wahga Town																		
+74.4192	31.61721	MAIN ROAD SAREEF NEAR  PURA EID GAHH					Wahga Town																		
+74.4175	31.60707	GOVT GIRLS HIGH SCHOOL KY PASS SAREEF PURRA					Wahga Town																		
+74.41708	31.60803	MASJID KY PAS GOVT GIRLS HIGH SCHOOL SAREEF PURRA					Wahga Town																		
+74.41709	31.60669	SAEEEN G BOOK DIPPU MAIN BAZAR SAREEF PURA					Wahga Town																		
+74.41141	31.60509	MAIN BAZAR SAREEF PURA NEAR SEHBAZ JARNAL STORE					Wahga Town																		
+74.41083	31.60978	MUHALLAH MEHAR PURA LAKHO DAIR NEAR RAZA JARNAL STORE					Wahga Town																		
+74.411015	31.61132	MAIN LAKHO DAIR ROAD EMPTY PLOT					Wahga Town																		
+74.40865	31.61061	EID GAHH LAKHOO DAIR					Wahga Town																		
+74.4785	31.59451	MAIN G T ROAD NEAR MANAWA UC					Wahga Town																		
+74.47622	31.59423	MAIN G T ROAD  MANAWA NEAR ZUBAIR SHADI HALL					Wahga Town																		
+74.47073	31.59368	MAIN G T ROAD  MANAWA NEAR PUNJAB HOTEL					Wahga Town																		
+74.46751	31.59328	FATIMA DISPENSIRY ISLAM PARK					Wahga Town																		
+74.4595	31.5887	MAIN G T ROAD  MANAWA NEAR IMRAN SHADI HALL					Wahga Town																		
+74.4553	31.5921	MAIN G T ROAD HOT AND SPICY RESTORENT					Wahga Town																		
+74.44869	31.59135	MAIN G T ROAD NEAR COT WALA					Wahga Town																		
+74.4444	31.59105	MAIN G T ROAD NEAR K P S SCHOOL					Wahga Town																		
+74.44286	31.5909	MAIN G T ROAD NEAR CHOGIAN					Wahga Town																		
+74.44286	31.5909	CUGGIAN PIND					Wahga Town																		
+74.44175	31.58882	MAIN G T ROAD ADDA SABEEL					Wahga Town																		
+74.44002	31.59057	MAIN G T ROAD NEAR GREEN PELAS SHADI HALL					Wahga Town																		
+74.44875	31.58819	COT DONI CHAN PIND					Wahga Town																		
+74.44529	31.59221	K C COLONY					Wahga Town																		
+74.4521	31.59196	MAIN G T ROAD SOTAR MILL					Wahga Town																		
+74.45304	31.59448	SOTAR MILL					Wahga Town																		
+74.45393	31.59228	MAIN G T ROD GOVT GIRLS HIGH SCHOOL SOTAR MILL					Wahga Town																		
+74.45657	31.59258	MAIN G T ROAD SHEEESA FACTORY					Wahga Town																		
+74.45817	31.59257	MAIN G T ROAD YAD GAR STOP					Wahga Town																		
+74.47174	31.59415	MAIN G T ROAD DARAARQAM SCHOOL					Wahga Town																		
+74.47646	31.5929	SON RISE GIRLS HIGH SCHOOL					Wahga Town																		
+74.48051	31.59408	MAIN G T ROAD ASKARI PAMP					Wahga Town																		
+74.47302	31.58735	IMRAN KHAN ROD NEAR MANAWA					Wahga Town																		
+74.4646	31.58478	MADICAL HOSTAL SCHEEM					Wahga Town																		
+74.46342	31.58232	MADICAL COLLAGE					Wahga Town																		
+74.48386	31.5768	JALLO PARK ROD NEAR PHATAK					Wahga Town																		
+74.48763	31.56986	JALLO PARK  PH NARSARY					Wahga Town																		
+74.4861	31.5665	JALLO WANA					Wahga Town																		
+74.48995	31.57675	JALLO PIND					Wahga Town																		
+74.4926	31.57725	JALLO PIND NEAR TALLL WALLA					Wahga Town																		
+74.4937	31.57723	JALLO PIND NEAR MASJID					Wahga Town																		
+74.51027	31.4779	BARKI WATARNARI HOSPITAL					Wahga Town																		
+74.51213	31.47355	POLICE ASTATION BARKI					Wahga Town																		
+74.51556	31.48133	BABA INAIAT WALA PLOT BARKI					Wahga Town																		
+74.52585	31.49175	KORIAN GARD WARA					Wahga Town																		
+74.348234	31.17763	TERAN MASJID WALA POINT					Wahga Town																		
+74.44799	31.4536	BHATTI FORM BEDIAN ROAD					Wahga Town																		
+74.44485	31.456	GIRLS SCHOOL NEAR ATTAK PAMP BEDIAN					Wahga Town																		
+74.44297	31.45413	CH ARSHAD MEHAR TOWN					Wahga Town																		
+74.41247	31.45751	LIDDAR HOSPITAL BEDIAN ROAD					Wahga Town																		
+74.43758	31.46134	SHEEL POMP BEDIAN ROAD					Wahga Town																		
+74.50876	31.56664	WRA MALIK SHAH MUHAMMAD					Wahga Town																		
+74.44202	31.56972	LEBAR CAMP RAILWAY LAIN					Wahga Town																		
+74.44508	31.52899	DOGGARY GAON GOVT HOSPITAL					Wahga Town																		
+74.447	31.5292	DOGGARY GAON GOVT SCHOOL					Wahga Town																		
+74.44764	31.5252	PERAGON CITY MAIN BARKI ROAD					Wahga Town																		
+74.45519	31.51941	CALASS MARRI					Wahga Town																		
+74.45766	31.5176	SHAREEF HOSPITAL BANGALI					Wahga Town																		
+74.48618	31.496	BANGALI GAON BOOORA WALA POINT					Wahga Town																		
+74.47774	31.48696	BANGALI GAON IMAM BARGAH					Wahga Town																		
+31.41045	74.48929	Near Union Council Office Heer					Nishter Town																		
+31.40692	74.48426	Muhallah Fareed Kot Heer					Nishter Town																		
+31.40552	74.48698	Muhallah Bara Dari Heer					Nishter Town																		
+31.41136	74.48935	Main Bediyan Road					Nishter Town																		
+31.41497	74.35937	Haji Di Khoi					Nishter Town																		
+31.41604	74.35921	Umer Town Main Stop					Nishter Town																		
+31.4169	74.35909	Near Umer Town					Nishter Town																		
+31.39764	74.362	Gajjumata Near Stop					Nishter Town																		
+31.39997	74.36152	Ibrahim Masjid					Nishter Town																		
+31.40373	74.36098	Lucky Hotel					Nishter Town																		
+31.41959	74.35867	KPSI School					Nishter Town																		
+31.42048	74.35859	22 Ft Road Nishter Colony					Nishter Town																		
+31.40807	74.36037	Dulam Stop Masjid Street					Nishter Town																		
+31.4056	74.36073	Dulam Stop					Nishter Town																		
+31.40591	74.36069	Dulukhurd Stop					Nishter Town																		
+31.40865	74.36026	Near UC Office					Nishter Town																		
+31.4105	74.36006	Opp Anam Road					Nishter Town																		
+31.41265	74.36979	Opp Gourmet Youhanna Abad					Nishter Town																		
+31.3954	74.36226	Gajjumata Rohi Nala Main Stop					Nishter Town																		
+31.40182	74.36257	Arif Town Main Road					Nishter Town																		
+31.40655	74.36256	Jaddah Town					Nishter Town																		
+31.4031	74.36275	Satellite Town					Nishter Town																		
+31.40791	74.36134	Jaddah Town Masjid Wali Street					Nishter Town																		
+31.41173	74.36182	Youhannah Abad Girja Chowk					Nishter Town																		
+31.41173	74.36168	Youhannah Abad Near Graveyard					Nishter Town																		
+31.41261	74.3661	Youhannah Abad Tariq Medical Store					Nishter Town																		
+31.41886	74.36148	Rehmat Colony					Nishter Town																		
+31.41319	74.37445	Gullu Kot					Nishter Town																		
+31.4114	74.37447	TT School					Nishter Town																		
+31.40835	74.37062	Khaliq Nagar Bridge					Nishter Town																		
+31.41173	74.36182	Youhannah Abad Near Classic Gift Center					Nishter Town																		
+31.39116	74.3628	Gajjumata Stop Main Ferozepur Road					Nishter Town																		
+31.3895	74.36317	Gajjumata Near Shahid Electronics					Nishter Town																		
+31.3887	74.36329	Imam Hospital					Nishter Town																		
+31.38752	74.36341	Gajjumata Road Opp Prince Show Room					Nishter Town																		
+31.38735	74.36346	Gajjumata Service Road					Nishter Town																		
+31.38643	74.36357	Haroon Park Street					Nishter Town																		
+31.38538	74.36371	Lahore Hotel Main Gajjumata					Nishter Town																		
+31.38418	74.36385	Dar e Arqam School					Nishter Town																		
+31.3835	74.36768	Gajjumata Suwa Near Shan Islam Masjid					Nishter Town																		
+31.38254	74.36384	Opp Wapda Office					Nishter Town																		
+31.38148	74.36429	Opp Pakistan Academy					Nishter Town																		
+31.38058	74.3656	Near Rehmat Park Ijaz Haveli					Nishter Town																		
+31.37975	74.36457	Opp Al Umer Academy					Nishter Town																		
+31.37893	74.36967	Opp Bank Bridge					Nishter Town																		
+31.37726	74.36992	Opp Afaq Science Academy					Nishter Town																		
+31.37706	74.36687	Near Khalid Town Masjid					Nishter Town																		
+31.37605	74.36504	Near Superior Academy					Nishter Town																		
+31.37984	74.36526	Opp Gourmet Bakers					Nishter Town																		
+31.37361	74.36536	Opp Bata Shop					Nishter Town																		
+31.37321	74.36552	Bukhari Tikka Shop					Nishter Town																		
+31.37218	74.36581	Opp Special Bank					Nishter Town																		
+31.37176	74.36591	Opp Atta Masjid					Nishter Town																		
+31.37124	74.36609	Opp Punjab Bank					Nishter Town																		
+31.37081	74.36615	Opp Aziz Medical Store					Nishter Town																		
+31.37405	74.3662	Opp Gurwaray Wali Street					Nishter Town																		
+31.36995	74.36607	Kahna Bus Stop					Nishter Town																		
+31.3693	74.36589	Op Ali Mobile Center					Nishter Town																		
+31.36912	74.3659	Taj Mehal Store					Nishter Town																		
+31.3688	74.36581	Kahna Main Bazar					Nishter Town																		
+31.36848	74.36569	Kahna Main Bazar Haji Noor					Nishter Town																		
+31.35362	74.37292	Faiz Property Office Chota Suwa					Nishter Town																		
+31.35331	74.37313	28 No Stop					Nishter Town																		
+31.35285	74.37344	Bus Stop Purana Kahna					Nishter Town																		
+31.35199	74.37384	Purana Kahna Main Service Road					Nishter Town																		
+31.35113	74.37423	Abdul Majeed Khan Stamp Paper Dealer					Nishter Town																		
+31.34606	74.37683	Rehan Garden					Nishter Town																		
+31.36807	74.3657	Mohammad Khalid Chowkidar Main Bazar Kahna					Nishter Town																		
+31.36732	74.36575	Liaqat Iron Store					Nishter Town																		
+31.36702	74.36591	Subhan Allah Boring Store					Nishter Town																		
+31.36668	74.36612	Qalandri Corporation					Nishter Town																		
+31.36597	74.3665	Hafiz Noshahi General Store					Nishter Town																		
+31.36456	74.36723	Sheikh Mehboob Sweets					Nishter Town																		
+31.36409	74.36749	Sheikh Karyana Store					Nishter Town																		
+31.36365	74.36768	Fazal Cooling Center					Nishter Town																		
+31.36332	74.36785	Sheh Shah Advisors					Nishter Town																		
+31.36288	74.36813	Sun Rise Academy					Nishter Town																		
+31.36225	74.36832	Kalay Ka Hotel					Nishter Town																		
+31.3621	74.36855	Sufi Sweets and Bakers					Nishter Town																		
+31.36068	74.36922	Madina Cooling Center					Nishter Town																		
+31.3603	74.37009	Hajveri Steel Works					Nishter Town																		
+31.359	74.37009	Almadina Furniture House					Nishter Town																		
+31.35805	74.37509	PSO Petrol Pump					Nishter Town																		
+31.3596	74.37116	Auto Market					Nishter Town																		
+31.3553	74.37201	Shaheen Marbles Near Chota Suwa					Nishter Town																		
+31.37007	74.36765	Gurdwaray Wala Plot					Nishter Town																		
+31.37033	74.36799	Gurdwaray Wala Plot					Nishter Town																		
+31.3677	74.36569	Atta Rai Market					Nishter Town																		
+31.36527	74.36681	Telenor Service Center					Nishter Town																		
+
+
+
+
+Placement of Korgans
+
+Sr. No	X	Y	Locations	Contractor
+1	74.35136	31.50747	Hussain Chowk Point Mehmood Qassori Road	Albayrak
+2	74.35742	31.50531	Guru Mangat Road Front of City School	Albayrak
+3	74.35818	31.51266	Guru Managat Road near HBL	Albayrak
+4	74.34407	31.52339	Graveyard road Main market	Albayrak
+5	74.34321	31.52261	Zahoor Elahi road adjacent graveyard	Albayrak
+6	74.33431	31.52706	Canal road near Zahoor Elahi Indicator	Albayrak
+7	74.33641	31.52941	Canal road adjacent Tiba	Albayrak
+8	74.33738	31.53198	Canal road near foreign minister office	Albayrak
+9	74.35611	31.55045	Canal road UIG house	Albayrak
+10	74.35199	31.54595	Canal road near American school	Albayrak
+11	74.34084	31.55371	Davis road near club chowk	Albayrak
+12	74.34087	31.55547	Sunderdas road near Muslim league house	Albayrak
+13	74.34283	31.55497	Sunderdas road near Meo garden	Albayrak
+14	74.35207	31.55329	Sunderdas road near white house	Albayrak
+15	74.35336	31.54885	Canal road near Zaman park tube well	Albayrak
+16	74.35481	31.54922	Canal road near Aitzaz house	Albayrak
+17	74.36668	31.55882	Canal road near royal palm	Albayrak
+18	74.39072	31.58567	G.T road Pakistan Mint	Albayrak
+19	74.39836	31.58667	Dhobi Ghat Bus stop G.T road	Albayrak
+20	74.41615	31.58837	Popi Charga G.T road	Albayrak
+21	74.43037	31.58954	Quaid-e-Azim Interchange G.T road	Albayrak
+22	74.40427	31.58697	Daroge wala chowk G.T road	Albayrak
+23	74.42496	31.54248	Zarar Shaheed road near bazar	Albayrak
+24	74.42017	31.54474	Zarar Shaheed road near gourmet bakery	Albayrak
+25	74.36121	31.55081	Infintry road Agriculture office	Albayrak
+26	74.36019	31.55421	Canal road Crime court	Albayrak
+27	74.39231	31.56485	Al-Falah bank Lal pull Canal road	Albayrak
+28	74.36868	31.58412	Christian graveyard Bhogiwal road	Albayrak
+29	74.34151	31.60151	Akram park Amir road	Albayrak
+30	74.33786	31.60017	Gol Bagh Shad bagh road	Albayrak
+31	74.33721	31.59327	Tajpura ground new Shad bagh road	Albayrak
+32	74.34505	31.57816	G.T road near Railway School	Albayrak
+33	74.30192	31.59508	Below Timber Market station Ravi road	Albayrak
+34	74.32759	31.58586	Front of Nawaz Sharif Hospital Circular road	Albayrak
+35	74.33445	31.57822	Front of Naulakha hotel Circular road	Albayrak
+36	74.32279	31.57647	Semson Health club Circular road	Albayrak
+37	74.30679	31.58273	Wapda office Ravi road	Albayrak
+38	74.31071	31.57044	Kacheri road Anar Kali near old book depot	Albayrak
+39	74.31861	31.56628	Macleod Road near Hall road chowk	Albayrak
+40	74.32832	31.56945	Lahore Hotel Macleod road	Albayrak
+41	74.33399	31.56347	Abot road near Shaheen Complex	Albayrak
+42	74.33833	31.56002	Davis road near Total petrol pump	Albayrak
+43	74.31774	31.55012	Queens road near Govt Jinnah degree college	Albayrak
+44	74.31453	31.55908	Mazang road near star continental hotel	Albayrak
+45	74.30934	31.56115	Moj e durya road near Govt college of Technology	Albayrak
+46	74.31683	31.54414	Ferozpur road near Marflex house	Albayrak
+47	74.31004	31.55705	Lyton road near chirag Palace park	Albayrak
+48	74.30525	31.56015	Lower Mall near Lesco office Rewaz garden	Albayrak
+49	74.30653	31.58461	Gora graveyard ravi road	Albayrak
+50	74.34665	31.54677	Mall road near Canal indicator	Albayrak

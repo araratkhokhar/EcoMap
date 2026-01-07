@@ -1,0 +1,17 @@
+HOW TO IMPORT YOUR DATA
+=======================
+
+You can import any amount of data (Containers or Korgans) without worrying about chat limits.
+
+1.  Open the file `new_data.txt` (currently empty).
+2.  Paste your raw data from Excel/Text file into `new_data.txt`.
+    -   It supports the format: `Long Lat Location ...`
+    -   It supports the format: `Sr. No X Y Location ...`
+3.  Save the file.
+4.  Run the import script in your terminal:
+    python import_tool.py
+
+The script will automatically:
+-   Detect if it's a Container or Korgan.
+-   Append the new points to your map.
+-   Keep your existing markers safe.

@@ -1,0 +1,1351 @@
+/* Eco-Organic Theme */
+:root {
+    --primary-color: #2E7D32;
+    /* Deep Forest Green */
+    --secondary-color: #F1F8E9;
+    /* Earthy Beige */
+    --accent-color: #AED581;
+    /* Light Green */
+    --text-color: #33691E;
+    --bg-color: #fafdfb;
+    --radius-xl: 30px;
+    --radius-lg: 20px;
+    --radius-md: 12px;
+    --font-main: 'Nunito', sans-serif;
+    --shadow-soft: 0 4px 20px rgba(46, 125, 50, 0.15);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-main);
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    height: 100vh;
+    overflow: hidden;
+    background-image: radial-gradient(#e8f5e9 1px, transparent 1px);
+    background-size: 20px 20px;
+}
+
+/* Helper Classes */
+.hidden {
+    display: none !important;
+}
+
+/* Full Screen Map */
+#app-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+}
+
+#map {
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+/* --- Organic Floating UI --- */
+
+#top-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 24px;
+    pointer-events: none;
+    z-index: 1000;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+/* Brand - Leaf Shape */
+.brand-section {
+    pointer-events: auto;
+    background: var(--primary-color);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 4px 24px 4px 24px;
+    /* Leaf shape */
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 800;
+    font-size: 1.3rem;
+    box-shadow: var(--shadow-soft);
+}
+
+/* Center Island */
+.top-center-island {
+    position: absolute;
+    left: 50%;
+    top: 24px;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+    pointer-events: none;
+}
+
+/* Search Bar - Pebble Shape */
+.search-section {
+    pointer-events: auto;
+    position: relative;
+    /* Added for suggestions dropdown */
+    width: 100%;
+    max-width: 400px;
+    /* Reduced width */
+    background: white;
+    border-radius: 30px;
+    padding: 6px;
+    display: flex;
+    box-shadow: var(--shadow-soft);
+    border: 2px solid var(--secondary-color);
+    margin-right: 60px;
+    /* Avoid toggle overlapping */
+}
+
+#search-input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-family: var(--font-main);
+    color: var(--text-color);
+    outline: none;
+}
+
+.search-btn {
+    width: 44px;
+    height: 44px;
+    border: none;
+    background: var(--accent-color);
+    color: var(--primary-color);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+}
+
+.search-btn:hover {
+    transform: rotate(15deg) scale(1.1);
+}
+
+/* Filters */
+.filters-section {
+    pointer-events: auto;
+    display: flex;
+    gap: 12px;
+}
+
+.capsule-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    background: white;
+    color: var(--text-color);
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s;
+    font-family: var(--font-main);
+}
+
+.capsule-btn.active {
+    background: var(--primary-color);
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Sidebar - Organic Vertical list */
+#sidebar {
+    position: absolute;
+    right: 24px;
+    top: 100px;
+    /* Fixed top instead of 50% center */
+    /* transform: translateY(-50%); REMOVED */
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    z-index: 1050;
+    /* Higher than top bar */
+    pointer-events: none;
+    padding-bottom: 20px;
+}
+
+
+
+.user-badge {
+    pointer-events: auto;
+    background: var(--primary-color);
+    color: white;
+    padding: 6px 10px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.spacer {
+    height: 20px;
+}
+
+/* Info Panel - Slide-in Card */
+#info-panel {
+    position: absolute;
+    top: 100px;
+    left: 24px;
+    width: 360px;
+    background: white;
+    border-radius: 24px;
+    /* Super rounded */
+    box-shadow: var(--shadow-soft);
+    z-index: 1001;
+    transform: translateX(0);
+    transition: transform 0.4s ease;
+    overflow-y: auto;
+    max-height: calc(100vh - 140px);
+    display: flex;
+    flex-direction: column;
+    border: 4px solid var(--secondary-color);
+}
+
+#info-panel.hidden {
+    transform: translateX(-150%);
+    /* Slide left out */
+    display: flex !important;
+}
+
+.panel-hero-view {
+    height: 160px;
+    background: linear-gradient(to bottom right, var(--secondary-color), #fff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+    color: var(--primary-color);
+    position: relative;
+}
+
+/* Decorative leaf */
+.panel-hero-view::after {
+    content: '\f06c';
+    /* FontAwesome leaf */
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    position: absolute;
+    bottom: -20px;
+    right: -20px;
+    font-size: 8rem;
+    color: rgba(46, 125, 50, 0.05);
+}
+
+.panel-close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(255, 255, 255, 0.8);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+    color: var(--primary-color);
+    cursor: pointer;
+    z-index: 2;
+    font-size: 1.1rem;
+}
+
+.panel-body {
+    padding: 24px;
+}
+
+.panel-title {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+    font-weight: 800;
+}
+
+.btn-save {
+    width: 100%;
+    padding: 14px;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    /* Pill button */
+    margin-top: 15px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1rem;
+    transition: transform 0.2s;
+}
+
+.btn-save:hover {
+    background: #1B5E20;
+    transform: translateY(-2px);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #666;
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px 18px;
+    background: var(--secondary-color);
+    border: 1px solid transparent;
+    border-radius: 12px;
+    font-family: inherit;
+}
+
+.form-control:focus {
+    border-color: var(--primary-color);
+    background: white;
+    outline: none;
+}
+
+/* Chatbot */
+#chatbot-icon {
+    position: fixed;
+    bottom: 40px;
+    /* Aligned with Find Nearest (bottom: 30px + padding diff) */
+    right: 30px;
+    /* Next to Find Nearest (which is at 120px) */
+    left: auto;
+    width: auto;
+    height: 50px;
+    /* Fixed height for pill */
+    padding: 0 20px;
+    background: var(--primary-color);
+    color: white;
+    border-radius: 25px;
+    /* Full Pill Shape */
+    box-shadow: var(--shadow-soft);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    z-index: 2000;
+    transition: all 0.3s;
+    border: none;
+    top: auto;
+}
+
+#chatbot-icon::before {
+    content: 'Chat';
+    display: inline-block;
+}
+
+#chatbot-icon:hover {
+    transform: translateY(-5px);
+    /* Pop up effect instead of slide */
+    background: #1B5E20;
+    padding-right: 20px;
+}
+
+#chatbot-box {
+    position: fixed;
+    bottom: 100px;
+    right: 30px;
+    left: auto;
+    width: 320px;
+    height: 450px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: var(--shadow-soft);
+    z-index: 2000;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 4px solid var(--secondary-color);
+}
+
+.chat-header {
+    background: var(--primary-color);
+    color: white;
+    padding: 16px;
+    font-weight: 700;
+}
+
+#chat-messages {
+    flex: 1;
+    padding: 16px;
+    background: #fff;
+    overflow-y: auto;
+}
+
+.message {
+    padding: 10px 16px;
+    border-radius: 18px;
+    margin-bottom: 12px;
+    max-width: 80%;
+    font-size: 0.95rem;
+}
+
+.bot-msg {
+    background: var(--secondary-color);
+    color: var(--text-color);
+    border-bottom-left-radius: 4px;
+}
+
+.user-msg {
+    background: var(--primary-color);
+    color: white;
+    margin-left: auto;
+    border-bottom-right-radius: 4px;
+}
+
+.chat-input-area {
+    padding: 12px;
+    background: white;
+    border-top: 2px solid var(--secondary-color);
+    display: flex;
+    gap: 8px;
+}
+
+/* Login Screen */
+#login-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(46, 125, 50, 0.4);
+    backdrop-filter: blur(5px);
+    z-index: 5000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-box {
+    background: white;
+    padding: 30px;
+    border-radius: 24px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    width: 350px;
+    text-align: center;
+}
+
+/* Toasts */
+#toast-container {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3000;
+}
+
+.toast {
+    background: var(--primary-color);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 30px;
+    margin-top: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.toast.show {
+    opacity: 1;
+}
+
+/* Custom Markers */
+.custom-marker {
+    background: none;
+    border: none;
+    pointer-events: auto !important;
+}
+
+.custom-pin {
+    width: 34px;
+    height: 34px;
+    border-radius: 50% 50% 50% 0;
+    transform: rotate(-45deg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+}
+
+.pin-container {
+    background: #4CAF50;
+}
+
+.pin-dump {
+    background: #5D4037;
+    /* Brownish for dump */
+}
+
+.pin-korgan {
+    background: #FFB74D;
+}
+
+.custom-pin i {
+    transform: rotate(45deg);
+    color: white;
+    font-size: 15px;
+}
+
+/* Routing Panel Integration */
+.leaflet-routing-container {
+    width: 100% !important;
+    max-width: none !important;
+    box-shadow: none !important;
+    border: none !important;
+    margin: 0 !important;
+    background: transparent !important;
+    padding: 0 !important;
+    font-family: var(--font-main) !important;
+}
+
+.leaflet-routing-alt {
+    border: none !important;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.leaflet-routing-alt tr:hover {
+    background-color: var(--secondary-color) !important;
+    cursor: pointer;
+}
+
+.leaflet-routing-geocoders {
+    display: none !important;
+    /* Hide inputs in panel, just show directions */
+}
+
+/* Find Nearest FAB */
+#find-nearest-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 150px;
+    /* Left of Chatbot (which is at 30px + ~100px width) */
+    width: 44px;
+    height: 44px;
+    background: var(--accent-color);
+    color: var(--text-color);
+    border-radius: 12px;
+    /* Soft square like sidebar */
+    box-shadow: var(--shadow-soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    cursor: pointer;
+    z-index: 2000;
+    border: none;
+    /* Removed white border to match others */
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+#find-nearest-btn:hover {
+    transform: scale(1.1) rotate(45deg);
+    background: var(--primary-color);
+    color: white;
+}
+
+/* Action Buttons Row */
+.action-buttons-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.btn-action {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: transform 0.2s;
+}
+
+.btn-report {
+    background: #FFEBEE;
+    color: #C62828;
+}
+
+.btn-share {
+    background: #E3F2FD;
+    color: #1565C0;
+}
+
+.btn-action:hover {
+    transform: translateY(-2px);
+    filter: brightness(0.95);
+}
+
+/* Report Modal (reuses login screen base) */
+#report-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    /* Darker dim */
+    backdrop-filter: blur(4px);
+    z-index: 6000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.report-box {
+    background: white;
+    padding: 30px;
+    border-radius: 24px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    width: 400px;
+    animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Layers Dropdown */
+.layer-container {
+    position: relative;
+    overflow: visible;
+}
+
+.layer-dropdown {
+    position: absolute;
+    right: 45px;
+    /* Slight overlap with sidebar to prevent gap */
+    padding-right: 15px;
+    /* Add padding to bridge any remaining gap */
+    left: auto;
+    top: 0;
+    background: white;
+    border-radius: 12px;
+    padding: 8px 0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    display: none;
+    flex-direction: column;
+    width: 120px;
+    z-index: 3000;
+}
+
+.layer-container:hover .layer-dropdown {
+    display: flex;
+}
+
+.layer-option {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    color: var(--text-color);
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.layer-option:hover {
+    background: var(--secondary-color);
+    color: var(--primary-color);
+}
+
+/* Standardize Sidebar buttons */
+.sidebar-item {
+    pointer-events: auto;
+    width: 44px;
+    height: 44px;
+    background: white;
+    color: var(--primary-color);
+    border-radius: 12px;
+    /* Soft square */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: var(--shadow-soft);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    font-size: 1.1rem;
+}
+
+/* Combined Zoom Controls */
+.zoom-controls {
+    display: flex;
+    flex-direction: column;
+    background: white;
+    border-radius: 12px;
+    box-shadow: var(--shadow-soft);
+    margin-bottom: 20px;
+    overflow: hidden;
+    pointer-events: auto;
+}
+
+.zoom-controls button {
+    width: 44px !important;
+    height: 44px !important;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    color: var(--primary-color);
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+.zoom-controls button:hover {
+    background: var(--secondary-color);
+}
+
+.zoom-divider {
+    height: 1px;
+    background: rgba(0, 0, 0, 0.1);
+    width: 100%;
+}
+
+/* --- Guest Mode Improvements --- */
+
+/* Guest Banner */
+.guest-banner {
+    position: absolute;
+    top: 90px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #4CAF50, #81C784);
+    color: white;
+    padding: 15px 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    z-index: 2000;
+    animation: slideDown 0.5s ease;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    min-width: 320px;
+}
+
+.banner-content {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+}
+
+.banner-text {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+@keyframes slideDown {
+    from {
+        top: -50px;
+        opacity: 0;
+    }
+
+    to {
+        top: 90px;
+        opacity: 1;
+    }
+}
+
+/* Feature Teaser Modals */
+.teaser-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+    z-index: 6000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.3s;
+}
+
+.teaser-card {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    max-width: 450px;
+    width: 90%;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    animation: slideUp 0.4s;
+    text-align: center;
+}
+
+.teaser-benefits {
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.benefit-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    background: #f5f5f5;
+    border-radius: 8px;
+    text-align: left;
+}
+
+.teaser-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn-secondary {
+    background: transparent;
+    border: 1px solid #ddd;
+    padding: 12px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 600;
+    color: #666;
+}
+
+.btn-secondary:hover {
+    background: #f5f5f5;
+}
+
+.btn-text {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+    text-decoration: underline;
+    margin-left: 10px;
+    font-size: 0.9rem;
+}
+
+/* Feature Tour */
+.tour-tooltip {
+    animation: bounceIn 0.5s;
+}
+
+@keyframes bounceIn {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+
+    60% {
+        transform: scale(1.05);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* --- Agent Mode Improvements --- */
+
+/* Welcome Card */
+.welcome-card {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 30px;
+    border-radius: 24px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    z-index: 5500;
+    text-align: center;
+    animation: popIn 0.5s;
+    width: 90%;
+    max-width: 500px;
+}
+
+.welcome-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 5400;
+}
+
+@keyframes popIn {
+    0% {
+        transform: translate(-50%, -50%) scale(0.8);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+}
+
+/* Quick Actions Dashboard */
+#agent-dashboard {
+    position: fixed;
+    top: 85px;
+    right: 20px;
+    background: white;
+    padding: 15px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    z-index: 2500;
+    width: 220px;
+    display: none;
+    /* Controlled by JS via class 'hidden' */
+}
+
+#agent-dashboard:not(.hidden) {
+    display: block;
+    animation: slideInRight 0.3s;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(50px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.quick-action {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background 0.2s;
+    font-size: 0.95rem;
+    color: var(--text-color);
+}
+
+.quick-action:hover {
+    background: var(--secondary-color);
+}
+
+/* My Markers View */
+.marker-item {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    transition: background 0.2s;
+    border-radius: 8px;
+}
+
+.marker-item:hover {
+    background: #f9f9f9;
+}
+
+/* Role Badges */
+.role-guest {
+    display: none !important;
+}
+
+.role-agent {
+    background: linear-gradient(135deg, #2196F3, #64B5F6) !important;
+    color: white !important;
+    box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3) !important;
+}
+
+.role-admin {
+    background: linear-gradient(135deg, #212121, #424242) !important;
+    color: white !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4) !important;
+    border: 2px solid #FFD700 !important;
+}
+
+/* --- Admin Mode Improvements --- */
+
+/* Admin Panel */
+#admin-panel {
+    position: fixed;
+    top: 85px;
+    left: 20px;
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    z-index: 2500;
+    width: 280px;
+    display: none;
+}
+
+#admin-panel:not(.hidden) {
+    display: block;
+    animation: slideInLeft 0.3s;
+}
+
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-50px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.admin-stat {
+    background: #f5f5f5;
+    padding: 12px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.stat-value {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #212121;
+}
+
+.stat-label {
+    font-size: 0.85rem;
+    color: #666;
+    margin-top: 4px;
+}
+
+.admin-action {
+    width: 100%;
+    padding: 10px;
+    background: #f5f5f5;
+    border: none;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: background 0.2s;
+    font-size: 0.9rem;
+    color: var(--text-color);
+}
+
+.admin-action:hover {
+    background: #e0e0e0;
+}
+
+.health-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+    border-bottom: 1px solid #eee;
+}
+
+.health-warning {
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+/* --- CLI/UX Overhaul: Collapsible Sidebar & Notification --- */
+
+
+
+
+
+/* User Profile & Notification Area */
+/* Repurpose user-badge to be more interactive */
+.user-badge {
+    position: relative;
+    padding-right: 30px;
+    /* Space for bell if needed inside, but we'll separate them */
+}
+
+/* Notification Bell */
+.notification-bell {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    cursor: pointer;
+    position: relative;
+}
+
+.notification-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #FF5252;
+    color: white;
+    font-size: 0.7rem;
+    font-weight: bold;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid white;
+}
+
+/* User Dropdown / Notification Panel */
+.floating-panel {
+    position: absolute;
+    right: 80px;
+    /* Left of the sidebar */
+    top: 0;
+    width: 280px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    padding: 15px;
+    z-index: 3000;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(10px);
+    transition: all 0.2s;
+}
+
+.floating-panel.visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+.fp-header {
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.notif-item {
+    padding: 10px;
+    border-radius: 8px;
+    background: #f9f9f9;
+    margin-bottom: 8px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    border-left: 3px solid var(--accent-color);
+}
+
+.notif-item:hover {
+    background: #f0f0f0;
+}
+
+.notif-item.unread {
+    background: #e8f5e9;
+    border-left-color: var(--primary-color);
+}
+
+.menu-item {
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: background 0.2s;
+}
+
+.menu-item:hover {
+    background: var(--secondary-color);
+}
+
+/* Layers Dropdown */
+.layer-container {
+    position: relative;
+    overflow: visible;
+}
+
+.layer-dropdown {
+    position: absolute;
+    right: 45px;
+    /* Overlap button by 5px */
+    top: 0;
+    background: white;
+    border-radius: 12px;
+    padding: 8px 0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    display: none;
+    flex-direction: column;
+    width: 120px;
+    z-index: 3000;
+}
+
+.layer-container:hover .layer-dropdown {
+    display: flex;
+}
+
+.layer-option {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    color: var(--text-color);
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.layer-option:hover {
+    background: var(--secondary-color);
+    color: var(--primary-color);
+}
+
+/* Combined Zoom Controls */
+.zoom-controls {
+    display: flex;
+    flex-direction: column;
+    background: white;
+    border-radius: 20px;
+    box-shadow: var(--shadow-soft);
+    margin-bottom: 20px;
+    overflow: hidden;
+    pointer-events: auto;
+}
+
+.zoom-controls button {
+    width: 36px;
+    height: 36px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Search Suggestions */
+.search-suggestions {
+    position: absolute;
+    top: 110%;
+    /* Just below the search bar */
+    left: 0;
+    width: 100%;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    z-index: 2000;
+    overflow: hidden;
+    border: 1px solid var(--secondary-color);
+}
+
+.suggestion-item {
+    padding: 12px 16px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    color: var(--text-color);
+    border-bottom: 1px solid #f1f1f1;
+    transition: background 0.2s;
+}
+
+.suggestion-item:last-child {
+    border-bottom: none;
+}
+
+.suggestion-item:hover {
+    background: var(--secondary-color);
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+/* Voice Command Features */
+#voice-mic {
+    transition: all 0.2s;
+}
+
+#voice-mic.listening {
+    background: #D32F2F !important;
+    /* Red when listening */
+    animation: pulseMic 1.5s infinite;
+}
+
+@keyframes pulseMic {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(211, 47, 47, 0.7);
+    }
+
+    70% {
+        transform: scale(1.1);
+        box-shadow: 0 0 0 10px rgba(211, 47, 47, 0);
+    }
+
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(211, 47, 47, 0);
+    }
+}
+
+/* Voice Nav Button in Panel */
+.voice-nav-btn {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #FFAB91;
+    /* Light Orange Border */
+    background: #FFF3E0;
+    /* Very light orange bg */
+    color: #E64A19;
+    /* Deep Orange Text */
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 0.75rem;
+    font-weight: 700;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    transition: all 0.2s;
+}
+
+.voice-nav-btn.active {
+    background: #FF5722;
+    color: white;
+    border-color: #FF5722;
+    box-shadow: 0 2px 8px rgba(255, 87, 34, 0.4);
+}

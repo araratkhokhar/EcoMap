@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoMap - Organic Theme</title>
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
+
+    <!-- Fonts: Nunito for Organic Feel -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="style_organic.css">
+</head>
+
+<body>
+
+    <div id="toast-container"></div>
+
+    <div id="login-screen" class="hidden">
+        <div class="login-box">
+            <h2 class="panel-title">Advisor Login</h2>
+            <div class="form-group">
+                <label for="login-user">Username</label>
+                <input type="text" id="login-user" name="username" autocomplete="username" class="form-control"
+                    placeholder="username">
+            </div>
+            <div class="form-group">
+                <label for="login-pass">Password</label>
+                <input type="password" id="login-pass" name="password" autocomplete="current-password"
+                    class="form-control" placeholder="password">
+            </div>
+            <p id="login-error" style="color: red; font-size: 0.9rem; margin-bottom: 15px;" class="hidden">Invalid
+                credentials</p>
+            <button class="btn-save" onclick="login()">Enter Garden</button>
+            <button class="btn-save" style="background: #ccc; color: #444;"
+                onclick="document.getElementById('login-screen').classList.add('hidden')">Cancel</button>
+        </div>
+    </div>
+
+    <!-- Main App Container -->
+    <div id="app-container">
+
+        <!-- Organic Top Bar -->
+        <div id="top-bar">
+            <div class="brand-section">
+                <i class="fa-solid fa-seedling"></i>
+                <span>EcoMap</span>
+            </div>
+
+            <div class="top-center-island">
+                <div class="search-section">
+                    <input type="text" id="search-input" name="search" autocomplete="off"
+                        placeholder="Find green spots...">
+                    <button class="search-btn" onclick="searchLocation()">
+                        <i class="fa-solid fa-leaf"></i>
+                    </button>
+                    <div id="search-suggestions" class="search-suggestions hidden"></div>
+                </div>
+
+                <div class="filters-section">
+                    <button id="filter-all" class="capsule-btn hidden" onclick="filterMarkers('all')">All</button>
+                    <button class="capsule-btn" onclick="filterMarkers('Garbage Containers')">Bins</button>
+                    <button class="capsule-btn" onclick="filterMarkers('Dumping Yard')">Yards</button>
+                    <button class="capsule-btn" onclick="filterMarkers('Korgans')">Korgans</button>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- Organic Sidebar -->
+        <div id="sidebar">
+            <div class="user-badge" id="user-badge">GUEST</div>
+
+
+
+            <div class="sidebar-item" id="mark-btn" onclick="toggleMarkMode()" title="Add Marker">
+                <i class="fa-solid fa-plus"></i>
+            </div>
+
+            <div class="sidebar-item layer-container" title="Layers">
+                <i class="fa-solid fa-layer-group"></i>
+                <div class="layer-dropdown">
+                    <div class="layer-option" onclick="switchLayer('street')">Street</div>
+                    <div class="layer-option" onclick="switchLayer('satellite')">Satellite</div>
+                    <div class="layer-option" onclick="switchLayer('heatmap')">Heatmap</div>
+                </div>
+            </div>
+            <div class="sidebar-item" onclick="locateUser()" title="My Location">
+                <i class="fa-solid fa-location-arrow"></i>
+            </div>
+
+            <div class="zoom-controls">
+                <button onclick="map.zoomIn()"><i class="fa-solid fa-plus"></i></button>
+                <div class="zoom-divider"></div>
+                <button onclick="map.zoomOut()"><i class="fa-solid fa-minus"></i></button>
+            </div>
+
+            <div class="spacer"></div>
+
+            <div class="sidebar-item" id="auth-btn" onclick="handleAuthClick()">
+                <i id="auth-icon" class="fa-solid fa-user-circle"></i>
+            </div>
+        </div>
+
+        <!-- Map -->
+        <div id="map"></div>
+
+        <!-- Info Panel -->
+        <div id="info-panel" class="hidden">
+            <button class="panel-close-btn" onclick="closePanel()">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div id="panel-content">
+                <!-- Dynamic Content -->
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Find Nearest FAB -->
+    <div id="find-nearest-btn" onclick="findNearest()" title="Find Nearest Bin">
+        <i class="fa-solid fa-compass"></i>
+    </div>
+
+    <!-- Chatbot -->
+    <div id="chatbot-icon" onclick="toggleChat()">
+        <i class="fa-solid fa-comment-dots"></i>
+    </div>
+
+    <div id="chatbot-box" class="hidden">
+        <div class="chat-header">
+            EcoGuide
+            <i class="fa-solid fa-xmark" style="float: right; cursor: pointer;" onclick="toggleChat()"></i>
+        </div>
+        <div id="chat-messages">
+            <div class="message bot-msg">Hello! How can we make Lahore greener?</div>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" id="chat-input" name="chat" class="form-control" placeholder="Ask nature..."
+                onkeypress="handleChatKey(event)">
+            <button class="btn-save" style="width: auto; margin:0;" onclick="sendMessage()">
+                <i class="fa-solid fa-paper-plane"></i>
+            </button>
+            <button id="voice-mic" class="btn-save" style="width: auto; margin:0; background: #FFB300;"
+                onclick="initVoiceCommand()" title="Voice Command">
+                <i class="fa-solid fa-microphone"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Report Modal -->
+    <div id="report-modal" class="hidden">
+        <div class="report-box" style="position: relative;">
+            <button onclick="closeReportModal()"
+                style="position:absolute; top:15px; right:15px; background:none; border:none; font-size:1.2rem; cursor:pointer;">&times;</button>
+            <h2 class="panel-title">Report Issue</h2>
+            <div class="form-group">
+                <label for="report-location">Location</label>
+                <input type="text" id="report-location" name="location" class="form-control" readonly>
+            </div>
+            <div class="form-group">
+                <label for="report-type">Issue Type</label>
+                <select id="report-type" name="issue-type" class="form-control">
+                    <option value="full">Container is Full</option>
+                    <option value="damaged">Container is Damaged</option>
+                    <option value="missing">Container is Missing</option>
+                    <option value="illegal-dump">Illegal Dumping Spotted</option>
+                    <option value="other">Other Issue</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="report-description">Description</label>
+                <textarea id="report-description" name="description" class="form-control" rows="4"></textarea>
+            </div>
+            <button class="btn-save" onclick="submitReport()">Submit Report</button>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="hidden"
+        style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(255,255,255,0.9); z-index:9999; display:flex; align-items:center; justify-content:center; backdrop-filter:blur(4px);">
+        <div style="text-align:center;">
+            <div class="spinner"
+                style="width:60px; height:60px; border:6px solid #f3f3f3; border-top:6px solid #2E7D32; border-radius:50%; animation:spin 1s linear infinite; margin:0 auto 20px;">
+            </div>
+            <div style="font-size:1.2rem; color:#2E7D32; font-weight:600;" id="loading-text">Loading...</div>
+        </div>
+    </div>
+    <style>
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+
+    <!-- Script Imports (Same as Main) -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+    <script src="https://unpkg.com/leaflet.heat/dist/leaflet-heat.js"></script> <!-- Heatmap Lib -->
+    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+    <!-- Clustering Lib -->
+    <script src="containers.js"></script>
+    <script src="markers.js"></script>
+    <script src="lahore_boundary.js"></script>
+    <script src="lahore_data_v2.js"></script>
+    <script src="korgans.js"></script>
+    <script src="chatbot_database.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

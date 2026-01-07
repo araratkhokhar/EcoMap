@@ -1,0 +1,19 @@
+{
+  "name": "ecomap",
+  "version": "1.0.0",
+  "description": "A web-based GIS application to help users locate garbage containers and dumping yards in Lahore, Pakistan.",
+  "main": "chatbot_database.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "pg": "^8.16.3"
+  }
+}
