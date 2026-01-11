@@ -203,13 +203,18 @@ function initApp() {
         socket = io();
 
         socket.on('connect', () => {
-            console.log('Connected to signaling server');
+            console.log('Connected to signaling server. ID:', socket.id);
+            showToast("Conn: " + socket.id); // Debug
             // Join with role
+            console.log("Joining as:", currentUser.role);
+            showToast("Joining as " + currentUser.role); // Debug
             socket.emit('join', { role: currentUser.role });
         });
 
         // Admin: Listen for incoming calls
         socket.on('call-offer', (data) => {
+            console.log("Received call-offer:", data);
+            showToast("Signal Received: " + (currentUser.role)); // Debug
             if (currentUser.role === 'admin') {
                 showIncomingCall(data);
             }
