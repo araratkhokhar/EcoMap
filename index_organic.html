@@ -158,6 +158,49 @@
         </div>
     </div>
 
+    <!-- Call UI -->
+    <!-- 1. Guest/User Call Button -->
+    <div id="call-support-button" class="hidden" onclick="initiateCall()" title="Call Support">
+        <i class="fa-solid fa-headset"></i>
+    </div>
+
+    <!-- 2. Active Call Modal (For both) -->
+    <div id="call-modal" class="hidden">
+        <div class="call-box">
+            <div class="call-avatar">
+                <i class="fa-solid fa-user"></i>
+            </div>
+            <h3 id="call-status-text">Calling Support...</h3>
+            <div id="call-timer" class="hidden">00:00</div>
+
+            <div class="call-actions">
+                <button class="call-btn btn-hangup" onclick="endCall()">
+                    <i class="fa-solid fa-phone-slash"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. Incoming Call Modal (For Admin) -->
+    <div id="incoming-call-modal" class="hidden">
+        <div class="call-box incoming">
+            <div class="call-avatar animate-pulse">
+                <i class="fa-solid fa-phone"></i>
+            </div>
+            <h3>Incoming Call</h3>
+            <p id="incoming-caller-name">Guest</p>
+
+            <div class="call-actions">
+                <button class="call-btn btn-accept" onclick="answerCall()">
+                    <i class="fa-solid fa-phone"></i>
+                </button>
+                <button class="call-btn btn-hangup" onclick="rejectCall()">
+                    <i class="fa-solid fa-phone-slash"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Report Modal -->
     <div id="report-modal" class="hidden">
         <div class="report-box" style="position: relative;">
@@ -211,6 +254,7 @@
     <!-- Script Imports (Same as Main) -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="/socket.io/socket.io.js"></script> <!-- Socket.io Client -->
     <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
     <script src="https://unpkg.com/leaflet.heat/dist/leaflet-heat.js"></script> <!-- Heatmap Lib -->
     <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>

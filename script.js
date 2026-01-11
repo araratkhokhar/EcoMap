@@ -12,6 +12,10 @@ let activeFilter = 'all';
 let currentRoute = null;
 let markerClusterGroup = null; // Changed from array to ClusterGroup
 let chatContext = { lastLocation: null, lastTopic: null };
+let socket;
+let callTimerInterval;
+let callStartTime;
+
 
 // UI State
 
@@ -190,6 +194,38 @@ function initApp() {
     initMap();
     // Initial Load
     loadMarkers();
+
+    // --- SOCKET.IO INITIALIZATION ---
+    try {
+        socket = io();
+
+        socket.on('connect', () => {
+            console.log('Connected to signaling server');
+            // Join with role
+            socket.emit('join', { role: currentUser.role });
+        });
+
+        // Admin: Listen for incoming calls
+        socket.on('call-offer', (data) => {
+            if (currentUser.role === 'admin') {
+                showIncomingCall(data);
+            }
+        });
+
+        // User: Listen for call accepted
+        socket.on('call-accepted', (data) => {
+            startCallTimer();
+        });
+
+        // Both: Listen for call ended
+        socket.on('call-ended', () => {
+            endCall(true); // true = remote ended
+        });
+
+    } catch (e) {
+        console.error("Socket.io not found or failed to connect", e);
+    }
+
 
     // --- HYBRID GEOSERVER INTEGRATION (FAIL-SAFE) ---
     async function loadGeoServerLayer() {
@@ -524,6 +560,17 @@ function updateUI() {
     const addBtn = document.getElementById('mark-btn');
     if (addBtn) addBtn.style.display = role !== 'guest' ? 'flex' : 'none';
 
+    // Call Support Button (Guest/User only)
+    const callBtn = document.getElementById('call-support-button');
+    if (callBtn) {
+        if (role !== 'admin') {
+            callBtn.classList.remove('hidden');
+        } else {
+            callBtn.classList.add('hidden');
+        }
+    }
+
+
     // 2. User Badge / Notification Area
     const badge = document.getElementById('user-badge');
 
@@ -798,6 +845,101 @@ function approveMarker(id) {
     showToast("Marker Approved & Published");
     loadMarkers();
     closePanel();
+}
+
+// --- CALL FEATURE LOGIC ---
+let activeCallParams = null; // Store caller ID when admin receives call
+
+function initiateCall() {
+    if (!socket) return showToast("Call service unavailable");
+
+    // UI
+    document.getElementById('call-modal').classList.remove('hidden');
+    document.getElementById('call-status-text').innerText = "Calling Support...";
+    document.querySelector('.call-avatar').classList.add('animate-pulse');
+
+    // Signal
+    socket.emit('call-init', { caller: currentUser.username });
+}
+
+function showIncomingCall(data) {
+    activeCallParams = data;
+    document.getElementById('incoming-call-modal').classList.remove('hidden');
+    document.getElementById('incoming-caller-name').innerText = data.callerName || "Guest";
+    // Play sound?
+}
+
+function answerCall() {
+    if (!activeCallParams) return;
+
+    // Signal
+    socket.emit('call-answer', { callerId: activeCallParams.callerId, adminId: socket.id });
+
+    // UI Switch
+    document.getElementById('incoming-call-modal').classList.add('hidden');
+    document.getElementById('call-modal').classList.remove('hidden');
+    document.getElementById('call-status-text').innerText = "Connected with " + activeCallParams.callerName;
+    document.querySelector('.call-avatar').classList.remove('animate-pulse'); // Stop pulsing
+
+    startCallTimer();
+}
+
+function rejectCall() {
+    if (!activeCallParams) return;
+    // simple close for now, could emit reject event
+    document.getElementById('incoming-call-modal').classList.add('hidden');
+    socket.emit('call-end', { to: activeCallParams.callerId });
+    activeCallParams = null;
+}
+
+function startCallTimer() {
+    // Show timer
+    document.getElementById('call-timer').classList.remove('hidden');
+    document.getElementById('call-status-text').innerText = "Connected";
+    document.querySelector('.call-avatar').classList.remove('animate-pulse'); // Stop pulsing if it was
+
+    callStartTime = Date.now();
+    callTimerInterval = setInterval(() => {
+        const delta = Math.floor((Date.now() - callStartTime) / 1000);
+        const m = Math.floor(delta / 60).toString().padStart(2, '0');
+        const s = (delta % 60).toString().padStart(2, '0');
+        document.getElementById('call-timer').innerText = `${m}:${s}`;
+    }, 1000);
+}
+
+function endCall(isRemote = false) {
+    // Stop timer
+    clearInterval(callTimerInterval);
+    document.getElementById('call-timer').classList.add('hidden');
+    document.getElementById('call-timer').innerText = "00:00";
+
+    // UI
+    document.getElementById('call-modal').classList.add('hidden');
+    document.getElementById('incoming-call-modal').classList.add('hidden');
+
+    if (!isRemote && socket) {
+        // If I ended it, notify others. 
+        // For admin, notify caller. For caller, notify connected admin (simplified: notify all or just close)
+        // Ideally we need to know who we are talking to.
+        // For prototype, we just emit call-end and server handles or we rely on the implementation plan simplicity.
+        // Let's emit call-end to room/id if known, but for now just general 'call-end'
+        if (activeCallParams) {
+            socket.emit('call-end', { to: activeCallParams.callerId });
+        } else {
+            // As caller, we might not know admin ID if we just started, 
+            // but if we are connected, we should know. 
+            // Simplification: Caller emits end, Server doesn't know who to tell without room logic.
+            // We'll stick to local cleanup for now or broadcast.
+            // Refinement: caller emits call-end-all ? 
+            // For this task, let's assume the disconnect handles it or we just close local UI.
+            // To be safe:
+            socket.emit('call-end', { to: 'admins' }); // Hacky: notify all admins call ended
+        }
+    }
+
+    activeCallParams = null;
+    if (isRemote) showToast("Call ended");
+
 
     // Suggestion: Award points to author here?
 }
