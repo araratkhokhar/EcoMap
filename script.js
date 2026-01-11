@@ -15,6 +15,9 @@ let chatContext = { lastLocation: null, lastTopic: null };
 let socket;
 let callTimerInterval;
 let callStartTime;
+let localStream = null;
+let peer = null;
+
 
 
 // UI State
@@ -214,7 +217,9 @@ function initApp() {
 
         // User: Listen for call accepted
         socket.on('call-accepted', (data) => {
-            startCallTimer();
+            // WebRTC: Signal Peer 
+            if (peer) peer.signal(data.signal);
+            // Timer starts on 'connect' event of peer now
         });
 
         // Both: Listen for call ended

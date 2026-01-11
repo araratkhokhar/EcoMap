@@ -42,20 +42,28 @@ io.on('connection', (socket) => {
 
     // Call Signaling
     socket.on('call-init', (data) => {
-        // Data contains caller info
-        console.log('Call initiated by', data.caller);
-        // Notify all admins
+        // Data contains caller info request
+        // We wait for signal from client now? 
+        // Actually, simple-peer needs to generate signal first.
+        // But for 'call-init', we might just notify admin to get ready?
+        // Let's stick to: Client generates signal -> emits call-offer
+        console.log('Call init (LEGACY) from', data.caller);
+    });
+
+    socket.on('call-offer', (data) => {
+        console.log('Call offer from', data.callerName);
         io.to('admins').emit('call-offer', {
             callerId: socket.id,
-            callerName: data.caller
+            callerName: data.callerName,
+            signal: data.signal // Pass WebRTC signal
         });
     });
 
     socket.on('call-answer', (data) => {
         console.log('Call answered by admin');
-        // Notify the specific caller that call is accepted
         io.to(data.callerId).emit('call-accepted', {
-            adminId: socket.id
+            adminId: socket.id,
+            signal: data.signal // Pass WebRTC signal
         });
     });
 
