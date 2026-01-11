@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoMap - Flow</title>
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Flow Styles -->
+    <link rel="stylesheet" href="style_flow.css">
+</head>
+
+<body>
+
+    <div id="toast-container"></div>
+
+    <!-- Login Modal -->
+    <div id="login-screen" class="hidden"
+        style="position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); width:300px; padding:30px; background:white; border-radius:24px; box-shadow:0 10px 40px rgba(0,0,0,0.1); z-index:10000; text-align:center;">
+        <h2 class="panel-title" style="color:var(--primary-color);">Welcome Back</h2>
+        <input type="text" id="login-user" placeholder="Username"
+            style="width:100%; padding:12px; border-radius:12px; border:1px solid #ddd; margin-bottom:10px; outline:none; font-family:inherit;">
+        <input type="password" id="login-pass" placeholder="Password"
+            style="width:100%; padding:12px; border-radius:12px; border:1px solid #ddd; margin-bottom:20px; outline:none; font-family:inherit;">
+        <button class="btn-save" onclick="login()">Log In</button>
+        <button class="btn-save" style="background:#f0f0f0; color:#666; margin-top:10px;"
+            onclick="document.getElementById('login-screen').classList.add('hidden')">Cancel</button>
+    </div>
+
+    <!-- Top Floating Island (Search & Filters) -->
+    <div id="top-container">
+        <div class="search-pill">
+            <i class="fa-solid fa-seedling" style="color:var(--primary-color); margin-right:10px;"></i>
+            <input type="text" id="search-input" placeholder="Find sustainable spots..." autocomplete="off">
+            <button class="search-btn" onclick="searchLocation()">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+        </div>
+
+        <div id="search-suggestions" class="hidden"
+            style="background:white; border-radius:15px; padding:10px; box-shadow:var(--shadow-sm);"></div>
+
+        <div class="filter-scroll">
+            <button id="filter-all" class="capsule-btn hidden" onclick="filterMarkers('all')">All</button>
+            <button class="capsule-btn" onclick="filterMarkers('Garbage Containers')">Bins</button>
+            <button class="capsule-btn" onclick="filterMarkers('Dumping Yard')">Dumps</button>
+            <button class="capsule-btn" onclick="filterMarkers('Korgans')">Korgans</button>
+            <button class="capsule-btn" onclick="switchLayer('satellite')">Sat View</button>
+        </div>
+    </div>
+
+    <!-- Map View -->
+    <div id="map"></div>
+
+    <!-- Theme Switcher (Floating Top Right) -->
+    <div onclick="toggleThemeModal()"
+        style="position:absolute; top:20px; right:100px; background:white; padding:8px 15px; border-radius:20px; box-shadow:var(--shadow-sm); z-index:1000; font-weight:500; cursor:pointer; color:var(--primary-color);">
+        <i class="fa-solid fa-palette"></i>
+    </div>
+
+    <!-- User Badge (Floating Top Right) -->
+    <div id="user-badge"
+        style="position:absolute; top:20px; right:20px; background:white; padding:8px 15px; border-radius:20px; box-shadow:var(--shadow-sm); z-index:1000; font-weight:500; cursor:pointer;"
+        onclick="handleAuthClick()">
+        GUEST
+    </div>
+    <!-- Hidden auth btn logic hook -->
+    <div id="auth-btn" style="display:none;"></div>
+
+    <!-- Bottom Dock Navigation -->
+    <div id="bottom-dock">
+        <button class="dock-item active" onclick="switchLayer('street')" title="Map">
+            <i class="fa-solid fa-map-location-dot"></i>
+        </button>
+
+        <button class="dock-item" onclick="findNearest()" id="find-nearest-btn" title="Nearest">
+            <i class="fa-solid fa-compass"></i>
+        </button>
+
+        <!-- Main Action (Center) -->
+        <button class="fab-main" id="mark-btn" onclick="toggleMarkMode()" title="Add Spot">
+            <i class="fa-solid fa-plus"></i>
+        </button>
+
+        <button class="dock-item" onclick="locateUser()" title="My Location">
+            <i class="fa-solid fa-location-crosshairs"></i>
+        </button>
+
+        <button class="dock-item" onclick="map.zoomIn()" title="Zoom In">
+            <i class="fa-solid fa-magnifying-glass-plus"></i>
+        </button>
+    </div>
+
+    <!-- Bottom Sheet (Info Panel) -->
+    <div id="info-panel" class="hidden">
+        <div class="sheet-handle"></div>
+        <button class="close-sheet-btn" onclick="closePanel()">&times;</button>
+        <div id="panel-content" class="sheet-content">
+            <!-- Dynamic Content -->
+        </div>
+    </div>
+
+    <!-- Chatbot Bubble -->
+    <div id="chatbot-icon" onclick="toggleChat()">
+        <i class="fa-solid fa-leaf"></i>
+    </div>
+
+    <div id="chatbot-box" class="hidden">
+        <div class="chat-header">
+            <span>EcoFriend</span>
+            <i class="fa-solid fa-xmark" onclick="toggleChat()" style="cursor:pointer;"></i>
+        </div>
+        <div id="chat-messages">
+            <div class="message bot-msg">Hi! How can I help you today?</div>
+        </div>
+        <div class="chat-input-area">
+            <button id="voice-mic" style="border:none; background:none; color:var(--primary-color);"
+                onclick="initVoiceCommand()"><i class="fa-solid fa-microphone"></i></button>
+            <input type="text" id="chat-input" style="flex:1; border:none; outline:none;"
+                placeholder="Type a message..." onkeypress="handleChatKey(event)">
+            <button style="border:none; background:none; color:var(--primary-color);" onclick="sendMessage()"><i
+                    class="fa-solid fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <!-- Theme Modal -->
+    <div id="theme-modal" class="hidden"
+        style="position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); width:90%; max-width:350px; background:var(--surface-color); border-radius:30px; padding:30px; box-shadow:var(--shadow-lg); z-index:11000; text-align:center;">
+        <h2 class="panel-title" style="color:var(--primary-color);">Pick a Vibe</h2>
+        <div style="display:grid; gap:10px;">
+            <button onclick="switchTheme('index_organic.html')" class="btn-save"
+                style="background:#e8f5e9; color:#2E7D32; border:1px solid #2E7D32;">Organic</button>
+            <button onclick="switchTheme('index_aero.html')" class="btn-save"
+                style="background:white; color:#333; border:1px solid #ddd;">Aero</button>
+            <button onclick="switchTheme('index_zen.html')" class="btn-save"
+                style="background:white; color:#333; border:1px solid #ddd;">Zen</button>
+            <button onclick="switchTheme('index_flow.html')" class="btn-save"
+                style="background:var(--primary-color); color:white;">Flow (Active)</button>
+        </div>
+        <button onclick="toggleThemeModal()"
+            style="margin-top:20px; background:none; border:none; color:#999; cursor:pointer;">Close</button>
+    </div>
+
+    <script>
+        function toggleThemeModal() {
+            document.getElementById('theme-modal').classList.toggle('hidden');
+        }
+        function switchTheme(file) {
+            window.location.href = file;
+        }
+    </script>
+
+    <!-- Report Modal -->
+    <div id="report-modal" class="hidden"
+        style="position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); width:90%; max-width:400px; padding:30px; z-index:9999;">
+        <button onclick="closeReportModal()"
+            style="position:absolute; top:15px; right:15px; border:none; background:none; font-size:1.5rem;">&times;</button>
+        <h2 class="panel-title">Report Issue</h2>
+
+        <input type="text" id="report-location"
+            style="width:100%; padding:15px; border-radius:15px; border:1px solid #ddd; background:#f9f9f9; margin-bottom:10px;"
+            readonly>
+
+        <select id="report-type"
+            style="width:100%; padding:15px; border-radius:15px; border:1px solid #ddd; margin-bottom:10px; background:white;">
+            <option value="full">Container Full</option>
+            <option value="damaged">Damaged</option>
+            <option value="missing">Missing</option>
+        </select>
+
+        <textarea id="report-description" rows="3"
+            style="width:100%; padding:15px; border-radius:15px; border:1px solid #ddd; margin-bottom:20px; background:white;"></textarea>
+
+        <button class="btn-save" onclick="submitReport()">Submit Report</button>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="hidden"
+        style="position:fixed; inset:0; background:rgba(255,255,255,0.8); backdrop-filter:blur(5px); z-index:9999; display:flex; align-items:center; justify-content:center;">
+        <div class="spinner"
+            style="width:60px; height:60px; border-radius:50%; border:5px solid #eee; border-top-color:var(--primary-color); animation:spin 1s infinite;">
+        </div>
+    </div>
+    <style>
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+    <script src="https://unpkg.com/leaflet.heat/dist/leaflet-heat.js"></script>
+    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+
+    <script src="containers.js"></script>
+    <script src="markers.js"></script>
+    <script src="lahore_boundary.js"></script>
+    <script src="lahore_data_v2.js"></script>
+    <script src="korgans.js"></script>
+    <script src="chatbot_database.js"></script>
+    <script src="script.js"></script>
+
+</body>
+
+</html>

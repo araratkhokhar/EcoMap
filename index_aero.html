@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoMap - Aero (Spatial)</title>
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
+
+    <!-- Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Aero Styles -->
+    <link rel="stylesheet" href="style_aero.css">
+</head>
+
+<body>
+
+    <div id="toast-container"></div>
+
+    <!-- Auth / Login Screen -->
+    <div id="login-screen" class="glass-panel hidden"
+        style="position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); width:320px; padding:30px; z-index:10000;">
+        <h2 class="panel-title" style="text-align:center;">ACCESS PORTAL</h2>
+        <div class="form-group" style="margin-bottom:15px;">
+            <label style="display:block; color:var(--text-muted); margin-bottom:5px;">ID</label>
+            <input type="text" id="login-user" class="glass-input"
+                style="width:100%; padding:10px; background:rgba(0,0,0,0.3); border:1px solid #444; color:white;">
+        </div>
+        <div class="form-group" style="margin-bottom:20px;">
+            <label style="display:block; color:var(--text-muted); margin-bottom:5px;">KEY</label>
+            <input type="password" id="login-pass" class="glass-input"
+                style="width:100%; padding:10px; background:rgba(0,0,0,0.3); border:1px solid #444; color:white;">
+        </div>
+        <button class="btn-save" onclick="login()">AUTHENTICATE</button>
+        <button class="btn-save" style="margin-top:10px; border-color:#555; color:#aaa; background:transparent;"
+            onclick="document.getElementById('login-screen').classList.add('hidden')">ABORT</button>
+    </div>
+
+    <!-- Top Floating Bar -->
+    <div id="top-bar" class="glass-panel">
+        <div class="brand-section">
+            <i class="fa-solid fa-cube"></i> ECOMAP <span
+                style="font-size:0.6rem; color:var(--neon-secondary); opacity:0.8;">AEROOS</span>
+        </div>
+
+        <div class="search-section">
+            <input type="text" id="search-input" placeholder="Search coordinates or places..." autocomplete="off">
+            <button class="search-btn" onclick="searchLocation()"><i class="fa-solid fa-magnifying-glass"></i></button>
+            <div id="search-suggestions" class="hidden"
+                style="position:absolute; top:50px; left:0; width:100%; background:#000; border:1px solid #333; z-index:999;">
+            </div>
+        </div>
+
+        <div class="filters-section">
+            <button id="filter-all" class="capsule-btn hidden" onclick="filterMarkers('all')">ALL</button>
+            <button class="capsule-btn" onclick="filterMarkers('Garbage Containers')">CONTAINERS</button>
+            <button class="capsule-btn" onclick="filterMarkers('Dumping Yard')">DUMP ZONES</button>
+            <button class="capsule-btn" onclick="filterMarkers('Korgans')">RECYCLERS</button>
+        </div>
+    </div>
+
+    <!-- Floating Sidebar Stack -->
+    <div id="sidebar">
+        <!-- User Module -->
+        <div id="user-badge">GUEST</div>
+
+        <!-- Add Marker -->
+        <div class="sidebar-item" id="mark-btn" onclick="toggleMarkMode()" title="Initialize Marker">
+            <i class="fa-solid fa-plus"></i>
+        </div>
+
+        <!-- Layers -->
+        <div class="sidebar-item" onclick="switchLayer('satellite')" title="Toggle Satellite">
+            <i class="fa-solid fa-layer-group"></i>
+        </div>
+
+        <!-- Location -->
+        <div class="sidebar-item" onclick="locateUser()" title="Acquire Location">
+            <i class="fa-solid fa-crosshairs"></i>
+        </div>
+
+        <!-- Theme Switcher -->
+        <div class="sidebar-item" onclick="toggleThemeModal()" title="Switch Theme"
+            style="border-color:var(--neon-warning) !important; color:var(--neon-warning);">
+            <i class="fa-solid fa-palette"></i>
+        </div>
+
+        <!-- Zoom Stack -->
+        <div class="zoom-controls">
+            <button onclick="map.zoomIn()"><i class="fa-solid fa-plus"></i></button>
+            <div class="zoom-divider"></div>
+            <button onclick="map.zoomOut()"><i class="fa-solid fa-minus"></i></button>
+        </div>
+
+        <!-- Auth Module (Bottom) -->
+        <div style="flex:1;"></div>
+        <div class="sidebar-item" id="auth-btn" onclick="handleAuthClick()">
+            <i id="auth-icon" class="fa-solid fa-user-astronaut"></i>
+        </div>
+    </div>
+
+    <!-- Central FAB -->
+    <div id="find-nearest-btn" onclick="findNearest()">
+        <i class="fa-solid fa-location-arrow"></i>
+    </div>
+
+    <!-- Main Map View -->
+    <div id="map"></div>
+
+    <!-- Info Panel / Drawer -->
+    <div id="info-panel" class="hidden">
+        <button class="panel-close-btn" onclick="closePanel()"><i class="fa-solid fa-xmark"></i></button>
+        <div id="panel-content">
+            <!-- Dynamic Content -->
+        </div>
+    </div>
+
+    <!-- Chatbot Module -->
+    <div id="chatbot-icon" onclick="toggleChat()">
+        <i class="fa-solid fa-robot"></i>
+    </div>
+
+    <div id="chatbot-box" class="hidden">
+        <div class="chat-header">
+            <span>AICORE</span>
+            <i class="fa-solid fa-minus" onclick="toggleChat()" style="cursor:pointer;"></i>
+        </div>
+        <div id="chat-messages">
+            <div class="message bot-msg">System Online. How can I assist with environmental data?</div>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" id="chat-input" class="glass-input"
+                style="flex:1; background:transparent; border:none; color:white;" placeholder="Command..."
+                onkeypress="handleChatKey(event)">
+            <button class="btn-save" style="width:auto; padding:5px 15px;" onclick="sendMessage()"><i
+                    class="fa-solid fa-chevron-right"></i></button>
+            <button id="voice-mic" class="btn-save"
+                style="width:auto; padding:5px 15px; border-color:var(--neon-warning); color:var(--neon-warning);"
+                onclick="initVoiceCommand()"><i class="fa-solid fa-microphone"></i></button>
+        </div>
+    </div>
+
+    <!-- Report Modal -->
+    <div id="report-modal" class="glass-panel hidden"
+        style="position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); width:400px; padding:30px; z-index:9999;">
+        <button onclick="closeReportModal()"
+            style="position:absolute; top:15px; right:15px; background:none; border:none; color:#666; font-size:1.2rem;">&times;</button>
+        <h2 class="panel-title">FILE REPORT</h2>
+        <input type="text" id="report-location" class="glass-input" readonly
+            style="width:100%; margin-bottom:10px; background:rgba(255,255,255,0.1); border:none; padding:10px; color:white;">
+        <select id="report-type"
+            style="width:100%; margin-bottom:10px; background:#222; color:white; padding:10px; border:1px solid #444;">
+            <option value="full">Container Full</option>
+            <option value="damaged">Structure Damaged</option>
+            <option value="missing">Asset Missing</option>
+            <option value="illegal-dump">Illegal Activity</option>
+        </select>
+        <textarea id="report-description" rows="3"
+            style="width:100%; background:#222; color:white; border:1px solid #444; margin-bottom:15px; padding:10px;"></textarea>
+        <button class="btn-save" onclick="submitReport()">TRANSMIT</button>
+    </div>
+
+    <!-- Theme Modal -->
+    <div id="theme-modal" class="glass-panel hidden"
+        style="position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); width:400px; padding:30px; z-index:11000;">
+        <button onclick="toggleThemeModal()"
+            style="position:absolute; top:15px; right:15px; background:none; border:none; color:#666; font-size:1.2rem;">&times;</button>
+        <h2 class="panel-title" style="text-align:center;">SYSTEM THEME</h2>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:15px; margin-top:20px;">
+            <button onclick="switchTheme('index_organic.html')" class="btn-save"
+                style="border-color:#2E7D32; color:#2E7D32;">
+                ORGANIC
+            </button>
+            <button onclick="switchTheme('index_aero.html')" class="btn-save"
+                style="border-color:var(--neon-secondary); color:var(--neon-secondary); background:rgba(0,184,212,0.1);">
+                AERO (ACTIVE)
+            </button>
+            <button onclick="switchTheme('index_zen.html')" class="btn-save" style="border-color:white; color:white;">
+                ZEN
+            </button>
+            <button onclick="switchTheme('index_flow.html')" class="btn-save"
+                style="border-color:#6A9C89; color:#6A9C89;">
+                FLOW
+            </button>
+        </div>
+    </div>
+
+    <script>
+        function toggleThemeModal() {
+            document.getElementById('theme-modal').classList.toggle('hidden');
+        }
+        function switchTheme(file) {
+            window.location.href = file;
+        }
+    </script>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="hidden"
+        style="position:fixed; inset:0; background:rgba(0,0,0,0.9); z-index:9999; display:flex; align-items:center; justify-content:center;">
+        <div style="text-align:center; color:var(--neon-primary); font-family:var(--font-heading);">
+            <div class="spinner"
+                style="width:50px; height:50px; border:3px solid #333; border-top-color:var(--neon-primary); border-radius:50%; animation:spin 1s infinite; margin:0 auto 20px;">
+            </div>
+            INITIALIZING...
+        </div>
+    </div>
+
+    <style>
+        @keyframes spin {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+    <script src="https://unpkg.com/leaflet.heat/dist/leaflet-heat.js"></script>
+    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+
+    <script src="containers.js"></script>
+    <script src="markers.js"></script>
+    <script src="lahore_boundary.js"></script>
+    <script src="lahore_data_v2.js"></script>
+    <script src="korgans.js"></script>
+    <script src="chatbot_database.js"></script>
+    <script src="script.js"></script>
+
+</body>
+
+</html>

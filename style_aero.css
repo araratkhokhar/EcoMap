@@ -1,0 +1,539 @@
+/* Aero Theme - Spatial/Glass Design */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --glass-bg: rgba(20, 20, 25, 0.65);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-highlight: rgba(255, 255, 255, 0.05);
+    --neon-primary: #00FF9D;
+    --neon-secondary: #00B8D4;
+    --neon-danger: #FF3D00;
+    --neon-warning: #FFD600;
+    --text-main: #FFFFFF;
+    --text-muted: #B0BEC5;
+    --font-heading: 'Orbitron', sans-serif;
+    --font-body: 'Rajdhani', sans-serif;
+    --blur-strength: 20px;
+    --panel-radius: 24px;
+    --shadow-soft: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-body);
+    color: var(--text-main);
+    overflow: hidden;
+    /* App feel */
+    background: #000;
+    /* Fallback */
+}
+
+/* --- Map Layer --- */
+#map {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+}
+
+/* Darken map tiles filter */
+.leaflet-layer {
+    filter: brightness(0.8) contrast(1.2) saturation(0.8);
+}
+
+/* --- Glass Container Components --- */
+.glass-panel {
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--blur-strength));
+    -webkit-backdrop-filter: blur(var(--blur-strength));
+    border: 1px solid var(--glass-border);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    /* Highlight top edge */
+    border-radius: var(--panel-radius);
+    box-shadow: var(--shadow-soft);
+    color: var(--text-main);
+}
+
+/* --- Top Bar (Floating Island) --- */
+#top-bar {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 800px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    z-index: 1000;
+    pointer-events: auto;
+    /* Ensure clicks work */
+}
+
+.brand-section {
+    font-family: var(--font-heading);
+    font-weight: 900;
+    font-size: 1.5rem;
+    color: var(--neon-primary);
+    text-shadow: 0 0 10px rgba(0, 255, 157, 0.5);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    letter-spacing: 1px;
+}
+
+.search-section {
+    flex: 1;
+    margin: 0 20px;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+#search-input {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--glass-border);
+    border-radius: 30px;
+    padding: 10px 20px;
+    color: white;
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+}
+
+#search-input:focus {
+    outline: none;
+    border-color: var(--neon-primary);
+    box-shadow: 0 0 15px rgba(0, 255, 157, 0.2);
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.search-btn {
+    position: absolute;
+    right: 5px;
+    background: transparent;
+    border: none;
+    color: var(--neon-primary);
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.search-btn:hover {
+    transform: scale(1.1);
+}
+
+/* Filter Capsules (Neon Tags) */
+.filters-section {
+    display: flex;
+    gap: 10px;
+}
+
+.capsule-btn {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-border);
+    color: var(--text-muted);
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+}
+
+.capsule-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.capsule-btn.active {
+    background: rgba(0, 255, 157, 0.1);
+    border-color: var(--neon-primary);
+    color: var(--neon-primary);
+    box-shadow: 0 0 10px rgba(0, 255, 157, 0.2);
+}
+
+/* --- Sidebar (Floating Stack) --- */
+#sidebar {
+    position: absolute;
+    top: 110px;
+    left: 20px;
+    width: 70px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 1000;
+    pointer-events: none;
+    /* Let clicks pass through gaps */
+}
+
+.sidebar-item {
+    pointer-events: auto;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    /* Circle buttons */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--blur-strength));
+    border: 1px solid var(--glass-border);
+}
+
+.sidebar-item:hover {
+    transform: scale(1.1);
+    border-color: var(--neon-secondary);
+    color: var(--neon-secondary);
+    box-shadow: 0 0 15px rgba(0, 184, 212, 0.4);
+}
+
+.sidebar-item i {
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
+}
+
+#user-badge {
+    pointer-events: auto;
+    font-family: var(--font-heading);
+    font-size: 0.7rem;
+    background: linear-gradient(135deg, var(--neon-primary), #00C853);
+    color: black;
+    padding: 5px;
+    border-radius: 12px;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 10px;
+    box-shadow: 0 5px 15px rgba(0, 255, 157, 0.3);
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+#user-badge:hover {
+    transform: translateY(-2px);
+}
+
+/* Zoom Controls as a joined pill */
+.zoom-controls {
+    pointer-events: auto;
+    display: flex;
+    flex-direction: column;
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--blur-strength));
+    border-radius: 30px;
+    border: 1px solid var(--glass-border);
+    overflow: hidden;
+    margin-top: 10px;
+    width: 50px;
+    align-self: center;
+    /* Center in sidebar flex */
+}
+
+.zoom-controls button {
+    background: transparent;
+    border: none;
+    color: white;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.zoom-controls button:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.zoom-divider {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+    width: 80%;
+    margin: 0 auto;
+}
+
+/* Auth Button unique style */
+#auth-btn {
+    border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+/* --- Floating Modules --- */
+
+/* Find Nearest FAB */
+#find-nearest-btn {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--neon-primary);
+    /* Glowy green */
+    color: #000;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    box-shadow: 0 0 30px rgba(0, 255, 157, 0.6);
+    z-index: 1000;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    border: 4px solid rgba(0, 0, 0, 0.2);
+}
+
+#find-nearest-btn:hover {
+    transform: translateX(-50%) scale(1.15);
+    box-shadow: 0 0 50px rgba(0, 255, 157, 0.8);
+}
+
+/* Chatbot Trigger */
+#chatbot-icon {
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--blur-strength));
+    border: 1px solid var(--glass-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: var(--neon-secondary);
+    z-index: 1000;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#chatbot-icon:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 20px rgba(0, 184, 212, 0.5);
+    border-color: var(--neon-secondary);
+}
+
+/* Chatbot Interface */
+#chatbot-box {
+    position: absolute;
+    bottom: 100px;
+    right: 30px;
+    width: 380px;
+    height: 500px;
+    background: rgba(10, 10, 15, 0.85);
+    /* Darker for chat */
+    backdrop-filter: blur(25px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    z-index: 9999;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    animation: slideUp 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.chat-header {
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.03);
+    border-bottom: 1px solid var(--glass-border);
+    font-family: var(--font-heading);
+    color: var(--neon-secondary);
+    font-size: 1.1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.message {
+    max-width: 80%;
+    padding: 12px 16px;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+.bot-msg {
+    background: rgba(255, 255, 255, 0.05);
+    color: #e0e0e0;
+    border-bottom-left-radius: 2px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.user-msg {
+    align-self: flex-end;
+    background: rgba(0, 184, 212, 0.2);
+    color: #00e5ff;
+    border-bottom-right-radius: 2px;
+    border: 1px solid rgba(0, 184, 212, 0.3);
+}
+
+.chat-input-area {
+    padding: 15px;
+    border-top: 1px solid var(--glass-border);
+    display: flex;
+    gap: 10px;
+}
+
+/* Info Panel (Right Side Drawer) */
+#info-panel {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 350px;
+    bottom: 20px;
+    /* Full height almost */
+    background: rgba(15, 15, 20, 0.8);
+    backdrop-filter: blur(30px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    z-index: 1100;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    box-shadow: -10px 0 40px rgba(0, 0, 0, 0.5);
+    transform: translateX(0);
+    transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+#info-panel.hidden {
+    transform: translateX(110%);
+    display: flex !important;
+    /* Override generic hidden for slide effect */
+}
+
+.panel-close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 1.2rem;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.panel-hero-view {
+    height: 180px;
+    background: linear-gradient(180deg, rgba(0, 255, 157, 0.1), transparent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+.panel-hero-view i {
+    font-size: 4rem;
+    color: var(--neon-primary);
+    filter: drop-shadow(0 0 20px var(--neon-primary));
+}
+
+.panel-body {
+    padding: 25px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.panel-title {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    background: -webkit-linear-gradient(0deg, #fff, #aaa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Leaflet Overrides */
+.leaflet-popup-content-wrapper {
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    color: white;
+    border-radius: 12px;
+    border: 1px solid var(--neon-primary);
+}
+
+.leaflet-popup-tip {
+    background: rgba(0, 0, 0, 0.8);
+    border-top: 1px solid var(--neon-primary);
+}
+
+/* Buttons in panels */
+.btn-save {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    border-radius: 8px;
+    border: 1px solid var(--neon-primary);
+    background: rgba(0, 255, 157, 0.1);
+    color: var(--neon-primary);
+    font-family: var(--font-heading);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-save:hover {
+    background: var(--neon-primary);
+    color: black;
+    box-shadow: 0 0 20px rgba(0, 255, 157, 0.4);
+}
+
+/* Utilities */
+.hidden {
+    display: none !important;
+}
+
+/* Animations */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 600px) {
+    #top-bar {
+        font-size: 0.8rem;
+        padding: 5px;
+    }
+
+    #search-input {
+        width: 150px;
+    }
+
+    .filters-section {
+        display: none;
+        /* Hide on very small screens or make scrollable */
+    }
+}
