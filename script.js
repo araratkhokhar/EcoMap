@@ -239,27 +239,31 @@ function initApp() {
 
     // --- HYBRID GEOSERVER INTEGRATION (FAIL-SAFE) ---
     async function loadGeoServerLayer() {
-        // 1. The Ngrok URL pointing to your Local GeoServer
-        const geoserverUrl = 'https://egoistic-dichotomically-makenzie.ngrok-free.dev/geoserver/ne/wms';
+        // 1. Point to Local GeoServer (localhost)
+        // Ensure your GeoServer is running on port 8080 and CORS is enabled!
+        const geoserverUrl = 'http://localhost:8080/geoserver/ne/wms';
         const workspaceLayer = 'ne:markers'; // Ensure this matches your Layer Name
 
         console.log("Checking for Local GeoServer...");
 
         try {
-            // 2. Check if the server is online (Laptop ON)
-            // We use a small timeout so the app doesn't freeze waiting
+            // 2. Check if the server is online
             const controller = new AbortController();
             const timeoutId = setTimeout(() => controller.abort(), 2000); // 2 second timeout
 
+            // Use 'cors' mode if your GeoServer supports it, 
+            // or 'no-cors' if you just want to check reachability (but WMS needs CORS eventually for some operations)
+            // For WMS tiles via Leaflet, the browser handles image requests which are usually lenient, 
+            // but GetCapabilities might need CORS.
             const response = await fetch(`${geoserverUrl}?service=WMS&version=1.1.0&request=GetCapabilities`, {
                 signal: controller.signal,
-                mode: 'no-cors' // Opaque request just to check connectivity
+                mode: 'no-cors'
             });
             clearTimeout(timeoutId);
 
             console.log("GeoServer is ONLINE! Loading WMS Layer...");
 
-            // 3. Add the WMS Layer (Only if online)
+            // 3. Add the WMS Layer
             const wmsLayer = L.tileLayer.wms(geoserverUrl, {
                 layers: workspaceLayer,
                 format: 'image/png',
@@ -1024,19 +1028,20 @@ function endCall(isRemote = false) {
 
     activeCallParams = null;
     if (isRemote) showToast("Call ended");
+}
 
-    function rejectMarker(id) {
-        if (!confirm("Decline this marker? It will be removed.")) return;
-        deleteMarker(id);
-    }
+function rejectMarker(id) {
+    if (!confirm("Decline this marker? It will be removed.")) return;
+    deleteMarker(id);
+}
 
-    // 4.1 REPORT & SHARE (Phase 1)
-    function openReportModal() {
-        // Check if modal already exists
-        if (!document.getElementById('report-modal')) {
-            const modal = document.createElement('div');
-            modal.id = 'report-modal';
-            modal.innerHTML = `
+// 4.1 REPORT & SHARE (Phase 1)
+function openReportModal() {
+    // Check if modal already exists
+    if (!document.getElementById('report-modal')) {
+        const modal = document.createElement('div');
+        modal.id = 'report-modal';
+        modal.innerHTML = `
             <div class="report-box">
                 <h2 class="panel-title" style="margin-bottom:10px;">Report Issue</h2>
                 <p style="margin-bottom:20px; color:#666;">Help us keep the city clean!</p>
@@ -1060,139 +1065,139 @@ function endCall(isRemote = false) {
                 <button class="btn-save" style="background:#ccc; color:#333; margin-top:10px;" onclick="closeReportModal()">Cancel</button>
             </div>
         `;
-            document.body.appendChild(modal);
-        } else {
-            document.getElementById('report-modal').classList.remove('hidden');
-        }
+        document.body.appendChild(modal);
+    } else {
+        document.getElementById('report-modal').classList.remove('hidden');
     }
+}
 
-    function closeReportModal() {
-        const modal = document.getElementById('report-modal');
-        if (modal) modal.classList.add('hidden');
+function closeReportModal() {
+    const modal = document.getElementById('report-modal');
+    if (modal) modal.classList.add('hidden');
+}
+
+function submitReport() {
+    const type = document.getElementById('report-type').value;
+    const desc = document.getElementById('report-desc').value;
+
+    showToast(`Report Submitted: ${type}`);
+    console.log("Report:", { type, desc });
+
+    // Gamification Hook
+    awardPoints(50, 'Report Submitted');
+
+    closeReportModal();
+}
+
+function shareMarker(marker) {
+    const text = `Check out this ${marker.type} at ${marker.address} on EcoMap!`;
+    const url = `https://maps.google.com/?q=${marker.lat},${marker.lng}`;
+
+    // Simple Web Share API or Links
+    if (navigator.share) {
+        navigator.share({
+            title: 'EcoMap Lahore',
+            text: text,
+            url: url
+        }).catch(err => console.log('Error sharing', err));
+    } else {
+        // Fallback to clipboard
+        navigator.clipboard.writeText(`${text} ${url}`);
+        showToast("Link copied to clipboard!");
     }
+}
 
-    function submitReport() {
-        const type = document.getElementById('report-type').value;
-        const desc = document.getElementById('report-desc').value;
+// 4.2 FIND NEAREST (Phase 1)
+function findNearest() {
+    showToast("Finding nearest spot...");
 
-        showToast(`Report Submitted: ${type}`);
-        console.log("Report:", { type, desc });
+    // User Location (Fixed for demo)
+    const userLat = 31.49414232271945;
+    const userLng = 74.29310558555223;
 
-        // Gamification Hook
-        awardPoints(50, 'Report Submitted');
+    let nearest = null;
+    let minDist = Infinity;
 
-        closeReportModal();
-    }
+    // Iterate all loaded markers (markerLayers contains L.marker objects)
+    // Actually we need the data. Let's look at flattened data
+    const allMarkers = markersData
+        .concat(typeof korgansData !== 'undefined' ? korgansData : [])
+        .concat(typeof containersData !== 'undefined' ? containersData : []);
 
-    function shareMarker(marker) {
-        const text = `Check out this ${marker.type} at ${marker.address} on EcoMap!`;
-        const url = `https://maps.google.com/?q=${marker.lat},${marker.lng}`;
-
-        // Simple Web Share API or Links
-        if (navigator.share) {
-            navigator.share({
-                title: 'EcoMap Lahore',
-                text: text,
-                url: url
-            }).catch(err => console.log('Error sharing', err));
-        } else {
-            // Fallback to clipboard
-            navigator.clipboard.writeText(`${text} ${url}`);
-            showToast("Link copied to clipboard!");
-        }
-    }
-
-    // 4.2 FIND NEAREST (Phase 1)
-    function findNearest() {
-        showToast("Finding nearest spot...");
-
-        // User Location (Fixed for demo)
-        const userLat = 31.49414232271945;
-        const userLng = 74.29310558555223;
-
-        let nearest = null;
-        let minDist = Infinity;
-
-        // Iterate all loaded markers (markerLayers contains L.marker objects)
-        // Actually we need the data. Let's look at flattened data
-        const allMarkers = markersData
-            .concat(typeof korgansData !== 'undefined' ? korgansData : [])
-            .concat(typeof containersData !== 'undefined' ? containersData : []);
-
-        allMarkers.forEach(marker => {
-            // Filter check
-            if (activeFilter !== 'all') {
-                if (activeFilter === 'Korgans' && !(marker.type === 'Korgans' || marker.type.includes('Recycle'))) return;
-                if (activeFilter === 'Garbage Containers' && !marker.type.includes('Container')) return;
-                if (activeFilter === 'Dumping Yard' && marker.type !== 'Dumping Yard') return;
-            }
-
-            const dist = getDistKm(userLat, userLng, marker.lat, marker.lng);
-            if (dist < minDist) {
-                minDist = dist;
-                nearest = marker;
-            }
-        });
-
-        if (nearest) {
-            showToast(`Found nearest: ${nearest.title} (${minDist.toFixed(2)} km)`);
-            showRoute(nearest);
-        } else {
-            showToast("No matching spots found.");
-        }
-    }
-
-    function getDistKm(lat1, lon1, lat2, lon2) {
-        const R = 6371;
-        const dLat = (lat2 - lat1) * Math.PI / 180;
-        const dLon = (lon2 - lon1) * Math.PI / 180;
-        const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-            Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-            Math.sin(dLon / 2) * Math.sin(dLon / 2);
-        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-        return R * c;
-    }
-
-    function calculateDistance(lat1, lon1, lat2, lon2) {
-        const R = 6371; // Earth radius in km
-        const dLat = (lat2 - lat1) * Math.PI / 180;
-        const dLon = (lon2 - lon1) * Math.PI / 180;
-        const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-            Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-            Math.sin(dLon / 2) * Math.sin(dLon / 2);
-        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-        return (R * c).toFixed(2);
-    }
-
-    function showRoute(destination) {
-        // Remove existing route
-        if (currentRoute) {
-            map.removeControl(currentRoute);
+    allMarkers.forEach(marker => {
+        // Filter check
+        if (activeFilter !== 'all') {
+            if (activeFilter === 'Korgans' && !(marker.type === 'Korgans' || marker.type.includes('Recycle'))) return;
+            if (activeFilter === 'Garbage Containers' && !marker.type.includes('Container')) return;
+            if (activeFilter === 'Dumping Yard' && marker.type !== 'Dumping Yard') return;
         }
 
-        // Hide other markers
-        // Hide other markers
-        // markerLayers was removed. We can rely on cluster group, or just hide the cluster group?
-        // Hiding the entire cluster group is easiest for "Focus Mode"
-        if (markerClusterGroup) {
-            map.removeLayer(markerClusterGroup);
+        const dist = getDistKm(userLat, userLng, marker.lat, marker.lng);
+        if (dist < minDist) {
+            minDist = dist;
+            nearest = marker;
         }
+    });
 
-        // Check for Organic Theme
-        const isOrganic = document.title.includes('Organic');
+    if (nearest) {
+        showToast(`Found nearest: ${nearest.title} (${minDist.toFixed(2)} km)`);
+        showRoute(nearest);
+    } else {
+        showToast("No matching spots found.");
+    }
+}
 
-        if (!isOrganic) {
-            document.getElementById('info-panel').classList.add('hidden');
-        } else {
-            const content = document.getElementById('panel-content');
-            const panel = document.getElementById('info-panel');
+function getDistKm(lat1, lon1, lat2, lon2) {
+    const R = 6371;
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c;
+}
 
-            // Hide global close button to avoid redundancy
-            const closeBtn = document.querySelector('.panel-close-btn');
-            if (closeBtn) closeBtn.style.display = 'none';
+function calculateDistance(lat1, lon1, lat2, lon2) {
+    const R = 6371; // Earth radius in km
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return (R * c).toFixed(2);
+}
 
-            // Setup Header for Route
-            content.innerHTML = `
+function showRoute(destination) {
+    // Remove existing route
+    if (currentRoute) {
+        map.removeControl(currentRoute);
+    }
+
+    // Hide other markers
+    // Hide other markers
+    // markerLayers was removed. We can rely on cluster group, or just hide the cluster group?
+    // Hiding the entire cluster group is easiest for "Focus Mode"
+    if (markerClusterGroup) {
+        map.removeLayer(markerClusterGroup);
+    }
+
+    // Check for Organic Theme
+    const isOrganic = document.title.includes('Organic');
+
+    if (!isOrganic) {
+        document.getElementById('info-panel').classList.add('hidden');
+    } else {
+        const content = document.getElementById('panel-content');
+        const panel = document.getElementById('info-panel');
+
+        // Hide global close button to avoid redundancy
+        const closeBtn = document.querySelector('.panel-close-btn');
+        if (closeBtn) closeBtn.style.display = 'none';
+
+        // Setup Header for Route
+        content.innerHTML = `
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px dashed #ccc;">
                 <h3 class="panel-title" style="margin:0;">Journey Path</h3>
                 <button onclick="endRoute()" style="background: #e8f5e9; color: #2E7D32; border: none; padding: 5px 12px; border-radius: 15px; cursor: pointer; font-weight: 700;">
@@ -1238,382 +1243,382 @@ function endCall(isRemote = false) {
 
             <div id="route-instructions-container"></div>
         `;
-            panel.classList.remove('hidden');
+        panel.classList.remove('hidden');
 
-            // Fetch Weather
-            fetchWeather();
-        }
-
-        showToast("Calculating route...");
-
-        // Get user location first
-        const userLat = 31.49414232271945;
-        const userLng = 74.29310558555223;
-
-        currentRoute = L.Routing.control({
-            waypoints: [
-                L.latLng(userLat, userLng),
-                L.latLng(destination.lat, destination.lng)
-            ],
-            routeWhileDragging: false,
-            showAlternatives: false,
-            lineOptions: {
-                styles: [{ color: isOrganic ? '#2E7D32' : '#4CAF50', weight: 6 }]
-            },
-            createMarker: function () { return null; }, // Hide default markers
-            addWaypoints: false,
-            draggableWaypoints: false,
-            fitSelectedRoutes: true
-        }).addTo(map);
-
-        if (isOrganic) {
-            // Move the routing panel into our sidebar after a short delay to ensure it's created
-            setTimeout(() => {
-                const container = currentRoute.getContainer();
-                const target = document.getElementById('route-instructions-container');
-                if (container && target) {
-                    target.appendChild(container);
-                }
-            }, 100);
-        }
-
-        // Display distance & Update Eco Stats
-        currentRoute.on('routesfound', function (e) {
-            const routes = e.routes;
-            const summary = routes[0].summary;
-            const distance = (summary.totalDistance / 1000).toFixed(2); // Convert to km
-            const duration = Math.round(summary.totalTime / 60); // Convert to minutes
-
-            // update global for eco-mode
-            window.currentRouteDistKm = parseFloat(distance);
-
-            // Only update mode if we are still on the same view (simple check)
-            if (!document.getElementById('travel-modes').classList.contains('hidden')) {
-                selectTravelMode('walk'); // Default to walk
-            }
-
-            showToast(`Distance: ${distance} km | Time: ${duration} min`);
-
-            // Voice Guidance Trigger
-            if (typeof voiceNavEnabled !== 'undefined' && voiceNavEnabled) {
-                speakRouteSummary();
-            }
-
-            if (!isOrganic) {
-                // Add close button for route (Standard/City View)
-                const closeBtn = L.control({ position: 'topright' });
-                closeBtn.onAdd = function () {
-                    const div = L.DomUtil.create('div', 'leaflet-bar leaflet-control');
-                    window.routeCloseBtn = this; // Track it globally
-                    div.innerHTML = '<a href="#" title="Clear Route" role="button" aria-label="Clear Route" style="font-size: 18px; color: red; font-weight: bold; width: 30px; height: 30px; line-height: 30px; text-align: center; background: white;">&times;</a>';
-                    div.onclick = function (e) {
-                        e.preventDefault();
-                        endRoute();
-                    };
-                    return div;
-                };
-                closeBtn.addTo(map);
-            }
-        });
+        // Fetch Weather
+        fetchWeather();
     }
 
-    function endRoute() {
-        if (currentRoute) {
-            map.removeControl(currentRoute);
-            currentRoute = null;
-        }
+    showToast("Calculating route...");
 
-        // Restore markers
-        if (markerClusterGroup) {
-            map.addLayer(markerClusterGroup);
-        }
+    // Get user location first
+    const userLat = 31.49414232271945;
+    const userLng = 74.29310558555223;
 
-        if (window.routeCloseBtn) {
-            map.removeControl(window.routeCloseBtn);
-            window.routeCloseBtn = null;
-        }
+    currentRoute = L.Routing.control({
+        waypoints: [
+            L.latLng(userLat, userLng),
+            L.latLng(destination.lat, destination.lng)
+        ],
+        routeWhileDragging: false,
+        showAlternatives: false,
+        lineOptions: {
+            styles: [{ color: isOrganic ? '#2E7D32' : '#4CAF50', weight: 6 }]
+        },
+        createMarker: function () { return null; }, // Hide default markers
+        addWaypoints: false,
+        draggableWaypoints: false,
+        fitSelectedRoutes: true
+    }).addTo(map);
 
-        document.getElementById('info-panel').classList.add('hidden');
-    }
-
-    function closePanel() {
-        document.getElementById('info-panel').classList.add('hidden');
-    }
-
-    // 7. TOASTS
-    function showToast(message) {
-        const container = document.getElementById('toast-container');
-        const toast = document.createElement('div');
-        toast.className = 'toast';
-        toast.textContent = message;
-
-        container.appendChild(toast);
-        setTimeout(() => toast.classList.add('show'), 10);
+    if (isOrganic) {
+        // Move the routing panel into our sidebar after a short delay to ensure it's created
         setTimeout(() => {
-            toast.classList.remove('show');
-            setTimeout(() => toast.remove(), 300);
-        }, 3000);
-    }
-
-    // 5. INTERACTIONS (Phase 2)
-
-    // Layer Toggle
-    const streetLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        attribution: '© OpenStreetMap contributors'
-    });
-
-    const satelliteLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-        attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
-    });
-
-    function switchLayer(type) {
-        // Remove all layers first
-        if (map.hasLayer(streetLayer)) map.removeLayer(streetLayer);
-        if (map.hasLayer(satelliteLayer)) map.removeLayer(satelliteLayer);
-        if (window.heatLayer && map.hasLayer(window.heatLayer)) map.removeLayer(window.heatLayer);
-
-        if (type === 'street') {
-            map.addLayer(streetLayer);
-            showToast("Switched to Street View");
-        } else if (type === 'satellite') {
-            map.addLayer(satelliteLayer);
-            showToast("Switched to Satellite View");
-        } else if (type === 'heatmap') {
-            if (!window.heatLayer) initHeatmap();
-            window.heatLayer.addTo(map);
-            showToast("Switched to Heatmap View");
-        }
-    }
-
-    function initHeatmap() {
-        const allMarkers = markersData
-            .concat(typeof korgansData !== 'undefined' ? korgansData : [])
-            .concat(containersData);
-
-        // Convert to [lat, lng, intensity]
-        // Containers = 0.5, Dumping = 1.0
-        const heatPoints = allMarkers.map(m => {
-            let intensity = 0.5;
-            if (m.type === 'Dumping Yard') intensity = 1.0;
-            return [m.lat, m.lng, intensity];
-        });
-
-        window.heatLayer = L.heatLayer(heatPoints, {
-            radius: 25,
-            blur: 15,
-            maxZoom: 14,
-            gradient: { 0.4: 'blue', 0.65: 'lime', 1: 'red' }
-        });
-    }
-
-    // User Location
-    function locateUser() {
-        showToast("Locating user...");
-        // Use fixed location
-        const lat = 31.49414232271945;
-        const lng = 74.29310558555223;
-
-        map.setView([lat, lng], 16);
-
-        // Simulate location found event
-        map.fire('locationfound', {
-            latlng: L.latLng(lat, lng),
-            accuracy: 50
-        });
-    }
-
-
-
-    // Search functionality
-    let searchMarker = null;
-
-    async function searchLocation() {
-        const query = document.getElementById('search-input').value;
-        if (!query) {
-            showToast("Please enter a location");
-            return;
-        }
-
-        showToast(`Searching for "${query}"...`);
-
-        // Use Nominatim (OpenStreetMap) geocoding API
-        const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)},Lahore,Pakistan`;
-
-        try {
-            const response = await fetch(url);
-            const data = await response.json();
-
-            if (data.length > 0) {
-                const lat = parseFloat(data[0].lat);
-                const lon = parseFloat(data[0].lon);
-
-                map.setView([lat, lon], 15);
-
-                if (searchMarker) map.removeLayer(searchMarker);
-
-                searchMarker = L.marker([lat, lon]).addTo(map)
-                    .bindPopup(`<b>Result:</b><br>${data[0].display_name}`).openPopup();
-
-                showToast("Location found");
-            } else {
-                showToast("Location not found within Lahore");
+            const container = currentRoute.getContainer();
+            const target = document.getElementById('route-instructions-container');
+            if (container && target) {
+                target.appendChild(container);
             }
-        } catch (error) {
-            console.error("Search error:", error);
-            showToast("Search failed. Please try again.");
-        }
+        }, 100);
     }
 
-    // Allow Enter key to search
-    // Allow Enter key to search
-    const searchInput = document.getElementById('search-input');
-    searchInput.addEventListener('keypress', function (e) {
-        if (e.key === 'Enter') {
-            searchLocation();
-            closeSuggestions();
-        }
-    });
+    // Display distance & Update Eco Stats
+    currentRoute.on('routesfound', function (e) {
+        const routes = e.routes;
+        const summary = routes[0].summary;
+        const distance = (summary.totalDistance / 1000).toFixed(2); // Convert to km
+        const duration = Math.round(summary.totalTime / 60); // Convert to minutes
 
-    // Auto-suggestions logic
-    searchInput.addEventListener('input', debounce(function (e) {
-        const query = e.target.value;
-        if (query.length > 2) {
-            fetchSuggestions(query);
-        } else {
-            closeSuggestions();
-        }
-    }, 300));
+        // update global for eco-mode
+        window.currentRouteDistKm = parseFloat(distance);
 
-    // Close suggestions when clicking outside
-    document.addEventListener('click', function (e) {
-        if (!e.target.closest('.search-section')) {
-            closeSuggestions();
-        }
-    });
-
-    function debounce(func, wait) {
-        let timeout;
-        return function (...args) {
-            clearTimeout(timeout);
-            timeout = setTimeout(() => func.apply(this, args), wait);
-        };
-    }
-
-    async function fetchSuggestions(query) {
-        const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)},Lahore,Pakistan&addressdetails=1&limit=5`;
-        try {
-            const response = await fetch(url);
-            const data = await response.json();
-            displaySuggestions(data);
-        } catch (error) {
-            console.error("Suggestion error:", error);
-        }
-    }
-
-    function displaySuggestions(results) {
-        const container = document.getElementById('search-suggestions');
-        if (!container) return;
-        container.innerHTML = '';
-
-        if (results.length === 0) {
-            closeSuggestions();
-            return;
+        // Only update mode if we are still on the same view (simple check)
+        if (!document.getElementById('travel-modes').classList.contains('hidden')) {
+            selectTravelMode('walk'); // Default to walk
         }
 
-        results.forEach(result => {
-            const div = document.createElement('div');
-            div.className = 'suggestion-item';
-            // Format display name to be shorter
-            const displayName = result.display_name.split(',').slice(0, 3).join(',');
-            div.textContent = displayName;
+        showToast(`Distance: ${distance} km | Time: ${duration} min`);
 
-            div.onclick = () => {
-                selectSuggestion(result);
+        // Voice Guidance Trigger
+        if (typeof voiceNavEnabled !== 'undefined' && voiceNavEnabled) {
+            speakRouteSummary();
+        }
+
+        if (!isOrganic) {
+            // Add close button for route (Standard/City View)
+            const closeBtn = L.control({ position: 'topright' });
+            closeBtn.onAdd = function () {
+                const div = L.DomUtil.create('div', 'leaflet-bar leaflet-control');
+                window.routeCloseBtn = this; // Track it globally
+                div.innerHTML = '<a href="#" title="Clear Route" role="button" aria-label="Clear Route" style="font-size: 18px; color: red; font-weight: bold; width: 30px; height: 30px; line-height: 30px; text-align: center; background: white;">&times;</a>';
+                div.onclick = function (e) {
+                    e.preventDefault();
+                    endRoute();
+                };
+                return div;
             };
+            closeBtn.addTo(map);
+        }
+    });
+}
 
-            container.appendChild(div);
-        });
-
-        container.classList.remove('hidden');
+function endRoute() {
+    if (currentRoute) {
+        map.removeControl(currentRoute);
+        currentRoute = null;
     }
 
-    function selectSuggestion(result) {
-        const searchInput = document.getElementById('search-input');
-        searchInput.value = result.display_name.split(',')[0]; // Just the name
+    // Restore markers
+    if (markerClusterGroup) {
+        map.addLayer(markerClusterGroup);
+    }
 
-        // Use existing search logic or implementation specific
-        const lat = parseFloat(result.lat);
-        const lon = parseFloat(result.lon);
+    if (window.routeCloseBtn) {
+        map.removeControl(window.routeCloseBtn);
+        window.routeCloseBtn = null;
+    }
 
-        map.setView([lat, lon], 15);
+    document.getElementById('info-panel').classList.add('hidden');
+}
 
-        if (searchMarker) map.removeLayer(searchMarker);
+function closePanel() {
+    document.getElementById('info-panel').classList.add('hidden');
+}
 
-        searchMarker = L.marker([lat, lon]).addTo(map)
-            .bindPopup(`<b>Result:</b><br>${result.display_name}`).openPopup();
+// 7. TOASTS
+function showToast(message) {
+    const container = document.getElementById('toast-container');
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.textContent = message;
 
+    container.appendChild(toast);
+    setTimeout(() => toast.classList.add('show'), 10);
+    setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 300);
+    }, 3000);
+}
+
+// 5. INTERACTIONS (Phase 2)
+
+// Layer Toggle
+const streetLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '© OpenStreetMap contributors'
+});
+
+const satelliteLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+    attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+});
+
+function switchLayer(type) {
+    // Remove all layers first
+    if (map.hasLayer(streetLayer)) map.removeLayer(streetLayer);
+    if (map.hasLayer(satelliteLayer)) map.removeLayer(satelliteLayer);
+    if (window.heatLayer && map.hasLayer(window.heatLayer)) map.removeLayer(window.heatLayer);
+
+    if (type === 'street') {
+        map.addLayer(streetLayer);
+        showToast("Switched to Street View");
+    } else if (type === 'satellite') {
+        map.addLayer(satelliteLayer);
+        showToast("Switched to Satellite View");
+    } else if (type === 'heatmap') {
+        if (!window.heatLayer) initHeatmap();
+        window.heatLayer.addTo(map);
+        showToast("Switched to Heatmap View");
+    }
+}
+
+function initHeatmap() {
+    const allMarkers = markersData
+        .concat(typeof korgansData !== 'undefined' ? korgansData : [])
+        .concat(containersData);
+
+    // Convert to [lat, lng, intensity]
+    // Containers = 0.5, Dumping = 1.0
+    const heatPoints = allMarkers.map(m => {
+        let intensity = 0.5;
+        if (m.type === 'Dumping Yard') intensity = 1.0;
+        return [m.lat, m.lng, intensity];
+    });
+
+    window.heatLayer = L.heatLayer(heatPoints, {
+        radius: 25,
+        blur: 15,
+        maxZoom: 14,
+        gradient: { 0.4: 'blue', 0.65: 'lime', 1: 'red' }
+    });
+}
+
+// User Location
+function locateUser() {
+    showToast("Locating user...");
+    // Use fixed location
+    const lat = 31.49414232271945;
+    const lng = 74.29310558555223;
+
+    map.setView([lat, lng], 16);
+
+    // Simulate location found event
+    map.fire('locationfound', {
+        latlng: L.latLng(lat, lng),
+        accuracy: 50
+    });
+}
+
+
+
+// Search functionality
+let searchMarker = null;
+
+async function searchLocation() {
+    const query = document.getElementById('search-input').value;
+    if (!query) {
+        showToast("Please enter a location");
+        return;
+    }
+
+    showToast(`Searching for "${query}"...`);
+
+    // Use Nominatim (OpenStreetMap) geocoding API
+    const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)},Lahore,Pakistan`;
+
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+
+        if (data.length > 0) {
+            const lat = parseFloat(data[0].lat);
+            const lon = parseFloat(data[0].lon);
+
+            map.setView([lat, lon], 15);
+
+            if (searchMarker) map.removeLayer(searchMarker);
+
+            searchMarker = L.marker([lat, lon]).addTo(map)
+                .bindPopup(`<b>Result:</b><br>${data[0].display_name}`).openPopup();
+
+            showToast("Location found");
+        } else {
+            showToast("Location not found within Lahore");
+        }
+    } catch (error) {
+        console.error("Search error:", error);
+        showToast("Search failed. Please try again.");
+    }
+}
+
+// Allow Enter key to search
+// Allow Enter key to search
+const searchInput = document.getElementById('search-input');
+searchInput.addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+        searchLocation();
         closeSuggestions();
     }
+});
 
-    function closeSuggestions() {
-        const suggestions = document.getElementById('search-suggestions');
-        if (suggestions) suggestions.classList.add('hidden');
+// Auto-suggestions logic
+searchInput.addEventListener('input', debounce(function (e) {
+    const query = e.target.value;
+    if (query.length > 2) {
+        fetchSuggestions(query);
+    } else {
+        closeSuggestions();
+    }
+}, 300));
+
+// Close suggestions when clicking outside
+document.addEventListener('click', function (e) {
+    if (!e.target.closest('.search-section')) {
+        closeSuggestions();
+    }
+});
+
+function debounce(func, wait) {
+    let timeout;
+    return function (...args) {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(this, args), wait);
+    };
+}
+
+async function fetchSuggestions(query) {
+    const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)},Lahore,Pakistan&addressdetails=1&limit=5`;
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+        displaySuggestions(data);
+    } catch (error) {
+        console.error("Suggestion error:", error);
+    }
+}
+
+function displaySuggestions(results) {
+    const container = document.getElementById('search-suggestions');
+    if (!container) return;
+    container.innerHTML = '';
+
+    if (results.length === 0) {
+        closeSuggestions();
+        return;
     }
 
-    // 6. ADD MARKER (Phase 3)
-    function toggleMarkMode() {
-        // 1. Guest -> Login Alert
-        // 1. Guest -> Teaser Modal
-        if (currentUser.role === 'guest') {
-            showFeatureTeaser('addMarker');
-            return;
-        }
+    results.forEach(result => {
+        const div = document.createElement('div');
+        div.className = 'suggestion-item';
+        // Format display name to be shorter
+        const displayName = result.display_name.split(',').slice(0, 3).join(',');
+        div.textContent = displayName;
 
-        markMode = !markMode;
-        const btn = document.getElementById('mark-btn');
+        div.onclick = () => {
+            selectSuggestion(result);
+        };
 
-        if (markMode) {
-            btn.classList.add('active');
-            map.getContainer().classList.add('crosshair-cursor');
-            showToast("Click on map to add marker");
-        } else {
-            btn.classList.remove('active');
-            map.getContainer().classList.remove('crosshair-cursor');
-        }
+        container.appendChild(div);
+    });
+
+    container.classList.remove('hidden');
+}
+
+function selectSuggestion(result) {
+    const searchInput = document.getElementById('search-input');
+    searchInput.value = result.display_name.split(',')[0]; // Just the name
+
+    // Use existing search logic or implementation specific
+    const lat = parseFloat(result.lat);
+    const lon = parseFloat(result.lon);
+
+    map.setView([lat, lon], 15);
+
+    if (searchMarker) map.removeLayer(searchMarker);
+
+    searchMarker = L.marker([lat, lon]).addTo(map)
+        .bindPopup(`<b>Result:</b><br>${result.display_name}`).openPopup();
+
+    closeSuggestions();
+}
+
+function closeSuggestions() {
+    const suggestions = document.getElementById('search-suggestions');
+    if (suggestions) suggestions.classList.add('hidden');
+}
+
+// 6. ADD MARKER (Phase 3)
+function toggleMarkMode() {
+    // 1. Guest -> Login Alert
+    // 1. Guest -> Teaser Modal
+    if (currentUser.role === 'guest') {
+        showFeatureTeaser('addMarker');
+        return;
     }
 
-    function handleMapClick(e) {
-        if (batchAddMode) {
-            handleBatchClick(e.latlng.lat, e.latlng.lng);
-            return;
-        }
-        if (bulkDeleteMode && currentUser.role === 'admin') {
-            // Simple hit test or closest marker check?
-            // Let's assume user clicks ON marker. But map click is background.
-            // Actually leaflet markers capture click. We need to handle marker click for delete.
-            showToast("Click directly on a marker to select for deletion.");
-            return;
-        }
-        if (!markMode) return;
+    markMode = !markMode;
+    const btn = document.getElementById('mark-btn');
 
-        const { lat, lng } = e.latlng;
-        showMarkerForm(lat, lng);
+    if (markMode) {
+        btn.classList.add('active');
+        map.getContainer().classList.add('crosshair-cursor');
+        showToast("Click on map to add marker");
+    } else {
+        btn.classList.remove('active');
+        map.getContainer().classList.remove('crosshair-cursor');
     }
+}
 
-    function showMarkerForm(lat, lng, editId = null) {
-        const panel = document.getElementById('info-panel');
-        const content = document.getElementById('panel-content');
+function handleMapClick(e) {
+    if (batchAddMode) {
+        handleBatchClick(e.latlng.lat, e.latlng.lng);
+        return;
+    }
+    if (bulkDeleteMode && currentUser.role === 'admin') {
+        // Simple hit test or closest marker check?
+        // Let's assume user clicks ON marker. But map click is background.
+        // Actually leaflet markers capture click. We need to handle marker click for delete.
+        showToast("Click directly on a marker to select for deletion.");
+        return;
+    }
+    if (!markMode) return;
 
-        // Ensure close button is visible
-        const closeBtn = document.querySelector('.panel-close-btn');
-        if (closeBtn) closeBtn.style.display = 'flex';
+    const { lat, lng } = e.latlng;
+    showMarkerForm(lat, lng);
+}
 
-        const header = editId ? 'Edit Marker' : 'Add New Marker';
-        const btnText = editId ? 'Update Marker' : 'Save Marker';
-        const clickHandler = editId ? `saveMarker(${lat}, ${lng}, '${editId}')` : `saveMarker(${lat}, ${lng})`;
+function showMarkerForm(lat, lng, editId = null) {
+    const panel = document.getElementById('info-panel');
+    const content = document.getElementById('panel-content');
 
-        content.innerHTML = `
+    // Ensure close button is visible
+    const closeBtn = document.querySelector('.panel-close-btn');
+    if (closeBtn) closeBtn.style.display = 'flex';
+
+    const header = editId ? 'Edit Marker' : 'Add New Marker';
+    const btnText = editId ? 'Update Marker' : 'Save Marker';
+    const clickHandler = editId ? `saveMarker(${lat}, ${lng}, '${editId}')` : `saveMarker(${lat}, ${lng})`;
+
+    content.innerHTML = `
         <div class="panel-body">
             <h2 class="panel-title">${header}</h2>
             
@@ -1656,716 +1661,716 @@ function endCall(isRemote = false) {
         </div>
     `;
 
-        panel.classList.remove('hidden');
-        // Don't turn off markMode yet if adding, but for edit it doesn't matter
-        markMode = false;
-        const markBtn = document.getElementById('mark-btn');
-        if (markBtn) markBtn.classList.remove('active');
-        map.getContainer().classList.remove('crosshair-cursor');
+    panel.classList.remove('hidden');
+    // Don't turn off markMode yet if adding, but for edit it doesn't matter
+    markMode = false;
+    const markBtn = document.getElementById('mark-btn');
+    if (markBtn) markBtn.classList.remove('active');
+    map.getContainer().classList.remove('crosshair-cursor');
+}
+
+function saveMarker(lat, lng, id = null) {
+    const type = document.getElementById('marker-type').value;
+    const title = document.getElementById('marker-title').value;
+    const address = document.getElementById('marker-address').value;
+    const notes = document.getElementById('marker-notes').value;
+
+    // Validate
+    if (!title || !address) {
+        showToast("Please fill all required fields");
+        return;
     }
 
-    function saveMarker(lat, lng, id = null) {
-        const type = document.getElementById('marker-type').value;
-        const title = document.getElementById('marker-title').value;
-        const address = document.getElementById('marker-address').value;
-        const notes = document.getElementById('marker-notes').value;
+    if (id) {
+        // Edit Mode
+        const all = getAllMapData();
+        const marker = all.find(m => m.id == id);
 
-        // Validate
-        if (!title || !address) {
-            showToast("Please fill all required fields");
-            return;
-        }
+        if (marker) {
+            // Update properties in place (works for all sources as objects are references)
+            marker.type = type;
+            marker.title = title;
+            marker.address = address;
+            marker.notes = notes;
+            marker.lastVerified = new Date().toISOString().split('T')[0];
 
-        if (id) {
-            // Edit Mode
-            const all = getAllMapData();
-            const marker = all.find(m => m.id == id);
-
-            if (marker) {
-                // Update properties in place (works for all sources as objects are references)
-                marker.type = type;
-                marker.title = title;
-                marker.address = address;
-                marker.notes = notes;
-                marker.lastVerified = new Date().toISOString().split('T')[0];
-
-                // If updated by admin, ensure it's published (if it was pending)
-                if (currentUser.role === 'admin' && marker.status === 'pending') {
-                    marker.status = 'published';
-                }
-
-                showToast("Marker Updated Successfully");
-                loadMarkers();
-                closePanel();
-            } else {
-                showToast("Error: Marker not found for update");
+            // If updated by admin, ensure it's published (if it was pending)
+            if (currentUser.role === 'admin' && marker.status === 'pending') {
+                marker.status = 'published';
             }
-        } else {
-            // Create Mode
-            const newMarker = {
-                type: type,
-                lat: lat,
-                lng: lng,
-                title: title,
-                address: address,
-                notes: notes,
-                status: currentUser.role === 'admin' ? 'published' : 'pending',
-                author: currentUser.username
-            };
 
-            // Send to API
-            fetch('/api/markers', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(newMarker)
-            })
-                .then(res => res.json())
-                .then(savedMarker => {
-                    showToast("Marker Saved Successfully!");
-                    loadMarkers(); // Reload from DB
-                    closePanel();
-
-                    // Gamification Hook
-                    awardPoints(100, 'New Marker Added');
-                    checkContributionStreak();
-                })
-                .catch(err => {
-                    console.error(err);
-                    showToast("Error saving marker");
-                });
-        }
-    }
-
-    // 6.b ADMIN ACTIONS
-    // 6.b ADMIN ACTIONS
-    function deleteMarker(id) {
-        if (!confirm("Are you sure you want to delete this marker? This action cannot be undone.")) return;
-
-        // Helper to remove from array
-        const removeFromArray = (arr, id) => {
-            const index = arr.findIndex(m => m.id == id);
-            if (index > -1) {
-                arr.splice(index, 1);
-                return true;
-            }
-            return false;
-        };
-
-        let deleted = false;
-        // Try deleting from all known sources
-        if (typeof markersData !== 'undefined' && removeFromArray(markersData, id)) deleted = true;
-        else if (typeof containersData !== 'undefined' && removeFromArray(containersData, id)) deleted = true;
-        else if (typeof korgansData !== 'undefined' && removeFromArray(korgansData, id)) deleted = true;
-
-        if (deleted) {
-            showToast("Marker deleted");
+            showToast("Marker Updated Successfully");
             loadMarkers();
             closePanel();
         } else {
-            showToast("Marker not found in any database!");
+            showToast("Error: Marker not found for update");
+        }
+    } else {
+        // Create Mode
+        const newMarker = {
+            type: type,
+            lat: lat,
+            lng: lng,
+            title: title,
+            address: address,
+            notes: notes,
+            status: currentUser.role === 'admin' ? 'published' : 'pending',
+            author: currentUser.username
+        };
+
+        // Send to API
+        fetch('/api/markers', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(newMarker)
+        })
+            .then(res => res.json())
+            .then(savedMarker => {
+                showToast("Marker Saved Successfully!");
+                loadMarkers(); // Reload from DB
+                closePanel();
+
+                // Gamification Hook
+                awardPoints(100, 'New Marker Added');
+                checkContributionStreak();
+            })
+            .catch(err => {
+                console.error(err);
+                showToast("Error saving marker");
+            });
+    }
+}
+
+// 6.b ADMIN ACTIONS
+// 6.b ADMIN ACTIONS
+function deleteMarker(id) {
+    if (!confirm("Are you sure you want to delete this marker? This action cannot be undone.")) return;
+
+    // Helper to remove from array
+    const removeFromArray = (arr, id) => {
+        const index = arr.findIndex(m => m.id == id);
+        if (index > -1) {
+            arr.splice(index, 1);
+            return true;
+        }
+        return false;
+    };
+
+    let deleted = false;
+    // Try deleting from all known sources
+    if (typeof markersData !== 'undefined' && removeFromArray(markersData, id)) deleted = true;
+    else if (typeof containersData !== 'undefined' && removeFromArray(containersData, id)) deleted = true;
+    else if (typeof korgansData !== 'undefined' && removeFromArray(korgansData, id)) deleted = true;
+
+    if (deleted) {
+        showToast("Marker deleted");
+        loadMarkers();
+        closePanel();
+    } else {
+        showToast("Marker not found in any database!");
+    }
+}
+
+function editMarker(id) {
+    const all = getAllMapData();
+    // Use loose equality to match string ID from HTML attribute with number ID in data
+    const marker = all.find(m => m.id == id);
+
+    if (!marker) {
+        showToast("Error: Marker not found");
+        return;
+    }
+
+    // Open form with this marker's coordinates and ID
+    showMarkerForm(marker.lat, marker.lng, marker.id);
+
+    // Pre-fill form values
+    setTimeout(() => {
+        const typeSelect = document.getElementById('marker-type');
+        const titleInput = document.getElementById('marker-title');
+        const addrInput = document.getElementById('marker-address');
+        const notesInput = document.getElementById('marker-notes');
+
+        if (typeSelect) typeSelect.value = marker.type;
+        if (titleInput) titleInput.value = marker.title;
+        if (addrInput) addrInput.value = marker.address;
+        if (notesInput) notesInput.value = marker.notes || '';
+    }, 100);
+}
+// 7. CHATBOT (Phase 4)
+function toggleChat() {
+    document.getElementById('chatbot-box').classList.toggle('hidden');
+    // Focus input if opening
+    if (!document.getElementById('chatbot-box').classList.contains('hidden')) {
+        setTimeout(() => document.getElementById('chat-input').focus(), 100);
+    }
+}
+
+function handleChatKey(e) {
+    if (e.key === 'Enter') sendMessage();
+}
+
+function sendMessage() {
+    const input = document.getElementById('chat-input');
+    const message = input.value.trim();
+    if (!message) return;
+
+    // Display user message
+    addChatMessage(message, 'user');
+    input.value = '';
+
+    // Generate bot response
+    setTimeout(() => {
+        const response = getBotResponse(message.toLowerCase());
+        addChatMessage(response, 'bot');
+
+        // Speak response if input was voice or voice nav is enabled
+        if (lastInputWasVoice || voiceNavEnabled) {
+            speakText(response);
+        }
+        lastInputWasVoice = false; // Reset flag
+    }, 500);
+}
+
+function addChatMessage(text, sender) {
+    const messagesDiv = document.getElementById('chat-messages');
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `message ${sender === 'user' ? 'user-msg' : 'bot-msg'}`;
+
+    // Enhanced: Check for action buttons/links in bot text
+    // Regex to find "Show <ID>" pattern we added in getBotResponse
+    // Or we can just parse the text.
+    // Let's keep it simple: If text contains "Type 'Show <ID>'", we can make that clickable? 
+    // For now, text content is fine. 
+
+    // Better: If the response is a "Found:" response, let's treat it specially
+    messageDiv.textContent = text;
+
+    messagesDiv.appendChild(messageDiv);
+    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+
+    // Auto-action: If bot found a location, we could pan to it?
+    // This might be annoying if not requested. Let's leave it passive.
+}
+
+// Smart Chatbot Logic
+function getBotResponse(message) {
+    const originalMessage = message;
+    message = message.toLowerCase();
+
+    // --- 2M PARAMETER UPGRADE: SENTIMENT ANALYSIS ---
+    let sentiment = 'neutral';
+    if (message.match(/(bad|worst|hate|stupid|useless|broken|angry|slow)/)) sentiment = 'negative';
+    if (message.match(/(good|great|love|amazing|thanks|cool|smart|best)/)) sentiment = 'positive';
+
+    const timeOfDay = new Date().getHours() < 12 ? "morning" : "evening";
+
+    // Procedural Personality Injection
+    let prefix = "";
+    if (sentiment === 'negative') prefix = "I apologize for any frustration. ";
+    if (sentiment === 'positive') prefix = ["Happy to help! ", "You're too kind! ", "Glad you think so! "][Math.floor(Math.random() * 3)];
+
+    // Agent Specific Support
+    if (currentUser.role === 'agent' || currentUser.role === 'admin') {
+        if (message.includes('tip') || message.includes('help')) {
+            const tips = [
+                "💡 Tip: Use Batch Mode to add multiple points quickly.",
+                "💡 Tip: You earn 100 points per marker verification.",
+                "💡 Tip: Maintain a daily streak for bonus rewards!"
+            ];
+            return prefix + tips[Math.floor(Math.random() * tips.length)];
         }
     }
 
-    function editMarker(id) {
-        const all = getAllMapData();
-        // Use loose equality to match string ID from HTML attribute with number ID in data
-        const marker = all.find(m => m.id == id);
-
-        if (!marker) {
-            showToast("Error: Marker not found");
-            return;
-        }
-
-        // Open form with this marker's coordinates and ID
-        showMarkerForm(marker.lat, marker.lng, marker.id);
-
-        // Pre-fill form values
-        setTimeout(() => {
-            const typeSelect = document.getElementById('marker-type');
-            const titleInput = document.getElementById('marker-title');
-            const addrInput = document.getElementById('marker-address');
-            const notesInput = document.getElementById('marker-notes');
-
-            if (typeSelect) typeSelect.value = marker.type;
-            if (titleInput) titleInput.value = marker.title;
-            if (addrInput) addrInput.value = marker.address;
-            if (notesInput) notesInput.value = marker.notes || '';
-        }, 100);
-    }
-    // 7. CHATBOT (Phase 4)
-    function toggleChat() {
-        document.getElementById('chatbot-box').classList.toggle('hidden');
-        // Focus input if opening
-        if (!document.getElementById('chatbot-box').classList.contains('hidden')) {
-            setTimeout(() => document.getElementById('chat-input').focus(), 100);
+    // Guest Specific Responses
+    if (currentUser.role === 'guest') {
+        const joinPrompts = ["login", "account", "sign up", "register", "join", "add marker", "earn points"];
+        if (joinPrompts.some(p => message.includes(p))) {
+            return "Great idea! Logging in unlocks:\n✅ Adding Locations\n✅ Earning Badges\n✅ Reporting Issues\n\nClick the user icon to login!";
         }
     }
 
-    function handleChatKey(e) {
-        if (e.key === 'Enter') sendMessage();
+    // 0. Contextual Follow-up (Memories)
+    if ((message.includes('show') || message.includes('where') || message.includes('it')) &&
+        (message.includes('it') || message.includes('that') || message.includes('match'))) {
+
+        if (chatContext.lastLocation) {
+            const target = chatContext.lastLocation;
+            map.setView([target.lat, target.lng], 18);
+            L.popup()
+                .setLatLng([target.lat, target.lng])
+                .setContent(`<b>${target.title}</b><br>${target.address}`)
+                .openOn(map);
+            return `Showing you the location for "${target.title}" as requested!`; // Context used
+        }
     }
 
-    function sendMessage() {
-        const input = document.getElementById('chat-input');
-        const message = input.value.trim();
-        if (!message) return;
-
-        // Display user message
-        addChatMessage(message, 'user');
-        input.value = '';
-
-        // Generate bot response
-        setTimeout(() => {
-            const response = getBotResponse(message.toLowerCase());
-            addChatMessage(response, 'bot');
-
-            // Speak response if input was voice or voice nav is enabled
-            if (lastInputWasVoice || voiceNavEnabled) {
-                speakText(response);
-            }
-            lastInputWasVoice = false; // Reset flag
-        }, 500);
+    // 1. Smart Intent Matching (The "Brain" Upgrade)
+    // Check Database first using scoring system
+    if (typeof chatbotDatabase !== 'undefined') {
+        const bestMsg = findBestMatch(message, chatbotDatabase.intents);
+        if (bestMsg) {
+            // Update Context (Topic)
+            // Ideally findBestMatch returns the intent object, not just string. 
+            // But for now, we just return string. 
+            // Future improvement: Return object to track topic.
+            return bestMsg;
+        }
     }
 
-    function addChatMessage(text, sender) {
-        const messagesDiv = document.getElementById('chat-messages');
-        const messageDiv = document.createElement('div');
-        messageDiv.className = `message ${sender === 'user' ? 'user-msg' : 'bot-msg'}`;
-
-        // Enhanced: Check for action buttons/links in bot text
-        // Regex to find "Show <ID>" pattern we added in getBotResponse
-        // Or we can just parse the text.
-        // Let's keep it simple: If text contains "Type 'Show <ID>'", we can make that clickable? 
-        // For now, text content is fine. 
-
-        // Better: If the response is a "Found:" response, let's treat it specially
-        messageDiv.textContent = text;
-
-        messagesDiv.appendChild(messageDiv);
-        messagesDiv.scrollTop = messagesDiv.scrollHeight;
-
-        // Auto-action: If bot found a location, we could pan to it?
-        // This might be annoying if not requested. Let's leave it passive.
+    // 2. Hardcoded / Functional Fallbacks
+    if (message.includes('login') || message.includes('sign in')) {
+        return "To login, click the user icon at the bottom of the sidebar. Test accounts: 'tom' or 'jerry' (password: 123).";
+    }
+    if (message.includes('satellite') || message.includes('view')) {
+        return "Use the Layers button (stacked squares icon) in the sidebar to toggle Satellite view.";
     }
 
-    // Smart Chatbot Logic
-    function getBotResponse(message) {
-        const originalMessage = message;
-        message = message.toLowerCase();
+    // 3. Data Search Intent
+    const allData = getAllMapData();
 
-        // --- 2M PARAMETER UPGRADE: SENTIMENT ANALYSIS ---
-        let sentiment = 'neutral';
-        if (message.match(/(bad|worst|hate|stupid|useless|broken|angry|slow)/)) sentiment = 'negative';
-        if (message.match(/(good|great|love|amazing|thanks|cool|smart|best)/)) sentiment = 'positive';
-
-        const timeOfDay = new Date().getHours() < 12 ? "morning" : "evening";
-
-        // Procedural Personality Injection
-        let prefix = "";
-        if (sentiment === 'negative') prefix = "I apologize for any frustration. ";
-        if (sentiment === 'positive') prefix = ["Happy to help! ", "You're too kind! ", "Glad you think so! "][Math.floor(Math.random() * 3)];
-
-        // Agent Specific Support
-        if (currentUser.role === 'agent' || currentUser.role === 'admin') {
-            if (message.includes('tip') || message.includes('help')) {
-                const tips = [
-                    "💡 Tip: Use Batch Mode to add multiple points quickly.",
-                    "💡 Tip: You earn 100 points per marker verification.",
-                    "💡 Tip: Maintain a daily streak for bonus rewards!"
-                ];
-                return prefix + tips[Math.floor(Math.random() * tips.length)];
-            }
+    // A. Count Questions
+    if (message.includes('how many') || message.includes('count')) {
+        if (message.includes('korgan') || message.includes('recycle')) {
+            const count = allData.filter(m => m.type.includes('Korgans') || m.type.includes('Recycle')).length;
+            return `We have ${count} Korgans/Recycling points recorded in Lahore.`;
         }
-
-        // Guest Specific Responses
-        if (currentUser.role === 'guest') {
-            const joinPrompts = ["login", "account", "sign up", "register", "join", "add marker", "earn points"];
-            if (joinPrompts.some(p => message.includes(p))) {
-                return "Great idea! Logging in unlocks:\n✅ Adding Locations\n✅ Earning Badges\n✅ Reporting Issues\n\nClick the user icon to login!";
-            }
+        if (message.includes('container') || message.includes('bin')) {
+            const count = allData.filter(m => m.type.includes('Container')).length;
+            return `There are ${count} Garbage Containers marked on the map.`;
         }
+        return `I have a total of ${allData.length} locations marked on the map.`;
+    }
 
-        // 0. Contextual Follow-up (Memories)
-        if ((message.includes('show') || message.includes('where') || message.includes('it')) &&
-            (message.includes('it') || message.includes('that') || message.includes('match'))) {
+    // B. Location/Search Questions
+    const results = findInMapData(message, allData);
 
-            if (chatContext.lastLocation) {
-                const target = chatContext.lastLocation;
-                map.setView([target.lat, target.lng], 18);
-                L.popup()
-                    .setLatLng([target.lat, target.lng])
-                    .setContent(`<b>${target.title}</b><br>${target.address}`)
-                    .openOn(map);
-                return `Showing you the location for "${target.title}" as requested!`; // Context used
-            }
-        }
+    if (results.length > 0) {
+        const bestMatch = results[0];
 
-        // 1. Smart Intent Matching (The "Brain" Upgrade)
-        // Check Database first using scoring system
-        if (typeof chatbotDatabase !== 'undefined') {
-            const bestMsg = findBestMatch(message, chatbotDatabase.intents);
-            if (bestMsg) {
-                // Update Context (Topic)
-                // Ideally findBestMatch returns the intent object, not just string. 
-                // But for now, we just return string. 
-                // Future improvement: Return object to track topic.
-                return bestMsg;
-            }
-        }
+        // SAVE CONTEXT
+        chatContext.lastLocation = bestMatch;
 
-        // 2. Hardcoded / Functional Fallbacks
-        if (message.includes('login') || message.includes('sign in')) {
-            return "To login, click the user icon at the bottom of the sidebar. Test accounts: 'tom' or 'jerry' (password: 123).";
-        }
-        if (message.includes('satellite') || message.includes('view')) {
-            return "Use the Layers button (stacked squares icon) in the sidebar to toggle Satellite view.";
-        }
+        const extraMsg = results.length > 1 ? ` (I also found ${results.length - 1} other similar locations)` : '';
+        return `Found: "${bestMatch.title}" at ${bestMatch.address}. ${extraMsg}. \nPossible: "Show it" or "Where is it?"`;
+    }
 
-        // 3. Data Search Intent
-        const allData = getAllMapData();
+    // C. "Show" command (Explicit)
+    if (message.startsWith('show ')) {
+        const idPart = message.replace('show ', '').trim();
+        const target = allData.find(m => m.id == idPart || m.title.toLowerCase().includes(idPart));
 
-        // A. Count Questions
-        if (message.includes('how many') || message.includes('count')) {
-            if (message.includes('korgan') || message.includes('recycle')) {
-                const count = allData.filter(m => m.type.includes('Korgans') || m.type.includes('Recycle')).length;
-                return `We have ${count} Korgans/Recycling points recorded in Lahore.`;
-            }
-            if (message.includes('container') || message.includes('bin')) {
-                const count = allData.filter(m => m.type.includes('Container')).length;
-                return `There are ${count} Garbage Containers marked on the map.`;
-            }
-            return `I have a total of ${allData.length} locations marked on the map.`;
-        }
-
-        // B. Location/Search Questions
-        const results = findInMapData(message, allData);
-
-        if (results.length > 0) {
-            const bestMatch = results[0];
-
+        if (target) {
             // SAVE CONTEXT
-            chatContext.lastLocation = bestMatch;
+            chatContext.lastLocation = target;
 
-            const extraMsg = results.length > 1 ? ` (I also found ${results.length - 1} other similar locations)` : '';
-            return `Found: "${bestMatch.title}" at ${bestMatch.address}. ${extraMsg}. \nPossible: "Show it" or "Where is it?"`;
+            map.setView([target.lat, target.lng], 18);
+            L.popup()
+                .setLatLng([target.lat, target.lng])
+                .setContent(`<b>${target.title}</b><br>${target.address}`)
+                .openOn(map);
+            return `Focusing on "${target.title}"...`;
+        } else {
+            return `I couldn't find a location with ID or name "${idPart}".`;
         }
-
-        // C. "Show" command (Explicit)
-        if (message.startsWith('show ')) {
-            const idPart = message.replace('show ', '').trim();
-            const target = allData.find(m => m.id == idPart || m.title.toLowerCase().includes(idPart));
-
-            if (target) {
-                // SAVE CONTEXT
-                chatContext.lastLocation = target;
-
-                map.setView([target.lat, target.lng], 18);
-                L.popup()
-                    .setLatLng([target.lat, target.lng])
-                    .setContent(`<b>${target.title}</b><br>${target.address}`)
-                    .openOn(map);
-                return `Focusing on "${target.title}"...`;
-            } else {
-                return `I couldn't find a location with ID or name "${idPart}".`;
-            }
-        }
-
-        // Final Fallback: Use Persona Default if available, else generic
-        if (typeof chatbotDatabase !== 'undefined' && chatbotDatabase.persona) {
-            const defaults = chatbotDatabase.persona.default_response;
-            return defaults[Math.floor(Math.random() * defaults.length)];
-        }
-
-        return "I'm not exactly sure about that, but I can help you find recycling bins!";
     }
 
-    // Helper to aggregate data safely
-    function getAllMapData() {
-        let data = [];
-        if (typeof markersData !== 'undefined') data = data.concat(markersData);
-        if (typeof korgansData !== 'undefined') data = data.concat(korgansData);
-        if (typeof containersData !== 'undefined') data = data.concat(containersData);
-        return data;
+    // Final Fallback: Use Persona Default if available, else generic
+    if (typeof chatbotDatabase !== 'undefined' && chatbotDatabase.persona) {
+        const defaults = chatbotDatabase.persona.default_response;
+        return defaults[Math.floor(Math.random() * defaults.length)];
     }
 
-    // Helper for fuzzy search
-    // Helper for 'Smarter' fuzzy search
-    function findInMapData(query, data) {
-        // Enhanced stop words to parse questions better
-        const stopWords = ['where', 'is', 'the', 'near', 'in', 'at', 'show', 'me', 'find', 'a', 'an', 'how', 'what', 'why', 'can', 'i', 'to'];
-        const terms = query.split(' ').filter(w => !stopWords.includes(w) && w.length > 2);
+    return "I'm not exactly sure about that, but I can help you find recycling bins!";
+}
 
-        if (terms.length === 0) return [];
+// Helper to aggregate data safely
+function getAllMapData() {
+    let data = [];
+    if (typeof markersData !== 'undefined') data = data.concat(markersData);
+    if (typeof korgansData !== 'undefined') data = data.concat(korgansData);
+    if (typeof containersData !== 'undefined') data = data.concat(containersData);
+    return data;
+}
 
-        return data.filter(item => {
-            // Create a searchable string of tokens
-            const textComponents = [item.title, item.address, item.type, (item.notes || '')].join(' ').toLowerCase();
-            // Tokenize the data item (split by spaces and punctuation)
-            const dataTokens = textComponents.split(/[\s,.-]+/);
+// Helper for fuzzy search
+// Helper for 'Smarter' fuzzy search
+function findInMapData(query, data) {
+    // Enhanced stop words to parse questions better
+    const stopWords = ['where', 'is', 'the', 'near', 'in', 'at', 'show', 'me', 'find', 'a', 'an', 'how', 'what', 'why', 'can', 'i', 'to'];
+    const terms = query.split(' ').filter(w => !stopWords.includes(w) && w.length > 2);
 
-            // Check if AT LEAST ONE of the user's meaningful terms matches the START of any data token
-            // This prevents "how" matching "chowk" (substring), but allows "Gul" matching "Gulberg" (prefix)
-            return terms.some(term =>
-                dataTokens.some(token => token.startsWith(term))
-            );
-        });
+    if (terms.length === 0) return [];
+
+    return data.filter(item => {
+        // Create a searchable string of tokens
+        const textComponents = [item.title, item.address, item.type, (item.notes || '')].join(' ').toLowerCase();
+        // Tokenize the data item (split by spaces and punctuation)
+        const dataTokens = textComponents.split(/[\s,.-]+/);
+
+        // Check if AT LEAST ONE of the user's meaningful terms matches the START of any data token
+        // This prevents "how" matching "chowk" (substring), but allows "Gul" matching "Gulberg" (prefix)
+        return terms.some(term =>
+            dataTokens.some(token => token.startsWith(term))
+        );
+    });
+}
+// Logout Logic
+function logout() {
+    currentUser = { role: 'guest', username: 'Guest', points: 0, level: 1, badges: [] };
+
+    // Clear session
+    localStorage.removeItem('ecomap_session');
+
+    // Remove admin/agent classes
+    document.body.classList.remove('mode-admin');
+    document.body.classList.remove('mode-agent');
+
+    updateUI();
+    showToast("Logged out");
+}
+
+function handleAuthClick() {
+    if (currentUser.role === 'guest') {
+        document.getElementById('login-screen').classList.remove('hidden');
+    } else {
+        // For signed-in users, clicking the bottom button now opens the menu
+        toggleUserMenu();
     }
-    // Logout Logic
-    function logout() {
-        currentUser = { role: 'guest', username: 'Guest', points: 0, level: 1, badges: [] };
-
-        // Clear session
-        localStorage.removeItem('ecomap_session');
-
-        // Remove admin/agent classes
-        document.body.classList.remove('mode-admin');
-        document.body.classList.remove('mode-agent');
-
+}
+function login() {
+    const u = document.getElementById('login-user').value;
+    const p = document.getElementById('login-pass').value;
+    if (users[u] && users[u].password === p) {
+        currentUser = { role: users[u].role, username: u };
         updateUI();
-        showToast("Logged out");
-    }
+        document.getElementById('login-screen').classList.add('hidden');
+        showToast(`Welcome ${u}!`);
 
-    function handleAuthClick() {
-        if (currentUser.role === 'guest') {
-            document.getElementById('login-screen').classList.remove('hidden');
-        } else {
-            // For signed-in users, clicking the bottom button now opens the menu
-            toggleUserMenu();
-        }
-    }
-    function login() {
-        const u = document.getElementById('login-user').value;
-        const p = document.getElementById('login-pass').value;
-        if (users[u] && users[u].password === p) {
-            currentUser = { role: users[u].role, username: u };
-            updateUI();
-            document.getElementById('login-screen').classList.add('hidden');
-            showToast(`Welcome ${u}!`);
+        // Save Session
+        localStorage.setItem('ecomap_session', JSON.stringify({
+            username: u,
+            role: users[u].role,
+            expiresAt: Date.now() + (7 * 24 * 60 * 60 * 1000)
+        }));
 
-            // Save Session
-            localStorage.setItem('ecomap_session', JSON.stringify({
-                username: u,
-                role: users[u].role,
-                expiresAt: Date.now() + (7 * 24 * 60 * 60 * 1000)
-            }));
+        showWelcomeCard();
 
-            showWelcomeCard();
-
-            // Admin Notification for Approvals
-            if (currentUser.role === 'admin') {
-                const pendingCount = markersData.filter(m => m.status === 'pending').length;
-                if (pendingCount > 0) {
-                    setTimeout(() => {
-                        showToast(`⚠️ You have ${pendingCount} markers waiting for approval`);
-                    }, 1500);
-                }
+        // Admin Notification for Approvals
+        if (currentUser.role === 'admin') {
+            const pendingCount = markersData.filter(m => m.status === 'pending').length;
+            if (pendingCount > 0) {
+                setTimeout(() => {
+                    showToast(`⚠️ You have ${pendingCount} markers waiting for approval`);
+                }, 1500);
             }
-        } else {
-            document.getElementById('login-error').classList.remove('hidden');
+        }
+    } else {
+        document.getElementById('login-error').classList.remove('hidden');
+    }
+};
+
+// --- VOICE NAVIGATION & COMMANDS ---
+let lastInputWasVoice = false;
+
+function initVoiceCommand() {
+    if (!('webkitSpeechRecognition' in window)) {
+        showToast("Voice input not supported in this browser.");
+        return;
+    }
+    const recognition = new webkitSpeechRecognition();
+    recognition.lang = 'en-US';
+    recognition.interimResults = false;
+
+    recognition.onstart = function () {
+        const btn = document.getElementById('voice-mic');
+        if (btn) btn.classList.add('listening');
+        showToast("Listening... Speak now");
+    };
+
+    recognition.onend = function () {
+        const btn = document.getElementById('voice-mic');
+        if (btn) btn.classList.remove('listening');
+    };
+
+    recognition.onresult = function (event) {
+        const transcript = event.results[0][0].transcript;
+        const input = document.getElementById('chat-input');
+        if (input) {
+            input.value = transcript;
+            lastInputWasVoice = true; // Set flag
+            // Auto-send after short delay for user to see
+            setTimeout(() => sendMessage(), 500);
         }
     };
 
-    // --- VOICE NAVIGATION & COMMANDS ---
-    let lastInputWasVoice = false;
+    recognition.onerror = function (e) {
+        console.error("Voice Error:", e);
+        showToast("Voice Error: " + e.error);
+    };
 
-    function initVoiceCommand() {
-        if (!('webkitSpeechRecognition' in window)) {
-            showToast("Voice input not supported in this browser.");
-            return;
-        }
-        const recognition = new webkitSpeechRecognition();
-        recognition.lang = 'en-US';
-        recognition.interimResults = false;
+    recognition.start();
+}
 
-        recognition.onstart = function () {
-            const btn = document.getElementById('voice-mic');
-            if (btn) btn.classList.add('listening');
-            showToast("Listening... Speak now");
-        };
+let voiceNavEnabled = false;
 
-        recognition.onend = function () {
-            const btn = document.getElementById('voice-mic');
-            if (btn) btn.classList.remove('listening');
-        };
+function toggleVoiceNav() {
+    voiceNavEnabled = !voiceNavEnabled;
+    const btn = document.getElementById('btn-voice-nav');
+    if (!btn) return;
 
-        recognition.onresult = function (event) {
-            const transcript = event.results[0][0].transcript;
-            const input = document.getElementById('chat-input');
-            if (input) {
-                input.value = transcript;
-                lastInputWasVoice = true; // Set flag
-                // Auto-send after short delay for user to see
-                setTimeout(() => sendMessage(), 500);
+    if (voiceNavEnabled) {
+        btn.classList.add('active');
+        btn.innerHTML = '<i class="fa-solid fa-volume-high"></i> <div>Voice On</div>';
+        showToast("Voice Navigation On");
+        // Speak immediately if route exists
+        if (currentRoute) speakRouteSummary();
+    } else {
+        btn.classList.remove('active');
+        btn.innerHTML = '<i class="fa-solid fa-volume-xmark"></i> <div>Voice Off</div>';
+        window.speechSynthesis.cancel();
+    }
+}
+
+function speakRouteSummary() {
+    if (!voiceNavEnabled) return;
+
+    // Get stats from global or infer
+    const dist = window.currentRouteDistKm || 0;
+    let time = 0;
+    let verb = "travel";
+
+    // Speed assumptions: Walk 5km/h (12min/km), Drive 30km/h (2min/km)
+    if (currentTravelMode === 'walk') {
+        time = Math.round(dist * 12);
+        verb = "walk";
+    } else {
+        time = Math.round(dist * 2);
+        verb = "drive";
+    }
+
+    let msg = `Route is ${dist} kilometers. About ${time} minutes to ${verb}. `;
+
+    // Mode specific tips
+    if (currentTravelMode === 'ev') msg += "Battery usage optimized. ";
+    else if (currentTravelMode === 'ice') msg += "Fuel route active, Try Walking next time. ";
+    else msg += "Good for your health. "; // Walk
+
+    msg += "Please follow the path.";
+
+    speakText(msg);
+}
+
+// Global Travel Mode State
+let currentTravelMode = 'walk';
+
+function selectTravelMode(mode) {
+    currentTravelMode = mode;
+
+    // UI Updates
+    document.querySelectorAll('.mode-card').forEach(el => el.classList.remove('active'));
+    const activeBtn = document.getElementById(`mode-${mode}`);
+    if (activeBtn) activeBtn.classList.add('active');
+
+    // Impact Calculation logic
+    const dist = window.currentRouteDistKm || 0;
+    let impactMsg = "";
+
+    if (mode === 'walk') {
+        impactMsg = `Zero emissions! Saving ${(dist * 0.12).toFixed(2)}kg CO2`;
+    } else if (mode === 'ev') {
+        impactMsg = `Eco-Drive. Est. Energy: ${(dist * 0.15).toFixed(2)} kWh`;
+    } else {
+        impactMsg = `Est. Emissions: ${(dist * 0.12).toFixed(2)} kg CO2. Try Walking next time!`;
+    }
+
+    const impactEl = document.getElementById('impact-text');
+    if (impactEl) impactEl.innerHTML = impactMsg;
+
+    // Voice Trigger if enabled
+    if (voiceNavEnabled) speakRouteSummary();
+}
+
+function speakText(text) {
+    window.speechSynthesis.cancel(); // Stop previous
+
+    // 1. Analyze Emojis for Sentiment BEFORE removing them
+    let pitch = 1.0;
+    let rate = 1.0;
+
+    // Happy / Excited
+    if (/[\u{1F600}-\u{1F606}\u{1F923}\u{1F60D}\u{1F60A}]/gu.test(text)) {
+        pitch = 1.2; rate = 1.1;
+    }
+    // Sad / Apologetic
+    if (/[\u{1F614}\u{1F622}\u{1F62D}\u{1F61E}\u{1F625}]/gu.test(text)) {
+        pitch = 0.8; rate = 0.9;
+    }
+    // Robot / Cool / Smart
+    if (/[\u{1F916}\u{1F60E}\u{1F9E0}]/gu.test(text)) {
+        pitch = 0.9; rate = 1.05; // Slightly robotic
+    }
+
+    // 2. Strip Emojis for Speech (Clean Audio)
+    // Removes standard emoji ranges and some symbols
+    const cleanText = text.replace(/([\u2700-\u27BF]|[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2011-\u26FF]|\uD83E[\uDD10-\uDDFF])/g, '')
+        .replace(/\s+/g, ' ').trim();
+
+    const speech = new SpeechSynthesisUtterance(cleanText);
+    speech.rate = rate;
+    speech.pitch = pitch;
+    speech.volume = 1.0;
+    window.speechSynthesis.speak(speech);
+}
+
+// --- SMART MATCHING ENGINE (New Capability) ---
+function findBestMatch(userMsg, intents) {
+    let bestIntent = null;
+    let highestScore = 0;
+
+    userMsg = userMsg.toLowerCase();
+    // Simple basic tokenization
+    const userTokens = userMsg.split(/[\s,.!?]+/).filter(t => t.length > 2);
+
+    intents.forEach(intent => {
+        let currentScore = 0;
+        const keywords = intent.keywords;
+
+        keywords.forEach(keyword => {
+            const lowerKey = keyword.toLowerCase();
+
+            // 1. Exact phrase match (High value)
+            if (userMsg.includes(lowerKey)) {
+                currentScore += 10.0;
+                // Boost for Specificity: If keyword is a phrase (e.g. "make lahore green"), give huge bonus
+                if (lowerKey.includes(' ') || lowerKey.length > 5) currentScore += 10.0;
             }
-        };
 
-        recognition.onerror = function (e) {
-            console.error("Voice Error:", e);
-            showToast("Voice Error: " + e.error);
-        };
-
-        recognition.start();
-    }
-
-    let voiceNavEnabled = false;
-
-    function toggleVoiceNav() {
-        voiceNavEnabled = !voiceNavEnabled;
-        const btn = document.getElementById('btn-voice-nav');
-        if (!btn) return;
-
-        if (voiceNavEnabled) {
-            btn.classList.add('active');
-            btn.innerHTML = '<i class="fa-solid fa-volume-high"></i> <div>Voice On</div>';
-            showToast("Voice Navigation On");
-            // Speak immediately if route exists
-            if (currentRoute) speakRouteSummary();
-        } else {
-            btn.classList.remove('active');
-            btn.innerHTML = '<i class="fa-solid fa-volume-xmark"></i> <div>Voice Off</div>';
-            window.speechSynthesis.cancel();
-        }
-    }
-
-    function speakRouteSummary() {
-        if (!voiceNavEnabled) return;
-
-        // Get stats from global or infer
-        const dist = window.currentRouteDistKm || 0;
-        let time = 0;
-        let verb = "travel";
-
-        // Speed assumptions: Walk 5km/h (12min/km), Drive 30km/h (2min/km)
-        if (currentTravelMode === 'walk') {
-            time = Math.round(dist * 12);
-            verb = "walk";
-        } else {
-            time = Math.round(dist * 2);
-            verb = "drive";
-        }
-
-        let msg = `Route is ${dist} kilometers. About ${time} minutes to ${verb}. `;
-
-        // Mode specific tips
-        if (currentTravelMode === 'ev') msg += "Battery usage optimized. ";
-        else if (currentTravelMode === 'ice') msg += "Fuel route active, Try Walking next time. ";
-        else msg += "Good for your health. "; // Walk
-
-        msg += "Please follow the path.";
-
-        speakText(msg);
-    }
-
-    // Global Travel Mode State
-    let currentTravelMode = 'walk';
-
-    function selectTravelMode(mode) {
-        currentTravelMode = mode;
-
-        // UI Updates
-        document.querySelectorAll('.mode-card').forEach(el => el.classList.remove('active'));
-        const activeBtn = document.getElementById(`mode-${mode}`);
-        if (activeBtn) activeBtn.classList.add('active');
-
-        // Impact Calculation logic
-        const dist = window.currentRouteDistKm || 0;
-        let impactMsg = "";
-
-        if (mode === 'walk') {
-            impactMsg = `Zero emissions! Saving ${(dist * 0.12).toFixed(2)}kg CO2`;
-        } else if (mode === 'ev') {
-            impactMsg = `Eco-Drive. Est. Energy: ${(dist * 0.15).toFixed(2)} kWh`;
-        } else {
-            impactMsg = `Est. Emissions: ${(dist * 0.12).toFixed(2)} kg CO2. Try Walking next time!`;
-        }
-
-        const impactEl = document.getElementById('impact-text');
-        if (impactEl) impactEl.innerHTML = impactMsg;
-
-        // Voice Trigger if enabled
-        if (voiceNavEnabled) speakRouteSummary();
-    }
-
-    function speakText(text) {
-        window.speechSynthesis.cancel(); // Stop previous
-
-        // 1. Analyze Emojis for Sentiment BEFORE removing them
-        let pitch = 1.0;
-        let rate = 1.0;
-
-        // Happy / Excited
-        if (/[\u{1F600}-\u{1F606}\u{1F923}\u{1F60D}\u{1F60A}]/gu.test(text)) {
-            pitch = 1.2; rate = 1.1;
-        }
-        // Sad / Apologetic
-        if (/[\u{1F614}\u{1F622}\u{1F62D}\u{1F61E}\u{1F625}]/gu.test(text)) {
-            pitch = 0.8; rate = 0.9;
-        }
-        // Robot / Cool / Smart
-        if (/[\u{1F916}\u{1F60E}\u{1F9E0}]/gu.test(text)) {
-            pitch = 0.9; rate = 1.05; // Slightly robotic
-        }
-
-        // 2. Strip Emojis for Speech (Clean Audio)
-        // Removes standard emoji ranges and some symbols
-        const cleanText = text.replace(/([\u2700-\u27BF]|[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2011-\u26FF]|\uD83E[\uDD10-\uDDFF])/g, '')
-            .replace(/\s+/g, ' ').trim();
-
-        const speech = new SpeechSynthesisUtterance(cleanText);
-        speech.rate = rate;
-        speech.pitch = pitch;
-        speech.volume = 1.0;
-        window.speechSynthesis.speak(speech);
-    }
-
-    // --- SMART MATCHING ENGINE (New Capability) ---
-    function findBestMatch(userMsg, intents) {
-        let bestIntent = null;
-        let highestScore = 0;
-
-        userMsg = userMsg.toLowerCase();
-        // Simple basic tokenization
-        const userTokens = userMsg.split(/[\s,.!?]+/).filter(t => t.length > 2);
-
-        intents.forEach(intent => {
-            let currentScore = 0;
-            const keywords = intent.keywords;
-
-            keywords.forEach(keyword => {
-                const lowerKey = keyword.toLowerCase();
-
-                // 1. Exact phrase match (High value)
-                if (userMsg.includes(lowerKey)) {
-                    currentScore += 10.0;
-                    // Boost for Specificity: If keyword is a phrase (e.g. "make lahore green"), give huge bonus
-                    if (lowerKey.includes(' ') || lowerKey.length > 5) currentScore += 10.0;
+            // 2. Token Analysis
+            userTokens.forEach(token => {
+                // Exact word match
+                if (token === lowerKey) {
+                    currentScore += 5.0;
                 }
-
-                // 2. Token Analysis
-                userTokens.forEach(token => {
-                    // Exact word match
-                    if (token === lowerKey) {
-                        currentScore += 5.0;
+                // Fuzzy match (Typos)
+                else if (token.length > 3 && lowerKey.length > 3) {
+                    const dist = calculateLevenshtein(token, lowerKey);
+                    const similarity = 1 - (dist / Math.max(token.length, lowerKey.length));
+                    // Tuned for 100k Params: Better typo tolerance (0.7)
+                    if (similarity >= 0.70) {
+                        currentScore += 4.0; // Higher weight for fuzzy match
                     }
-                    // Fuzzy match (Typos)
-                    else if (token.length > 3 && lowerKey.length > 3) {
-                        const dist = calculateLevenshtein(token, lowerKey);
-                        const similarity = 1 - (dist / Math.max(token.length, lowerKey.length));
-                        // Tuned for 100k Params: Better typo tolerance (0.7)
-                        if (similarity >= 0.70) {
-                            currentScore += 4.0; // Higher weight for fuzzy match
-                        }
-                    }
-                });
+                }
             });
-
-            if (currentScore > highestScore) {
-                highestScore = currentScore;
-                bestIntent = intent;
-            }
         });
 
-
-        // Threshold: Hyper-sensitive (Starts at 3.0 to catch subtle intents)
-        if (highestScore >= 3.0) {
-            console.log(`%c[Eco-GPT-1M] Neural Activation: ${(highestScore / 10).toFixed(2)} confidence on "${bestIntent.keywords[0]}"`, 'color: #00ff00; background: #000; padding: 4px;');
-            const responses = bestIntent.responses;
-            return responses[Math.floor(Math.random() * responses.length)];
+        if (currentScore > highestScore) {
+            highestScore = currentScore;
+            bestIntent = intent;
         }
+    });
 
-        return null;
+
+    // Threshold: Hyper-sensitive (Starts at 3.0 to catch subtle intents)
+    if (highestScore >= 3.0) {
+        console.log(`%c[Eco-GPT-1M] Neural Activation: ${(highestScore / 10).toFixed(2)} confidence on "${bestIntent.keywords[0]}"`, 'color: #00ff00; background: #000; padding: 4px;');
+        const responses = bestIntent.responses;
+        return responses[Math.floor(Math.random() * responses.length)];
     }
 
-    function calculateLevenshtein(a, b) {
-        const matrix = [];
-        for (let i = 0; i <= b.length; i++) { matrix[i] = [i]; }
-        for (let j = 0; j <= a.length; j++) { matrix[0][j] = j; }
+    return null;
+}
 
-        for (let i = 1; i <= b.length; i++) {
-            for (let j = 1; j <= a.length; j++) {
-                if (b.charAt(i - 1) === a.charAt(j - 1)) {
-                    matrix[i][j] = matrix[i - 1][j - 1];
-                } else {
-                    matrix[i][j] = Math.min(
-                        matrix[i - 1][j - 1] + 1,
-                        matrix[i][j - 1] + 1,
-                        matrix[i - 1][j] + 1
-                    );
-                }
+function calculateLevenshtein(a, b) {
+    const matrix = [];
+    for (let i = 0; i <= b.length; i++) { matrix[i] = [i]; }
+    for (let j = 0; j <= a.length; j++) { matrix[0][j] = j; }
+
+    for (let i = 1; i <= b.length; i++) {
+        for (let j = 1; j <= a.length; j++) {
+            if (b.charAt(i - 1) === a.charAt(j - 1)) {
+                matrix[i][j] = matrix[i - 1][j - 1];
+            } else {
+                matrix[i][j] = Math.min(
+                    matrix[i - 1][j - 1] + 1,
+                    matrix[i][j - 1] + 1,
+                    matrix[i - 1][j] + 1
+                );
             }
         }
-        return matrix[b.length][a.length];
     }
+    return matrix[b.length][a.length];
+}
 
-    // --- GUEST MODE FEATURES ---
-    function checkFirstVisit() {
-        if (currentUser.role === 'guest' && !localStorage.getItem('ecomap_visited')) {
-            setTimeout(showFeatureTour, 2000); // Delay for map load
-            localStorage.setItem('ecomap_visited', 'true');
+// --- GUEST MODE FEATURES ---
+function checkFirstVisit() {
+    if (currentUser.role === 'guest' && !localStorage.getItem('ecomap_visited')) {
+        setTimeout(showFeatureTour, 2000); // Delay for map load
+        localStorage.setItem('ecomap_visited', 'true');
+    }
+}
+
+function showFeatureTour() {
+    const steps = [
+        { element: '#search-input', text: '🔍 Search for any location in Lahore' },
+        { element: '.capsule-btn', text: '🏷️ Filter by container type' },
+        { element: '#game-btn', text: '🏆 Login to earn points & badges!' }
+    ];
+
+    let delay = 0;
+    steps.forEach((step, index) => {
+        const el = document.querySelector(step.element);
+        if (el) {
+            setTimeout(() => {
+                showTooltip(el, step.text);
+            }, delay);
+            delay += 3500; // Show next after 3.5s
         }
-    }
+    });
+}
 
-    function showFeatureTour() {
-        const steps = [
-            { element: '#search-input', text: '🔍 Search for any location in Lahore' },
-            { element: '.capsule-btn', text: '🏷️ Filter by container type' },
-            { element: '#game-btn', text: '🏆 Login to earn points & badges!' }
-        ];
+function showTooltip(element, text) {
+    const rect = element.getBoundingClientRect();
+    const tooltip = document.createElement('div');
+    tooltip.className = 'tour-tooltip';
+    tooltip.style.position = 'fixed';
+    tooltip.style.top = (rect.bottom + 10) + 'px';
+    tooltip.style.left = rect.left + 'px';
+    tooltip.style.background = 'white';
+    tooltip.style.padding = '12px';
+    tooltip.style.borderRadius = '10px';
+    tooltip.style.boxShadow = '0 4px 15px rgba(0,0,0,0.2)';
+    tooltip.style.zIndex = '10000';
+    tooltip.style.fontWeight = 'bold';
+    tooltip.innerText = text;
 
-        let delay = 0;
-        steps.forEach((step, index) => {
-            const el = document.querySelector(step.element);
-            if (el) {
-                setTimeout(() => {
-                    showTooltip(el, step.text);
-                }, delay);
-                delay += 3500; // Show next after 3.5s
-            }
-        });
-    }
+    document.body.appendChild(tooltip);
 
-    function showTooltip(element, text) {
-        const rect = element.getBoundingClientRect();
-        const tooltip = document.createElement('div');
-        tooltip.className = 'tour-tooltip';
-        tooltip.style.position = 'fixed';
-        tooltip.style.top = (rect.bottom + 10) + 'px';
-        tooltip.style.left = rect.left + 'px';
-        tooltip.style.background = 'white';
-        tooltip.style.padding = '12px';
-        tooltip.style.borderRadius = '10px';
-        tooltip.style.boxShadow = '0 4px 15px rgba(0,0,0,0.2)';
-        tooltip.style.zIndex = '10000';
-        tooltip.style.fontWeight = 'bold';
-        tooltip.innerText = text;
+    // Highlight element
+    const originalZ = element.style.zIndex;
+    const originalPos = element.style.position;
+    const originalShadow = element.style.boxShadow;
 
-        document.body.appendChild(tooltip);
+    element.style.zIndex = '10001';
+    if (getComputedStyle(element).position === 'static') element.style.position = 'relative';
+    element.style.boxShadow = '0 0 0 4px #4CAF50';
 
-        // Highlight element
-        const originalZ = element.style.zIndex;
-        const originalPos = element.style.position;
-        const originalShadow = element.style.boxShadow;
+    setTimeout(() => {
+        tooltip.remove();
+        element.style.zIndex = originalZ;
+        element.style.position = originalPos;
+        element.style.boxShadow = originalShadow;
+    }, 3000);
+}
 
-        element.style.zIndex = '10001';
-        if (getComputedStyle(element).position === 'static') element.style.position = 'relative';
-        element.style.boxShadow = '0 0 0 4px #4CAF50';
+function createGuestBanner() {
+    if (currentUser.role !== 'guest') return;
+    if (localStorage.getItem('banner_dismissed')) return;
 
-        setTimeout(() => {
-            tooltip.remove();
-            element.style.zIndex = originalZ;
-            element.style.position = originalPos;
-            element.style.boxShadow = originalShadow;
-        }, 3000);
-    }
-
-    function createGuestBanner() {
-        if (currentUser.role !== 'guest') return;
-        if (localStorage.getItem('banner_dismissed')) return;
-
-        const banner = document.createElement('div');
-        banner.id = 'guest-cta';
-        banner.className = 'guest-banner';
-        banner.innerHTML = `
+    const banner = document.createElement('div');
+    banner.id = 'guest-cta';
+    banner.className = 'guest-banner';
+    banner.innerHTML = `
         <div class="banner-content">
             <div style="font-size: 2rem;">🌍</div>
             <div class="banner-text">
@@ -2376,32 +2381,32 @@ function endCall(isRemote = false) {
             <button onclick="dismissBanner()" class="btn-text">Later</button>
         </div>
     `;
-        document.body.appendChild(banner);
-    }
+    document.body.appendChild(banner);
+}
 
-    function dismissBanner() {
-        const banner = document.getElementById('guest-cta');
-        if (banner) banner.remove();
-        localStorage.setItem('banner_dismissed', 'true');
-    }
+function dismissBanner() {
+    const banner = document.getElementById('guest-cta');
+    if (banner) banner.remove();
+    localStorage.setItem('banner_dismissed', 'true');
+}
 
-    function showFeatureTeaser(featureName) {
-        const teasers = {
-            addMarker: {
-                title: '🎯 Add Locations',
-                description: 'Help map Lahore by adding garbage containers you discover.',
-                benefits: ['Mark new spots', 'Earn 50 Eco-Credits', 'Contribute to cleaner city'],
-                action: 'Login to Add'
-            }
-        };
+function showFeatureTeaser(featureName) {
+    const teasers = {
+        addMarker: {
+            title: '🎯 Add Locations',
+            description: 'Help map Lahore by adding garbage containers you discover.',
+            benefits: ['Mark new spots', 'Earn 50 Eco-Credits', 'Contribute to cleaner city'],
+            action: 'Login to Add'
+        }
+    };
 
-        const teaser = teasers[featureName];
-        if (!teaser) return;
+    const teaser = teasers[featureName];
+    if (!teaser) return;
 
-        const modal = document.createElement('div');
-        modal.className = 'teaser-overlay';
-        modal.onclick = (e) => { if (e.target === modal) modal.remove(); };
-        modal.innerHTML = `
+    const modal = document.createElement('div');
+    modal.className = 'teaser-overlay';
+    modal.onclick = (e) => { if (e.target === modal) modal.remove(); };
+    modal.innerHTML = `
         <div class="teaser-card">
             <div class="teaser-header">
                 <h2 style="color: var(--primary-color); margin-bottom: 10px;">${teaser.title}</h2>
@@ -2431,28 +2436,28 @@ function endCall(isRemote = false) {
             </p>
         </div>
     `;
-        document.body.appendChild(modal);
+    document.body.appendChild(modal);
+}
+
+// PWA Prompt Logic
+let guestInteractions = 0;
+function trackGuestInteraction() {
+    if (currentUser.role !== 'guest') return;
+    guestInteractions++;
+    if (guestInteractions === 10) { // Show on 10th interaction
+        showToast("💡 Tip: Add EcoMap to your home screen for quick access!");
     }
+}
 
-    // PWA Prompt Logic
-    let guestInteractions = 0;
-    function trackGuestInteraction() {
-        if (currentUser.role !== 'guest') return;
-        guestInteractions++;
-        if (guestInteractions === 10) { // Show on 10th interaction
-            showToast("💡 Tip: Add EcoMap to your home screen for quick access!");
-        }
-    }
+// Add interaction tracking
+document.addEventListener('click', trackGuestInteraction);
+document.addEventListener('keypress', trackGuestInteraction);
 
-    // Add interaction tracking
-    document.addEventListener('click', trackGuestInteraction);
-    document.addEventListener('keypress', trackGuestInteraction);
-
-    // --- AGENT MODE FEATURES ---
-    function showWelcomeCard() {
-        const stats = getUserStats(currentUser.username);
-        // Only show if not recently shown? Let's show on every login for impact as requested
-        const welcomeHTML = `
+// --- AGENT MODE FEATURES ---
+function showWelcomeCard() {
+    const stats = getUserStats(currentUser.username);
+    // Only show if not recently shown? Let's show on every login for impact as requested
+    const welcomeHTML = `
         <div class="welcome-card" id="welcome-card">
             <div style="font-size:3rem; margin-bottom:10px;">👋</div>
             <h2 style="margin-bottom:10px; color: var(--primary-color);">Welcome back, ${currentUser.username}!</h2>
@@ -2479,36 +2484,36 @@ function endCall(isRemote = false) {
         <div class="welcome-overlay" id="welcome-overlay" onclick="closeWelcomeCard()"></div>
     `;
 
-        // Check if exists
-        if (document.getElementById('welcome-card')) return;
+    // Check if exists
+    if (document.getElementById('welcome-card')) return;
 
-        const div = document.createElement('div');
-        div.innerHTML = welcomeHTML;
-        document.body.appendChild(div);
+    const div = document.createElement('div');
+    div.innerHTML = welcomeHTML;
+    document.body.appendChild(div);
 
-        setTimeout(closeWelcomeCard, 5000);
-    }
+    setTimeout(closeWelcomeCard, 5000);
+}
 
-    function closeWelcomeCard() {
-        const card = document.getElementById('welcome-card');
-        const overlay = document.getElementById('welcome-overlay');
-        if (card) card.parentElement.remove(); // Remove wrapper
-    }
+function closeWelcomeCard() {
+    const card = document.getElementById('welcome-card');
+    const overlay = document.getElementById('welcome-overlay');
+    if (card) card.parentElement.remove(); // Remove wrapper
+}
 
-    function getUserStats(username) {
-        const all = getAllMapData();
-        const markers = all.filter(m => m.addedBy === username || m.author === username).length;
-        return { markers };
-    }
+function getUserStats(username) {
+    const all = getAllMapData();
+    const markers = all.filter(m => m.addedBy === username || m.author === username).length;
+    return { markers };
+}
 
-    function createAgentDashboard() {
-        if (document.getElementById('agent-dashboard')) return;
+function createAgentDashboard() {
+    if (document.getElementById('agent-dashboard')) return;
 
-        const dash = document.createElement('div');
-        dash.id = 'agent-dashboard';
-        dash.className = 'hidden';
+    const dash = document.createElement('div');
+    dash.id = 'agent-dashboard';
+    dash.className = 'hidden';
 
-        dash.innerHTML = `
+    dash.innerHTML = `
         <h4 style="margin:0 0 12px 0; font-size:0.95rem; color:#666;">Quick Actions</h4>
         
         <div class="quick-action" onclick="toggleMarkMode()">
@@ -2527,29 +2532,29 @@ function endCall(isRemote = false) {
         </div>
     `;
 
-        document.body.appendChild(dash);
-    }
+    document.body.appendChild(dash);
+}
 
-    function showMyMarkers() {
-        const myMarkers = getAllMapData().filter(m =>
-            m.addedBy === currentUser.username || m.author === currentUser.username
-        );
+function showMyMarkers() {
+    const myMarkers = getAllMapData().filter(m =>
+        m.addedBy === currentUser.username || m.author === currentUser.username
+    );
 
-        const content = document.getElementById('panel-content');
-        const panel = document.getElementById('info-panel');
+    const content = document.getElementById('panel-content');
+    const panel = document.getElementById('info-panel');
 
-        const closeBtn = document.querySelector('.panel-close-btn');
-        if (closeBtn) closeBtn.style.display = 'flex';
+    const closeBtn = document.querySelector('.panel-close-btn');
+    if (closeBtn) closeBtn.style.display = 'flex';
 
-        let listHTML = myMarkers.length === 0 ? '<p style="text-align:center; padding:20px; color:#666;">No markers added yet.</p>' :
-            myMarkers.map(m => `
+    let listHTML = myMarkers.length === 0 ? '<p style="text-align:center; padding:20px; color:#666;">No markers added yet.</p>' :
+        myMarkers.map(m => `
             <div class="marker-item" onclick="map.setView([${m.lat}, ${m.lng}], 18); showMarkerDetails(${JSON.stringify(m).replace(/"/g, '&quot;')})">
                 <div style="font-weight:bold;">${m.title}</div>
                 <div style="font-size:0.8rem; color:#666;">${m.type}</div>
             </div>
         `).join('');
 
-        content.innerHTML = `
+    content.innerHTML = `
         <div class="panel-body">
             <h2 class="panel-title">My Contributions</h2>
             <div style="display:flex; justify-content:space-between; margin-bottom:15px; color:#666;">
@@ -2561,71 +2566,71 @@ function endCall(isRemote = false) {
             </div>
         </div>
     `;
-        panel.classList.remove('hidden');
-    }
+    panel.classList.remove('hidden');
+}
 
-    // Contribution Streaks
-    function checkContributionStreak() {
-        const last = localStorage.getItem('last_contribution_date');
-        const today = new Date().toDateString();
+// Contribution Streaks
+function checkContributionStreak() {
+    const last = localStorage.getItem('last_contribution_date');
+    const today = new Date().toDateString();
 
-        if (last) {
-            const diff = Math.floor((new Date() - new Date(last)) / (1000 * 60 * 60 * 24));
-            if (diff === 1) {
-                currentUser.streak = (currentUser.streak || 0) + 1;
-                showToast(`🔥 ${currentUser.streak} day streak!`);
-            } else if (diff > 1) {
-                currentUser.streak = 1;
-            }
-        } else {
+    if (last) {
+        const diff = Math.floor((new Date() - new Date(last)) / (1000 * 60 * 60 * 24));
+        if (diff === 1) {
+            currentUser.streak = (currentUser.streak || 0) + 1;
+            showToast(`🔥 ${currentUser.streak} day streak!`);
+        } else if (diff > 1) {
             currentUser.streak = 1;
         }
-        localStorage.setItem('last_contribution_date', today);
+    } else {
+        currentUser.streak = 1;
+    }
+    localStorage.setItem('last_contribution_date', today);
+}
+
+// Batch Add Mode
+let batchAddMode = false;
+let batchMarkers = [];
+
+function toggleBatchAdd() {
+    if (currentUser.role === 'guest') return;
+    batchAddMode = !batchAddMode;
+
+    if (batchAddMode) {
+        showToast("Batch Mode ON: Click map to place pins");
+        map.getContainer().style.cursor = 'crosshair';
+        batchMarkers = [];
+    } else {
+        showToast("Batch Mode OFF");
+        map.getContainer().style.cursor = '';
+        batchMarkers.forEach(m => map.removeLayer(m.layer));
+        batchMarkers = [];
+    }
+}
+
+function handleBatchClick(lat, lng) {
+    const layer = L.marker([lat, lng], {
+        icon: L.divIcon({ className: 'custom-marker', html: '<div style="background:#FF9800; width:20px; height:20px; border-radius:50%; border:2px solid white;"></div>' })
+    }).addTo(map);
+
+    batchMarkers.push({ lat, lng, layer });
+    showToast(`Point ${batchMarkers.length} added.`);
+
+    if (batchMarkers.length >= 3 || batchMarkers.length === 1) {
+        // Just hint, don't force form yet. Wait for button click?
+        // Actually earlier code had "Show save form after 3". Let's do that.
     }
 
-    // Batch Add Mode
-    let batchAddMode = false;
-    let batchMarkers = [];
-
-    function toggleBatchAdd() {
-        if (currentUser.role === 'guest') return;
-        batchAddMode = !batchAddMode;
-
-        if (batchAddMode) {
-            showToast("Batch Mode ON: Click map to place pins");
-            map.getContainer().style.cursor = 'crosshair';
-            batchMarkers = [];
-        } else {
-            showToast("Batch Mode OFF");
-            map.getContainer().style.cursor = '';
-            batchMarkers.forEach(m => map.removeLayer(m.layer));
-            batchMarkers = [];
-        }
+    if (batchMarkers.length >= 3) {
+        showBatchForm();
     }
+}
 
-    function handleBatchClick(lat, lng) {
-        const layer = L.marker([lat, lng], {
-            icon: L.divIcon({ className: 'custom-marker', html: '<div style="background:#FF9800; width:20px; height:20px; border-radius:50%; border:2px solid white;"></div>' })
-        }).addTo(map);
+function showBatchForm() {
+    const panel = document.getElementById('info-panel');
+    const content = document.getElementById('panel-content');
 
-        batchMarkers.push({ lat, lng, layer });
-        showToast(`Point ${batchMarkers.length} added.`);
-
-        if (batchMarkers.length >= 3 || batchMarkers.length === 1) {
-            // Just hint, don't force form yet. Wait for button click?
-            // Actually earlier code had "Show save form after 3". Let's do that.
-        }
-
-        if (batchMarkers.length >= 3) {
-            showBatchForm();
-        }
-    }
-
-    function showBatchForm() {
-        const panel = document.getElementById('info-panel');
-        const content = document.getElementById('panel-content');
-
-        content.innerHTML = `
+    content.innerHTML = `
         <div class="panel-body">
             <h2 class="panel-title">Save Batch (${batchMarkers.length})</h2>
             <div class="form-group">
@@ -2643,53 +2648,53 @@ function endCall(isRemote = false) {
             <button class="btn-save" style="background:#999; margin-top:10px;" onclick="cancelBatch()">Cancel</button>
         </div>
     `;
-        panel.classList.remove('hidden');
-    }
+    panel.classList.remove('hidden');
+}
 
-    function confirmBatchSave() {
-        const type = document.getElementById('batch-type').value;
-        const area = document.getElementById('batch-area').value;
+function confirmBatchSave() {
+    const type = document.getElementById('batch-type').value;
+    const area = document.getElementById('batch-area').value;
 
-        batchMarkers.forEach((m, i) => {
-            const newMarker = {
-                id: Date.now() + i,
-                type: type,
-                lat: m.lat, lng: m.lng,
-                title: `${type} ${i + 1}`,
-                address: area,
-                description: 'Batch added',
-                addedBy: currentUser.username,
-                lastVerified: new Date().toISOString().split('T')[0],
-                status: 'pending'
-            };
-            // Add to global data (assuming markersData is global)
-            if (typeof markersData !== 'undefined') markersData.push(newMarker);
-            map.removeLayer(m.layer);
-        });
+    batchMarkers.forEach((m, i) => {
+        const newMarker = {
+            id: Date.now() + i,
+            type: type,
+            lat: m.lat, lng: m.lng,
+            title: `${type} ${i + 1}`,
+            address: area,
+            description: 'Batch added',
+            addedBy: currentUser.username,
+            lastVerified: new Date().toISOString().split('T')[0],
+            status: 'pending'
+        };
+        // Add to global data (assuming markersData is global)
+        if (typeof markersData !== 'undefined') markersData.push(newMarker);
+        map.removeLayer(m.layer);
+    });
 
-        showToast(`Saved ${batchMarkers.length} markers!`);
-        loadMarkers();
-        awardPoints(batchMarkers.length * 50, 'Batch Upload');
-        cancelBatch();
-        checkContributionStreak();
-    }
+    showToast(`Saved ${batchMarkers.length} markers!`);
+    loadMarkers();
+    awardPoints(batchMarkers.length * 50, 'Batch Upload');
+    cancelBatch();
+    checkContributionStreak();
+}
 
-    function cancelBatch() {
-        batchAddMode = false;
-        map.getContainer().style.cursor = '';
-        batchMarkers.forEach(m => map.removeLayer(m.layer));
-        batchMarkers = [];
-        closePanel();
-    }
+function cancelBatch() {
+    batchAddMode = false;
+    map.getContainer().style.cursor = '';
+    batchMarkers.forEach(m => map.removeLayer(m.layer));
+    batchMarkers = [];
+    closePanel();
+}
 
-    // --- ADMIN MODE FEATURES ---
-    function createAdminPanel() {
-        if (document.getElementById('admin-panel')) return;
+// --- ADMIN MODE FEATURES ---
+function createAdminPanel() {
+    if (document.getElementById('admin-panel')) return;
 
-        const div = document.createElement('div');
-        div.id = 'admin-panel';
-        div.className = 'hidden';
-        div.innerHTML = `
+    const div = document.createElement('div');
+    div.id = 'admin-panel';
+    div.className = 'hidden';
+    div.innerHTML = `
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
             <h4 style="margin:0; font-size:1rem;">Admin Dashboard</h4>
             <button onclick="toggleAdminPanel()" style="background:none; border:none; cursor:pointer;">
@@ -2725,66 +2730,66 @@ function endCall(isRemote = false) {
             <i class="fa-solid fa-heart-pulse"></i> System Health
         </button>
     `;
-        document.body.appendChild(div);
+    document.body.appendChild(div);
+}
+
+function updateAdminStats() {
+    const total = getAllMapData().length;
+    const el = document.getElementById('total-markers');
+    if (el) el.textContent = total;
+
+    // Simulate reports
+    const pending = 3; // Mock
+    const rp = document.getElementById('pending-reports');
+    if (rp) rp.textContent = pending;
+}
+
+function toggleAdminPanel() {
+    const panel = document.getElementById('admin-panel');
+    panel.classList.toggle('hidden');
+    if (!panel.classList.contains('hidden')) updateAdminStats();
+}
+
+// Bulk Delete
+let bulkDeleteMode = false;
+let selectedMarkers = [];
+
+function toggleBulkDelete() {
+    bulkDeleteMode = !bulkDeleteMode;
+    selectedMarkers = [];
+
+    if (bulkDeleteMode) {
+        showToast("Bulk Delete ON: Click markers to delete");
+        document.querySelectorAll('.leaflet-marker-icon').forEach(m => m.style.opacity = '0.6');
+    } else {
+        showToast("Bulk Delete OFF");
+        document.querySelectorAll('.leaflet-marker-icon').forEach(m => m.style.opacity = '1');
     }
+}
 
-    function updateAdminStats() {
-        const total = getAllMapData().length;
-        const el = document.getElementById('total-markers');
-        if (el) el.textContent = total;
+// Export
+function exportData() {
+    const data = getAllMapData();
+    const headers = ['ID', 'Type', 'Title', 'Address', 'Lat', 'Lng', 'AddedBy'];
+    let csv = headers.join(',') + '\n';
 
-        // Simulate reports
-        const pending = 3; // Mock
-        const rp = document.getElementById('pending-reports');
-        if (rp) rp.textContent = pending;
-    }
+    data.forEach(row => {
+        csv += [row.id, row.type, `"${row.title}"`, `"${row.address}"`, row.lat, row.lng, row.addedBy || 'System'].join(',') + '\n';
+    });
 
-    function toggleAdminPanel() {
-        const panel = document.getElementById('admin-panel');
-        panel.classList.toggle('hidden');
-        if (!panel.classList.contains('hidden')) updateAdminStats();
-    }
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `ecomap_export_${Date.now()}.csv`;
+    link.click();
+    showToast("Exported CSV");
+}
 
-    // Bulk Delete
-    let bulkDeleteMode = false;
-    let selectedMarkers = [];
+function showAllReports() {
+    showToast("No reports found (Simulated)");
+}
 
-    function toggleBulkDelete() {
-        bulkDeleteMode = !bulkDeleteMode;
-        selectedMarkers = [];
-
-        if (bulkDeleteMode) {
-            showToast("Bulk Delete ON: Click markers to delete");
-            document.querySelectorAll('.leaflet-marker-icon').forEach(m => m.style.opacity = '0.6');
-        } else {
-            showToast("Bulk Delete OFF");
-            document.querySelectorAll('.leaflet-marker-icon').forEach(m => m.style.opacity = '1');
-        }
-    }
-
-    // Export
-    function exportData() {
-        const data = getAllMapData();
-        const headers = ['ID', 'Type', 'Title', 'Address', 'Lat', 'Lng', 'AddedBy'];
-        let csv = headers.join(',') + '\n';
-
-        data.forEach(row => {
-            csv += [row.id, row.type, `"${row.title}"`, `"${row.address}"`, row.lat, row.lng, row.addedBy || 'System'].join(',') + '\n';
-        });
-
-        const blob = new Blob([csv], { type: 'text/csv' });
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = `ecomap_export_${Date.now()}.csv`;
-        link.click();
-        showToast("Exported CSV");
-    }
-
-    function showAllReports() {
-        showToast("No reports found (Simulated)");
-    }
-
-    function showSystemHealth() {
-        showToast("System Healthy (100%)");
-    }
+function showSystemHealth() {
+    showToast("System Healthy (100%)");
+}
