@@ -97,13 +97,25 @@ const pool = new Pool({
     ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false
 });
 
-// Test DB Connection
-pool.connect((err, client, release) => {
+// Test DB Connection & Auto-Migrate
+pool.connect(async (err, client, release) => {
     if (err) {
         return console.error('Error acquiring client', err.stack);
     }
     console.log('Connected to PostgreSQL Database');
-    release();
+
+    // Auto-Migrate: Ensure columns exist
+    try {
+        await client.query(`
+            ALTER TABLE markers ADD COLUMN IF NOT EXISTS status VARCHAR(20) DEFAULT 'published';
+            ALTER TABLE markers ADD COLUMN IF NOT EXISTS author VARCHAR(100);
+        `);
+        console.log('Database Schema Sync: Checked/Updated columns');
+    } catch (migErr) {
+        console.error('Migration Error:', migErr);
+    } finally {
+        release();
+    }
 });
 
 // --- API ROUTES ---
