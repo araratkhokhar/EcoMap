@@ -97,24 +97,140 @@ const pool = new Pool({
     ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false
 });
 
-// Test DB Connection & Auto-Migrate
-pool.connect(async (err, client, release) => {
-    if (err) {
-        return console.error('Error acquiring client', err.stack);
-    }
-    console.log('Connected to PostgreSQL Database');
+// Built-in Node crypto for hashing
+const crypto = require('crypto');
 
-    // Auto-Migrate: Ensure columns exist
+// Helper for hashing
+function hashPassword(password) {
+    return crypto.createHash('sha256').update(password).digest('hex');
+}
+
+// Test DB Connection & Auto-Migrate
+pool.connect()
+    .then(client => {
+        console.log("Connected to Database");
+
+        // 1. Markers Table (Existing)
+        client.query(`
+            CREATE TABLE IF NOT EXISTS markers (
+                id SERIAL PRIMARY KEY,
+                type VARCHAR(50) NOT NULL,
+                title VARCHAR(255),
+                address TEXT,
+                lat DOUBLE PRECISION NOT NULL,
+                lng DOUBLE PRECISION NOT NULL,
+                notes TEXT,
+                status VARCHAR(20) DEFAULT 'published',
+                author VARCHAR(100),
+                image TEXT,
+                geom GEOMETRY(Point, 4326),
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            );
+        `).then(() => {
+            // 2. Users Table (New)
+            return client.query(`
+                CREATE TABLE IF NOT EXISTS users (
+                    id SERIAL PRIMARY KEY,
+                    username VARCHAR(50) UNIQUE NOT NULL,
+                    email VARCHAR(100) UNIQUE NOT NULL,
+                    password_hash TEXT NOT NULL,
+                    role VARCHAR(20) DEFAULT 'user',
+                    avatar VARCHAR(255),
+                    points INTEGER DEFAULT 0,
+                    level INTEGER DEFAULT 1,
+                    joined_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                );
+            `);
+        })
+            .then(async () => {
+                // Migration: Check for 'image' column in markers
+                try {
+                    const check = await client.query("SELECT column_name FROM information_schema.columns WHERE table_name='markers' AND column_name='image'");
+                    if (check.rows.length === 0) {
+                        console.log("Adding missing column 'image' to markers table...");
+                        await client.query("ALTER TABLE markers ADD COLUMN image TEXT");
+                    }
+                } catch (e) {
+                    console.error("Migration error (markers.image):", e);
+                }
+            })
+            .then(() => console.log("Database Schema Sync Complete"))
+            .catch(err => console.error("Migration Error", err))
+            .finally(() => client.release());
+    })
+    .catch(err => console.error("DB Connection Error", err));
+
+
+// --- AUTH ROUTES ---
+
+// 1. Register
+app.post('/api/register', async (req, res) => {
+    const { username, email, password } = req.body;
+
+    if (!username || !email || !password) {
+        return res.status(400).json({ error: "All fields are required" });
+    }
+
     try {
-        await client.query(`
-            ALTER TABLE markers ADD COLUMN IF NOT EXISTS status VARCHAR(20) DEFAULT 'published';
-            ALTER TABLE markers ADD COLUMN IF NOT EXISTS author VARCHAR(100);
-        `);
-        console.log('Database Schema Sync: Checked/Updated columns');
-    } catch (migErr) {
-        console.error('Migration Error:', migErr);
-    } finally {
-        release();
+        const passwordHash = hashPassword(password);
+        const query = `
+            INSERT INTO users (username, email, password_hash)
+            VALUES ($1, $2, $3)
+            RETURNING id, username, role, points, level;
+        `;
+        const result = await pool.query(query, [username, email, passwordHash]);
+
+        res.json({
+            success: true,
+            message: "Account Created!",
+            user: result.rows[0]
+        });
+
+    } catch (err) {
+        console.error("Register Error:", err);
+        if (err.code === '23505') { // Unique violation
+            return res.status(400).json({ error: "Username or Email already exists" });
+        }
+        res.status(500).json({ error: "Server Error" });
+    }
+});
+
+// 2. Login
+app.post('/api/login', async (req, res) => {
+    const { username, password } = req.body;
+
+    try {
+        const passwordHash = hashPassword(password);
+        const query = `SELECT * FROM users WHERE username = $1`;
+        const result = await pool.query(query, [username]);
+
+        if (result.rows.length === 0) {
+            return res.status(401).json({ error: "Invalid Credentials" });
+        }
+
+        const user = result.rows[0];
+
+        if (user.password_hash !== passwordHash) {
+            return res.status(401).json({ error: "Invalid Credentials" });
+        }
+
+        // Return public user data
+        res.json({
+            success: true,
+            user: {
+                id: user.id,
+                username: user.username,
+                role: user.role,
+                points: user.points,
+                level: user.level,
+                avatar: user.avatar
+            }
+        });
+
+    } catch (err) {
+        console.error("Login Error:", err);
+        res.status(500).json({ error: "Server Error" });
     }
 });
 
@@ -133,14 +249,14 @@ app.get('/api/markers', async (req, res) => {
 
 // Add Marker
 app.post('/api/markers', async (req, res) => {
-    const { type, lat, lng, title, address, notes, status, author } = req.body;
+    const { type, lat, lng, title, address, notes, status, author, image } = req.body;
     try {
         const query = `
-            INSERT INTO markers (type, lat, lng, title, address, notes, status, author, geom)
-            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, ST_SetSRID(ST_MakePoint($3, $2), 4326))
+            INSERT INTO markers (type, lat, lng, title, address, notes, status, author, image, geom)
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, ST_SetSRID(ST_MakePoint($3, $2), 4326))
             RETURNING *;
         `;
-        const values = [type, lat, lng, title, address, notes, status, author];
+        const values = [type, lat, lng, title, address, notes, status, author, image];
         const result = await pool.query(query, values);
         res.json(result.rows[0]);
     } catch (err) {
@@ -152,16 +268,27 @@ app.post('/api/markers', async (req, res) => {
 // Update Marker
 app.put('/api/markers/:id', async (req, res) => {
     const { id } = req.params;
-    const { type, title, address, notes, status } = req.body;
+    const { type, title, address, notes, status, image } = req.body;
     try {
-        const query = `
-            UPDATE markers 
-            SET type = $1, title = $2, address = $3, notes = $4, status = $5
-            WHERE id = $6
-            RETURNING *;
-        `;
-        const values = [type, title, address, notes, status, id];
+        // Dynamic update
+        let fields = [];
+        let values = [];
+        let idx = 1;
+
+        if (type) { fields.push(`type=$${idx++}`); values.push(type); }
+        if (title) { fields.push(`title=$${idx++}`); values.push(title); }
+        if (address) { fields.push(`address=$${idx++}`); values.push(address); }
+        if (notes) { fields.push(`notes=$${idx++}`); values.push(notes); }
+        if (status) { fields.push(`status=$${idx++}`); values.push(status); }
+        if (image) { fields.push(`image=$${idx++}`); values.push(image); }
+
+        if (fields.length === 0) return res.status(400).json({ error: "No fields" });
+
+        values.push(id);
+        const query = `UPDATE markers SET ${fields.join(', ')} WHERE id=$${idx} RETURNING *`;
+
         const result = await pool.query(query, values);
+
         if (result.rows.length === 0) {
             return res.status(404).send('Marker not found');
         }
@@ -188,7 +315,59 @@ app.delete('/api/markers/:id', async (req, res) => {
     }
 });
 
-// Start Server
+// --- ADMIN ROUTES ---
+
+// 6. Get All Users (Admin Only)
+app.get('/api/users', async (req, res) => {
+    // In production, add middleware to verify admin token
+    try {
+        const query = `SELECT id, username, email, role, points, level, joined_at, avatar FROM users ORDER BY id ASC`;
+        const result = await pool.query(query);
+        res.json(result.rows);
+    } catch (err) {
+        console.error("Get Users Error:", err);
+        res.status(500).json({ error: "Server Error" });
+    }
+});
+
+// 7. Update User Role (Promote/Ban)
+app.put('/api/users/:id/role', async (req, res) => {
+    const { id } = req.params;
+    const { role } = req.body;
+
+    if (!['admin', 'agent', 'user', 'banned'].includes(role)) {
+        return res.status(400).json({ error: "Invalid Role" });
+    }
+
+    try {
+        await pool.query(`UPDATE users SET role = $1 WHERE id = $2`, [role, id]);
+        res.json({ success: true, message: `User role updated to ${role}` });
+    } catch (err) {
+        console.error("Update Role Error:", err);
+        res.status(500).json({ error: "Server Error" });
+    }
+});
+
+// 8. Export Markers (CSV)
+app.get('/api/export/markers', async (req, res) => {
+    try {
+        const result = await pool.query(`SELECT id, type, title, address, status, author, created_at FROM markers ORDER BY id ASC`);
+
+        let csv = "ID,Type,Title,Address,Status,Author,Created At\n";
+        result.rows.forEach(row => {
+            csv += `${row.id},"${row.type}","${row.title || ''}","${row.address || ''}",${row.status},${row.author || 'Anonymous'},${row.created_at}\n`;
+        });
+
+        res.header('Content-Type', 'text/csv');
+        res.header('Content-Disposition', 'attachment; filename="ecomap_markers.csv"');
+        res.send(csv);
+
+    } catch (err) {
+        console.error("Export Error:", err);
+        res.status(500).json({ error: "Export Failed" });
+    }
+});
+
 // Start Server
 server.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);

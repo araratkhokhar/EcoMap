@@ -423,7 +423,12 @@ async function loadMarkers() {
             });
 
             const mapMarker = L.marker([marker.lat, marker.lng], { icon: customIcon, opacity: opacity })
-                .bindPopup(`<b>${marker.title}</b><br>${marker.address}${marker.status === 'pending' ? '<br><em style="color:orange">(Pending Approval)</em>' : ''}`);
+                .bindPopup(`
+                    <b>${marker.title}</b><br>
+                    ${marker.address}
+                    ${marker.image ? `<br><img src="${marker.image}" style="width:100%; max-height:150px; object-fit:cover; margin-top:5px; border-radius:4px;">` : ''}
+                    ${marker.status === 'pending' ? '<br><em style="color:orange">(Pending Approval)</em>' : ''}
+                `);
 
             mapMarker.on('click', () => {
                 if (bulkDeleteMode && currentUser.role === 'admin') {
@@ -1413,8 +1418,27 @@ function closeEditModal() {
     document.getElementById('edit-modal').classList.add('hidden');
 }
 
-function submitEdit() {
+async function submitEdit() {
     const id = document.getElementById('edit-marker-id').value;
+    const fileInput = document.getElementById('edit-marker-image');
+
+    let imageBase64 = null;
+    if (fileInput.files.length > 0) {
+        try {
+            const file = fileInput.files[0];
+            imageBase64 = await new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = error => reject(error);
+            });
+        } catch (e) {
+            console.error("Image read error", e);
+            showToast("Error processing image");
+            return;
+        }
+    }
+
     const updatedData = {
         title: document.getElementById('edit-title').value,
         type: document.getElementById('edit-type').value,
@@ -1422,6 +1446,10 @@ function submitEdit() {
         notes: document.getElementById('edit-notes').value,
         status: document.getElementById('edit-status').value
     };
+
+    if (imageBase64) {
+        updatedData.image = imageBase64;
+    }
 
     fetch(`/api/markers/${id}`, {
         method: 'PUT',
@@ -1756,6 +1784,11 @@ function showMarkerForm(lat, lng, editId = null) {
                 <label>Notes (Optional)</label>
                 <textarea id="marker-notes" class="form-control" rows="3" placeholder="Additional information..."></textarea>
             </div>
+
+            <div class="form-group">
+                <label>Photo (Optional)</label>
+                <input type="file" id="marker-image" class="form-control" accept="image/*">
+            </div>
             
             <div class="form-group">
                 <label>Coordinates</label>
@@ -1779,16 +1812,36 @@ function showMarkerForm(lat, lng, editId = null) {
     map.getContainer().classList.remove('crosshair-cursor');
 }
 
-function saveMarker(lat, lng, id = null) {
+async function saveMarker(lat, lng, id = null) {
     const type = document.getElementById('marker-type').value;
     const title = document.getElementById('marker-title').value;
     const address = document.getElementById('marker-address').value;
     const notes = document.getElementById('marker-notes').value;
+    const fileInput = document.getElementById('marker-image');
 
     // Validate
     if (!title || !address) {
         showToast("Please fill all required fields");
         return;
+    }
+
+    let imageBase64 = null;
+    if (fileInput.files.length > 0) {
+        try {
+            const file = fileInput.files[0];
+            // Simple resize logic could go here, but for now just raw base64 or max 500kb?
+            // Let's use a helper promise for cleanliness
+            imageBase64 = await new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = error => reject(error);
+            });
+        } catch (e) {
+            console.error("Image read error", e);
+            showToast("Error processing image");
+            return;
+        }
     }
 
     if (id) {
@@ -1797,11 +1850,13 @@ function saveMarker(lat, lng, id = null) {
         const marker = all.find(m => m.id == id);
 
         if (marker) {
-            // Update properties in place (works for all sources as objects are references)
+            // Optimistic update
             marker.type = type;
             marker.title = title;
             marker.address = address;
             marker.notes = notes;
+            if (imageBase64) marker.image = imageBase64; // Update image if provided
+
             marker.lastVerified = new Date().toISOString().split('T')[0];
 
             // If updated by admin, ensure it's published (if it was pending)
@@ -1809,9 +1864,22 @@ function saveMarker(lat, lng, id = null) {
                 marker.status = 'published';
             }
 
-            showToast("Marker Updated Successfully");
-            loadMarkers();
-            closePanel();
+            // Send PUT request to persist changes
+            fetch(`/api/markers/${id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    type, title, address, notes, status: marker.status, image: imageBase64 || marker.image
+                })
+            }).then(() => {
+                showToast("Marker Updated Successfully");
+                loadMarkers();
+                closePanel();
+            }).catch(err => {
+                console.error(err);
+                showToast("Error updating marker");
+            });
+
         } else {
             showToast("Error: Marker not found for update");
         }
@@ -1825,7 +1893,8 @@ function saveMarker(lat, lng, id = null) {
             address: address,
             notes: notes,
             status: currentUser.role === 'admin' ? 'published' : 'pending',
-            author: currentUser.username
+            author: currentUser.username,
+            image: imageBase64
         };
 
         // Send to API
@@ -2166,11 +2235,29 @@ function openDashboard() {
         if (logoutBtn) logoutBtn.style.display = 'inline-block';
     }
 
+    // Admin Button
+    const adminBtn = document.getElementById('dash-admin-btn');
+    if (adminBtn) {
+        adminBtn.style.display = (currentUser.role === 'admin') ? 'inline-block' : 'none';
+    }
+
     // Populate Data
     document.getElementById('dash-username').textContent = currentUser.username;
     document.getElementById('dash-role').textContent = currentUser.role;
     document.getElementById('dash-points').textContent = currentUser.points || 0;
     document.getElementById('dash-level').textContent = currentUser.level || 1;
+
+    // Avatar Logic
+    const avatarImg = document.getElementById('dash-avatar-img');
+    const avatarIcon = document.getElementById('dash-avatar-icon');
+    if (currentUser.avatar) {
+        avatarImg.src = currentUser.avatar;
+        avatarImg.classList.remove('hidden');
+        avatarIcon.classList.add('hidden');
+    } else {
+        avatarImg.classList.add('hidden');
+        avatarIcon.classList.remove('hidden');
+    }
 
     // Calculate Contributions (Markers authored)
     const allData = getAllMapData();
@@ -2243,37 +2330,219 @@ function renderNotifications() {
         list.appendChild(item);
     });
 }
+// --- AUTHENTICATION ---
+
+function toggleAuthScreens() {
+    const loginScreen = document.getElementById('login-screen');
+    const signupScreen = document.getElementById('signup-screen');
+
+    if (loginScreen.classList.contains('hidden')) {
+        loginScreen.classList.remove('hidden');
+        signupScreen.classList.add('hidden');
+    } else {
+        loginScreen.classList.add('hidden');
+        signupScreen.classList.remove('hidden');
+    }
+}
+
+function registerUser() {
+    const u = document.getElementById('reg-user').value;
+    const e = document.getElementById('reg-email').value;
+    const p = document.getElementById('reg-pass').value;
+
+    if (!u || !e || !p) return showToast("Please fill all fields");
+
+    fetch('/api/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username: u, email: e, password: p })
+    })
+        .then(res => res.json())
+        .then(data => {
+            if (data.error) throw new Error(data.error);
+
+            showToast("Account Created! Please Login.");
+            toggleAuthScreens(); // Go back to login
+        })
+        .catch(err => {
+            console.error(err);
+            showToast(err.message);
+        });
+}
+
 function login() {
     const u = document.getElementById('login-user').value;
     const p = document.getElementById('login-pass').value;
-    if (users[u] && users[u].password === p) {
-        currentUser = { role: users[u].role, username: u };
-        updateUI();
-        document.getElementById('login-screen').classList.add('hidden');
-        showToast(`Welcome ${u}!`);
 
-        // Save Session
-        localStorage.setItem('ecomap_session', JSON.stringify({
-            username: u,
-            role: users[u].role,
-            expiresAt: Date.now() + (7 * 24 * 60 * 60 * 1000)
-        }));
+    if (!u || !p) return showToast("Enter username and password");
 
-        showWelcomeCard();
+    fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username: u, password: p })
+    })
+        .then(res => res.json())
+        .then(data => {
+            if (data.error) throw new Error(data.error);
 
-        // Admin Notification for Approvals
-        if (currentUser.role === 'admin') {
-            const pendingCount = markersData.filter(m => m.status === 'pending').length;
-            if (pendingCount > 0) {
-                setTimeout(() => {
-                    showToast(`⚠️ You have ${pendingCount} markers waiting for approval`);
-                }, 1500);
+            const user = data.user;
+
+            currentUser = {
+                role: user.role,
+                username: user.username,
+                points: user.points,
+                level: user.level,
+                avatar: user.avatar
+            };
+
+            updateUI();
+            document.getElementById('login-screen').classList.add('hidden');
+            showToast(`Welcome ${user.username}!`);
+
+            // Save Session
+            localStorage.setItem('ecomap_session', JSON.stringify({
+                username: user.username,
+                role: user.role,
+                points: user.points,
+                level: user.level,
+                avatar: user.avatar,
+                expiresAt: Date.now() + (7 * 24 * 60 * 60 * 1000)
+            }));
+        })
+        .catch(err => {
+            console.error(err);
+            showToast(err.message || "Login failed");
+        });
+}
+
+// --- ACCOUNT MANAGEMENT ---
+
+function openForgotPass() {
+    document.getElementById('login-screen').classList.add('hidden');
+    document.getElementById('forgot-screen').classList.remove('hidden');
+}
+
+function sendResetCode() {
+    const email = document.getElementById('forgot-email').value;
+    if (!email) return showToast("Please enter your email");
+
+    fetch('/api/forgot-password', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email })
+    })
+        .then(res => res.json())
+        .then(data => {
+            if (data.error) throw new Error(data.error);
+
+            showToast("Code Sent! (Check Console for Mock)");
+            console.log("MOCK TOKEN:", data.debug_token); // For testing
+
+            document.getElementById('forgot-screen').classList.add('hidden');
+            document.getElementById('reset-screen').classList.remove('hidden');
+        })
+        .catch(err => showToast(err.message));
+}
+
+function submitResetPassword() {
+    const email = document.getElementById('forgot-email').value;
+    const token = document.getElementById('reset-token').value;
+    const pass = document.getElementById('reset-pass').value;
+
+    if (!token || !pass) return showToast("Fill all fields");
+
+    fetch('/api/reset-password', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, token, newPassword: pass })
+    })
+        .then(res => res.json())
+        .then(data => {
+            if (data.error) throw new Error(data.error);
+
+            showToast("Password Reset Success! Please Login.");
+            document.getElementById('reset-screen').classList.add('hidden');
+            document.getElementById('login-screen').classList.remove('hidden');
+        })
+        .catch(err => showToast(err.message));
+}
+
+function uploadAvatar(input) {
+    const file = input.files[0];
+    if (!file) return;
+
+    // 1. Read File
+    const reader = new FileReader();
+    reader.onload = function (e) {
+        const img = new Image();
+        img.src = e.target.result;
+        img.onload = function () {
+            // 2. Resize Canvas (Max 300x300 for efficiency)
+            const canvas = document.createElement('canvas');
+            const MAX_SIZE = 300;
+            let width = img.width;
+            let height = img.height;
+
+            if (width > height) {
+                if (width > MAX_SIZE) {
+                    height *= MAX_SIZE / width;
+                    width = MAX_SIZE;
+                }
+            } else {
+                if (height > MAX_SIZE) {
+                    width *= MAX_SIZE / height;
+                    height = MAX_SIZE;
+                }
             }
+            canvas.width = width;
+            canvas.height = height;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, width, height);
+
+            // 3. Get Base64
+            const dataUrl = canvas.toDataURL('image/jpeg', 0.8);
+
+            // 4. Send to API
+            fetch('/api/upload-avatar', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    username: currentUser.username,
+                    imageBase64: dataUrl
+                })
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.error) throw new Error(data.error);
+
+                    showToast("Avatar Updated!");
+                    currentUser.avatar = data.avatar;
+
+                    // Update Local Storage
+                    const session = JSON.parse(localStorage.getItem('ecomap_session'));
+                    session.avatar = data.avatar;
+                    localStorage.setItem('ecomap_session', JSON.stringify(session));
+
+                    updateUI(); // Reflect changes
+                })
+                .catch(err => showToast(err.message));
         }
-    } else {
-        document.getElementById('login-error').classList.remove('hidden');
     }
-};
+    reader.readAsDataURL(file);
+}
+
+showWelcomeCard();
+
+// Admin Notification for Approvals
+if (currentUser.role === 'admin') {
+    const pendingCount = markersData.filter(m => m.status === 'pending').length;
+    if (pendingCount > 0) {
+        setTimeout(() => {
+            showToast(`⚠️ You have ${pendingCount} markers waiting for approval`);
+        }, 1500);
+    }
+}
+
 
 // --- VOICE NAVIGATION & COMMANDS ---
 let lastInputWasVoice = false;
@@ -2997,4 +3266,100 @@ function showAllReports() {
 
 function showSystemHealth() {
     showToast("System Healthy (100%)");
+}
+
+// --- ADMIN PANEL LOGIC ---
+
+function openAdminPanel() {
+    closeDashboard();
+    document.getElementById('admin-modal').classList.remove('hidden');
+    renderUserList();
+}
+
+function showAdminTab(tab) {
+    // Buttons
+    document.getElementById('tab-users').style.background = tab === 'users' ? 'var(--primary-color)' : 'white';
+    document.getElementById('tab-users').style.color = tab === 'users' ? 'white' : '#333';
+
+    document.getElementById('tab-export').style.background = tab === 'export' ? 'var(--primary-color)' : 'white';
+    document.getElementById('tab-export').style.color = tab === 'export' ? 'white' : '#333';
+
+    // Views
+    if (tab === 'users') {
+        document.getElementById('admin-view-users').classList.remove('hidden');
+        document.getElementById('admin-view-export').classList.add('hidden');
+    } else {
+        document.getElementById('admin-view-users').classList.add('hidden');
+        document.getElementById('admin-view-export').classList.remove('hidden');
+    }
+}
+
+function renderUserList() {
+    const list = document.getElementById('admin-user-list');
+    list.innerHTML = '<tr><td colspan="4" style="text-align:center;">Loading...</td></tr>';
+
+    fetch('/api/users')
+        .then(res => res.json())
+        .then(users => {
+            list.innerHTML = '';
+            users.forEach(user => {
+                const row = document.createElement('tr');
+                row.style.borderBottom = '1px solid #eee';
+
+                // Allow changing roles (except for self or protected admins if needed)
+                const isSelf = user.username === currentUser.username;
+
+                let actionHtml = '';
+                if (!isSelf) {
+                    if (user.role === 'banned') {
+                        actionHtml = `<button onclick="updateUserRole('${user.id}', 'user')" style="color:green; border:1px solid green; background:white; padding:2px 8px; border-radius:4px; font-size:0.8rem;">Unban</button>`;
+                    } else {
+                        actionHtml = `
+                        <button onclick="updateUserRole('${user.id}', 'admin')" style="background:#2196F3; color:white; border:none; padding:4px 8px; border-radius:4px; font-size:0.8rem;" title="Make Admin"><i class="fa-solid fa-crown"></i></button>
+                        <button onclick="updateUserRole('${user.id}', 'banned')" style="background:#f44336; color:white; border:none; padding:4px 8px; border-radius:4px; font-size:0.8rem;" title="Ban User"><i class="fa-solid fa-ban"></i></button>
+                    `;
+                    }
+                } else {
+                    actionHtml = '<span style="color:#999; font-style:italic;">(You)</span>';
+                }
+
+                row.innerHTML = `
+                <td style="padding:10px;">
+                    <div style="display:flex; align-items:center; gap:10px;">
+                        <img src="${user.avatar || 'https://cdn-icons-png.flaticon.com/512/1077/1077114.png'}" style="width:30px; height:30px; border-radius:50%; object-fit:cover;">
+                        ${user.username}
+                    </div>
+                </td>
+                <td style="padding:10px; color:#666;">${user.email}</td>
+                <td style="padding:10px;"><span class="role-badge">${user.role}</span></td>
+                <td style="padding:10px;">${actionHtml}</td>
+            `;
+                list.appendChild(row);
+            });
+        })
+        .catch(err => {
+            console.error(err);
+            list.innerHTML = '<tr><td colspan="4" style="color:red; text-align:center;">Error loading users</td></tr>';
+        });
+}
+
+function updateUserRole(id, role) {
+    if (!confirm(`Set user role to ${role}?`)) return;
+
+    fetch(`/api/users/${id}/role`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ role })
+    })
+        .then(res => res.json())
+        .then(data => {
+            if (data.error) throw new Error(data.error);
+            showToast(`User updated to ${role}`);
+            renderUserList(); // Refresh
+        })
+        .catch(err => showToast("Error updating role"));
+}
+
+function exportData() {
+    window.location.href = '/api/export/markers';
 }

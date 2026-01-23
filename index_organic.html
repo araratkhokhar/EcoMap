@@ -25,24 +25,94 @@
 
     <div id="toast-container"></div>
 
+    <!-- Login Screen -->
     <div id="login-screen" class="hidden">
         <div class="login-box">
-            <h2 class="panel-title">Advisor Login</h2>
-            <div class="form-group">
-                <label for="login-user">Username</label>
-                <input type="text" id="login-user" name="username" autocomplete="username" class="form-control"
-                    placeholder="username">
+            <div style="text-align:center; margin-bottom:20px;">
+                <i class="fa-solid fa-leaf" style="font-size:3rem; color:var(--primary-color);"></i>
+                <h2 style="margin-top:10px;">Welcome Back</h2>
             </div>
             <div class="form-group">
-                <label for="login-pass">Password</label>
-                <input type="password" id="login-pass" name="password" autocomplete="current-password"
-                    class="form-control" placeholder="password">
+                <input type="text" id="login-user" class="form-control" placeholder="Username (Try: admin)">
             </div>
-            <p id="login-error" style="color: red; font-size: 0.9rem; margin-bottom: 15px;" class="hidden">Invalid
-                credentials</p>
-            <button class="btn-save" onclick="login()">Enter Garden</button>
-            <button class="btn-save" style="background: #ccc; color: #444;"
-                onclick="document.getElementById('login-screen').classList.add('hidden')">Cancel</button>
+            <div class="form-group">
+                <input type="password" id="login-pass" class="form-control" placeholder="Password (Try: 1234)">
+            </div>
+            <button class="btn-save" onclick="login()">Login</button>
+            <button class="btn-save" onclick="document.getElementById('login-screen').classList.add('hidden')"
+                style="background:#eee; color:#333; margin-top:10px;">Continue as Guest</button>
+
+            <p style="margin-top:15px; font-size:0.9rem; color:#666;">
+                Don't have an account? <a href="#" onclick="toggleAuthScreens()"
+                    style="color:var(--primary-color); font-weight:bold;">Sign Up</a>
+            </p>
+            <p style="margin-top:5px; font-size:0.85rem; color:#999;">
+                <a href="#" onclick="openForgotPass()" style="color:#666; text-decoration:underline;">Forgot
+                    Password?</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Signup Screen -->
+    <div id="signup-screen" class="hidden"
+        style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:2000; display:flex; align-items:center; justify-content:center; backdrop-filter:blur(5px);">
+        <div class="login-box">
+            <div style="text-align:center; margin-bottom:20px;">
+                <i class="fa-solid fa-user-plus" style="font-size:3rem; color:var(--primary-color);"></i>
+                <h2 style="margin-top:10px;">Create Account</h2>
+            </div>
+            <div class="form-group">
+                <input type="text" id="reg-user" class="form-control" placeholder="Choose Username">
+            </div>
+            <div class="form-group">
+                <input type="email" id="reg-email" class="form-control" placeholder="Email Address">
+            </div>
+            <div class="form-group">
+                <input type="password" id="reg-pass" class="form-control" placeholder="Create Password">
+            </div>
+            <button class="btn-save" onclick="registerUser()">Sign Up</button>
+            <button class="btn-save" onclick="toggleAuthScreens()"
+                style="background:#eee; color:#333; margin-top:10px;">Back to Login</button>
+        </div>
+    </div>
+
+    <!-- Forgot Password Screen -->
+    <div id="forgot-screen" class="hidden"
+        style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:2000; display:flex; align-items:center; justify-content:center; backdrop-filter:blur(5px);">
+        <div class="login-box">
+            <div style="text-align:center; margin-bottom:20px;">
+                <i class="fa-solid fa-key" style="font-size:3rem; color:var(--primary-color);"></i>
+                <h2 style="margin-top:10px;">Account Recovery</h2>
+            </div>
+            <p style="margin-bottom:15px; font-size:0.9rem; color:#666; text-align:center;">
+                Enter your email address and we will send you a code to reset your password.
+            </p>
+            <div class="form-group">
+                <input type="email" id="forgot-email" class="form-control" placeholder="Enter Registration Email">
+            </div>
+            <button class="btn-save" onclick="sendResetCode()">Send Code</button>
+            <button class="btn-save" onclick="document.getElementById('forgot-screen').classList.add('hidden')"
+                style="background:#eee; color:#333; margin-top:10px;">Cancel</button>
+        </div>
+    </div>
+
+    <!-- Reset Password Screen -->
+    <div id="reset-screen" class="hidden"
+        style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:2000; display:flex; align-items:center; justify-content:center; backdrop-filter:blur(5px);">
+        <div class="login-box">
+            <div style="text-align:center; margin-bottom:20px;">
+                <i class="fa-solid fa-lock-open" style="font-size:3rem; color:var(--primary-color);"></i>
+                <h2 style="margin-top:10px;">New Password</h2>
+            </div>
+            <div class="form-group">
+                <label>Reset Code</label>
+                <input type="text" id="reset-token" class="form-control" placeholder="123456">
+            </div>
+            <div class="form-group">
+                <label>New Password</label>
+                <input type="password" id="reset-pass" class="form-control" placeholder="New Secure Password">
+            </div>
+            <button class="btn-save" onclick="submitResetPassword()">Update Password</button>
         </div>
     </div>
 
@@ -269,6 +339,10 @@
                     <option value="maintenance">Maintenance</option>
                 </select>
             </div>
+            <div class="form-group">
+                <label for="edit-marker-image">Photo (Optional)</label>
+                <input type="file" id="edit-marker-image" class="form-control" accept="image/*">
+            </div>
             <button class="btn-save" onclick="submitEdit()">Save Changes</button>
         </div>
     </div>
@@ -291,9 +365,18 @@
                 <!-- 1. Profile Card -->
                 <div class="dashboard-card profile-card">
                     <div class="profile-header">
-                        <div class="profile-avatar">
-                            <i class="fa-solid fa-user-astronaut"></i>
+                        <div class="profile-avatar" onclick="document.getElementById('avatar-upload').click()"
+                            style="cursor:pointer; position:relative;">
+                            <i class="fa-solid fa-user-astronaut" id="dash-avatar-icon"></i>
+                            <img id="dash-avatar-img" class="hidden"
+                                style="width:100%; height:100%; object-fit:cover; border-radius:50%;">
+                            <div
+                                style="position:absolute; bottom:0; right:0; background:var(--primary-color); color:white; border-radius:50%; width:24px; height:24px; display:flex; align-items:center; justify-content:center; font-size:12px; border:2px solid white;">
+                                <i class="fa-solid fa-camera"></i>
+                            </div>
                         </div>
+                        <input type="file" id="avatar-upload" accept="image/*" class="hidden"
+                            onchange="uploadAvatar(this)">
                         <div class="profile-info">
                             <h3 id="dash-username">User</h3>
                             <div class="role-badge" id="dash-role">Agent</div>
@@ -362,6 +445,61 @@
                     class="btn-save"
                     style="background: var(--primary-color); color: white; width: auto; padding: 8px 24px; display: none;">
                     <i class="fa-solid fa-right-to-bracket"></i> Login
+                </button>
+                <!-- Admin Button -->
+                <button id="dash-admin-btn" onclick="openAdminPanel()" class="btn-save"
+                    style="background:#333; color:white; border:1px solid #555; width:auto; padding:8px 24px; display:none; margin-right:10px;">
+                    <i class="fa-solid fa-user-shield"></i> Admin
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Modal -->
+    <div id="admin-modal" class="hidden"
+        style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:2000; display:flex; align-items:center; justify-content:center; backdrop-filter:blur(5px);">
+        <div class="dashboard-container"
+            style="max-height:90vh; overflow-y:auto; background:white; padding:20px; border-radius:15px; width:95%; max-width:900px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+                <h2 class="panel-title" style="margin:0;">Admin Panel</h2>
+                <button onclick="document.getElementById('admin-modal').classList.add('hidden')"
+                    style="background:none; border:none; font-size:1.5rem; cursor:pointer;">&times;</button>
+            </div>
+
+            <div class="admin-tabs"
+                style="display:flex; gap:10px; margin-bottom:20px; border-bottom:1px solid #eee; padding-bottom:10px;">
+                <button class="capsule-btn" onclick="showAdminTab('users')" id="tab-users"
+                    style="background:var(--primary-color); color:white;">Users</button>
+                <button class="capsule-btn" onclick="showAdminTab('export')" id="tab-export"
+                    style="background:white; color:#333; border:1px solid #ccc;">Data Export</button>
+            </div>
+
+            <!-- Tab: Users -->
+            <div id="admin-view-users">
+                <div style="overflow-x:auto;">
+                    <table style="width:100%; border-collapse:collapse; font-size:0.9rem;">
+                        <thead>
+                            <tr style="background:#f5f5f5; text-align:left;">
+                                <th style="padding:10px;">User</th>
+                                <th style="padding:10px;">Email</th>
+                                <th style="padding:10px;">Role</th>
+                                <th style="padding:10px;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-user-list">
+                            <!-- Injected via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Tab: Export -->
+            <div id="admin-view-export" class="hidden" style="text-align:center; padding:40px;">
+                <i class="fa-solid fa-file-csv" style="font-size:4rem; color:#2E7D32; margin-bottom:20px;"></i>
+                <h3>Export Marker Data</h3>
+                <p style="color:#666; margin-bottom:20px;">Download all marker data as a CSV file for analysis.</p>
+                <button class="btn-save" onclick="exportData()" style="width:auto; padding:10px 30px;">
+                    <i class="fa-solid fa-download"></i> Download CSV
                 </button>
             </div>
         </div>
