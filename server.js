@@ -144,8 +144,8 @@ app.post('/api/markers', async (req, res) => {
         const result = await pool.query(query, values);
         res.json(result.rows[0]);
     } catch (err) {
-        console.error(err);
-        res.status(500).send('Server Error');
+        console.error("Insert Error:", err);
+        res.status(500).json({ error: err.message });
     }
 });
 

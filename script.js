@@ -577,14 +577,9 @@ function updateUI() {
     if (addBtn) addBtn.style.display = role !== 'guest' ? 'flex' : 'none';
 
     // Call Support Button (Guest/User only)
+    // Call Support Button REMOVED (Moved to Chatbot)
     const callBtn = document.getElementById('call-support-button');
-    if (callBtn) {
-        if (role !== 'admin') {
-            callBtn.classList.remove('hidden');
-        } else {
-            callBtn.classList.add('hidden');
-        }
-    }
+    if (callBtn) callBtn.style.display = 'none';
 
 
     // 2. User Badge / Notification Area
@@ -611,13 +606,11 @@ function updateUI() {
         // Check real unread count
         const unread = userNotifications.filter(n => !n.read).length;
         if (unread > 0) {
-            // Append dot without overwriting textContent completely if possible, 
-            // but textContent was just set. 
-            // Better to use innerHTML for both.
             badgeEl.innerHTML = `${currentUser.username} <span style="position:absolute; top:-2px; right:-2px; width:10px; height:10px; background:red; border-radius:50%; border:1px solid white;"></span>`;
         }
 
-        badgeEl.onclick = toggleUserMenu;
+        // ALWAYS open Dashboard logic now (No more floating menu)
+        badgeEl.onclick = handleAuthClick;
     }
 
     // 3. Theme Classes
@@ -1973,6 +1966,12 @@ function getBotResponse(message) {
             ];
             return prefix + tips[Math.floor(Math.random() * tips.length)];
         }
+    }
+
+    // Call Support Intent
+    if (message.includes('call support') || message.includes('contact support') || message.includes('speak to admin')) {
+        setTimeout(() => initiateCall(), 1000); // Small delay for UX
+        return "Initiating secure voice line to Support... Please allow microphone access.";
     }
 
     // Guest Specific Responses
