@@ -172,8 +172,30 @@ pool.connect()
                            VALUES ('admin', 'admin@ecomap.com', $1, 'admin', 9999, 99)
                         `, [adminPass]);
                     }
+
+                    // Seed Agents (Tom & Jerry)
+                    const tomCheck = await client.query("SELECT * FROM users WHERE username = 'tom'");
+                    if (tomCheck.rows.length === 0) {
+                        console.log("Seeding agent tom...");
+                        const tomPass = hashPassword('123');
+                        await client.query(`
+                           INSERT INTO users (username, email, password_hash, role, points, level)
+                           VALUES ('tom', 'tom@ecomap.com', $1, 'agent', 450, 5)
+                        `, [tomPass]);
+                    }
+
+                    const jerryCheck = await client.query("SELECT * FROM users WHERE username = 'jerry'");
+                    if (jerryCheck.rows.length === 0) {
+                        console.log("Seeding agent jerry...");
+                        const jerryPass = hashPassword('123');
+                        await client.query(`
+                           INSERT INTO users (username, email, password_hash, role, points, level)
+                           VALUES ('jerry', 'jerry@ecomap.com', $1, 'agent', 320, 3)
+                        `, [jerryPass]);
+                    }
+
                 } catch (e) {
-                    console.error("Error seeding admin:", e);
+                    console.error("Error seeding users:", e);
                 }
 
                 // Migration: Check for 'image' column in markers
@@ -234,7 +256,8 @@ app.post('/api/login', async (req, res) => {
 
     try {
         const passwordHash = hashPassword(password);
-        const query = `SELECT * FROM users WHERE username = $1`;
+        // Case-insensitive login
+        const query = `SELECT * FROM users WHERE LOWER(username) = LOWER($1)`;
         const result = await pool.query(query, [username]);
 
         if (result.rows.length === 0) {

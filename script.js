@@ -897,6 +897,14 @@ let activeCallParams = null; // Store caller ID when admin receives call
 async function initiateCall() {
     if (!socket) return showToast("Call service unavailable");
 
+    // Security Check for Remote Devices
+    if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1' && window.location.protocol !== 'https:') {
+        const msg = "麦克风 access blocked! You are on HTTP. Please use HTTPS or localhost to enable voice calls.";
+        alert(msg);
+        showToast(msg);
+        return;
+    }
+
     // UI
     document.getElementById('call-modal').classList.remove('hidden');
     document.getElementById('call-status-text').innerText = "Calling Support... (Allow Mic)";
@@ -960,6 +968,14 @@ function showIncomingCall(data) {
 
 async function answerCall() {
     if (!activeCallParams) return;
+
+    // Security Check for Remote Devices
+    if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1' && window.location.protocol !== 'https:') {
+        const msg = "Cannot access microphone on HTTP. Please use HTTPS.";
+        alert(msg);
+        showToast(msg);
+        return;
+    }
 
     try {
         localStream = await navigator.mediaDevices.getUserMedia({ audio: true });
