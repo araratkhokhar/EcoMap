@@ -161,6 +161,21 @@ pool.connect()
             });
         })
             .then(async () => {
+                // Seed Default Admin
+                try {
+                    const adminCheck = await client.query("SELECT * FROM users WHERE username = 'admin'");
+                    if (adminCheck.rows.length === 0) {
+                        console.log("Seeding default admin user...");
+                        const adminPass = hashPassword('admin123');
+                        await client.query(`
+                           INSERT INTO users (username, email, password_hash, role, points, level)
+                           VALUES ('admin', 'admin@ecomap.com', $1, 'admin', 9999, 99)
+                        `, [adminPass]);
+                    }
+                } catch (e) {
+                    console.error("Error seeding admin:", e);
+                }
+
                 // Migration: Check for 'image' column in markers
                 try {
                     const check = await client.query("SELECT column_name FROM information_schema.columns WHERE table_name='markers' AND column_name='image'");
