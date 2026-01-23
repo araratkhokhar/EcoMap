@@ -852,8 +852,8 @@ function renderPanelContent(marker, distance) {
 }
 
 function approveMarker(id) {
-    const all = getAllMapData();
-    const marker = all.find(m => m.id == id);
+    // Use cachedMarkers directly as it's the source of truth for the map
+    const marker = cachedMarkers.find(m => m.id == id);
 
     if (!marker) {
         showToast("Error: Marker not found");
@@ -1988,9 +1988,9 @@ function deleteMarker(id) {
 }
 
 function editMarker(id) {
-    const all = getAllMapData();
+    // Use cachedMarkers directly
     // Use loose equality to match string ID from HTML attribute with number ID in data
-    const marker = all.find(m => m.id == id);
+    const marker = cachedMarkers.find(m => m.id == id);
 
     if (!marker) {
         showToast("Error: Marker not found");
