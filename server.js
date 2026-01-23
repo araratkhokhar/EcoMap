@@ -35,8 +35,12 @@ io.on('connection', (socket) => {
     socket.on('join', (data) => {
         const role = data.role;
         console.log(`User ${socket.id} joined as ${role}`);
+
+        // Manage Admin Room
         if (role === 'admin') {
             socket.join('admins');
+        } else {
+            socket.leave('admins');
         }
     });
 
@@ -141,7 +145,20 @@ pool.connect()
                     level INTEGER DEFAULT 1,
                     joined_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                 );
-            `);
+            `).then(() => {
+                // 3. Reports Table (New)
+                return client.query(`
+                    CREATE TABLE IF NOT EXISTS reports (
+                        id SERIAL PRIMARY KEY,
+                        type VARCHAR(50) NOT NULL,
+                        description TEXT,
+                        location TEXT,
+                        status VARCHAR(20) DEFAULT 'pending',
+                        author VARCHAR(100),
+                        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                    );
+                `);
+            });
         })
             .then(async () => {
                 // Migration: Check for 'image' column in markers
@@ -365,6 +382,52 @@ app.get('/api/export/markers', async (req, res) => {
     } catch (err) {
         console.error("Export Error:", err);
         res.status(500).json({ error: "Export Failed" });
+    }
+});
+
+// --- REPORT ROUTES ---
+
+// 9. Submit Report
+app.post('/api/reports', async (req, res) => {
+    const { type, description, location, author } = req.body;
+    try {
+        const query = `
+            INSERT INTO reports (type, description, location, author)
+            VALUES ($1, $2, $3, $4)
+            RETURNING *;
+        `;
+        const result = await pool.query(query, [type, description, location, author]);
+        res.json(result.rows[0]);
+    } catch (err) {
+        console.error("Report Error:", err);
+        res.status(500).json({ error: "Server Error" });
+    }
+});
+
+// 10. Get All Reports (Admin)
+app.get('/api/reports', async (req, res) => {
+    try {
+        const result = await pool.query('SELECT * FROM reports ORDER BY created_at DESC');
+        res.json(result.rows);
+    } catch (err) {
+        console.error("Get Reports Error:", err);
+        res.status(500).json({ error: "Server Error" });
+    }
+});
+
+// 11. Update Report Status
+app.put('/api/reports/:id/status', async (req, res) => {
+    const { id } = req.params;
+    const { status } = req.body;
+    try {
+        const result = await pool.query(
+            'UPDATE reports SET status = $1 WHERE id = $2 RETURNING *',
+            [status, id]
+        );
+        res.json(result.rows[0]);
+    } catch (err) {
+        console.error("Update Report Error:", err);
+        res.status(500).json({ error: "Server Error" });
     }
 });
 

@@ -1109,14 +1109,34 @@ function closeReportModal() {
 function submitReport() {
     const type = document.getElementById('report-type').value;
     const desc = document.getElementById('report-desc').value;
+    const location = document.getElementById('report-location').value;
 
-    showToast(`Report Submitted: ${type}`);
-    console.log("Report:", { type, desc });
+    const reportData = {
+        type: type,
+        description: desc,
+        location: location,
+        author: currentUser.username
+    };
 
-    // Gamification Hook
-    awardPoints(50, 'Report Submitted');
-
-    closeReportModal();
+    fetch('/api/reports', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(reportData)
+    })
+        .then(res => {
+            if (!res.ok) throw new Error('Failed to submit report');
+            return res.json();
+        })
+        .then(data => {
+            showToast(`Report Submitted: ${type}`);
+            // Gamification Hook
+            awardPoints(50, 'Report Submitted');
+            closeReportModal();
+        })
+        .catch(err => {
+            console.error(err);
+            showToast("Error submitting report");
+        });
 }
 
 function shareMarker(marker) {
@@ -2214,6 +2234,11 @@ function logout() {
 
     updateUI();
     showToast("Logged out");
+
+    // Update Socket Role
+    if (socket) {
+        socket.emit('join', { role: 'guest' });
+    }
 }
 
 function handleAuthClick() {
@@ -2398,6 +2423,11 @@ function login() {
             updateUI();
             document.getElementById('login-screen').classList.add('hidden');
             showToast(`Welcome ${user.username}!`);
+
+            // Update Socket Role (Join Admin Room if applicable)
+            if (socket) {
+                socket.emit('join', { role: currentUser.role });
+            }
 
             // Save Session
             localStorage.setItem('ecomap_session', JSON.stringify({
@@ -3277,21 +3307,146 @@ function openAdminPanel() {
 }
 
 function showAdminTab(tab) {
-    // Buttons
-    document.getElementById('tab-users').style.background = tab === 'users' ? 'var(--primary-color)' : 'white';
-    document.getElementById('tab-users').style.color = tab === 'users' ? 'white' : '#333';
-
-    document.getElementById('tab-export').style.background = tab === 'export' ? 'var(--primary-color)' : 'white';
-    document.getElementById('tab-export').style.color = tab === 'export' ? 'white' : '#333';
+    // Tabs
+    document.querySelectorAll('.admin-tabs button').forEach(btn => {
+        btn.style.background = 'white';
+        btn.style.color = '#333';
+        btn.style.borderColor = '#ccc';
+    });
+    const activeBtn = document.getElementById(`tab-${tab}`);
+    if (activeBtn) {
+        activeBtn.style.background = 'var(--primary-color)';
+        activeBtn.style.color = 'white';
+        activeBtn.style.borderColor = 'var(--primary-color)';
+    }
 
     // Views
+    document.getElementById('admin-view-users').classList.add('hidden');
+    document.getElementById('admin-view-export').classList.add('hidden');
+    document.getElementById('admin-view-approvals').classList.add('hidden');
+    document.getElementById('admin-view-reports').classList.add('hidden');
+
+    document.getElementById(`admin-view-${tab}`).classList.remove('hidden');
+
     if (tab === 'users') {
-        document.getElementById('admin-view-users').classList.remove('hidden');
-        document.getElementById('admin-view-export').classList.add('hidden');
-    } else {
-        document.getElementById('admin-view-users').classList.add('hidden');
-        document.getElementById('admin-view-export').classList.remove('hidden');
+        renderUserList();
+    } else if (tab === 'approvals') {
+        renderApprovalList();
+    } else if (tab === 'reports') {
+        renderReportList();
     }
+}
+
+function renderApprovalList() {
+    const list = document.getElementById('admin-approval-list');
+    list.innerHTML = '<tr><td colspan="4" style="text-align:center; padding:20px;">Loading...</td></tr>';
+
+    // Filter local markers for pending status
+    const all = getAllMapData();
+    const pending = all.filter(m => m.status === 'pending');
+
+    list.innerHTML = '';
+
+    if (pending.length === 0) {
+        document.getElementById('no-approvals-msg').style.display = 'block';
+    } else {
+        document.getElementById('no-approvals-msg').style.display = 'none';
+        pending.forEach(m => {
+            const tr = document.createElement('tr');
+            tr.style.borderBottom = '1px solid #eee';
+            tr.innerHTML = `
+                <td style="padding:10px;">
+                    <div style="font-weight:600;">${m.title}</div>
+                    <div style="font-size:0.8rem; color:#666;">${m.address}</div>
+                </td>
+                <td style="padding:10px;">${m.type}</td>
+                <td style="padding:10px;">${m.author || 'Anonymous'}</td>
+                <td style="padding:10px;">
+                    <button onclick="approveMarkerAdmin('${m.id}')" style="background:#4CAF50; color:white; border:none; padding:5px 10px; border-radius:4px; cursor:pointer; margin-right:5px;">Approve</button>
+                    <button onclick="rejectMarker('${m.id}')" style="background:#f44336; color:white; border:none; padding:5px 10px; border-radius:4px; cursor:pointer;">Reject</button>
+                </td>
+            `;
+            list.appendChild(tr);
+        });
+    }
+}
+
+function approveMarkerAdmin(id) {
+    fetch(`/api/markers/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ status: 'published' })
+    })
+        .then(() => {
+            showToast("Marker Approved");
+            loadMarkers(); // Update local map data
+            renderApprovalList(); // Refresh admin list
+        })
+        .catch(err => {
+            console.error(err);
+            showToast("Error approving marker");
+        });
+}
+
+async function renderReportList() {
+    const list = document.getElementById('admin-report-list');
+    list.innerHTML = '<tr><td colspan="5" style="text-align:center; padding:20px;">Loading...</td></tr>';
+
+    try {
+        const res = await fetch('/api/reports');
+        const reports = await res.json();
+
+        list.innerHTML = '';
+
+        if (reports.length === 0) {
+            document.getElementById('no-reports-msg').style.display = 'block';
+        } else {
+            document.getElementById('no-reports-msg').style.display = 'none';
+            reports.forEach(r => {
+                const tr = document.createElement('tr');
+                tr.style.borderBottom = '1px solid #eee';
+                const date = new Date(r.created_at).toLocaleDateString();
+                const statusColor = r.status === 'resolved' ? 'green' : 'orange';
+
+                tr.innerHTML = `
+                    <td style="padding:10px;">${date}</td>
+                    <td style="padding:10px;">${r.type}</td>
+                    <td style="padding:10px;">
+                        <div>${r.description || '-'}</div>
+                        ${r.location ? `<div style="font-size:0.8rem; color:#666; margin-top:4px;">📍 ${r.location}</div>` : ''}
+                    </td>
+                    <td style="padding:10px;"><span style="color:${statusColor}; font-weight:bold; text-transform:capitalize;">${r.status}</span></td>
+                    <td style="padding:10px;">
+                        ${r.status === 'pending' ?
+                        `<button onclick="resolveReport(${r.id})" style="background:#2196F3; color:white; border:none; padding:5px 10px; border-radius:4px; cursor:pointer;">Resolve</button>`
+                        : '<i class="fa-solid fa-check" style="color:green;"></i>'}
+                    </td>
+                `;
+                list.appendChild(tr);
+            });
+        }
+
+    } catch (e) {
+        console.error("Error fetching reports", e);
+        list.innerHTML = '<tr><td colspan="5" style="text-align:center; color:red;">Error loading reports</td></tr>';
+    }
+}
+
+function resolveReport(id) {
+    fetch(`/api/reports/${id}/status`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ status: 'resolved' })
+    })
+        .then(res => res.json())
+        .then(data => {
+            showToast("Report marked as Resolved");
+            renderReportList();
+        })
+        .catch(err => {
+            console.error(err);
+            showToast("Error update report");
+        });
 }
 
 function renderUserList() {
