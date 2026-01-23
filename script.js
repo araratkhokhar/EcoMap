@@ -620,7 +620,7 @@ function updateUI() {
 
     // 4. Removed redundant internal game-btn injection block since we use the main badge now.
 
-    // 5. Update Auth Button Icon (Bottom Sidebar)
+    // 5. Update Auth Button Icon (Bottom Sidebar) - REMOVED from HTML, keep logic safe
     const authIcon = document.getElementById('auth-icon');
     if (authIcon) {
         if (role === 'guest') {
