@@ -140,7 +140,11 @@
     <div id="chatbot-box" class="hidden">
         <div class="chat-header">
             EcoGuide
-            <i class="fa-solid fa-xmark" style="float: right; cursor: pointer;" onclick="toggleChat()"></i>
+            <div style="float: right; display: flex; gap: 15px; align-items: center;">
+                <i class="fa-solid fa-headset" style="cursor: pointer;" onclick="initiateCall()"
+                    title="Call Support"></i>
+                <i class="fa-solid fa-xmark" style="cursor: pointer;" onclick="toggleChat()"></i>
+            </div>
         </div>
         <div id="chat-messages">
             <div class="message bot-msg">Hello! How can we make Lahore greener?</div>
