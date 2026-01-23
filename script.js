@@ -2260,10 +2260,31 @@ function openDashboard() {
         if (logoutBtn) logoutBtn.style.display = 'inline-block';
     }
 
-    // Admin Button
+    // Admin Button & Card
     const adminBtn = document.getElementById('dash-admin-btn');
-    if (adminBtn) {
-        adminBtn.style.display = (currentUser.role === 'admin') ? 'inline-block' : 'none';
+    const adminCard = document.getElementById('dash-admin-card');
+
+    if (currentUser.role === 'admin') {
+        if (adminBtn) adminBtn.style.display = 'inline-block'; // Keep button just in case
+        if (adminCard) {
+            adminCard.style.display = 'block';
+            // Update Admin Stats
+            const allData = getAllMapData();
+            const pendingParams = allData.filter(m => m.status === 'pending').length;
+            document.getElementById('dash-admin-approvals-count').textContent = pendingParams;
+
+            // For reports, we need to fetch from API, but for sync UI let's just fetch
+            fetch('/api/reports')
+                .then(res => res.json())
+                .then(reports => {
+                    const pendingReports = reports.filter(r => r.status === 'pending').length;
+                    document.getElementById('dash-admin-reports-count').textContent = pendingReports;
+                })
+                .catch(e => console.error(e));
+        }
+    } else {
+        if (adminBtn) adminBtn.style.display = 'none';
+        if (adminCard) adminCard.style.display = 'none';
     }
 
     // Populate Data
@@ -3303,7 +3324,14 @@ function showSystemHealth() {
 function openAdminPanel() {
     closeDashboard();
     document.getElementById('admin-modal').classList.remove('hidden');
-    renderUserList();
+    // Default tab
+    showAdminTab('users');
+}
+
+function openAdminPanelTab(tabName) {
+    closeDashboard();
+    document.getElementById('admin-modal').classList.remove('hidden');
+    showAdminTab(tabName);
 }
 
 function showAdminTab(tab) {
