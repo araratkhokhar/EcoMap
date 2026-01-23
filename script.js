@@ -1693,7 +1693,16 @@ function showMarkerForm(lat, lng, editId = null) {
     if (closeBtn) closeBtn.style.display = 'flex';
 
     const header = editId ? 'Edit Marker' : 'Add New Marker';
-    const btnText = editId ? 'Update Marker' : 'Save Marker';
+    // Logic: Edit -> Update
+    // New + Agent -> Submit for Approval
+    // New + Admin -> Save Marker
+    let btnText = 'Save Marker';
+    if (editId) {
+        btnText = 'Update Marker';
+    } else if (currentUser.role !== 'admin') {
+        btnText = 'Submit for Approval';
+    }
+
     const clickHandler = editId ? `saveMarker(${lat}, ${lng}, '${editId}')` : `saveMarker(${lat}, ${lng})`;
 
     content.innerHTML = `
@@ -1803,8 +1812,14 @@ function saveMarker(lat, lng, id = null) {
             body: JSON.stringify(newMarker)
         })
             .then(res => res.json())
+            .then(res => res.json())
             .then(savedMarker => {
-                showToast("Marker Saved Successfully!");
+                if (newMarker.status === 'pending') {
+                    showToast("Submitted for Approval! 🕒");
+                } else {
+                    showToast("Marker Saved Successfully!");
+                }
+
                 loadMarkers(); // Reload from DB
                 closePanel();
 
