@@ -2112,9 +2112,93 @@ function handleAuthClick() {
     if (currentUser.role === 'guest') {
         document.getElementById('login-screen').classList.remove('hidden');
     } else {
-        // For signed-in users, clicking the bottom button now opens the menu
-        toggleUserMenu();
+        openDashboard();
     }
+}
+
+// --- DASHBOARD LOGIC ---
+function openDashboard() {
+    if (currentUser.role === 'guest') {
+        showFeatureTeaser('dashboard');
+        return;
+    }
+
+    // Populate Data
+    document.getElementById('dash-username').textContent = currentUser.username;
+    document.getElementById('dash-role').textContent = currentUser.role;
+    document.getElementById('dash-points').textContent = currentUser.points || 0;
+    document.getElementById('dash-level').textContent = currentUser.level || 1;
+
+    // Calculate Contributions (Markers authored)
+    const allData = getAllMapData();
+    const myContribs = allData.filter(m => m.author === currentUser.username).length;
+    document.getElementById('dash-contrib').textContent = myContribs;
+
+    renderLeaderboard();
+    renderNotifications();
+
+    document.getElementById('dashboard-modal').classList.remove('hidden');
+}
+
+function closeDashboard() {
+    document.getElementById('dashboard-modal').classList.add('hidden');
+}
+
+function renderLeaderboard() {
+    const list = document.getElementById('dash-leaderboard-list');
+    list.innerHTML = '';
+
+    // Mock Leaderboard Data (In real app, fetch from server)
+    const leaders = [
+        { name: 'Sarah Green', points: 1250 },
+        { name: 'Mike Eco', points: 980 },
+        { name: 'LahoreCleanup', points: 850 },
+        { name: 'Ali Recycle', points: 720 },
+        { name: currentUser.username, points: currentUser.points || 0 } // Include current user
+    ];
+
+    // Sort descending
+    leaders.sort((a, b) => b.points - a.points);
+    // Remove duplicates if user is already top
+    const uniqueLeaders = leaders.filter((v, i, a) => a.findIndex(v2 => (v2.name === v.name)) === i);
+
+    uniqueLeaders.slice(0, 5).forEach((user, index) => {
+        const item = document.createElement('div');
+        item.className = 'leaderboard-item';
+        // Highlight current user
+        if (user.name === currentUser.username) item.style.background = '#e8f5e9';
+
+        item.innerHTML = `
+            <span class="rank" style="color:${index === 0 ? '#FFB300' : ''}">#${index + 1}</span>
+            <span class="name">${user.name}</span>
+            <span class="score">${user.points} pts</span>
+        `;
+        list.appendChild(item);
+    });
+}
+
+function renderNotifications() {
+    const list = document.getElementById('dash-notifications-list');
+    list.innerHTML = '';
+
+    if (!userNotifications || userNotifications.length === 0) {
+        list.innerHTML = '<div class="empty-state" style="text-align:center; padding:20px; color:#999; font-style:italic;">No new notifications</div>';
+        return;
+    }
+
+    userNotifications.forEach(notif => {
+        const item = document.createElement('div');
+        item.className = `notification-item ${notif.read ? '' : 'unread'}`;
+        item.innerHTML = `
+            <i class="fa-solid fa-circle-info" style="color:var(--primary-color); margin-top:3px;"></i>
+            <div>
+                <div style="font-weight:700; margin-bottom:2px;">${notif.title}</div>
+                <div style="font-size:0.85rem; opacity:0.8;">${notif.message}</div>
+                <div style="font-size:0.75rem; color:#999; margin-top:4px;">${notif.time}</div>
+            </div>
+        `;
+        list.appendChild(item);
+    });
 }
 function login() {
     const u = document.getElementById('login-user').value;

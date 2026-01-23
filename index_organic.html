@@ -261,7 +261,7 @@
                 <label for="edit-notes">Notes</label>
                 <textarea id="edit-notes" class="form-control" rows="3"></textarea>
             </div>
-             <div class="form-group">
+            <div class="form-group">
                 <label for="edit-status">Status</label>
                 <select id="edit-status" class="form-control">
                     <option value="active">Active</option>
@@ -270,6 +270,83 @@
                 </select>
             </div>
             <button class="btn-save" onclick="submitEdit()">Save Changes</button>
+        </div>
+    </div>
+
+    <!-- Agent/Admin Dashboard Modal -->
+    <div id="dashboard-modal" class="hidden">
+        <div class="dashboard-container">
+            <div class="dashboard-header">
+                <div>
+                    <h2 style="margin:0;">EcoMap Dashboard</h2>
+                    <p style="margin:5px 0 0; opacity:0.8; font-size:0.9rem;">Manage contributions and track progress
+                    </p>
+                </div>
+                <button onclick="closeDashboard()" class="close-dashboard-btn">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="dashboard-content">
+                <!-- 1. Profile Card -->
+                <div class="dashboard-card profile-card">
+                    <div class="profile-header">
+                        <div class="profile-avatar">
+                            <i class="fa-solid fa-user-astronaut"></i>
+                        </div>
+                        <div class="profile-info">
+                            <h3 id="dash-username">User</h3>
+                            <div class="role-badge" id="dash-role">Agent</div>
+                        </div>
+                    </div>
+                    <div class="profile-stats">
+                        <div class="stat-item">
+                            <div class="stat-value" id="dash-points">0</div>
+                            <div class="stat-label">Points</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="dash-level">1</div>
+                            <div class="stat-label">Level</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="dash-contrib">0</div>
+                            <div class="stat-label">Reports</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Notifications -->
+                <div class="dashboard-card notification-card">
+                    <h3><i class="fa-solid fa-bell"></i> Notifications</h3>
+                    <div id="dash-notifications-list" class="notification-list">
+                        <!-- Items injected by JS -->
+                        <div class="empty-state">No new notifications</div>
+                    </div>
+                </div>
+
+                <!-- 3. Leaderboard -->
+                <div class="dashboard-card leaderboard-card">
+                    <h3><i class="fa-solid fa-trophy"></i> Top Contributors</h3>
+                    <div id="dash-leaderboard-list" class="leaderboard-list">
+                        <!-- Items injected by JS -->
+                        <div class="leaderboard-item">
+                            <span class="rank">1</span>
+                            <span class="name">Sarah Green</span>
+                            <span class="score">1,250 pts</span>
+                        </div>
+                        <div class="leaderboard-item">
+                            <span class="rank">2</span>
+                            <span class="name">Mike Eco</span>
+                            <span class="score">980 pts</span>
+                        </div>
+                        <div class="leaderboard-item">
+                            <span class="rank">3</span>
+                            <span class="name">LahoreCleanup</span>
+                            <span class="score">850 pts</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
