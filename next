@@ -1,0 +1,10 @@
+Call Support option should be in the chatbot 
+add a logout button in the dashboard and make it work for all users
+remove the Profile, leaderboard, and logout options from the Agent and Admin buttons
+the message is error saving marker but after reload it shows that the marker is there and 'Pending Approval'
+
+Remove the floating and make it work for all users 
+Added a "login" button at the bottom of the dashboard for Guest users. update the Logic so clicking the User Badge always opens the Dashboard  for all users if user is logged in they get a button for Logout and if not they get a button for Login
+
+Full User Registration (Feature 138) - Allow public users to Apply for an account.
+

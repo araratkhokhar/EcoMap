@@ -847,13 +847,43 @@ function renderPanelContent(marker, distance) {
 }
 
 function approveMarker(id) {
-    const marker = markersData.find(m => m.id == id);
-    if (!marker) return;
+    const all = getAllMapData();
+    const marker = all.find(m => m.id == id);
 
-    marker.status = 'published';
-    showToast("Marker Approved & Published");
-    loadMarkers();
-    closePanel();
+    if (!marker) {
+        showToast("Error: Marker not found");
+        return;
+    }
+
+    // Backend expects full object for PUT
+    const updatePayload = {
+        type: marker.type,
+        title: marker.title,
+        address: marker.address,
+        notes: marker.notes || '',
+        status: 'published'
+    };
+
+    fetch(`/api/markers/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(updatePayload)
+    })
+        .then(res => {
+            if (!res.ok) throw new Error('Update failed');
+            return res.json();
+        })
+        .then(data => {
+            showToast("Marker Approved & Published! ✅");
+            loadMarkers(); // Refresh map
+            closePanel();
+
+            // Gamification: Award points to author? (Future usage)
+        })
+        .catch(err => {
+            console.error(err);
+            showToast("Error approving marker");
+        });
 }
 
 // --- CALL FEATURE LOGIC (WebRTC) ---
