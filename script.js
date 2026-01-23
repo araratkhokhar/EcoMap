@@ -594,7 +594,7 @@ function updateUI() {
     if (role === 'guest') {
         badgeEl.textContent = 'GUEST';
         badgeEl.style.setProperty('background', '#757575', 'important'); // Standard Grey
-        badgeEl.onclick = openGamificationModal;
+        badgeEl.onclick = handleAuthClick; // Open Dashboard for Guest too
     } else {
         // Display Username
         badgeEl.textContent = currentUser.username;
@@ -2125,18 +2125,22 @@ function logout() {
 }
 
 function handleAuthClick() {
-    if (currentUser.role === 'guest') {
-        document.getElementById('login-screen').classList.remove('hidden');
-    } else {
-        openDashboard();
-    }
+    openDashboard();
 }
 
 // --- DASHBOARD LOGIC ---
 function openDashboard() {
+    // Universal Access - No Guest Block
+    // Logic to toggle buttons
+    const loginBtn = document.getElementById('dash-login-btn');
+    const logoutBtn = document.getElementById('dash-logout-btn');
+
     if (currentUser.role === 'guest') {
-        showFeatureTeaser('dashboard');
-        return;
+        if (loginBtn) loginBtn.style.display = 'inline-block';
+        if (logoutBtn) logoutBtn.style.display = 'none';
+    } else {
+        if (loginBtn) loginBtn.style.display = 'none';
+        if (logoutBtn) logoutBtn.style.display = 'inline-block';
     }
 
     // Populate Data

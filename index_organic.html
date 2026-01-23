@@ -355,9 +355,17 @@
             <!-- Dashboard Footer -->
             <div
                 style="margin-top: 20px; text-align: center; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 15px;">
-                <button onclick="logout(); closeDashboard();" class="btn-save"
-                    style="background: rgba(255, 82, 82, 0.2); color: #ff5252; border: 1px solid #ff5252; width: auto; padding: 8px 24px;">
+                <!-- Logout Button -->
+                <button id="dash-logout-btn" onclick="logout(); closeDashboard();" class="btn-save"
+                    style="background: rgba(255, 82, 82, 0.2); color: #ff5252; border: 1px solid #ff5252; width: auto; padding: 8px 24px; display: none;">
                     <i class="fa-solid fa-sign-out-alt"></i> Logout
+                </button>
+                <!-- Login Button -->
+                <button id="dash-login-btn"
+                    onclick="closeDashboard(); document.getElementById('login-screen').classList.remove('hidden');"
+                    class="btn-save"
+                    style="background: var(--primary-color); color: white; width: auto; padding: 8px 24px; display: none;">
+                    <i class="fa-solid fa-right-to-bracket"></i> Login
                 </button>
             </div>
         </div>
