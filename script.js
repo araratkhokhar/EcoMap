@@ -10,6 +10,7 @@ let currentUser = {
 let markMode = false;
 let activeFilter = 'all';
 let currentRoute = null;
+let cachedMarkers = []; // Store markers for client-side access
 let markerClusterGroup = null; // Changed from array to ClusterGroup
 let chatContext = { lastLocation: null, lastTopic: null };
 let socket;
@@ -369,6 +370,7 @@ async function loadMarkers() {
         // Combine with static data if needed (or just use DB)
         // For migration, we prefer DB only, but let's keep static layers if they aren't in DB yet
         const allMarkers = dbMarkers;
+        cachedMarkers = allMarkers; // Update global cache
 
 
         allMarkers.forEach(marker => {
@@ -1343,6 +1345,82 @@ function endRoute() {
 
 function closePanel() {
     document.getElementById('info-panel').classList.add('hidden');
+}
+
+// --- 8. EDIT & DELETE LOGIC ---
+function deleteMarker(id) {
+    if (!confirm("Are you sure you want to delete this marker? This action cannot be undone.")) return;
+
+    fetch(`/api/markers/${id}`, {
+        method: 'DELETE'
+    })
+        .then(response => {
+            if (!response.ok) throw new Error('Failed to delete marker');
+            return response.json();
+        })
+        .then(data => {
+            showToast("Marker deleted successfully");
+            closePanel();
+            loadMarkers(); // Refresh map
+        })
+        .catch(error => {
+            console.error("Error deleting marker:", error);
+            showToast("Error deleting marker");
+        });
+}
+
+function editMarker(id) {
+    const marker = cachedMarkers.find(m => m.id == id);
+    if (!marker) {
+        showToast("Error: Marker data not found");
+        return;
+    }
+
+    document.getElementById('edit-marker-id').value = marker.id;
+    document.getElementById('edit-title').value = marker.title;
+    document.getElementById('edit-type').value = marker.type;
+    document.getElementById('edit-address').value = marker.address;
+    document.getElementById('edit-notes').value = marker.notes || '';
+    document.getElementById('edit-status').value = marker.status;
+
+    document.getElementById('edit-modal').classList.remove('hidden');
+}
+
+function closeEditModal() {
+    document.getElementById('edit-modal').classList.add('hidden');
+}
+
+function submitEdit() {
+    const id = document.getElementById('edit-marker-id').value;
+    const updatedData = {
+        title: document.getElementById('edit-title').value,
+        type: document.getElementById('edit-type').value,
+        address: document.getElementById('edit-address').value,
+        notes: document.getElementById('edit-notes').value,
+        status: document.getElementById('edit-status').value
+    };
+
+    fetch(`/api/markers/${id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(updatedData)
+    })
+        .then(response => {
+            if (!response.ok) throw new Error('Failed to update marker');
+            return response.json();
+        })
+        .then(data => {
+            showToast("Marker updated successfully");
+            closeEditModal();
+            closePanel();
+            loadMarkers(); // Refresh map
+        })
+        .catch(error => {
+            console.error("Error updating marker:", error);
+            showToast("Error updating marker");
+        });
 }
 
 // 7. TOASTS

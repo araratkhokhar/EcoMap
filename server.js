@@ -137,6 +137,45 @@ app.post('/api/markers', async (req, res) => {
     }
 });
 
+// Update Marker
+app.put('/api/markers/:id', async (req, res) => {
+    const { id } = req.params;
+    const { type, title, address, notes, status } = req.body;
+    try {
+        const query = `
+            UPDATE markers 
+            SET type = $1, title = $2, address = $3, notes = $4, status = $5
+            WHERE id = $6
+            RETURNING *;
+        `;
+        const values = [type, title, address, notes, status, id];
+        const result = await pool.query(query, values);
+        if (result.rows.length === 0) {
+            return res.status(404).send('Marker not found');
+        }
+        res.json(result.rows[0]);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Server Error');
+    }
+});
+
+// Delete Marker
+app.delete('/api/markers/:id', async (req, res) => {
+    const { id } = req.params;
+    try {
+        const query = 'DELETE FROM markers WHERE id = $1 RETURNING *';
+        const result = await pool.query(query, [id]);
+        if (result.rows.length === 0) {
+            return res.status(404).send('Marker not found');
+        }
+        res.json({ message: 'Marker deleted' });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Server Error');
+    }
+});
+
 // Start Server
 // Start Server
 server.listen(PORT, () => {
