@@ -1804,8 +1804,10 @@ function saveMarker(lat, lng, id = null) {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(newMarker)
         })
-            .then(res => res.json())
-            .then(res => res.json())
+            .then(res => {
+                if (!res.ok) throw new Error('Server returned ' + res.status);
+                return res.json();
+            })
             .then(savedMarker => {
                 if (newMarker.status === 'pending') {
                     showToast("Submitted for Approval! 🕒");
