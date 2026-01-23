@@ -1834,29 +1834,22 @@ function saveMarker(lat, lng, id = null) {
 function deleteMarker(id) {
     if (!confirm("Are you sure you want to delete this marker? This action cannot be undone.")) return;
 
-    // Helper to remove from array
-    const removeFromArray = (arr, id) => {
-        const index = arr.findIndex(m => m.id == id);
-        if (index > -1) {
-            arr.splice(index, 1);
-            return true;
-        }
-        return false;
-    };
-
-    let deleted = false;
-    // Try deleting from all known sources
-    if (typeof markersData !== 'undefined' && removeFromArray(markersData, id)) deleted = true;
-    else if (typeof containersData !== 'undefined' && removeFromArray(containersData, id)) deleted = true;
-    else if (typeof korgansData !== 'undefined' && removeFromArray(korgansData, id)) deleted = true;
-
-    if (deleted) {
-        showToast("Marker deleted");
-        loadMarkers();
-        closePanel();
-    } else {
-        showToast("Marker not found in any database!");
-    }
+    fetch(`/api/markers/${id}`, {
+        method: 'DELETE'
+    })
+        .then(res => {
+            if (!res.ok) throw new Error('Failed to delete marker');
+            return res.json();
+        })
+        .then(data => {
+            showToast("Marker deleted successfully");
+            loadMarkers(); // Refresh map
+            closePanel();
+        })
+        .catch(err => {
+            console.error(err);
+            showToast("Error deleting marker: " + err.message);
+        });
 }
 
 function editMarker(id) {
